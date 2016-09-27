@@ -1,5 +1,8 @@
 package com.fq.dao.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +46,8 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 	}
 
 	@Override
-	public void addUser(UserBean userBean) {
-		hibernateTemplate.save(userBean);
+	public void addUser(UserBean userBean){
+		 hibernateTemplate.save(userBean);
 	}
 
 	@Override
@@ -87,6 +90,15 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 	public UserBean selectById(String id) {
 		UserBean userBean = getHibernateTemplate().get(UserBean.class, Integer.valueOf(id));
 		return null==userBean?null:userBean;
+	}
+
+	@Override
+	public void addUser(UserBean userBean, String time) throws Exception {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = sdf.parse(time);
+		userBean.setAddtime(date);
+		hibernateTemplate.save(userBean);
+		
 	}
 
 }

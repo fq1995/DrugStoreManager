@@ -107,8 +107,8 @@
 					varStatus="state">
 					<tr>
 						<td><input name="id_check" type="checkbox"
-							value="${state.count }" id="${user.userid}"/></td>
-						<td>${user.userid }</td>
+							value="${user.userid }" id="${user.userid}"/></td>
+						<td>${state.count }</td>
 						<td>${user.usercode }</td>
 						<td>${user.username }</td>
 						<td>${user.password }</td>

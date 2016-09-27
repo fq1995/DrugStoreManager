@@ -13,6 +13,7 @@ public interface UserDAO{
 	
 	UserBean selectUserByName(String username);
 	
+	void addUser(UserBean userBean,String time) throws Exception;
 	void addUser(UserBean userBean);
 
 	PageModel<UserBean> splitUser(Integer currPage, Integer pageSize);

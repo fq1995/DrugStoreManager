@@ -1,5 +1,6 @@
 package com.fq.action;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +33,8 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	private Integer pageSize=5;
 	private String ids;
 	private String id;
+	private String time;
+	
 	
 	@Autowired
 	private UserService userService;
@@ -78,11 +81,12 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	/**
 	 * 新增用户
 	 * @return
+	 * @throws Exception 
 	 */
-	public String addUser(){
+	public String addUser() throws Exception{
 		if(null == selectUserByName()){
-			userService.addUser(userBean);
-			return showUser();
+			userService.addUser(userBean,time);
+			return "show";
 		}
 		request.put("message","用户名已被使用！");
 		return "addUser";
@@ -144,7 +148,6 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 
 	@Override
 	public UserBean getModel() {
-		// TODO Auto-generated method stub
 		return userBean;
 	}
 	public Integer getCurrPage() {
@@ -175,6 +178,11 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	public void setFlag(boolean flag) {
 		this.flag = flag;
 	}
-	
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
 
 }

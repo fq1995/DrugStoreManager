@@ -14,6 +14,8 @@ public interface UserService {
 
 	PageModel<UserBean> splitUser(Integer currPage, Integer pageSize);
 
+	void addUser(UserBean userBean,String time) throws Exception;
+	
 	void addUser(UserBean userBean);
 	//批量查询
 	List<UserBean> showAllUser(String ids);

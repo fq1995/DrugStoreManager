@@ -16,7 +16,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="js/jquery-ui-1.8.16.custom.min.js"></script>
     <script type="text/javascript" src="js/jquery.keyboard.extension-typing.js"></script>
     <link type="text/css" href="css/keyboard.css" rel="stylesheet" />
-    <!-- <script type="text/javascript" src="js/jquery.keyboard.js"></script> -->
+	<script type="text/javascript">
+  		function change() {
+  		 	$("#verifyCode").attr("src","validateImg?a=" + new Date().getTime());
+  		}
+  </script>
+   <script type="text/javascript">
+  	$(function() {
+  		$("#inputVerifyCode").blur(function(){
+  			var verifyCode = $("#inputVerifyCode").val();
+  	  		$.ajax({
+  				url:'user_validateVerifyCode.action',
+  				type:'POST',
+  				data:{'yanzheng':verifyCode},
+  				dataType:'json',
+  				success:function(data){ 
+  			       //获取Action返回的数据用  data.Action中的属性名 获取
+   			          if(data==false)
+  			          {
+   			        	$("#tishi").html("验证码输入错误");
+  			          }else{
+  			           //进行页面跳转，因为ajax我们的Action只返回数据，不在进行跳转了...
+  			            $("#tishi").html("");
+  			        	$("img[name='duihao4']").css("display",""); 
+  			          }
+  			       }  
+  	  		});
+  		});
+  	});
+  
+  </script>
 </head>
 <body id="login">
 <div id="wrappertop">
@@ -40,21 +69,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <label class="loginlabel" for="user_name">
                         用户账号:</label>
                     <input class="logininput ui-keyboard-input ui-widget-content ui-corner-all" name="username"
-                           id="username" type="text" value="" placeholder="请输入账号"/>
+                           id="username" type="text" value="" placeholder="请输入账号"/>&nbsp;&nbsp;<img name="duihao1" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_" name="tip_"></span>
                 </p>
                 <p>
                     <label class="loginlabel" for="password">
                         密码:</label>
                     <span>
-                        <input class="logininput"   name="password" id="password" type="password" placeholder="请输入密码"/><img
-                            id="passwd" class="tooltip" alt="Click to open the virtual keyboard" title="Click to open the virtual keyboard"
-                            src="images/keyboard.png" />
+                        <input class="logininput"   name="password" id="password" type="password" placeholder="请输入密码"/>&nbsp;&nbsp;<img name="duihao2" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_pass" name="tip_"></span>
                     </span>
                 </p>
                 <p>
                     <label class="loginlabel" for="yanzheng">
                         验证码:</label>
-                    <span><input class="logininput ui-keyboard-input ui-widget-content ui-corner-all" name="yanzheng" type="text" value="" onclick="JavaScript:this.value=''" style="width: 250px;" placeholder="请输入验证码"/></span><cite>X3D5S</cite>
+                    <span><input id="inputVerifyCode" class="logininput ui-keyboard-input ui-widget-content ui-corner-all" name="yanzheng" type="text" value="" onclick="JavaScript:this.value=''" style="width: 80px;" placeholder="请输入验证码"/>
+                     <span><img id="verifyCode" src="validateImg" onclick="change()" style="width:100px ;height: 25px"/></span>
+                     <img name="duihao4" alt="" src="images/yes.jpg" style="display:none"/>
+                    <span id="tishi" style="width:40px;height:25px;color:red"></span>
                 </p>
                 <div style="background-color: blue">
                     <button id="loginbtn" type="submit" class="positive" name="Submit">
@@ -64,7 +94,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li>
                         <input id="remember" type="checkbox" name="remember" id="rememberMe"><label for="rememberMe">记住我</label></li>
                 </ul>
-                <button id="resetbtn" type="RESET" class="positive" name="Reset" style="width: 69px;">重置</button>
+                <button id="resetbtn" type="RESET" class="positive" name="Reset" style="width: 69px;" onclick="clean()">重置</button>
                 </div>
             </fieldset>
         </form>
@@ -72,42 +102,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#password').keyboard({
-            openOn: null,
-            stayOpen: true,
-            layout: 'qwerty'
-        }).addTyping();
-        $('#passwd').click(function() {
-            $('#password').getkeyboard().reveal();
-        })
-
-        $(".logininput").blur(function() {
-            if ($(this).val() == "") {
-                $(this).css("border-color", "red");
-            }
-            else
-                $(this).css("border-color", "#D9D6C4");
-        })
-
-        $("#loginbtn").click(function() {
-            var k = 0;
-            var ajaxhtml = "";
-            $(".logininput").each(function(i, obj) {
-                if ($(obj).val().trim() == "") {
-                    k++;
-                    $(this).css("border-color", "red");
-                    $(this).focus();
-                    return false;
-                }
-            });
-            if (k != 0) return;
-            ajaxhtml = $("#loginbtn").html();
-            $("#loginbtn").html("Loading....  <img src='images/loading.gif' alt='Announcement' /> ");
-            $("#loginbtn").attr("disabled", "disabled","disabled");
-
-        })
-    });
-
+function clean(){
+	$("#tishi").html("");
+	$(".tip_").html("");
+	$(".tip_pass").html("");
+	$("img[name='duihao1']").css("display","none"); 
+	$("img[name='duihao2']").css("display","none"); 
+}
+$(function() {
+	//用户名非空
+	$("#username").blur(function(){
+		$(".tip_").html("");
+        var name = $("input[name='username']").val(); 
+        $("img[name='duihao1']").css("display","none"); 
+        $("#tip_").html("");
+        if($.trim(name) == "" || name.length == 0){
+        	$(".tip_").html("<a style='color:red'>用户名不能为空</a>");
+        }else{
+        	$("img[name='duihao1']").css("display",""); 
+        }
+	});
+	
+	//密码
+	$("#password").blur(function(){
+		$(".tip_pass").html("");
+		$("img[name='duihao2']").css("display","none"); 
+		var pass = $("#password").val();
+		if ($.trim(pass) == "" || pass.length == 0) {
+			$(".tip_pass").html("<a style='color:red'>密码不能为空</a>");
+			pass.focus();
+		}else if (pass.length<6 || pass.length>10) {
+			$(".tip_pass").html("<a style='color:red'>密码的长度必须在6-10个字符</a>");
+			pass.select();
+		}else{
+        	$("img[name='duihao2']").css("display",""); 
+        }
+	});
+});
 </script>
 </body>
