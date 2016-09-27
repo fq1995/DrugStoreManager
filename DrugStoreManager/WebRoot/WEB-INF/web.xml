@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <!-- 必须要放在sturts2 filter-mapping上面 因为放在下面不生效 openSessionInView配置 等页面上把hibernate把数据展示完成 
+		才关闭hibernate session 延迟session的关闭 -->
+	<filter>
+		<filter-name>openSessionInViewFilter</filter-name>
+		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+		<init-param>
+			<param-name>singleSession</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>openSessionInViewFilter</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+
+	<!--Spring的配置文件的位置 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<!-- 指定配置文件的位置 -->
+		<param-value>Classpath:spring.xml</param-value>
+	</context-param>
+	<!--配置spring的监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!-- Struts2配置 -->
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.action</url-pattern>
+		<!-- 默认拦截request 加上forward会加上 拦截请求转发 -->
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>ValidateImgServlet</servlet-name>
+		<servlet-class>com.fq.util.ValidateImgServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ValidateImgServlet</servlet-name>
+		<url-pattern>/validateImg</url-pattern>
+	</servlet-mapping>
+  
+</web-app>

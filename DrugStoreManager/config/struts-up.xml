@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="shop" extends="json-default" namespace="/">
+		<!-- 设置一个全局的页面 -->
+		<global-results>
+			<result name="ok">main.jsp</result>
+			<result name="error">login.jsp</result>
+			<result name="defult">register.jsp</result>
+		</global-results>
+		<!-- 配置首页访问的action -->
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="showUser">usermanager.jsp</result>
+			<result name="addUser">useradd.jsp</result>
+			<result name="show" type="redirectAction">user_showUser.action?currPage=1</result>
+			<result name="edit">userupdate.jsp</result>
+			<result name="ajax_verifyCode" type="json">
+				<param name="root">flag</param>
+			</result>
+		</action>
+		 
+	</package>
+</struts>
