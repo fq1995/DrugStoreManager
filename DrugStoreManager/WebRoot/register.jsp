@@ -65,7 +65,7 @@
                     <label class="loginlabel" for="username">
                         用户名:</label>
                     <input class="logininput ui-keyboard-input ui-widget-content ui-corner-all" name="username"
-                           id="username" type="text" value="" placeholder="请输入用户名"/>&nbsp;&nbsp;<img name="duihao1" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_" name="tip_"></span>
+                           id="username" type="text" value="" placeholder="请输入用户名"/>&nbsp;&nbsp;<img name="duihao1" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_" name="tip_"></span><i class="exit" style="color: red">${message}</i>
                 </p>
                 <p>
                     <label class="loginlabel" for="password">
@@ -122,6 +122,7 @@ function clean(){
 $(function() {
 	//用户名非空
 	$("#username").blur(function(){
+		$(".exit").html("");
 		$(".tip_").html("");
         var name = $("input[name='username']").val(); 
         $("img[name='duihao1']").css("display","none"); 

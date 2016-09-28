@@ -985,7 +985,6 @@ h2 {
 	border-left: solid 1px #a7b5bc;
 	border-right: solid 1px #ced9df;
 	border-bottom: solid 1px #ced9df;
-	background: url(../images/inputbg.gif) repeat-x;
 	text-indent: 10px;
 }
 
@@ -994,7 +993,7 @@ h2 {
 	border-left: solid 1px #a7b5bc;
 	border-right: solid 1px #ced9df;
 	border-bottom: solid 1px #ced9df;
-	background: url(../images/inputbg.gif) repeat-x;
+/* 	background: url(../images/inputbg.gif) repeat-x; */
 	padding: 10px;
 	width: 504px;
 	height: 135px;
@@ -1564,7 +1563,7 @@ h2 {
 	border-left: solid 1px #a7b5bc;
 	border-right: solid 1px #ced9df;
 	border-bottom: solid 1px #ced9df;
-	background: url(../images/inputbg.gif) repeat-x;
+	/* background: url(../images/inputbg.gif) repeat-x; */
 	text-indent: 10px;
 }
 

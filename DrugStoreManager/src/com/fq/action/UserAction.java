@@ -61,6 +61,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 			userService.register(userBean);
 			return "error";
 		}else{
+			request.put("message","用户名已被使用！");
 			return "defult";
 		}
 		
@@ -115,8 +116,12 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	 * 修改用户 
 	 */
 	public String updateUser(){
-		userService.updateUser(userBean);
-		return "show";
+		if(null == selectUserByName()){
+			userService.updateUser(userBean);
+			return "show";
+		}
+		request.put("message","用户名已被使用！");
+		return editUser();
 	}
 	/**
 	 * 根据用户名查重
