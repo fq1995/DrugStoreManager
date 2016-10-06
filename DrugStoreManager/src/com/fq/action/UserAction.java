@@ -21,7 +21,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Controller("userAction")
 @Scope("prototype")
 public class UserAction extends BaseAction implements ModelDriven<UserBean>,RequestAware{
-	
+	//用户管理
 	private Map<String ,Object> session;
 	private Map<String, Object> request;
 	private boolean flag;
