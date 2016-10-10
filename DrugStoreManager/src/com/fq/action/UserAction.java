@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import com.fq.po.UserBean;
 import com.fq.service.UserService;
 import com.fq.util.BaseAction;
+import com.fq.util.ConstantUtils;
 import com.fq.util.PageModel;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -27,7 +28,6 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	private boolean flag;
 	private Integer currPage;
 	 
-	private Integer pageSize=5;
 	private String ids;
 	private String id;
 	private String time;
@@ -73,7 +73,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 		if(currPage == null) {
 			currPage = 1;
 		}
-		PageModel<UserBean>  page = userService.splitUser(currPage,pageSize);
+		PageModel<UserBean>  page = userService.splitUser(currPage,ConstantUtils.PAGESIZE);
 		request.put("page", page);
 
 		return "showUser";

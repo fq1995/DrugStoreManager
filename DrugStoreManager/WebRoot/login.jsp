@@ -16,36 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="js/jquery-ui-1.8.16.custom.min.js"></script>
     <script type="text/javascript" src="js/jquery.keyboard.extension-typing.js"></script>
     <link type="text/css" href="css/keyboard.css" rel="stylesheet" />
-	<script type="text/javascript">
-  		function change() {
-  		 	$("#verifyCode").attr("src","validateImg?a=" + new Date().getTime());
-  		}
-  </script>
-   <script type="text/javascript">
-  	$(function() {
-  		$("#inputVerifyCode").blur(function(){
-  			var verifyCode = $("#inputVerifyCode").val();
-  	  		$.ajax({
-  				url:'user_validateVerifyCode.action',
-  				type:'POST',
-  				data:{'yanzheng':verifyCode},
-  				dataType:'json',
-  				success:function(data){ 
-  			       //获取Action返回的数据用  data.Action中的属性名 获取
-   			          if(data==false)
-  			          {
-   			        	$("#tishi").html("验证码输入错误");
-  			          }else{
-  			           //进行页面跳转，因为ajax我们的Action只返回数据，不在进行跳转了...
-  			            $("#tishi").html("");
-  			        	$("img[name='duihao4']").css("display",""); 
-  			          }
-  			       }  
-  	  		});
-  		});
-  	});
-  
-  </script>
+    <script type="text/javascript" src="js/login.js"></script>
 </head>
 <body id="login">
 <div id="wrappertop">
@@ -61,13 +32,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div id="darkbanner" class="banner320">
         
             <h2>
-                系统登录    
+                系统登录    </h2>
+                
         </div>
         <div id="darkbannerwrap">
         </div>
-       
+      
         <form name="form1" method="post" action="user_login.action">
+         
             <fieldset class="form">
+            <span id="ti"><center><font id="tish">${tishi }</font></center></span>
                 <p>
                     <label class="loginlabel" for="user_name">
                         用户账号:</label>
@@ -78,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <label class="loginlabel" for="password">
                         密码:</label>
                     <span>
-                        <input class="logininput"   name="password" id="password" type="password" placeholder="请输入密码"/>&nbsp;&nbsp;<img name="duihao2" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_pass" name="tip_"></span>
+                        <input class="logininput" name="password" id="password" type="password" placeholder="请输入密码"/>&nbsp;&nbsp;<img name="duihao2" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_pass" name="tip_"></span>
                     </span>
                 </p>
                 <p>
@@ -104,44 +78,4 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
 </div>
 
-<script type="text/javascript">
-function clean(){
-	$("#mess").html("");
-	$("#tishi").html("");
-	$(".tip_").html("");
-	$(".tip_pass").html("");
-	$("img[name='duihao1']").css("display","none"); 
-	$("img[name='duihao2']").css("display","none"); 
-}
-$(function() {
-	//用户名非空
-	$("#username").blur(function(){
-		$(".tip_").html("");
-        var name = $("input[name='username']").val(); 
-        $("img[name='duihao1']").css("display","none"); 
-        $("#tip_").html("");
-        if($.trim(name) == "" || name.length == 0){
-        	$(".tip_").html("<a style='color:red'>用户名不能为空</a>");
-        }else{
-        	$("img[name='duihao1']").css("display",""); 
-        }
-	});
-	
-	//密码
-	$("#password").blur(function(){
-		$(".tip_pass").html("");
-		$("img[name='duihao2']").css("display","none"); 
-		var pass = $("#password").val();
-		if ($.trim(pass) == "" || pass.length == 0) {
-			$(".tip_pass").html("<a style='color:red'>密码不能为空</a>");
-			pass.focus();
-		}else if (pass.length<6 || pass.length>10) {
-			$(".tip_pass").html("<a style='color:red'>密码的长度必须在6-10个字符</a>");
-			pass.select();
-		}else{
-        	$("img[name='duihao2']").css("display",""); 
-        }
-	});
-});
-</script>
 </body>
