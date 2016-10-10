@@ -56,13 +56,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <h1 style="color: darkslateblue ;font-size: 30px;font-family: 微软雅黑;position:relative;left: 120px">
                 药店管理系统
             </h1>
+           
         </div>
         <div id="darkbanner" class="banner320">
+        
             <h2>
-                系统登录</h2>
+                系统登录    
         </div>
         <div id="darkbannerwrap">
         </div>
+       
         <form name="form1" method="post" action="user_login.action">
             <fieldset class="form">
                 <p>
@@ -103,6 +106,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script type="text/javascript">
 function clean(){
+	$("#mess").html("");
 	$("#tishi").html("");
 	$(".tip_").html("");
 	$(".tip_pass").html("");

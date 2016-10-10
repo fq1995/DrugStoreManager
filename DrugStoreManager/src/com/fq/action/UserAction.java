@@ -1,6 +1,6 @@
 package com.fq.action;
 
-import java.util.Date;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -25,15 +25,13 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	private Map<String ,Object> session;
 	private Map<String, Object> request;
 	private boolean flag;
-	public Map<String, Object> getRequest() {
-		return request;
-	}
 	private Integer currPage;
 	 
 	private Integer pageSize=5;
 	private String ids;
 	private String id;
 	private String time;
+	private String mess;
 	
 	
 	@Autowired
@@ -49,6 +47,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 			session.put("user", user);
 			return "ok";
 		}else{
+			request.put("tishi","用户名或密码错误");
 			return "error";
 		}
 	}
@@ -145,7 +144,20 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 		}
 		return "ajax_verifyCode";
 	}
-
+	/**
+	 * ajax校验用户名是否可用
+	 */
+	public String validateName() {
+		UserBean bean =userService.selectUserByName(userBean.getUsername());
+		if(null == bean) {
+			mess = "用户名可用";
+		} else if(null != bean){
+			mess = "用户名不可用";
+		}
+		return "ajax_verifyName";
+	}
+	
+	
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session=session;
@@ -160,10 +172,6 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	}
 	public void setCurrPage(Integer currPage) {
 		this.currPage = currPage;
-	}
-	@Override
-	public void setRequest(Map<String, Object> request) {
-		this.request = request;
 	}
 	public String getIds() {
 		return ids;
@@ -189,5 +197,15 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	public void setTime(String time) {
 		this.time = time;
 	}
-
+	@Override
+	public void setRequest(Map<String, Object> request) {
+		this.request = request;
+	}
+	public String getMess() {
+		return mess;
+	}
+	public void setMess(String mess) {
+		this.mess = mess;
+	}
+	
 }

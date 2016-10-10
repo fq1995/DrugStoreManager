@@ -19,7 +19,12 @@
 			<result name="ajax_verifyCode" type="json">
 				<param name="root">flag</param>
 			</result>
+			<result name="ajax_verifyName" type="json">
+				<param name="root">mess</param>
+			</result>
+			
 		</action>
-		 
 	</package>
+	
+	
 </struts>

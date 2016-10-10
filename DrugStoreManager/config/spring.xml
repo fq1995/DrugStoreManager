@@ -105,6 +105,7 @@
 			<tx:method name="save*" propagation="REQUIRED"/>
 			<tx:method name="register*" propagation="REQUIRED"/>
 			<tx:method name="show*" propagation="REQUIRED"/>
+			<tx:method name="select*" propagation="REQUIRED"/>
 			<!-- 除上面所定义的方法开事物  其他的都是只读事物  只能读，不能修改 -->
 			<tx:method name="*" read-only="true"/>
 		</tx:attributes>

@@ -19,6 +19,7 @@
   </script>
   <script type="text/javascript">
   	$(function() {
+  		//验证码
   		$("#inputVerifyCode").blur(function(){
   			var verifyCode = $("#inputVerifyCode").val();
   	  		$.ajax({
@@ -32,15 +33,46 @@
   			          {
    			        	$("#tishi").html("验证码输入错误");
   			          }else{
-  			           //进行页面跳转，因为ajax我们的Action只返回数据，不在进行跳转了...
   			            $("#tishi").html("");
   			        	$("img[name='duihao4']").css("display","");
   			          }
   			       }  
   	  		});
   		});
+  		//用户名
+  		$("#username").blur(function(){
+  			$("#mess").html("");
+  			$(".exit").html("");
+  			$(".tip_").html("");
+  			$("img[name='duihao1']").css("display","none"); 
+  		    $("#tip_").html("");
+			var username = $("#username").val();
+	  		$.ajax({
+				url:'user_validateName.action',
+				type:'POST',
+				data:{'username':username},
+				dataType:'json',
+				success:function(data){ 
+					if($.trim(username) == "" || username.length == 0){
+			            $(".tip_").html("<a style='color:red'>用户名不能为空</a>");
+			            
+			        }  
+					else if(data == "用户名不可用"){
+						$("#mess").html("用户名不可用");
+					}
+					
+					else if(data=="用户名可用"){
+			        	$("img[name='duihao1']").css("display",""); 
+			        }
+			     }  
+	  		});
+		});
+  		
   	});
-  
+  	
+  </script>
+  <script type="text/javascript">
+		
   </script>
 </head>
 <body id="login">
@@ -65,7 +97,7 @@
                     <label class="loginlabel" for="username">
                         用户名:</label>
                     <input class="logininput ui-keyboard-input ui-widget-content ui-corner-all" name="username"
-                           id="username" type="text" value="" placeholder="请输入用户名"/>&nbsp;&nbsp;<img name="duihao1" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_" name="tip_"></span><i class="exit" style="color: red">${message}</i>
+                           id="username" type="text" value="" placeholder="请输入用户名"/>&nbsp;&nbsp;<img name="duihao1" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_" name="tip_"></span><i class="exit" style="color: red">${message}</i><i id="mess" style="color: red"></i>
                 </p>
                 <p>
                     <label class="loginlabel" for="password">
@@ -111,6 +143,7 @@
 
 <script type="text/javascript">
 function clean(){
+	$("#mess").html("");
 	$(".tip_").html("");
 	$(".tip_pass").html("");
 	$(".tip_pass2").html("");
@@ -124,15 +157,17 @@ $(function() {
 	$("#username").blur(function(){
 		$(".exit").html("");
 		$(".tip_").html("");
+		$("img[name='duihao1']").css("display","none"); 
+	    $("#tip_").html("");
         var name = $("input[name='username']").val(); 
-        $("img[name='duihao1']").css("display","none"); 
-        $("#tip_").html("");
         if($.trim(name) == "" || name.length == 0){
         	$(".tip_").html("<a style='color:red'>用户名不能为空</a>");
-        }else{
-        	$("img[name='duihao1']").css("display",""); 
         }
-	});
+       /*  
+        else{
+        	$("img[name='duihao1']").css("display",""); 
+        } */
+	}); 
     //密码
 	$("#password").blur(function(){
 		$(".tip_pass").html("");
