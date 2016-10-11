@@ -5,8 +5,11 @@ package com.fq.po;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,11 +29,11 @@ public class UserBean  implements java.io.Serializable {
     // Fields    
 
      private Integer userid;
+     private RoleBean roleBean;
      private Integer usercode;
      private String username;
      private String password;
      private Date addtime;
-     private Integer rolecode;
      private Integer status;
 
 
@@ -47,12 +50,12 @@ public class UserBean  implements java.io.Serializable {
     }
     
     /** full constructor */
-    public UserBean(Integer usercode, String username, String password, Date addtime, Integer rolecode, Integer status) {
+    public UserBean(RoleBean roleBean, Integer usercode, String username, String password, Date addtime, Integer status) {
+        this.roleBean = roleBean;
         this.usercode = usercode;
         this.username = username;
         this.password = password;
         this.addtime = addtime;
-        this.rolecode = rolecode;
         this.status = status;
     }
 
@@ -68,6 +71,16 @@ public class UserBean  implements java.io.Serializable {
     
     public void setUserid(Integer userid) {
         this.userid = userid;
+    }
+	@ManyToOne(fetch=FetchType.LAZY)
+        @JoinColumn(name="rolecode")
+
+    public RoleBean getRoleBean() {
+        return this.roleBean;
+    }
+    
+    public void setRoleBean(RoleBean roleBean) {
+        this.roleBean = roleBean;
     }
     
     @Column(name="usercode")
@@ -108,16 +121,6 @@ public class UserBean  implements java.io.Serializable {
     
     public void setAddtime(Date addtime) {
         this.addtime = addtime;
-    }
-    
-    @Column(name="rolecode")
-
-    public Integer getRolecode() {
-        return this.rolecode;
-    }
-    
-    public void setRolecode(Integer rolecode) {
-        this.rolecode = rolecode;
     }
     
     @Column(name="status")

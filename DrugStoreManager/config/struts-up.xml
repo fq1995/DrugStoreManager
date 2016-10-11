@@ -22,7 +22,16 @@
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
 			</result>
-			
+		</action>
+		
+		<action name="role_*" class="roleAction" method="{1}">
+			<result name="showRole">rolemanager.jsp</result>
+			<result name="addRole">roleadd.jsp</result>
+			<result name="show" type="redirectAction">role_showRole.action?currPage=1</result>
+			<result name="edit">roleupdate.jsp</result>
+			<result name="ajax_verifyName" type="json">
+				<param name="root">mess</param>
+			</result>
 		</action>
 	</package>
 	

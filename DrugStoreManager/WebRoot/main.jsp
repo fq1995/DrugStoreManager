@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>药店管理系统</title>
-    <link href="css/default.css" rel="stylesheet" type="text/css" />
+    <link href="<%=basePath%>css/default.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="js/themes/default/easyui.css" />
     <link rel="stylesheet" type="text/css" href="js/themes/icon.css" />
     <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
@@ -33,7 +38,7 @@
 						{"menuid":"1","icon":"icon-sys","menuname":"基本操作",
 							"menus":[
 									{"menuid":"13","menuname":"用户管理","icon":"icon-users","url":"${pageContext.request.contextPath}/user_showUser.action?currPage=1"},
-									{"menuid":"14","menuname":"角色管理","icon":"icon-role","url":"demo2.html"},
+									{"menuid":"14","menuname":"角色管理","icon":"icon-role","url":"${pageContext.request.contextPath}/role_showRole.action?currPage=1"},
 									{"menuid":"15","menuname":"权限设置","icon":"icon-set","url":"demo.html"},
 									{"menuid":"16","menuname":"系统日志","icon":"icon-log","url":"demo1.html"}
 								]

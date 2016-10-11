@@ -13,10 +13,13 @@
 <title>用户管理</title>
 <link href="<%=basePath%>css/style1.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=basePath%>js/jquery.js"></script>
-<script type="text/javascript" src="<%=basePath%>js/usermanager.js"></script>
 <script src="<%=basePath%>js/usermanager_operation.js" type="text/javascript" charset="utf-8"></script>
-<script src="<%=basePath%>js/usermanager_page.js" type="text/javascript" charset="utf-8"></script>
-
+<%-- <script src="<%=basePath%>js/usermanager_page.js" type="text/javascript" charset="utf-8"></script> --%>
+<script type="text/javascript">
+	$(function(){
+		var keyword = $("#keyword").val;
+	})
+</script>
 </head>
 
 <body>
@@ -39,11 +42,14 @@
 				<li id="btn_updateUser" class="click"><span><img
 						src="<%=basePath%>images/t02.png"  /></span>修改</li>
 				<li id="btn_deleteUser" class="click"><span><img src="<%=basePath%>images/t03.png" /></span>删除</li>
+				
 				<li id="" class="click"><span><img src="<%=basePath%>images/t04.png" /></span>统计</li>
 			</ul>
 
 
 			<ul class="toolbar1">
+				<li> <input type="text" id="keyword" name="keyword"/><a id="btn_selectUser" href="">查询</a></li>
+				
 				<li><span><img src="<%=basePath%>images/t05.png" /></span>设置</li>
 			</ul>
 
@@ -73,8 +79,15 @@
 						<td>${user.usercode }</td>
 						<td>${user.username }</td>
 						<td>${user.password }</td>
-						<td>${user.rolecode }</td>
-						<td>是</td>
+						<td>${user.roleBean.rolename }</td>
+						<c:choose>
+							<c:when test="${user.status eq 1}">
+								<td>是</td>
+							</c:when>
+							<c:otherwise>
+								<td>否</td>
+							</c:otherwise>
+						</c:choose>
 						<td>${user.addtime }</td>
 					</tr>
 				</c:forEach>
@@ -151,6 +164,13 @@
 
 		</div>
 	</div>
+<script type="text/javascript">
+$('.tablelist tbody tr:odd').addClass('odd');
+function jump(){
+var pc = $("#select_jumpPage option:selected").text();
+window.location.href="${pageContext.request.contextPath}/user_showUser.action?currPage=" + pc;
+} 
+</script>
 </body>
 
 </html>

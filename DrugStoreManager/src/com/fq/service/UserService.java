@@ -12,7 +12,7 @@ public interface UserService {
 	
 	UserBean selectUserByName(String username);
 
-	PageModel<UserBean> splitUser(Integer currPage, Integer pageSize);
+	PageModel<UserBean> splitUser(Integer currPage, Integer pageSize, String keyword);
 
 	void addUser(UserBean userBean,String time) throws Exception;
 	

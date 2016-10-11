@@ -13,9 +13,8 @@
 <title>用户管理</title>
 <link href="<%=basePath%>css/style1.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=basePath%>js/jquery.js"></script>
-<script type="text/javascript" src="<%=basePath%>js/usermanager.js"></script>
-<script src="<%=basePath%>js/usermanager_operation.js" type="text/javascript" charset="utf-8"></script>
-<script src="<%=basePath%>js/usermanager_page.js" type="text/javascript" charset="utf-8"></script>
+<script src="<%=basePath%>js/rolemanager_operation.js" type="text/javascript" charset="utf-8"></script>
+<%-- <script src="<%=basePath%>js/usermanager_page.js" type="text/javascript" charset="utf-8"></script> --%>
 </head>
 
 <body>
@@ -24,7 +23,7 @@
 		<ul class="placeul">
 			<li><a href="#">基本操作</a></li>
 			<li><img src="images/next.gif" style="margin-top:13px"></li>
-			<li><a href="#">用户管理</a></li>
+			<li><a href="#">角色管理</a></li>
 		</ul>
 	</div>
 
@@ -54,27 +53,21 @@
 				<tr>
 					<th><input id="all" name="all" type="checkbox" value="" /></th>
 					<th>序号</th>
-					<th>用户编号</th>
-					<th>用户名</th>
-					<th>密码</th>
+					<th>角色编号</th>
+					<th>角色名</th>
 					<th>权限</th>
-					<th>是否审核</th>
-					<th>添加日期</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${requestScope.page.list}" var="user"
+				<c:forEach items="${requestScope.page.list}" var="role"
 					varStatus="state">
 					<tr>
 						<td><input name="id_check" type="checkbox"
-							value="${user.userid }" id="${user.userid}"/></td>
+							value="${role.roleid }" id="${role.roleid}"/></td>
 						<td>${state.count }</td>
-						<td>${user.usercode }</td>
-						<td>${user.username }</td>
-						<td>${user.password }</td>
-						<td>${user.rolecode }</td>
-						<td>是</td>
-						<td>${user.addtime }</td>
+						<td>${role.rolecode }</td>
+						<td>${role.rolename }</td>
+						<td><%-- ${role.permission.pername } --%></td>
 					</tr>
 				</c:forEach>
 			</tbody>

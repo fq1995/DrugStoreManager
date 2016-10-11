@@ -39,10 +39,10 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 	}
 
 	@Override
-	public PageModel<UserBean> splitUser(Integer currPage, Integer pageSize) {
-		String hql_count = "select count(*) from UserBean where status=1";
-		String hql = "from UserBean where status=1 order by userid desc";
-		return super.split(hql, hql_count, currPage, pageSize);
+	public PageModel<UserBean> splitUser(Integer currPage, Integer pageSize,String keyword) {
+		String hql_count = "select count(*) from UserBean where username like :keyword";
+		String hql = "from UserBean where username like :keyword order by userid desc";
+		return super.split(hql, hql_count, currPage, pageSize,keyword);
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 			for (Integer i = 0; i < arr.length; i++) {
 				arrId[i] = Integer.parseInt(arr[i]);
 			}
-			String hql ="from UserBean where  status=1 and userid in(";
+			String hql ="from UserBean where userid in(";
 			StringBuilder sb = new StringBuilder(hql);
 			for(Integer i = 0; i < arrId.length; i++) {
 				if(i != arrId.length - 1){

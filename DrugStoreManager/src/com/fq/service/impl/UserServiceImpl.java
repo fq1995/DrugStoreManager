@@ -33,8 +33,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public PageModel<UserBean> splitUser(Integer currPage, Integer pageSize) {
-		return userDAO.splitUser(currPage,pageSize);
+	public PageModel<UserBean> splitUser(Integer currPage, Integer pageSize ,String keyword) {
+		return userDAO.splitUser(currPage,pageSize,keyword);
 	}
 
 	@Override

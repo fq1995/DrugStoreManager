@@ -16,7 +16,7 @@ public interface UserDAO{
 	void addUser(UserBean userBean,String time) throws Exception;
 	void addUser(UserBean userBean);
 
-	PageModel<UserBean> splitUser(Integer currPage, Integer pageSize);
+	PageModel<UserBean> splitUser(Integer currPage, Integer pageSize, String keyword);
 	//批量查询
 	List<UserBean> showAllUser(String ids);
 	//批量删除对象

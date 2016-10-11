@@ -51,6 +51,7 @@
 		<span>位置：</span>
 		<ul class="placeul">
 			<li><a href="#">首页</a></li>
+			<li><img src="images/next.gif" style="margin-top:13px"></li>
 			<li><a href="#">表单</a></li>
 		</ul>
 	</div>

@@ -39,6 +39,12 @@
 		}
 	}
 	function init(){
+		//查询
+		document.querySelector("#btn_selectUser").addEventListener("click",()=>{
+			var keyword=document.querySelector("#keyword").value;
+			/*alert(keyword);*/
+			window.location.href="${pageContext.request.contextPath}/user_showUser.action?currPage=1&keyword="+keyword;
+		},false);
 		//新增用户
 		document.querySelector("#btn_addUser").addEventListener("click",()=>{
 			window.location.href="useradd.jsp";
@@ -61,8 +67,3 @@
 	}
 	window.addEventListener("load",init,false);
 })();
-$('.tablelist tbody tr:odd').addClass('odd');
-	function jump(){
-	var pc = $("#select_jumpPage option:selected").text();
-	window.location.href="${pageContext.request.contextPath}/user_showUser.action?currPage=" + pc;
-} 

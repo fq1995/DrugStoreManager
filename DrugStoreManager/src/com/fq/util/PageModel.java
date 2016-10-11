@@ -15,6 +15,8 @@ public class PageModel<E> {
 	private int total;
 	//总页数
 	private int totalPage;
+	//查询关键字
+	private String keyword;
 	//查询出来的记录数
 	private List<E> list;
 	
@@ -53,6 +55,13 @@ public class PageModel<E> {
 	}
 	public void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
+	}
+	
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 	public List<E> getList() {
 		return list;

@@ -32,6 +32,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	private String id;
 	private String time;
 	private String mess;
+	private String keyword;
 	
 	
 	@Autowired
@@ -70,10 +71,16 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	 * @return
 	 */
 	public String showUser() {
+		/*HttpServletRequest request1 = ServletActionContext.getRequest();
+		keyword = request1.getParameter("keyword");*/
+		System.out.println(keyword+"=================================================");
+		if(null == keyword){
+			keyword="";
+		}
 		if(currPage == null) {
 			currPage = 1;
 		}
-		PageModel<UserBean>  page = userService.splitUser(currPage,ConstantUtils.PAGESIZE);
+		PageModel<UserBean>  page = userService.splitUser(currPage,ConstantUtils.PAGESIZE,keyword);
 		request.put("page", page);
 
 		return "showUser";
@@ -93,6 +100,12 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 		
 	}
 	/**
+	 *  1	1001	user_showUser.action
+		2	1002	user_updateUser.acti
+		3	1003	user_editUser.action
+		4	1004	user_delUser.action
+		1	1	超级管理员	1001
+		2	2	管理员	1002
 	 * 删除用户
 	 */
 	public String delUser(){
@@ -206,6 +219,12 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	}
 	public void setMess(String mess) {
 		this.mess = mess;
+	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 	
 }

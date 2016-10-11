@@ -65,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </p>
                 <div style="background-color: blue">
                     <button id="loginbtn" type="submit" class="positive" name="Submit">
-                        <img src="images/key.png" alt="Announcement" />登录</button>
+                        <img src="images/key.png" alt="" />登录</button>
                 <ul id="forgottenpassword">
                     <li class="boldtext">|</li>
                     <li>
