@@ -16,7 +16,6 @@
 <script type="text/javascript" src="<%=basePath%>js/usermanager.js"></script>
 <script src="<%=basePath%>js/usermanager_operation.js" type="text/javascript" charset="utf-8"></script>
 <script src="<%=basePath%>js/usermanager_page.js" type="text/javascript" charset="utf-8"></script>
-
 </head>
 
 <body>

@@ -73,6 +73,5 @@
 				<li><input name="" type="submit" class="btn" value="确认保存" /></li>
 			</ul>
 		</form>
-
 	</div>
 </body>

@@ -10,7 +10,7 @@
 					param+=",";
 					param+=checks[i].id;
 				}
-				
+
 			}
 		}
 		if(param==""){
@@ -61,3 +61,8 @@
 	}
 	window.addEventListener("load",init,false);
 })();
+$('.tablelist tbody tr:odd').addClass('odd');
+	function jump(){
+	var pc = $("#select_jumpPage option:selected").text();
+	window.location.href="${pageContext.request.contextPath}/user_showUser.action?currPage=" + pc;
+} 
