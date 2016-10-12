@@ -10,7 +10,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>用户管理</title>
+<title>角色管理</title>
 <link href="<%=basePath%>css/style1.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=basePath%>js/jquery.js"></script>
 <script src="<%=basePath%>js/rolemanager_operation.js" type="text/javascript" charset="utf-8"></script>
@@ -81,9 +81,9 @@
 			<ul class="paginList">
 				<c:if test="${page.perIndex > 0}">
 					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/user_showUser.action?currPage=1">首页</a></li>
+						href="${pageContext.request.contextPath }/role_showRole.action?currPage=1">首页</a></li>
 					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/user_showUser.action?currPage=${page.perIndex}"><span
+						href="${pageContext.request.contextPath }/role_showRole.action?currPage=${page.perIndex}"><span
 							class="pagepre"></span></a></li>
 				</c:if>
 				<c:forEach begin="1" end="${page.totalPage }" var="p">
@@ -93,16 +93,16 @@
 						</c:when>
 						<c:otherwise>
 							<li class="paginItem"><a
-								href="${pageContext.request.contextPath }/user_showUser.action?currPage=${p}">${p}</a></li>
+								href="${pageContext.request.contextPath }/role_showRole.action?currPage=${p}">${p}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				<c:if test="${page.nextIndex > 0}">
 					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/user_showUser.action?currPage=${page.nextIndex}"><span
+						href="${pageContext.request.contextPath }/role_showRole.action?currPage=${page.nextIndex}"><span
 							class="pagenxt"></span></a></li>
 					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/user_showUser.action?currPage=${page.totalPage}">尾页</a></li>
+						href="${pageContext.request.contextPath }/role_showRole.action?currPage=${page.totalPage}">尾页</a></li>
 				</c:if>
 				&nbsp;
 				<select id="select_jumpPage" style="height: 30px" onchange="jump()">

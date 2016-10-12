@@ -12,7 +12,7 @@ public interface RoleDAO{
 	//添加
 	void addRole(RoleBean roleBean);
 	//分页查询
-	PageModel<RoleBean> splitRole(Integer currPage, Integer pageSize, String keyword);
+	PageModel<RoleBean> splitRole(Integer currPage, Integer pageSize);
 	//批量查询
 	List<RoleBean> showAllRole(String ids);
 	//批量删除对象

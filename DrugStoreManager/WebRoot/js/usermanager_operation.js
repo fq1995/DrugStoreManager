@@ -42,8 +42,8 @@
 		//查询
 		document.querySelector("#btn_selectUser").addEventListener("click",()=>{
 			var keyword=document.querySelector("#keyword").value;
-			/*alert(keyword);*/
-			window.location.href="${pageContext.request.contextPath}/user_showUser.action?currPage=1&keyword="+keyword;
+			alert(keyword);
+			window.location.href="user_showUser.action?currPage=1&keyword="+keyword;
 		},false);
 		//新增用户
 		document.querySelector("#btn_addUser").addEventListener("click",()=>{

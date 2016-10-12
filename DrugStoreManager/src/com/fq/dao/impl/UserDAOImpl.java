@@ -1,6 +1,5 @@
 package com.fq.dao.impl;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -99,6 +98,13 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 		userBean.setAddtime(date);
 		hibernateTemplate.save(userBean);
 		
+	}
+
+	@Override
+	public UserBean selectUserByUsercode(Integer usercode) {
+		String hql ="from UserBean where usercode=?";
+		List<UserBean> Userlist = (List<UserBean>) hibernateTemplate.find(hql, usercode);
+		return Userlist==null||Userlist.size()<=0?null:Userlist.get(0);
 	}
 
 }

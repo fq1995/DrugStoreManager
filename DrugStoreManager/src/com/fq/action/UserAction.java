@@ -91,21 +91,16 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	 * @throws Exception 
 	 */
 	public String addUser() throws Exception{
-		if(null == selectUserByName()){
+		if(null == selectUserByName() && null == selectUserByUsercode()){
 			userService.addUser(userBean,time);
 			return "show";
 		}
 		request.put("message","用户名已被使用！");
+		request.put("message2","用户编号已被使用！");
 		return "addUser";
 		
 	}
 	/**
-	 *  1	1001	user_showUser.action
-		2	1002	user_updateUser.acti
-		3	1003	user_editUser.action
-		4	1004	user_delUser.action
-		1	1	超级管理员	1001
-		2	2	管理员	1002
 	 * 删除用户
 	 */
 	public String delUser(){
@@ -141,6 +136,14 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	 */
 	public UserBean selectUserByName(){
 		UserBean bean =userService.selectUserByName(userBean.getUsername());
+		return bean;
+	}
+	/**
+	 * 根据用户编号查重
+	 * @return
+	 */
+	public UserBean selectUserByUsercode(){
+		UserBean bean =userService.selectUserByUsercode(userBean.getUsercode());
 		return bean;
 	}
 	/**

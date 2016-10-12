@@ -12,7 +12,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>用户管理</title>
 <link href="<%=basePath%>css/style1.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="<%=basePath%>js/jquery.js"></script>
+<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
 <script src="<%=basePath%>js/usermanager_operation.js" type="text/javascript" charset="utf-8"></script>
 <%-- <script src="<%=basePath%>js/usermanager_page.js" type="text/javascript" charset="utf-8"></script> --%>
 <script type="text/javascript">
@@ -37,7 +39,8 @@
 		<div class="tools">
 
 			<ul class="toolbar">
-				<li id="btn_addUser" class="click"><span><img
+				
+				<li id="btn_addUser"  class="click"><span><img
 						src="<%=basePath%>images/t01.png" /></span>添加</li>
 				<li id="btn_updateUser" class="click"><span><img
 						src="<%=basePath%>images/t02.png"  /></span>修改</li>
@@ -48,9 +51,10 @@
 
 
 			<ul class="toolbar1">
-				<li> <input type="text" id="keyword" name="keyword"/><a id="btn_selectUser" href="">查询</a></li>
+				<li style="border:0px"> <input class="form-control" placeholder="输入需要查询的用户名" style="width:180px;" type="text" id="keyword" name="keyword"/></li>&nbsp;&nbsp;
+				 <button id="btn_selectUser" type="button" class="btn btn-info btn-sm">查询</button>
 				
-				<li><span><img src="<%=basePath%>images/t05.png" /></span>设置</li>
+				<%-- <li><span><img src="<%=basePath%>images/t05.png" /></span>设置</li> --%>
 			</ul>
 
 		</div>

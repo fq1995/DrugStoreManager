@@ -28,8 +28,8 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public PageModel<RoleBean> splitRole(Integer currPage, Integer pageSize, String keyword) {
-		return roleDAO.splitRole(currPage, pageSize, keyword);
+	public PageModel<RoleBean> splitRole(Integer currPage, Integer pageSize) {
+		return roleDAO.splitRole(currPage, pageSize);
 	}
 
 	@Override

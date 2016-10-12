@@ -33,6 +33,16 @@
 				<param name="root">mess</param>
 			</result>
 		</action>
+		
+		<action name="per_*" class="permissionAction" method="{1}">
+			<result name="showPer">permanager.jsp</result>
+			<result name="addPer">peradd.jsp</result>
+			<result name="show" type="redirectAction">per_showPer.action?currPage=1</result>
+			<result name="edit">perupdate.jsp</result>
+			<result name="ajax_verifyName" type="json">
+				<param name="root">mess</param>
+			</result>
+		</action>
 	</package>
 	
 	

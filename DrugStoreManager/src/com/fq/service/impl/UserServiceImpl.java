@@ -31,7 +31,8 @@ public class UserServiceImpl implements UserService {
 	public UserBean selectUserByName(String username) {
 		return userDAO.selectUserByName(username);
 	}
-
+	
+	
 	@Override
 	public PageModel<UserBean> splitUser(Integer currPage, Integer pageSize ,String keyword) {
 		return userDAO.splitUser(currPage,pageSize,keyword);
@@ -68,6 +69,11 @@ public class UserServiceImpl implements UserService {
 	public void addUser(UserBean userBean) {
 		 userDAO.addUser(userBean);
 		
+	}
+
+	@Override
+	public UserBean selectUserByUsercode(Integer usercode) {
+		return userDAO.selectUserByUsercode(usercode);
 	}
 
 	 

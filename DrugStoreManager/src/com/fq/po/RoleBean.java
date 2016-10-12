@@ -30,7 +30,7 @@ public class RoleBean  implements java.io.Serializable {
     // Fields    
 
      private Integer roleid;
-     private Permission permission;
+     private PermissionBean permissionBean;
      private Integer rolecode;
      private String rolename;
      private Set<UserBean> userBeans = new HashSet<UserBean>(0);
@@ -44,8 +44,8 @@ public class RoleBean  implements java.io.Serializable {
 
     
     /** full constructor */
-    public RoleBean(Permission permission, Integer rolecode, String rolename, Set<UserBean> userBeans) {
-        this.permission = permission;
+    public RoleBean(PermissionBean permissionBean, Integer rolecode, String rolename, Set<UserBean> userBeans) {
+        this.permissionBean = permissionBean;
         this.rolecode = rolecode;
         this.rolename = rolename;
         this.userBeans = userBeans;
@@ -67,12 +67,12 @@ public class RoleBean  implements java.io.Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
         @JoinColumn(name="PERCODE")
 
-    public Permission getPermission() {
-        return this.permission;
+    public PermissionBean getPermissionBean() {
+        return this.permissionBean;
     }
     
-    public void setPermission(Permission permission) {
-        this.permission = permission;
+    public void setPermissionBean(PermissionBean permissionBean) {
+        this.permissionBean = permissionBean;
     }
     
     @Column(name="ROLECODE")

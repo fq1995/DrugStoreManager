@@ -25,10 +25,10 @@ public class RoleDAOImpl extends BaseDAO<RoleBean> implements RoleDAO {
 	}
 
 	@Override
-	public PageModel<RoleBean> splitRole(Integer currPage, Integer pageSize,String keyword) {
-		String hql_count = "select count(*) from RoleBean where rolename like :keyword";
-		String hql = "from RoleBean where rolename like :keyword order by roleid desc";
-		return super.split(hql, hql_count, currPage, pageSize,keyword);
+	public PageModel<RoleBean> splitRole(Integer currPage, Integer pageSize) {
+		String hql_count = "select count(*) from RoleBean ";
+		String hql = "from RoleBean order by roleid desc";
+		return super.split(hql, hql_count, currPage, pageSize);
 	}
 
 	@Override

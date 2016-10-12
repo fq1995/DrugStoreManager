@@ -28,6 +28,19 @@ public class BaseDAO<E>{
 	 * 无条件的分页
 	 * @return
 	 */
+	public PageModel<E> split(String hql,String hql_count,int currPage,int pageSize){
+		PageModel<E>  model=new PageModel<E>();
+		model.setCurrPage(currPage);
+		model.setPageSize(pageSize);
+		model.setPerIndex(getPerIndex(currPage));
+		int total=(int)getTotal(hql_count);
+		int totalpage=getTotalPage(total, pageSize);
+		model.setNextIndex(getNextIndex(currPage, totalpage));
+		model.setTotal(total);
+		model.setTotalPage(totalpage);
+		model.setList(getList(hql, currPage, pageSize));
+		return model;
+	}
 	public PageModel<E> split(String hql,String hql_count,int currPage,int pageSize,String keyword){
 		PageModel<E>  model=new PageModel<E>();
 		model.setCurrPage(currPage);
@@ -44,6 +57,15 @@ public class BaseDAO<E>{
 	}
 	
 	//计算总数据条数
+	private long getTotal(final String hql_count){
+		//select count(*) from UserBean 
+		return  (long) getHibernateTemplate().execute(new HibernateCallback() {
+			public Object doInHibernate(Session session) throws HibernateException {
+				Query query=session.createQuery(hql_count);
+				return query.list().get(0);
+			}
+		});
+	}
 	private long getTotal(final String hql_count,final String keyword){
 		//select count(*) from UserBean 
 		return  (long) getHibernateTemplate().execute(new HibernateCallback() {
@@ -81,6 +103,19 @@ public class BaseDAO<E>{
 		}
 	}
 	//查询结果集的
+	private List<E> getList(final String hql,final int currPage,final int pageSize){
+		//匿名内部类
+		return (List<E>) getHibernateTemplate().execute(new HibernateCallback() {
+			public Object doInHibernate(Session session) throws HibernateException {
+				//10   0    10    20  
+				int firstResult=(currPage-1)*pageSize;
+				Query query=session.createQuery(hql);
+				query.setFirstResult(firstResult);
+				query.setMaxResults(pageSize);
+				return query.list();
+			}
+		});
+	}
 	private List<E> getList(final String hql,final int currPage,final int pageSize,final String keyword){
 		//匿名内部类
 		return (List<E>) getHibernateTemplate().execute(new HibernateCallback() {

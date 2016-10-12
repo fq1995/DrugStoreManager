@@ -15,14 +15,14 @@ import javax.persistence.Table;
 
 
 /**
- * Permission entity. @author MyEclipse Persistence Tools
+ * PermissionBean entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name="tbl_permission"
     ,catalog="yaodian"
 )
 
-public class Permission  implements java.io.Serializable {
+public class PermissionBean  implements java.io.Serializable {
 
 
     // Fields    
@@ -36,12 +36,12 @@ public class Permission  implements java.io.Serializable {
     // Constructors
 
     /** default constructor */
-    public Permission() {
+    public PermissionBean() {
     }
 
     
     /** full constructor */
-    public Permission(Integer percode, String pername, Set<RoleBean> roleBeans) {
+    public PermissionBean(Integer percode, String pername, Set<RoleBean> roleBeans) {
         this.percode = percode;
         this.pername = pername;
         this.roleBeans = roleBeans;
@@ -71,7 +71,7 @@ public class Permission  implements java.io.Serializable {
         this.percode = percode;
     }
     
-    @Column(name="PERNAME", length=20)
+    @Column(name="PERNAME", length=100)
 
     public String getPername() {
         return this.pername;
@@ -80,7 +80,7 @@ public class Permission  implements java.io.Serializable {
     public void setPername(String pername) {
         this.pername = pername;
     }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="permission")
+@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="permissionBean")
 
     public Set<RoleBean> getRoleBeans() {
         return this.roleBeans;

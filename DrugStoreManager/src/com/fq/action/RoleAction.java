@@ -24,7 +24,6 @@ public class RoleAction extends BaseAction implements ModelDriven<RoleBean>,Requ
 	private String ids;
 	private String id;
 	private String mess;
-	private String keyword;
 	
 	
 	@Autowired
@@ -36,13 +35,10 @@ public class RoleAction extends BaseAction implements ModelDriven<RoleBean>,Requ
 	 * @return
 	 */
 	public String showRole() {
-		if(null == keyword){
-			keyword="";
-		}
 		if(currPage == null) {
 			currPage = 1;
 		}
-		PageModel<RoleBean>  page = roleService.splitRole(currPage, ConstantUtils.PAGESIZE,keyword);
+		PageModel<RoleBean>  page = roleService.splitRole(currPage, ConstantUtils.PAGESIZE);
 		request.put("page", page);
 		RoleBean role= roleService.selectAll();
 		request.put("role", role);
@@ -147,12 +143,6 @@ public class RoleAction extends BaseAction implements ModelDriven<RoleBean>,Requ
 	}
 	public void setMess(String mess) {
 		this.mess = mess;
-	}
-	public String getKeyword() {
-		return keyword;
-	}
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
 	}
 	@Override
 	public void setRequest(Map<String, Object> request) {

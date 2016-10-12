@@ -11,6 +11,8 @@ public interface UserService {
 	UserBean loginOrNot(String username,String password);
 	
 	UserBean selectUserByName(String username);
+	
+	UserBean selectUserByUsercode(Integer usercode);
 
 	PageModel<UserBean> splitUser(Integer currPage, Integer pageSize, String keyword);
 
