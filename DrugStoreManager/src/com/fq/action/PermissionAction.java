@@ -40,8 +40,6 @@ public class PermissionAction extends BaseAction implements ModelDriven<Permissi
 		}
 		PageModel<PermissionBean>  page = perService.splitPer(currPage, ConstantUtils.PAGESIZE);
 		request.put("page", page);
-		PermissionBean per= perService.selectAll();
-		request.put("per", per);
 		return "showPer";
 	}
 	/**

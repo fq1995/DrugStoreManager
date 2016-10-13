@@ -40,8 +40,6 @@ public class RoleAction extends BaseAction implements ModelDriven<RoleBean>,Requ
 		}
 		PageModel<RoleBean>  page = roleService.splitRole(currPage, ConstantUtils.PAGESIZE);
 		request.put("page", page);
-		RoleBean role= roleService.selectAll();
-		request.put("role", role);
 		return "showRole";
 	}
 	/**
