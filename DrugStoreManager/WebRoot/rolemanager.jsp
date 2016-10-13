@@ -12,7 +12,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>角色管理</title>
 <link href="<%=basePath%>css/style1.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="<%=basePath%>js/jquery.js"></script>
+<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
 <script src="<%=basePath%>js/rolemanager_operation.js" type="text/javascript" charset="utf-8"></script>
 <%-- <script src="<%=basePath%>js/usermanager_page.js" type="text/javascript" charset="utf-8"></script> --%>
 </head>
@@ -22,7 +24,7 @@
 		<span>位置：</span>
 		<ul class="placeul">
 			<li><a href="#">基本操作</a></li>
-			<li><img src="images/next.gif" style="margin-top:13px"></li>
+			<li><img src="images/next.gif"></li>
 			<li><a href="#">角色管理</a></li>
 		</ul>
 	</div>
@@ -67,7 +69,7 @@
 						<td>${state.count }</td>
 						<td>${role.rolecode }</td>
 						<td>${role.rolename }</td>
-						<td><%-- ${role.permission.pername } --%></td>
+						<td><%-- ${role.permissionBean.pername } --%></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -89,7 +91,7 @@
 				<c:forEach begin="1" end="${page.totalPage }" var="p">
 					<c:choose>
 						<c:when test="${p eq page.currPage}">
-							<li class="paginItem"><a href="#">[${p}]</a></li>
+							<li class="paginItem"><a href="#" style="background-color:#337AB7;color:#FFFFFF">${p}</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="paginItem"><a
@@ -105,20 +107,23 @@
 						href="${pageContext.request.contextPath }/role_showRole.action?currPage=${page.totalPage}">尾页</a></li>
 				</c:if>
 				&nbsp;
-				<select id="select_jumpPage" style="height: 30px" onchange="jump()">
-					<c:forEach begin="1" end="${requestScope.page.totalPage}" var="page">
+				&nbsp;
+				 <div class="form-group" style="display:inline-block">
+				    <select id="select_jumpPage" class="form-control" style="width:60px;height:30px" onchange="jump()" > 
+				      <c:forEach begin="1" end="${requestScope.page.totalPage}" var="page">
 						<c:if test="${page==requestScope.page.currPage}">
-							<li class="paginItem">
+							<li class="">
 							<option value="${page}" selected>${page}</option>
 							</li>
 						</c:if>
 						<c:if test="${page!=requestScope.page.currPage}">
-							<li class="paginItem">
+							<li class="">
 							<option value="${page}">${page}</option>
 							</li>
 						</c:if>
-					</c:forEach>
-				</select> &nbsp;
+					   </c:forEach>
+				     </select>
+				 </div>
 			</ul>
 		</div>
 

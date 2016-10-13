@@ -26,19 +26,6 @@
  	});
  	$(function() {
  		$("#rolename").css("background-color",""); 
- 		$("#rolecode").css("background-color",""); 
- 		//角色编号非空
- 		$("#rolecode").blur(function(){
- 	        var name = $("input[name='rolecode']").val(); 
- 	        if($.trim(name) == "" || name.length == 0 ||name.length >10){
- 	        	$("#rolecode").css("background-color","#FFB9B9"); 
- 	        	$("#add").attr("disabled",true);
- 	        }else{
- 	        	$("#rolecode").css("background-color","");
- 	        	$("#add").attr("disabled",false); 
- 	        }
- 		});
- 		
  		//角色名非空
  		$("#rolename").blur(function(){
  	        var name = $("input[name='rolename']").val(); 
@@ -67,13 +54,11 @@
 		<div class="formtitle">
 			<span>基本信息</span>
 		</div>
-		<form action="role_addRole.action" method="post">
+		<form action="per_addPer.action" method="post">
 			<input type="hidden" name="currPage" value="1">
 			<!-- <input type="hidden" name="time"> -->
 
 			<ul class="forminfo">
-				<li><label>角色编号</label><input name="rolecode" type="text" id="rolecode"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入角色编号"/><i style="color: red">${message2}</i></li>
 				<li><label>角色名</label><input name="rolename" type="text" id="rolename"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入角色名" /><i>角色名不能超过10个字符</i><i style="color: red">${message}</i></li>
 				<li><input id="add" type="submit" class="btn btn-info btn-sm" disabled value="确认保存" /></li> 

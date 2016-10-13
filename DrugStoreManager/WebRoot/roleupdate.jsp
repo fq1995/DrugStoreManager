@@ -1,11 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>用户修改</title>
     <link href="css/style1.css" rel="stylesheet" type="text/css" />
+    <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
     <script src="js/jquery-1.6.2.min.js"></script>
     <script type="text/javascript">
     $(function() {
@@ -16,8 +23,10 @@
  	        var name = $("input[name='rolename']").val(); 
  	        if($.trim(name) == "" || name.length == 0 ||name.length >10){
  	        	$("#rolename").css("background-color","#FFB9B9"); 
+ 	        	$("#update").attr("disabled",true);   
  	        }else{
  	        	$("#rolename").css("background-color",""); 
+ 	        	$("#update").attr("disabled",false);   
  	        }
  		});
  		
@@ -42,12 +51,10 @@
     <form action="role_updateRole.action" method="post">
     <input type="hidden" name="roleid" value="${role.roleid}">
    
- 
         <ul class="forminfo">
-            <li><label>角色名</label><input id="rolename" name="rolename" type="text" class="dfinput" value="${role.rolename}"/><i>角色名不能超过10个字符</i><i style="color: red">${message}</i></li>
-           <%--  <li><label>密码</label><input id="password" name="password" type="text" class="dfinput" value="${user.password}"/><i>密码长度在6~10位之间</i></li>
-            <li><label>是否审核</label><cite><input name="status" type="radio" value="1" checked="checked" />是&nbsp;&nbsp;&nbsp;&nbsp;<input name="status" type="radio" value="0" />否</cite></li> --%>
-            <li><input name="" type="submit" class="btn" value="确认保存"/></li>
+            <li><label>角色名</label><input id="rolename" name="rolename" type="text" class="form-control" 
+            style="width:200px; display:inline" placeholder="请输入角色名" value="${role.rolename}"/><i>角色名不能超过10个字符</i><i style="color: red">${message}</i></li>
+            <li><input id="update" type="submit" class="btn btn-info btn-sm" disabled value="确认保存"/></li>
         </ul>
     </form>
 

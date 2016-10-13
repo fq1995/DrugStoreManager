@@ -1,6 +1,5 @@
 package com.fq.action;
 
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.fq.po.RoleBean;
 import com.fq.po.UserBean;
 import com.fq.service.UserService;
 import com.fq.util.BaseAction;
@@ -71,9 +71,6 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	 * @return
 	 */
 	public String showUser() {
-		/*HttpServletRequest request1 = ServletActionContext.getRequest();
-		keyword = request1.getParameter("keyword");*/
-		System.out.println(keyword+"=================================================");
 		if(null == keyword){
 			keyword="";
 		}
@@ -90,9 +87,14 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	 * @return
 	 * @throws Exception 
 	 */
-	public String addUser() throws Exception{
+	public String addUser(){
 		if(null == selectUserByName() && null == selectUserByUsercode()){
-			userService.addUser(userBean,time);
+			try {
+				userService.addUser(userBean,time);
+			} catch (Exception e) {
+				System.out.println("时间转换错误");
+				e.printStackTrace();
+			}
 			return "show";
 		}
 		request.put("message","用户名已被使用！");
@@ -123,8 +125,8 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	 * 修改用户 
 	 */
 	public String updateUser(){
-		if(null == selectUserByName()){
-			userService.updateUser(userBean);
+		if(null == selectUserByNameAndUserId()){
+			userService.updateUser(userBean,time);
 			return "show";
 		}
 		request.put("message","用户名已被使用！");
@@ -136,6 +138,14 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	 */
 	public UserBean selectUserByName(){
 		UserBean bean =userService.selectUserByName(userBean.getUsername());
+		return bean;
+	}
+	/**
+	 * 根据用户名和id查重
+	 * @return
+	 */
+	public UserBean selectUserByNameAndUserId(){
+		UserBean bean =userService.selectUserByNameAndUserId(userBean.getUsername(),userBean.getUserid());
 		return bean;
 	}
 	/**

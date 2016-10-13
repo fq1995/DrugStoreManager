@@ -7,6 +7,7 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.fq.dao.RoleDAO;
+import com.fq.po.PermissionBean;
 import com.fq.po.RoleBean;
 import com.fq.util.BaseDAO;
 import com.fq.util.PageModel;
@@ -83,6 +84,20 @@ public class RoleDAOImpl extends BaseDAO<RoleBean> implements RoleDAO {
 		String hql= "from RoleBean";
 		List<RoleBean> Rolelist = (List<RoleBean>) hibernateTemplate.find(hql);
 		return Rolelist==null||Rolelist.size()<=0?null:Rolelist.get(0);
+	}
+
+	@Override
+	public RoleBean selectRoleByRoleCode(Integer rolecode) {
+		String hql = "from RoleBean where rolecode = ?";
+		List<RoleBean> Rolelist = (List<RoleBean>) hibernateTemplate.find(hql, rolecode);
+		return Rolelist==null||Rolelist.size()<=0?null:Rolelist.get(0);
+	}
+
+	@Override
+	public PermissionBean selectPer() {
+		String hql= "from PermissionBean";
+		List<PermissionBean> perlist = (List<PermissionBean>) hibernateTemplate.find(hql);
+		return perlist==null||perlist.size()<=0?null:perlist.get(0);
 	}
 
 

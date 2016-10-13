@@ -15,6 +15,8 @@ public interface UserDAO{
 	
 	UserBean selectUserByUsercode(Integer usercode);
 	
+	UserBean selectUserByNameAndUserId(String username,Integer userid);
+	
 	void addUser(UserBean userBean,String time) throws Exception;
 	
 	void addUser(UserBean userBean);
@@ -25,7 +27,7 @@ public interface UserDAO{
 	//批量删除对象
 	void deleteAllUser(List<UserBean> userList);
 	//修改
-	void updateUser(UserBean userBean);
+	void updateUser(UserBean userBean,String time);
 	//根据ID查询
 	UserBean selectById(String id);
 	

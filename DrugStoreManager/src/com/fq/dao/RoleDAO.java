@@ -2,6 +2,7 @@ package com.fq.dao;
 
 import java.util.List;
 
+import com.fq.po.PermissionBean;
 import com.fq.po.RoleBean;
 import com.fq.util.PageModel;
 
@@ -9,6 +10,8 @@ public interface RoleDAO{
 	
 	//根据名称查询
 	RoleBean selectRoleByName(String rolename);
+	//根据编号查询
+	RoleBean selectRoleByRoleCode(Integer rolecode);
 	//添加
 	void addRole(RoleBean roleBean);
 	//分页查询
@@ -23,4 +26,7 @@ public interface RoleDAO{
 	RoleBean selectById(String id);
 	//查询全部
 	RoleBean selectAll();
+	//查询全部的权限
+	PermissionBean selectPer();
+	
 }

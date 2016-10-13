@@ -55,8 +55,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateUser(UserBean userBean) {
-		userDAO.updateUser(userBean);
+	public void updateUser(UserBean userBean,String time){
+		userDAO.updateUser(userBean,time);
 		
 	}
 
@@ -76,7 +76,9 @@ public class UserServiceImpl implements UserService {
 		return userDAO.selectUserByUsercode(usercode);
 	}
 
-	 
+	@Override
+	public UserBean selectUserByNameAndUserId(String username, Integer userid) {
+		return userDAO.selectUserByNameAndUserId(username, userid);
+	}
 
-	
 }

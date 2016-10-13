@@ -9,6 +9,8 @@ public interface RoleService {
 	
 	//根据名称查询
 	RoleBean selectRoleByName(String rolename);
+	//根据编号查询
+	RoleBean selectRoleByRoleCode(Integer rolecode);
 	//添加
 	void addRole(RoleBean roleBean);
 	//分页查询

@@ -17,6 +17,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="js/jquery.keyboard.extension-typing.js"></script>
     <link type="text/css" href="css/keyboard.css" rel="stylesheet" />
     <script type="text/javascript" src="js/login.js"></script>
+    <style type="text/css">
+    	#an{
+    		position:relative;
+    		right:40px;
+    	}
+    	#resetbtn{
+    		position:relative;
+    		right:70px;
+    	}
+    	#forgottenpassword a {
+    		
+    		color:#C5C3C8;
+		}
+    	
+    </style>
 </head>
 <body id="login">
 <div id="wrappertop">
@@ -63,15 +78,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                      <img name="duihao4" alt="" src="images/yes.jpg" style="display:none"/>
                     <span id="tishi" style="width:40px;height:25px;color:red"></span>
                 </p>
-                <div style="background-color: blue">
+                <div id="an">
                     <button id="loginbtn" type="submit" class="positive" name="Submit">
                         <img src="images/key.png" alt="" />登录</button>
                 <ul id="forgottenpassword">
                     <li class="boldtext">|</li>
                     <li>
-                        <input id="remember" type="checkbox" name="remember" id="rememberMe"><label for="rememberMe">记住我</label></li>
+                        <input id="remember" type="checkbox" name="remember" id="rememberMe"><label for="rememberMe">记住我</label>&nbsp;<a href="register.jsp" style="text-decoration:none; cursor: hand;cursor: pointer;" id="register">还未注册</a></li>
                 </ul>
-                <button id="resetbtn" type="RESET" class="positive" name="Reset" style="width: 69px;" onclick="clean()">重置</button>
+                	<button style="display:inline-block" id="resetbtn" type="RESET" class="positive" name="Reset" style="width: 69px;" onclick="clean()">重置</button>
                 </div>
             </fieldset>
         </form>

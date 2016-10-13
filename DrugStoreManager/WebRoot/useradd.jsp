@@ -7,9 +7,9 @@
 			+ path + "/";
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta charset=utf-8 />
 <title>用户添加</title>
 <link href="css/style1.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -28,7 +28,7 @@
  	$(function() {
  		$("#username").css("background-color",""); 
  		$("#password").css("background-color",""); 
- 		$("#userid").css("background-color",""); 
+ 		$("#usercode").css("background-color",""); 
  		
  		//用户编号非空
  		$("#usercode").blur(function(){

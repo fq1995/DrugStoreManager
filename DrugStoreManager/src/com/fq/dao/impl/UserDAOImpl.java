@@ -1,5 +1,6 @@
 package com.fq.dao.impl;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -80,7 +81,16 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 	}
 
 	@Override
-	public void updateUser(UserBean userBean) {
+	public void updateUser(UserBean userBean,String time) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date=null;
+		try {
+			date = sdf.parse(time);
+		} catch (ParseException e) {
+			System.out.println("时间转换错误");
+			e.printStackTrace();
+		}
+		userBean.setAddtime(date);
 		getHibernateTemplate().update(userBean);
 		
 	}
@@ -104,6 +114,13 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 	public UserBean selectUserByUsercode(Integer usercode) {
 		String hql ="from UserBean where usercode=?";
 		List<UserBean> Userlist = (List<UserBean>) hibernateTemplate.find(hql, usercode);
+		return Userlist==null||Userlist.size()<=0?null:Userlist.get(0);
+	}
+
+	@Override
+	public UserBean selectUserByNameAndUserId(String username, Integer userid) {
+		String hql ="from UserBean where username =? and userid !=? and status=1";
+		List<UserBean> Userlist = (List<UserBean>) hibernateTemplate.find(hql, username,userid);
 		return Userlist==null||Userlist.size()<=0?null:Userlist.get(0);
 	}
 

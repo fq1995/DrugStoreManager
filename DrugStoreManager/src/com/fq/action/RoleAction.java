@@ -47,14 +47,15 @@ public class RoleAction extends BaseAction implements ModelDriven<RoleBean>,Requ
 	/**
 	 * 新增角色
 	 * @return
-	 * @throws Exception 
+	 *  
 	 */
 	public String addRole(){
-		if(null == selectRoleByName()){
+		if(null == selectRoleByName() && null == selectRoleByRoleCode()){
 			roleService.addRole(roleBean);
 			return "show";
 		}
 		request.put("message","角色名已被使用！");
+		request.put("message2", "角色编号已被使用！");
 		return "addRole";
 		
 	}
@@ -94,6 +95,14 @@ public class RoleAction extends BaseAction implements ModelDriven<RoleBean>,Requ
 	 */
 	public RoleBean selectRoleByName(){
 		RoleBean bean =roleService.selectRoleByName(roleBean.getRolename());
+		return bean;
+	}
+	/**
+	 * 根据角色编号查重
+	 * @return
+	 */
+	public RoleBean selectRoleByRoleCode(){
+		RoleBean bean =roleService.selectRoleByRoleCode(roleBean.getRolecode());
 		return bean;
 	}
 	

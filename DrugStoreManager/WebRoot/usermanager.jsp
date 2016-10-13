@@ -130,20 +130,23 @@
 						href="${pageContext.request.contextPath }/user_showUser.action?currPage=${page.totalPage}">尾页</a></li>
 				</c:if>
 				&nbsp;
-				<select id="select_jumpPage" style="height: 30px" onchange="jump()">
-					<c:forEach begin="1" end="${requestScope.page.totalPage}" var="page">
+				&nbsp;
+				<div class="form-group" style="display:inline-block">
+				    <select id="select_jumpPage" class="form-control" style="width:60px;height:30px" onchange="jump()" > 
+				      <c:forEach begin="1" end="${requestScope.page.totalPage}" var="page">
 						<c:if test="${page==requestScope.page.currPage}">
-							<li class="paginItem">
+							<li class="">
 							<option value="${page}" selected>${page}</option>
 							</li>
 						</c:if>
 						<c:if test="${page!=requestScope.page.currPage}">
-							<li class="paginItem">
+							<li class="">
 							<option value="${page}">${page}</option>
 							</li>
 						</c:if>
-					</c:forEach>
-				</select> &nbsp;
+					   </c:forEach>
+				     </select>
+				 </div>
 			</ul>
 		</div>
 

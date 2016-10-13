@@ -39,7 +39,7 @@
 							"menus":[
 									{"menuid":"13","menuname":"用户管理","icon":"icon-users","url":"${pageContext.request.contextPath}/user_showUser.action?currPage=1"},
 									{"menuid":"14","menuname":"角色管理","icon":"icon-role","url":"${pageContext.request.contextPath}/role_showRole.action?currPage=1"},
-									{"menuid":"15","menuname":"权限设置","icon":"icon-set","url":"demo.html"},
+									{"menuid":"15","menuname":"权限设置","icon":"icon-set","url":"${pageContext.request.contextPath}/per_showPer.action?currPage=1"},
 									{"menuid":"16","menuname":"系统日志","icon":"icon-log","url":"demo1.html"}
 								]
 						},{"menuid":"8","icon":"icon-sys","menuname":"员工管理",
@@ -75,10 +75,10 @@
             });
         } */
         //关闭登录窗口
-       /*  function closePwd() {
+         function closePwd() {
             $('#w').window('close');
         }
- */
+ 
         //时间(点击其他页面不刷新)
  		/* setInterval(function() {
  		    var now = (new Date()).toLocaleString();
@@ -114,10 +114,10 @@
 							close();
 						})
 
-					}
+					} */
 			
 					$(function() {
-						openPwd();
+						/* openPwd();
 
 						$('#editpass').click(function() {
 							$('#w').window('open');
@@ -130,7 +130,7 @@
 						$('#btnCancel').click(function() {
 							closePwd();
 						})
-
+  */
 						$('#loginOut')
 								.click(
 										function() {
@@ -141,11 +141,11 @@
 															function(r) {
 
 																if (r) {
-																	location.href = '/ajax/loginout.ashx';
+																	location.href = 'login.jsp';
 																}
 															});
 										})
-					}); */
+					}); 
 				</script>
 
 </head>
@@ -159,7 +159,7 @@
         line-height: 20px;color: #fff; font-family: Verdana, 微软雅黑,黑体">
         <span id="opt_info" border="false" region="center" style=" width: 20px; height: 20px;"></span>
        
-        <span style="float:right; padding-right:20px;" class="head"> <span id="time" style="..."></span>&nbsp;&nbsp;欢迎&nbsp;&nbsp;<span name="username" id="username">${username}</span>  <a href="#" id="editpass">修改密码</a> <a href="#" id="loginOut">安全退出</a></span>
+        <span style="float:right; padding-right:20px;" class="head"> <span id="time" style="..."></span>&nbsp;&nbsp;欢迎&nbsp;&nbsp;<span name="username" id="username">${username}</span>  <a style="text-decoration:none;cursor: hand;cursor: pointer;" href="#" id="loginOut">安全退出</a></span>
         <span style="padding-left:10px; font-size: 16px; "><img src="images/blocks.gif" width="20" height="20" align="absmiddle" /> 药店管理系统</span>
         <span name="time"></span>
     </div>
