@@ -22,4 +22,6 @@ public interface PermissionDAO {
 			PermissionBean selectById(String id);
 			//查询全部
 			PermissionBean selectAll();
+			//根据角色名和角色编号查询
+			PermissionBean selectPerByNameAndPerId(String pername, Integer perid);
 }

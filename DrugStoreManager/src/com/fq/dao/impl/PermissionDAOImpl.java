@@ -87,4 +87,11 @@ public class PermissionDAOImpl extends BaseDAO<PermissionBean> implements Permis
 		return perlist==null||perlist.size()<=0?null:perlist.get(0);
 	}
 
+	@Override
+	public PermissionBean selectPerByNameAndPerId(String pername, Integer perid) {
+		String hql ="from PermissionBean where pername=? and perid !=?";
+		List<PermissionBean> perlist = (List<PermissionBean>) hibernateTemplate.find(hql, pername,perid);
+		return perlist==null||perlist.size()<=0?null:perlist.get(0);
+	}
+
 }

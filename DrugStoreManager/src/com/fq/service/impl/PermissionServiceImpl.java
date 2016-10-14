@@ -58,4 +58,9 @@ public class PermissionServiceImpl implements PermissionService{
 		return perDAO.selectAll();
 	}
 
+	@Override
+	public PermissionBean selectPerByNameAndPerId(String pername, Integer perid) {
+		return perDAO.selectPerByNameAndPerId(pername, perid);
+	}
+
 }

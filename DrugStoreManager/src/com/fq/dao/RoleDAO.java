@@ -28,5 +28,6 @@ public interface RoleDAO{
 	RoleBean selectAll();
 	//查询全部的权限
 	PermissionBean selectPer();
-	
+	//根据角色名和角色编号查询
+	RoleBean selectRoleByNameAndRoleId(String rolename, Integer roleid);
 }

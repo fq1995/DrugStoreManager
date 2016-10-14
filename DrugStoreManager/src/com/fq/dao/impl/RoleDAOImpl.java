@@ -100,6 +100,13 @@ public class RoleDAOImpl extends BaseDAO<RoleBean> implements RoleDAO {
 		return perlist==null||perlist.size()<=0?null:perlist.get(0);
 	}
 
+	@Override
+	public RoleBean selectRoleByNameAndRoleId(String rolename, Integer roleid) {
+		String hql = "from RoleBean where rolecode = ? and rolename != ? ";
+		List<RoleBean> Rolelist = (List<RoleBean>) hibernateTemplate.find(hql, roleid,rolename);
+		return Rolelist==null||Rolelist.size()<=0?null:Rolelist.get(0);
+	}
+
 
 
 

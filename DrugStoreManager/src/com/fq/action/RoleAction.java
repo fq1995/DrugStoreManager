@@ -80,7 +80,7 @@ public class RoleAction extends BaseAction implements ModelDriven<RoleBean>,Requ
 	 * 修改角色 
 	 */
 	public String updateRole(){
-		if(null == selectRoleByName()){
+		if(null == selectRoleByNameAndRoleId()){
 			roleService.updateRole(roleBean);
 			return "show";
 		}
@@ -93,6 +93,14 @@ public class RoleAction extends BaseAction implements ModelDriven<RoleBean>,Requ
 	 */
 	public RoleBean selectRoleByName(){
 		RoleBean bean =roleService.selectRoleByName(roleBean.getRolename());
+		return bean;
+	}
+	/**
+	 * 根据角色名和角色编号查重
+	 * @return
+	 */
+	public RoleBean selectRoleByNameAndRoleId(){
+		RoleBean bean =roleService.selectRoleByNameAndRoleId(roleBean.getRolename(),roleBean.getRoleid());
 		return bean;
 	}
 	/**

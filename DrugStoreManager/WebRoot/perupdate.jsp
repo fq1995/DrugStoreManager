@@ -16,15 +16,15 @@
     <script src="js/jquery-1.6.2.min.js"></script>
     <script type="text/javascript">
     $(function() {
-    	$("#rolename").css("background-color",""); 
- 		//角色名非空
- 		$("#rolename").blur(function(){
- 	        var name = $("input[name='rolename']").val(); 
- 	        if($.trim(name) == "" || name.length == 0 ||name.length >10){
- 	        	$("#rolename").css("background-color","#FFB9B9"); 
+    	$("#pername").css("background-color",""); 
+ 		//权限名非空
+ 		$("#pername").blur(function(){
+ 	        var name = $("input[name='pername']").val(); 
+ 	        if($.trim(name) == "" || name.length == 0){
+ 	        	$("#pername").css("background-color","#FFB9B9"); 
  	        	$("#update").attr("disabled",true);   
  	        }else{
- 	        	$("#rolename").css("background-color",""); 
+ 	        	$("#pername").css("background-color",""); 
  	        	$("#update").attr("disabled",false);   
  	        }
  		});
@@ -47,15 +47,15 @@
 <div class="formbody">
 
     <div class="formtitle"><span>基本信息</span></div>
-    <form action="role_updateRole.action" method="post">
-    <input type="hidden" name="roleid" value="${role.roleid}">
-    <input type="hidden" name="id" value="${role.roleid}">
+    <form action="per_updatePer.action" method="post">
+    <input type="hidden" name="perid" value="${per.perid}">
+    <input type="hidden" name="id" value="${per.perid}">
    
         <ul class="forminfo">
-        	<li><label>角色编号</label><input name="rolecode" type="text" id="rolecode" value="${role.rolecode}"
+        	<li><label>角色编号</label><input name="percode" type="text" id="percode" value="${per.percode}"
 					class="form-control" style="width:200px; display:inline" readonly="readonly"/></li>
-            <li><label>角色名</label><input id="rolename" name="rolename" type="text" class="form-control" 
-            style="width:200px; display:inline" placeholder="请输入角色名" value="${role.rolename}"/><i>角色名不能超过10个字符</i><i style="color: red">${message}</i></li>
+            <li><label>角色名</label><input id="pername" name="pername" type="text" class="form-control" 
+            style="width:200px; display:inline" placeholder="请输入权限名" value="${per.pername}"/><i>角色名不能超过10个字符</i><i style="color: red">${message}</i></li>
             <li><input id="update" type="submit" class="btn btn-info btn-sm" disabled value="确认保存"/></li>
         </ul>
     </form>

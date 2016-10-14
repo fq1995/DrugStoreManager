@@ -25,5 +25,7 @@ public interface RoleService {
 	RoleBean selectById(String id);
 	//查询全部
 	RoleBean selectAll();
+	//根据角色名和角色编号查询
+	RoleBean selectRoleByNameAndRoleId(String rolename, Integer roleid);
 	
 }

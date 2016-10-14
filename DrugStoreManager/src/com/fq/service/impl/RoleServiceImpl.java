@@ -64,6 +64,11 @@ public class RoleServiceImpl implements RoleService {
 		return roleDAO.selectRoleByRoleCode(rolecode);
 	}
 
+	@Override
+	public RoleBean selectRoleByNameAndRoleId(String rolename, Integer roleid) {
+		return roleDAO.selectRoleByNameAndRoleId(rolename, roleid);
+	}
+
 
 	
 }

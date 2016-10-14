@@ -15,7 +15,7 @@
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<%=basePath%>js/jquery.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
-<script src="<%=basePath%>js/rolemanager_operation.js" type="text/javascript" charset="utf-8"></script>
+<script src="<%=basePath%>js/permanager_operation.js" type="text/javascript" charset="utf-8"></script>
 <%-- <script src="<%=basePath%>js/usermanager_page.js" type="text/javascript" charset="utf-8"></script> --%>
 </head>
 

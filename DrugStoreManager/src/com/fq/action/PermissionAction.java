@@ -53,6 +53,7 @@ public class PermissionAction extends BaseAction implements ModelDriven<Permissi
 			return "show";
 		}
 		request.put("message","权限名已被使用！");
+		request.put("message2","权限编号已被使用！");
 		return "addPer";
 		
 	}
@@ -79,7 +80,7 @@ public class PermissionAction extends BaseAction implements ModelDriven<Permissi
 	 * 修改权限 
 	 */
 	public String updatePer(){
-		if(null == selectPerByName()){
+		if(null == selectPerByNameAndPerId()){
 			perService.updatePer(perBean);
 			return "show";
 		}
@@ -92,6 +93,14 @@ public class PermissionAction extends BaseAction implements ModelDriven<Permissi
 	 */
 	public PermissionBean selectPerByName(){
 		PermissionBean bean =perService.selectPerByName(perBean.getPername());
+		return bean;
+	}
+	/**
+	 * 根据权限名和权限编号查重
+	 * @return
+	 */
+	public PermissionBean selectPerByNameAndPerId(){
+		PermissionBean bean =perService.selectPerByNameAndPerId(perBean.getPername(),perBean.getPerid());
 		return bean;
 	}
 	
