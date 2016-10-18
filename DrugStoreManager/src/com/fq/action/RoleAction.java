@@ -43,6 +43,12 @@ public class RoleAction extends BaseAction implements ModelDriven<RoleBean>,Requ
 		return "showRole";
 	}
 	/**
+	 * 跳转新增
+	 */
+	public String doaddRole(){
+		return "doadd";
+	}
+	/**
 	 * 新增角色
 	 * @return
 	 *  

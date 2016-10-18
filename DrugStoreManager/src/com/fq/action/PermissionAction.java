@@ -43,6 +43,12 @@ public class PermissionAction extends BaseAction implements ModelDriven<Permissi
 		return "showPer";
 	}
 	/**
+	 * 跳转新增
+	 */
+	public String doaddPer(){
+		return "doaddPer";
+	}
+	/**
 	 * 新增权限
 	 * @return
 	 * @throws Exception 

@@ -11,11 +11,11 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>药店管理系统</title>
     <link href="<%=basePath%>css/default.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="js/themes/default/easyui.css" />
-    <link rel="stylesheet" type="text/css" href="js/themes/icon.css" />
-    <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
-    <script type="text/javascript" src="js/jquery.easyui.min.1.2.2.js"></script>
-	<script type="text/javascript" src='js/outlook2.js'> </script>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>js/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>js/themes/icon.css" />
+    <script type="text/javascript" src="<%=basePath%>js/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>js/jquery.easyui.min.1.2.2.js"></script>
+	<script type="text/javascript" src='<%=basePath%>js/outlook2.js'> </script>
 	<script type="text/javascript">
 	
 		function currentTime() {
@@ -141,7 +141,7 @@
 															function(r) {
 
 																if (r) {
-																	location.href = 'login.jsp';
+																	location.href = '<%=basePath%>login.jsp';
 																}
 															});
 										})
@@ -152,15 +152,15 @@
 <body class="easyui-layout" style="overflow-y: hidden"  scroll="no">
 <noscript>
 <div style=" position:absolute; z-index:100000; height:2046px;top:0px;left:0px; width:100%; background:white; text-align:center;">
-    <img src="images/noscript.gif" alt='抱歉，请开启脚本支持！' />
+    <img src="<%=basePath%>images/noscript.gif" alt='抱歉，请开启脚本支持！' />
 </div></noscript>
     <div region="north" split="true" border="false" style="overflow: hidden; height: 30px;
-        background: url(images/layout-browser-hd-bg.gif) #7f99be repeat-x center 50%;
+        background: url(<%=basePath%>images/layout-browser-hd-bg.gif) #7f99be repeat-x center 50%;
         line-height: 20px;color: #fff; font-family: Verdana, 微软雅黑,黑体">
         <span id="opt_info" border="false" region="center" style=" width: 20px; height: 20px;"></span>
        
         <span style="float:right; padding-right:20px;" class="head"> <span id="time" style="..."></span>&nbsp;&nbsp;欢迎&nbsp;&nbsp;<span name="username" id="username">${username}</span>  <a style="text-decoration:none;cursor: hand;cursor: pointer;" href="#" id="loginOut">安全退出</a></span>
-        <span style="padding-left:10px; font-size: 16px; "><img src="images/blocks.gif" width="20" height="20" align="absmiddle" /> 药店管理系统</span>
+        <span style="padding-left:10px; font-size: 16px; "><img src="<%=basePath%>images/blocks.gif" width="20" height="20" align="absmiddle" /> 药店管理系统</span>
         <span name="time"></span>
     </div>
     <div region="south" split="true" style="height: 30px; background: #D2E0F2; ">

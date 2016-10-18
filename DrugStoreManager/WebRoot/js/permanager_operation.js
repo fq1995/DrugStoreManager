@@ -41,7 +41,7 @@
 	function init(){
 		//新增
 		document.querySelector("#btn_addUser").addEventListener("click",()=>{
-			window.location.href="peradd.jsp";
+			window.location.href="per_doaddPer.action";
 		},false);
 		//修改
 		document.querySelector("#btn_updateUser").addEventListener("click",update,false);

@@ -10,12 +10,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>角色管理</title>
+<title>权限管理</title>
 <link href="<%=basePath%>css/style1.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/jquery.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
-<script src="<%=basePath%>js/rolemanager_operation.js" type="text/javascript" charset="utf-8"></script>
+<script src="<%=basePath%>js/permanager_operation.js" type="text/javascript" charset="utf-8"></script>
 <%-- <script src="<%=basePath%>js/usermanager_page.js" type="text/javascript" charset="utf-8"></script> --%>
 </head>
 
@@ -24,8 +24,8 @@
 		<span>位置：</span>
 		<ul class="placeul">
 			<li><a href="#">基本操作</a></li>
-			<li><img src="images/next.gif"></li>
-			<li><a href="#">角色管理</a></li>
+			<li><img src="<%=basePath%>images/next.gif" style="margin-top:13px"></li>
+			<li><a href="#">权限管理</a></li>
 		</ul>
 	</div>
 
@@ -55,21 +55,21 @@
 				<tr>
 					<th><input id="all" name="all" type="checkbox" value="" /></th>
 					<th>序号</th>
-					<th>角色编号</th>
-					<th>角色名</th>
+					<th>权限编号</th>
+					<th>权限名</th>
 					<th>权限</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${requestScope.page.list}" var="role"
+				<c:forEach items="${requestScope.page.list}" var="per"
 					varStatus="state">
 					<tr>
 						<td><input name="id_check" type="checkbox"
-							value="${role.roleid }" id="${role.roleid}"/></td>
+							value="${per.perid }" id="${per.perid}"/></td>
 						<td>${state.count }</td>
-						<td>${role.rolecode }</td>
-						<td>${role.rolename }</td>
-					    <td>${role.permissionBean.perid }</td> 
+						<td>${per.percode }</td>
+						<td>${per.pername }</td>
+						<td></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -83,9 +83,9 @@
 			<ul class="paginList">
 				<c:if test="${page.perIndex > 0}">
 					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/role_showRole.action?currPage=1">首页</a></li>
+						href="${pageContext.request.contextPath }/per_showPer.action?currPage=1">首页</a></li>
 					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/role_showRole.action?currPage=${page.perIndex}"><span
+						href="${pageContext.request.contextPath }/per_showPer.action?currPage=${page.perIndex}"><span
 							class="pagepre"></span></a></li>
 				</c:if>
 				<c:forEach begin="1" end="${page.totalPage }" var="p">
@@ -95,20 +95,20 @@
 						</c:when>
 						<c:otherwise>
 							<li class="paginItem"><a
-								href="${pageContext.request.contextPath }/role_showRole.action?currPage=${p}">${p}</a></li>
+								href="${pageContext.request.contextPath }/per_showPer.action?currPage=${p}">${p}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				<c:if test="${page.nextIndex > 0}">
 					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/role_showRole.action?currPage=${page.nextIndex}"><span
+						href="${pageContext.request.contextPath }/per_showPer.action?currPage=${page.nextIndex}"><span
 							class="pagenxt"></span></a></li>
 					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/role_showRole.action?currPage=${page.totalPage}">尾页</a></li>
+						href="${pageContext.request.contextPath }/per_showPer.action?currPage=${page.totalPage}">尾页</a></li>
 				</c:if>
 				&nbsp;
 				&nbsp;
-				 <div class="form-group" style="display:inline-block">
+				<div class="form-group" style="display:inline-block">
 				    <select id="select_jumpPage" class="form-control" style="width:60px;height:30px" onchange="jump()" > 
 				      <c:forEach begin="1" end="${requestScope.page.totalPage}" var="page">
 						<c:if test="${page==requestScope.page.currPage}">

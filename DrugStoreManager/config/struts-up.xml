@@ -6,7 +6,7 @@
 	<package name="shop" extends="json-default" namespace="/">
 		<!-- 设置一个全局的页面 -->
 		<global-results>
-			<result name="ok">main.jsp</result>
+			<result name="ok">/WEB-INF/main.jsp</result>
 			<result name="error">login.jsp</result>
 			<result name="defult">register.jsp</result>
 		</global-results>
@@ -26,20 +26,22 @@
 		</action>
 		
 		<action name="role_*" class="roleAction" method="{1}">
-			<result name="showRole">rolemanager.jsp</result>
-			<result name="addRole">roleadd.jsp</result>
+			<result name="doadd">/WEB-INF/role/roleadd.jsp</result>
+			<result name="showRole">/WEB-INF/role/rolemanager.jsp</result>
+			<result name="addRole">/WEB-INF/role/roleadd.jsp</result>
 			<result name="show" type="redirectAction">role_showRole.action?currPage=1</result>
-			<result name="edit">roleupdate.jsp</result>
+			<result name="edit">/WEB-INF/role/roleupdate.jsp</result>
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
 			</result>
 		</action>
 		
 		<action name="per_*" class="permissionAction" method="{1}">
-			<result name="showPer">permanager.jsp</result>
-			<result name="addPer">peradd.jsp</result>
+			<result name="doaddPer">/WEB-INF/per/peradd.jsp</result>
+			<result name="showPer">/WEB-INF/per/permanager.jsp</result>
+			<result name="addPer">/WEB-INF/per/peradd.jsp</result>
 			<result name="show" type="redirectAction">per_showPer.action?currPage=1</result>
-			<result name="edit">perupdate.jsp</result>
+			<result name="edit">/WEB-INF/per/perupdate.jsp</result>
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
 			</result>
