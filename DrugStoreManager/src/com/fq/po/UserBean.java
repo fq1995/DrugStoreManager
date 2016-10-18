@@ -50,10 +50,9 @@ public class UserBean  implements java.io.Serializable {
     }
 
 	/** minimal constructor */
-    public UserBean(String userId, Integer userCode, String username) {
+    public UserBean(String userId, Integer userCode) {
         this.userId = userId;
         this.userCode = userCode;
-        this.username = username;
     }
     
     /** full constructor */
@@ -83,8 +82,8 @@ public class UserBean  implements java.io.Serializable {
     public void setUserId(String userId) {
         this.userId = userId;
     }
-	@ManyToOne(fetch=FetchType.LAZY)
-        @JoinColumn(name="ROLECODE")
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+        @JoinColumn(name="ROLEID")
 
     public RoleBean getRoleBean() {
         return this.roleBean;
@@ -104,7 +103,7 @@ public class UserBean  implements java.io.Serializable {
         this.userCode = userCode;
     }
     
-    @Column(name="username", nullable=false, length=20)
+    @Column(name="username", length=4)
 
     public String getUsername() {
         return this.username;

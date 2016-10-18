@@ -99,6 +99,7 @@
 		<tx:attributes>
 			<!-- 事物控制的方法 Never是不开事物-->
 			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="doadd*" propagation="REQUIRED" />
 			<tx:method name="del*" propagation="REQUIRED" />
 			<tx:method name="edit*" propagation="REQUIRED" />
 			<tx:method name="update*" propagation="REQUIRED"/>

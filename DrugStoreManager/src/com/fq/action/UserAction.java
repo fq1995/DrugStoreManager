@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.fq.po.RoleBean;
 import com.fq.po.UserBean;
 import com.fq.service.UserService;
 import com.fq.util.BaseAction;
@@ -81,6 +80,12 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 		request.put("page", page);
 
 		return "showUser";
+	}
+	/**
+	 * 跳转新增
+	 */
+	public String doaddUser(){
+		return "doadd";
 	}
 	/**
 	 * 新增用户

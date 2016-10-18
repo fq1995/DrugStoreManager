@@ -30,6 +30,7 @@ public class PermissionBean  implements java.io.Serializable {
      private Integer perid;
      private Integer percode;
      private String pername;
+     private byte[] remark;
      private Set<RoleBean> roleBeans = new HashSet<RoleBean>(0);
 
 
@@ -41,9 +42,10 @@ public class PermissionBean  implements java.io.Serializable {
 
     
     /** full constructor */
-    public PermissionBean(Integer percode, String pername, Set<RoleBean> roleBeans) {
+    public PermissionBean(Integer percode, String pername, byte[] remark, Set<RoleBean> roleBeans) {
         this.percode = percode;
         this.pername = pername;
+        this.remark = remark;
         this.roleBeans = roleBeans;
     }
 
@@ -71,7 +73,7 @@ public class PermissionBean  implements java.io.Serializable {
         this.percode = percode;
     }
     
-    @Column(name="PERNAME", length=100)
+    @Column(name="PERNAME", length=20)
 
     public String getPername() {
         return this.pername;
@@ -79,6 +81,16 @@ public class PermissionBean  implements java.io.Serializable {
     
     public void setPername(String pername) {
         this.pername = pername;
+    }
+    
+    @Column(name="REMARK")
+
+    public byte[] getRemark() {
+        return this.remark;
+    }
+    
+    public void setRemark(byte[] remark) {
+        this.remark = remark;
     }
 @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="permissionBean")
 

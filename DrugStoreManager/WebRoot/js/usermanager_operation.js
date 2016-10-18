@@ -47,7 +47,7 @@
 		},false);
 		//新增用户
 		document.querySelector("#btn_addUser").addEventListener("click",()=>{
-			window.location.href="useradd.jsp";
+			window.location.href="user_doaddUser.action";
 		},false);
 		//修改用户
 		document.querySelector("#btn_updateUser").addEventListener("click",update,false);

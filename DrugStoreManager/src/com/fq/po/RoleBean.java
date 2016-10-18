@@ -65,7 +65,7 @@ public class RoleBean  implements java.io.Serializable {
         this.roleid = roleid;
     }
 	@ManyToOne(fetch=FetchType.LAZY)
-        @JoinColumn(name="PERCODE")
+        @JoinColumn(name="PERID")
 
     public PermissionBean getPermissionBean() {
         return this.permissionBean;

@@ -12,10 +12,11 @@
 		</global-results>
 		<!-- 配置首页访问的action -->
 		<action name="user_*" class="userAction" method="{1}">
-			<result name="showUser">usermanager.jsp</result>
-			<result name="addUser">useradd.jsp</result>
+			<result name="doadd">/WEB-INF/user/useradd.jsp</result>
+			<result name="showUser">/WEB-INF/user/usermanager.jsp</result>
+			<result name="addUser">/WEB-INF/user/useradd.jsp</result>
 			<result name="show" type="redirectAction">user_showUser.action?currPage=1</result>
-			<result name="edit">userupdate.jsp</result>
+			<result name="edit">/WEB-INF/user/userupdate.jsp</result>
 			<result name="ajax_verifyCode" type="json">
 				<param name="root">flag</param>
 			</result>
