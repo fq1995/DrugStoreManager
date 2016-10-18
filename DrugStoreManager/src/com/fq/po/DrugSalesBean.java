@@ -1,5 +1,7 @@
 package com.fq.po;
 
+// default package
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -7,7 +9,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -46,9 +47,14 @@ public class DrugSalesBean  implements java.io.Serializable {
     public DrugSalesBean() {
     }
 
+	/** minimal constructor */
+    public DrugSalesBean(String salesId) {
+        this.salesId = salesId;
+    }
     
     /** full constructor */
-    public DrugSalesBean(DrugBean drugBean, UserBean userBean, String salesCode, Integer salesVolume, Date salesDate, Float totalamount, Set<BussinessBean> bussinessBeans) {
+    public DrugSalesBean(String salesId, DrugBean drugBean, UserBean userBean, String salesCode, Integer salesVolume, Date salesDate, Float totalamount, Set<BussinessBean> bussinessBeans) {
+        this.salesId = salesId;
         this.drugBean = drugBean;
         this.userBean = userBean;
         this.salesCode = salesCode;
@@ -60,7 +66,7 @@ public class DrugSalesBean  implements java.io.Serializable {
 
    
     // Property accessors
-    @Id @GeneratedValue
+    @Id 
     
     @Column(name="SALES_ID", unique=true, nullable=false, length=32)
 

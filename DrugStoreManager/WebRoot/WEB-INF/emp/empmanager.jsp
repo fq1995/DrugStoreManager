@@ -10,12 +10,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>用户管理</title>
+<title>员工管理</title>
 <link href="<%=basePath%>css/style1.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
-<script src="<%=basePath%>js/usermanager_operation.js" type="text/javascript" charset="utf-8"></script>
+<script src="<%=basePath%>js/empmanager_operation.js" type="text/javascript" charset="utf-8"></script>
 <%-- <script src="<%=basePath%>js/usermanager_page.js" type="text/javascript" charset="utf-8"></script> --%>
 <script type="text/javascript">
 	$(function(){
@@ -29,8 +29,8 @@
 		<span>位置：</span>
 		<ul class="placeul">
 			<li><a href="#">基本操作</a></li>
-			<li><img src="<%=basePath%>images/next.gif" ></li>
-			<li><a href="#">用户管理</a></li>
+			<li><img src="images/next.gif" ></li>
+			<li><a href="#">员工管理</a></li>
 		</ul>
 	</div>
 
@@ -51,7 +51,7 @@
 
 
 			<ul class="toolbar1">
-				<li style="border:0px"> <input class="form-control" placeholder="输入需要查询的用户名" style="width:180px;" type="text" id="keyword" name="keyword"/></li>&nbsp;&nbsp;
+				<li style="border:0px"> <input class="form-control" placeholder="输入需要查询的员工名" style="width:180px;" type="text" id="keyword" name="keyword"/></li>&nbsp;&nbsp;
 				 <button id="btn_selectUser" type="button" class="btn btn-info btn-sm">查询</button>
 				
 				<%-- <li><span><img src="<%=basePath%>images/t05.png" /></span>设置</li> --%>
@@ -65,34 +65,36 @@
 				<tr>
 					<th><input id="all" name="all" type="checkbox" value="" /></th>
 					<th>序号</th>
-					<th>用户编号</th>
-					<th>用户名</th>
-					<th>密码</th>
-					<th>权限</th>
-					<th>是否审核</th>
-					<th>添加日期</th>
+					<th>员工编号</th>
+					<th>员工性名</th>
+					<th>性别</th>
+					<th>年龄</th>
+					<th>电话</th>
+					<th>职位</th>
+					<th>工作时间</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${requestScope.page.list}" var="user"
+				<c:forEach items="${requestScope.page.list}" var="emp"
 					varStatus="state">
 					<tr>
 						<td><input name="id_check" type="checkbox"
-							value="${user.userId }" id="${user.userId}"/></td>
+							value="${emp.empId }" id="${emp.empId}"/></td>
 						<td>${state.count }</td>
-						<td>${user.userCode }</td>
-						<td>${user.username }</td>
-						<td>${user.password }</td>
-						<td>${user.roleBean.rolename }</td>
+						<td>${emp.empCode }</td>
+						<td>${emp.empName }</td>
 						<c:choose>
-							<c:when test="${user.status eq 1}">
-								<td>是</td>
+							<c:when test="${emp.sex eq 1}">
+								<td>男</td>
 							</c:when>
 							<c:otherwise>
-								<td>否</td>
+								<td>女</td>
 							</c:otherwise>
 						</c:choose>
-						<td>${user.addtime }</td>
+						<td>${emp.age }</td>
+						<td>${emp.tel }</td>
+						<td>${emp.title }</td>
+						<td>${emp.startdate }</td>
 					</tr>
 				</c:forEach>
 			</tbody>

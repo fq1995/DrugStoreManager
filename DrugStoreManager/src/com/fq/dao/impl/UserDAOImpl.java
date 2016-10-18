@@ -64,9 +64,6 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 					sb.append("'").append(arr[i]).append("'").append(",");
 				}
 			}
-			
-			
-			
 			List<UserBean> userList = (List<UserBean>) getHibernateTemplate().find(sb.toString());
 			if(userList != null && userList.size() > 0) {
 				return userList;

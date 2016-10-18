@@ -43,7 +43,7 @@
 									{"menuid":"16","menuname":"系统日志","icon":"icon-log","url":"demo1.html"}
 								]
 						},{"menuid":"8","icon":"icon-sys","menuname":"员工管理",
-							"menus":[{"menuid":"21","menuname":"员工列表","icon":"icon-nav","url":"demo.html"},
+							"menus":[{"menuid":"21","menuname":"员工列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/emp_showEmp.action?currPage=1"},
 									{"menuid":"22","menuname":"视频监控","icon":"icon-nav","url":"demo1.html"}
 								]
 						},{"menuid":"56","icon":"icon-sys","menuname":"部门管理",

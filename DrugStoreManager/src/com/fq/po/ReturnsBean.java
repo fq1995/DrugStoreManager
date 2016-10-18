@@ -1,5 +1,7 @@
 package com.fq.po;
 
+// default package
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -7,7 +9,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -48,9 +49,14 @@ public class ReturnsBean  implements java.io.Serializable {
     public ReturnsBean() {
     }
 
+	/** minimal constructor */
+    public ReturnsBean(String returnId) {
+        this.returnId = returnId;
+    }
     
     /** full constructor */
-    public ReturnsBean(DrugBean drugBean, UserBean userBean, DrugPurchaseBean drugPurchaseBean, String returnCode, Integer amount, Double money, byte[] reason, Date submitTime, Set<BussinessBean> bussinessBeans) {
+    public ReturnsBean(String returnId, DrugBean drugBean, UserBean userBean, DrugPurchaseBean drugPurchaseBean, String returnCode, Integer amount, Double money, byte[] reason, Date submitTime, Set<BussinessBean> bussinessBeans) {
+        this.returnId = returnId;
         this.drugBean = drugBean;
         this.userBean = userBean;
         this.drugPurchaseBean = drugPurchaseBean;
@@ -64,7 +70,7 @@ public class ReturnsBean  implements java.io.Serializable {
 
    
     // Property accessors
-    @Id @GeneratedValue
+    @Id 
     
     @Column(name="RETURN_ID", unique=true, nullable=false, length=32)
 

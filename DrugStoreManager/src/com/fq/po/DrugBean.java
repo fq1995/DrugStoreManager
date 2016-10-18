@@ -1,5 +1,7 @@
 package com.fq.po;
 
+// default package
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -7,7 +9,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -58,12 +59,14 @@ public class DrugBean  implements java.io.Serializable {
     }
 
 	/** minimal constructor */
-    public DrugBean(Integer drugCode) {
+    public DrugBean(String drugId, Integer drugCode) {
+        this.drugId = drugId;
         this.drugCode = drugCode;
     }
     
     /** full constructor */
-    public DrugBean(DrugUnitBean drugUnitBean, DosageformBean dosageformBean, DrugCategoryBean drugCategoryBean, Integer drugCode, String drugName, byte[] manufacturer, String approvalNumber, String modifier, Date modifyTime, String memo, String status, Set<InventoriesBean> inventoriesBeans, Set<BussinessBean> bussinessBeans, Set<ReturnsBean> returnsBeans, Set<DrugPurchaseBean> drugPurchaseBeans, Set<DrugSalesBean> drugSalesBeans) {
+    public DrugBean(String drugId, DrugUnitBean drugUnitBean, DosageformBean dosageformBean, DrugCategoryBean drugCategoryBean, Integer drugCode, String drugName, byte[] manufacturer, String approvalNumber, String modifier, Date modifyTime, String memo, String status, Set<InventoriesBean> inventoriesBeans, Set<BussinessBean> bussinessBeans, Set<ReturnsBean> returnsBeans, Set<DrugPurchaseBean> drugPurchaseBeans, Set<DrugSalesBean> drugSalesBeans) {
+        this.drugId = drugId;
         this.drugUnitBean = drugUnitBean;
         this.dosageformBean = dosageformBean;
         this.drugCategoryBean = drugCategoryBean;
@@ -84,7 +87,7 @@ public class DrugBean  implements java.io.Serializable {
 
    
     // Property accessors
-    @Id @GeneratedValue
+    @Id 
     
     @Column(name="DRUG_ID", unique=true, nullable=false, length=32)
 

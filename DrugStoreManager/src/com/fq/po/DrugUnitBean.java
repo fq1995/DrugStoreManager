@@ -1,12 +1,13 @@
 package com.fq.po;
 
+// default package
+
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -36,16 +37,21 @@ public class DrugUnitBean  implements java.io.Serializable {
     public DrugUnitBean() {
     }
 
+	/** minimal constructor */
+    public DrugUnitBean(String unitnameId) {
+        this.unitnameId = unitnameId;
+    }
     
     /** full constructor */
-    public DrugUnitBean(String unitname, Set<DrugBean> drugBeans) {
+    public DrugUnitBean(String unitnameId, String unitname, Set<DrugBean> drugBeans) {
+        this.unitnameId = unitnameId;
         this.unitname = unitname;
         this.drugBeans = drugBeans;
     }
 
    
     // Property accessors
-    @Id @GeneratedValue
+    @Id 
     
     @Column(name="UNITNAME_ID", unique=true, nullable=false, length=32)
 

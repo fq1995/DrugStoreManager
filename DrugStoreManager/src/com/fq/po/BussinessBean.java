@@ -5,7 +5,6 @@ package com.fq.po;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -39,9 +38,14 @@ public class BussinessBean  implements java.io.Serializable {
     public BussinessBean() {
     }
 
+	/** minimal constructor */
+    public BussinessBean(String businessId) {
+        this.businessId = businessId;
+    }
     
     /** full constructor */
-    public BussinessBean(DrugBean drugBean, DrugSalesBean drugSalesBean, InventoriesBean inventoriesBean, DrugPurchaseBean drugPurchaseBean, ReturnsBean returnsBean) {
+    public BussinessBean(String businessId, DrugBean drugBean, DrugSalesBean drugSalesBean, InventoriesBean inventoriesBean, DrugPurchaseBean drugPurchaseBean, ReturnsBean returnsBean) {
+        this.businessId = businessId;
         this.drugBean = drugBean;
         this.drugSalesBean = drugSalesBean;
         this.inventoriesBean = inventoriesBean;
@@ -51,7 +55,7 @@ public class BussinessBean  implements java.io.Serializable {
 
    
     // Property accessors
-    @Id @GeneratedValue
+    @Id 
     
     @Column(name="BUSINESS_ID", unique=true, nullable=false, length=32)
 

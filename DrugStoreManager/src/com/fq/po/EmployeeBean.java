@@ -1,9 +1,10 @@
 package com.fq.po;
 
+// default package
+
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -30,7 +31,6 @@ public class EmployeeBean  implements java.io.Serializable {
      private Integer age;
      private String tel;
      private String title;
-     private String job;
      private Date startdate;
 
 
@@ -41,25 +41,26 @@ public class EmployeeBean  implements java.io.Serializable {
     }
 
 	/** minimal constructor */
-    public EmployeeBean(String empCode) {
+    public EmployeeBean(String empId, String empCode) {
+        this.empId = empId;
         this.empCode = empCode;
     }
     
     /** full constructor */
-    public EmployeeBean(String empCode, String empName, String sex, Integer age, String tel, String title, String job, Date startdate) {
+    public EmployeeBean(String empId, String empCode, String empName, String sex, Integer age, String tel, String title, Date startdate) {
+        this.empId = empId;
         this.empCode = empCode;
         this.empName = empName;
         this.sex = sex;
         this.age = age;
         this.tel = tel;
         this.title = title;
-        this.job = job;
         this.startdate = startdate;
     }
 
    
     // Property accessors
-    @Id @GeneratedValue
+    @Id 
     
     @Column(name="EMP_ID", unique=true, nullable=false, length=32)
 
@@ -129,16 +130,6 @@ public class EmployeeBean  implements java.io.Serializable {
     
     public void setTitle(String title) {
         this.title = title;
-    }
-    
-    @Column(name="JOB", length=20)
-
-    public String getJob() {
-        return this.job;
-    }
-    
-    public void setJob(String job) {
-        this.job = job;
     }
     @Temporal(TemporalType.DATE)
     @Column(name="STARTDATE", length=10)

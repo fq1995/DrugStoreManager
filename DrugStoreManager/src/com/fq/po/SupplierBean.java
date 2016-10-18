@@ -1,12 +1,13 @@
 package com.fq.po;
 
+// default package
+
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -41,13 +42,15 @@ public class SupplierBean  implements java.io.Serializable {
     }
 
 	/** minimal constructor */
-    public SupplierBean(String supplierCode, String supplier) {
+    public SupplierBean(String supplierId, String supplierCode, String supplier) {
+        this.supplierId = supplierId;
         this.supplierCode = supplierCode;
         this.supplier = supplier;
     }
     
     /** full constructor */
-    public SupplierBean(String supplierCode, String supplier, String name, String tel, String status, Set<DrugPurchaseBean> drugPurchaseBeans) {
+    public SupplierBean(String supplierId, String supplierCode, String supplier, String name, String tel, String status, Set<DrugPurchaseBean> drugPurchaseBeans) {
+        this.supplierId = supplierId;
         this.supplierCode = supplierCode;
         this.supplier = supplier;
         this.name = name;
@@ -58,7 +61,7 @@ public class SupplierBean  implements java.io.Serializable {
 
    
     // Property accessors
-    @Id @GeneratedValue
+    @Id 
     
     @Column(name="SUPPLIER_ID", unique=true, nullable=false, length=32)
 

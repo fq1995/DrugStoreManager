@@ -1,8 +1,9 @@
 package com.fq.po;
 
+// default package
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -37,9 +38,14 @@ public class MemberBean  implements java.io.Serializable {
     public MemberBean() {
     }
 
+	/** minimal constructor */
+    public MemberBean(String memberId) {
+        this.memberId = memberId;
+    }
     
     /** full constructor */
-    public MemberBean(String memberCode, String memberName, String sex, byte[] age, String memberLevel, Integer integration, String suppliertel, byte[] address) {
+    public MemberBean(String memberId, String memberCode, String memberName, String sex, byte[] age, String memberLevel, Integer integration, String suppliertel, byte[] address) {
+        this.memberId = memberId;
         this.memberCode = memberCode;
         this.memberName = memberName;
         this.sex = sex;
@@ -52,7 +58,7 @@ public class MemberBean  implements java.io.Serializable {
 
    
     // Property accessors
-    @Id @GeneratedValue
+    @Id 
     
     @Column(name="MEMBER_ID", unique=true, nullable=false, length=32)
 

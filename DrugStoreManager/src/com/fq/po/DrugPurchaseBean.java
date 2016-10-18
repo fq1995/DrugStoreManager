@@ -1,5 +1,7 @@
 package com.fq.po;
 
+// default package
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -7,7 +9,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -55,12 +56,14 @@ public class DrugPurchaseBean  implements java.io.Serializable {
     }
 
 	/** minimal constructor */
-    public DrugPurchaseBean(String purchaseCode) {
+    public DrugPurchaseBean(String purchaseId, String purchaseCode) {
+        this.purchaseId = purchaseId;
         this.purchaseCode = purchaseCode;
     }
     
     /** full constructor */
-    public DrugPurchaseBean(DrugBean drugBean, UserBean userBean, SupplierBean supplierBean, String purchaseCode, String drugname, Integer amount, Date productionDate, Date validityDate, Double purchaseprice, Double salepeice, Float totalamount, Date purchasedate, Double memberprice, Set<BussinessBean> bussinessBeans, Set<ReturnsBean> returnsBeans) {
+    public DrugPurchaseBean(String purchaseId, DrugBean drugBean, UserBean userBean, SupplierBean supplierBean, String purchaseCode, String drugname, Integer amount, Date productionDate, Date validityDate, Double purchaseprice, Double salepeice, Float totalamount, Date purchasedate, Double memberprice, Set<BussinessBean> bussinessBeans, Set<ReturnsBean> returnsBeans) {
+        this.purchaseId = purchaseId;
         this.drugBean = drugBean;
         this.userBean = userBean;
         this.supplierBean = supplierBean;
@@ -80,7 +83,7 @@ public class DrugPurchaseBean  implements java.io.Serializable {
 
    
     // Property accessors
-    @Id @GeneratedValue
+    @Id 
     
     @Column(name="PURCHASE_ID", unique=true, nullable=false, length=32)
 
