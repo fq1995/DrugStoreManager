@@ -69,7 +69,7 @@
 						<td>${state.count }</td>
 						<td>${per.percode }</td>
 						<td>${per.pername }</td>
-						<td>${role.permission.pername }</td>
+						<td></td>
 					</tr>
 				</c:forEach>
 			</tbody>

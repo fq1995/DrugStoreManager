@@ -12,7 +12,7 @@ public interface UserService {
 	
 	UserBean selectUserByName(String username);
 	
-	UserBean selectUserByNameAndUserId(String username,Integer userid);
+	UserBean selectUserByNameAndUserId(String username,String userid);
 	
 	UserBean selectUserByUsercode(Integer usercode);
 

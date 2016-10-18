@@ -72,13 +72,13 @@
 
     <div class="formtitle"><span>基本信息</span></div>
     <form action="user_updateUser.action" method="post">
-    <input type="hidden" name="userid" value="${user.userid}">
-    <input type="hidden" name="id" value="${user.userid}">
+    <input type="hidden" name="userId" value="${user.userId}">
+    <input type="hidden" name="id" value="${user.userId}">
  	<input type="hidden" name="roleBean.rolecode" value="${user.roleBean.rolecode}">
  	<input type="hidden" name="roleBean.roleid" value="${user.roleBean.roleid}">
  	<input type="hidden" name="time">
         <ul class="forminfo">
-        	<li><label>用户编号</label><input name="usercode" type="text" id="usercode" value="${user.usercode}"
+        	<li><label>用户编号</label><input name="userCode" type="text" id="userCode" value="${user.userCode}"
 					class="form-control" style="width:200px; display:inline" readonly="readonly"/></li>
         	<li ><label>用户名</label><input name="username" type="text" id="username" value="${user.username}"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入用户名"/><i>用户名不能超过10个字符</i><i style="color: red">${message}</i></li>

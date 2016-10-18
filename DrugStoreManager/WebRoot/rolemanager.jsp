@@ -69,7 +69,7 @@
 						<td>${state.count }</td>
 						<td>${role.rolecode }</td>
 						<td>${role.rolename }</td>
-						<td><%-- ${role.permissionBean.pername } --%></td>
+					    <td>${role.permissionBean.perid }</td> 
 					</tr>
 				</c:forEach>
 			</tbody>

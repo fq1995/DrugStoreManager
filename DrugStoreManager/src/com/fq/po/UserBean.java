@@ -3,13 +3,16 @@ package com.fq.po;
 // default package
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,13 +31,16 @@ public class UserBean  implements java.io.Serializable {
 
     // Fields    
 
-     private Integer userid;
+     private String userId;
      private RoleBean roleBean;
-     private Integer usercode;
+     private Integer userCode;
      private String username;
      private String password;
      private Date addtime;
      private Integer status;
+     private Set<DrugPurchaseBean> drugPurchaseBeans = new HashSet<DrugPurchaseBean>(0);
+     private Set<DrugSalesBean> drugSalesBeans = new HashSet<DrugSalesBean>(0);
+     private Set<ReturnsBean> returnsBeans = new HashSet<ReturnsBean>(0);
 
 
     // Constructors
@@ -44,36 +50,41 @@ public class UserBean  implements java.io.Serializable {
     }
 
 	/** minimal constructor */
-    public UserBean(String username, String password) {
+    public UserBean(String userId, Integer userCode, String username) {
+        this.userId = userId;
+        this.userCode = userCode;
         this.username = username;
-        this.password = password;
     }
     
     /** full constructor */
-    public UserBean(RoleBean roleBean, Integer usercode, String username, String password, Date addtime, Integer status) {
+    public UserBean(String userId, RoleBean roleBean, Integer userCode, String username, String password, Date addtime, Integer status, Set<DrugPurchaseBean> drugPurchaseBeans, Set<DrugSalesBean> drugSalesBeans, Set<ReturnsBean> returnsBeans) {
+        this.userId = userId;
         this.roleBean = roleBean;
-        this.usercode = usercode;
+        this.userCode = userCode;
         this.username = username;
         this.password = password;
         this.addtime = addtime;
         this.status = status;
+        this.drugPurchaseBeans = drugPurchaseBeans;
+        this.drugSalesBeans = drugSalesBeans;
+        this.returnsBeans = returnsBeans;
     }
 
    
     // Property accessors
-    @Id @GeneratedValue
+    @Id 
     
-    @Column(name="userid", unique=true, nullable=false)
+    @Column(name="USER_ID", unique=true, nullable=false, length=32)
 
-    public Integer getUserid() {
-        return this.userid;
+    public String getUserId() {
+        return this.userId;
     }
     
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 	@ManyToOne(fetch=FetchType.LAZY)
-        @JoinColumn(name="rolecode")
+        @JoinColumn(name="ROLECODE")
 
     public RoleBean getRoleBean() {
         return this.roleBean;
@@ -83,14 +94,14 @@ public class UserBean  implements java.io.Serializable {
         this.roleBean = roleBean;
     }
     
-    @Column(name="usercode")
+    @Column(name="USER_CODE", nullable=false)
 
-    public Integer getUsercode() {
-        return this.usercode;
+    public Integer getUserCode() {
+        return this.userCode;
     }
     
-    public void setUsercode(Integer usercode) {
-        this.usercode = usercode;
+    public void setUserCode(Integer userCode) {
+        this.userCode = userCode;
     }
     
     @Column(name="username", nullable=false, length=20)
@@ -103,7 +114,7 @@ public class UserBean  implements java.io.Serializable {
         this.username = username;
     }
     
-    @Column(name="password", nullable=false, length=20)
+    @Column(name="PASSWORD", length=20)
 
     public String getPassword() {
         return this.password;
@@ -131,6 +142,33 @@ public class UserBean  implements java.io.Serializable {
     
     public void setStatus(Integer status) {
         this.status = status;
+    }
+@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="userBean")
+
+    public Set<DrugPurchaseBean> getDrugPurchaseBeans() {
+        return this.drugPurchaseBeans;
+    }
+    
+    public void setDrugPurchaseBeans(Set<DrugPurchaseBean> drugPurchaseBeans) {
+        this.drugPurchaseBeans = drugPurchaseBeans;
+    }
+@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="userBean")
+
+    public Set<DrugSalesBean> getDrugSalesBeans() {
+        return this.drugSalesBeans;
+    }
+    
+    public void setDrugSalesBeans(Set<DrugSalesBean> drugSalesBeans) {
+        this.drugSalesBeans = drugSalesBeans;
+    }
+@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="userBean")
+
+    public Set<ReturnsBean> getReturnsBeans() {
+        return this.returnsBeans;
+    }
+    
+    public void setReturnsBeans(Set<ReturnsBean> returnsBeans) {
+        this.returnsBeans = returnsBeans;
     }
    
 

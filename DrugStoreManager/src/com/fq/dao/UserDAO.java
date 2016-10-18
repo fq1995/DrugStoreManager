@@ -15,7 +15,7 @@ public interface UserDAO{
 	
 	UserBean selectUserByUsercode(Integer usercode);
 	
-	UserBean selectUserByNameAndUserId(String username,Integer userid);
+	UserBean selectUserByNameAndUserId(String username,String userid);
 	
 	void addUser(UserBean userBean,String time) throws Exception;
 	

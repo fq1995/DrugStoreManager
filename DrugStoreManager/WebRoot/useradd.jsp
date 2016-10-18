@@ -77,7 +77,7 @@
 		<span>位置：</span>
 		<ul class="placeul">
 			<li><a href="#">首页</a></li>
-			<li><img src="images/next.gif" style="margin-top:13px"></li>
+			<li><img src="images/next.gif" ></li>
 			<li><a href="#">表单</a></li>
 		</ul>
 	</div>
@@ -90,7 +90,7 @@
 			<input type="hidden" name="time">
 
 			<ul class="forminfo">
-				<li><label>用户编号</label><input name="usercode" type="text" id="usercode"
+				<li><label>用户编号</label><input name="userCode" type="text" id="userCode"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入用户编号"/><i style="color: red">${message2}</i></li>
 				<li ><label>用户名</label><input name="username" type="text" id="username"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入用户名"/><i>用户名不能超过10个字符</i><i style="color: red">${message}</i></li>

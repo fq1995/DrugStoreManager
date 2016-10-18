@@ -13,6 +13,7 @@ import com.fq.dao.UserDAO;
 import com.fq.po.UserBean;
 import com.fq.util.BaseDAO;
 import com.fq.util.PageModel;
+import com.fq.util.UUIDBuild;
 @Repository("userDAO")
 public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 
@@ -41,7 +42,7 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 	@Override
 	public PageModel<UserBean> splitUser(Integer currPage, Integer pageSize,String keyword) {
 		String hql_count = "select count(*) from UserBean where username like :keyword";
-		String hql = "from UserBean where username like :keyword order by userid desc";
+		String hql = "from UserBean where username like :keyword order by addtime desc";
 		return super.split(hql, hql_count, currPage, pageSize,keyword);
 	}
 
@@ -52,26 +53,24 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 
 	@Override
 	public List<UserBean> showAllUser(String ids) {
-		String[] arr = ids.split(",");
-		if(arr!=null){
-			Integer[] arrId = new Integer[arr.length];
-			for (Integer i = 0; i < arr.length; i++) {
-				arrId[i] = Integer.parseInt(arr[i]);
-			}
-			String hql ="from UserBean where userid in(";
-			StringBuilder sb = new StringBuilder(hql);
-			for(Integer i = 0; i < arrId.length; i++) {
-				if(i != arrId.length - 1){
-					sb.append(arrId[i] + ",");
+			String[] arr = ids.split(",");
+			StringBuilder sb = new StringBuilder();
+			String hql ="from UserBean where userId in(";
+			sb.append(hql);
+			for(int i = 0;i<arr.length;i++){
+				if(i==arr.length-1){
+					sb.append("'").append(arr[i]).append("')");
 				}else{
-					sb.append(arrId[i] + ")");
+					sb.append("'").append(arr[i]).append("'").append(",");
 				}
 			}
+			
+			
+			
 			List<UserBean> userList = (List<UserBean>) getHibernateTemplate().find(sb.toString());
 			if(userList != null && userList.size() > 0) {
 				return userList;
 			}
-		}
 		return null;
 	}
 	//批量删除的dao层
@@ -97,7 +96,7 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 
 	@Override
 	public UserBean selectById(String id) {
-		UserBean userBean = getHibernateTemplate().get(UserBean.class, Integer.valueOf(id));
+		UserBean userBean = getHibernateTemplate().get(UserBean.class, id);
 		return null==userBean?null:userBean;
 	}
 
@@ -106,20 +105,21 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = sdf.parse(time);
 		userBean.setAddtime(date);
+		userBean.setUserId(UUIDBuild.getUUID());
 		hibernateTemplate.save(userBean);
 		
 	}
 
 	@Override
 	public UserBean selectUserByUsercode(Integer usercode) {
-		String hql ="from UserBean where usercode=?";
+		String hql ="from UserBean where userCode=?";
 		List<UserBean> Userlist = (List<UserBean>) hibernateTemplate.find(hql, usercode);
 		return Userlist==null||Userlist.size()<=0?null:Userlist.get(0);
 	}
 
 	@Override
-	public UserBean selectUserByNameAndUserId(String username, Integer userid) {
-		String hql ="from UserBean where username =? and userid !=? and status=1";
+	public UserBean selectUserByNameAndUserId(String username, String userid) {
+		String hql ="from UserBean where username =? and userId !=? and status=1";
 		List<UserBean> Userlist = (List<UserBean>) hibernateTemplate.find(hql, username,userid);
 		return Userlist==null||Userlist.size()<=0?null:Userlist.get(0);
 	}

@@ -145,7 +145,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	 * @return
 	 */
 	public UserBean selectUserByNameAndUserId(){
-		UserBean bean =userService.selectUserByNameAndUserId(userBean.getUsername(),userBean.getUserid());
+		UserBean bean =userService.selectUserByNameAndUserId(userBean.getUsername(),userBean.getUserId());
 		return bean;
 	}
 	/**
@@ -153,7 +153,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	 * @return
 	 */
 	public UserBean selectUserByUsercode(){
-		UserBean bean =userService.selectUserByUsercode(userBean.getUsercode());
+		UserBean bean =userService.selectUserByUsercode(userBean.getUserCode());
 		return bean;
 	}
 	/**

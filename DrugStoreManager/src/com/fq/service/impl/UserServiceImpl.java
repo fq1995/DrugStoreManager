@@ -10,11 +10,15 @@ import com.fq.dao.UserDAO;
 import com.fq.po.UserBean;
 import com.fq.service.UserService;
 import com.fq.util.PageModel;
+import com.fq.util.UUIDBuild;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserDAO userDAO;
+	
+	private UUIDBuild ubd = new UUIDBuild();
+	
 	
 	@Override
 	public void register(UserBean userBean) {
@@ -77,7 +81,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserBean selectUserByNameAndUserId(String username, Integer userid) {
+	public UserBean selectUserByNameAndUserId(String username, String userid) {
 		return userDAO.selectUserByNameAndUserId(username, userid);
 	}
 
