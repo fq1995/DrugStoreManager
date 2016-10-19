@@ -39,7 +39,7 @@ public class DrugBean  implements java.io.Serializable {
      private DrugCategoryBean drugCategoryBean;
      private Integer drugCode;
      private String drugName;
-     private byte[] manufacturer;
+     private String manufacturer;
      private String approvalNumber;
      private String modifier;
      private Date modifyTime;
@@ -65,7 +65,7 @@ public class DrugBean  implements java.io.Serializable {
     }
     
     /** full constructor */
-    public DrugBean(String drugId, DrugUnitBean drugUnitBean, DosageformBean dosageformBean, DrugCategoryBean drugCategoryBean, Integer drugCode, String drugName, byte[] manufacturer, String approvalNumber, String modifier, Date modifyTime, String memo, String status, Set<InventoriesBean> inventoriesBeans, Set<BussinessBean> bussinessBeans, Set<ReturnsBean> returnsBeans, Set<DrugPurchaseBean> drugPurchaseBeans, Set<DrugSalesBean> drugSalesBeans) {
+    public DrugBean(String drugId, DrugUnitBean drugUnitBean, DosageformBean dosageformBean, DrugCategoryBean drugCategoryBean, Integer drugCode, String drugName, String manufacturer, String approvalNumber, String modifier, Date modifyTime, String memo, String status, Set<InventoriesBean> inventoriesBeans, Set<BussinessBean> bussinessBeans, Set<ReturnsBean> returnsBeans, Set<DrugPurchaseBean> drugPurchaseBeans, Set<DrugSalesBean> drugSalesBeans) {
         this.drugId = drugId;
         this.drugUnitBean = drugUnitBean;
         this.dosageformBean = dosageformBean;
@@ -149,13 +149,13 @@ public class DrugBean  implements java.io.Serializable {
         this.drugName = drugName;
     }
     
-    @Column(name="MANUFACTURER")
+    @Column(name="MANUFACTURER", length=30)
 
-    public byte[] getManufacturer() {
+    public String getManufacturer() {
         return this.manufacturer;
     }
     
-    public void setManufacturer(byte[] manufacturer) {
+    public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
     

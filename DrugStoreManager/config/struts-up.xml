@@ -60,6 +60,21 @@
 				<param name="root">mess</param>
 			</result>
 		</action>
+		
+		<action name="drug_*" class="drugAction" method="{1}">
+			<result name="doadd">/WEB-INF/drug/drugadd.jsp</result>
+			<result name="showDrug">/WEB-INF/drug/drugmanager.jsp</result>
+			<result name="addDrug">/WEB-INF/drug/drugadd.jsp</result>
+			<result name="show" type="redirectAction">drug_showDrug.action?currPage=1</result>
+			<result name="edit">/WEB-INF/drug/drugupdate.jsp</result>
+			<result name="ajax_verifyCode" type="json">
+				<param name="root">flag</param>
+			</result>
+			<result name="ajax_verifyName" type="json">
+				<param name="root">mess</param>
+			</result>
+		</action>
+		
 	</package>
 	
 	

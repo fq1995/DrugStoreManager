@@ -10,18 +10,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>员工管理</title>
+<title>药品管理</title>
 <link href="<%=basePath%>css/style1.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
-<script src="<%=basePath%>js/empmanager_operation.js" type="text/javascript" charset="utf-8"></script>
-<%-- <script src="<%=basePath%>js/usermanager_page.js" type="text/javascript" charset="utf-8"></script> --%>
+<script src="<%=basePath%>js/drugmanager_operation.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 	$(function(){
 		var keyword = $("#keyword").val;
 	})
 </script>
+<style type="text/css">
+	th,td  
+	{  
+ 	white-space: nowrap;  
+	}  
+	
+</style> 
 </head>
 
 <body>
@@ -29,8 +35,8 @@
 		<span>位置：</span>
 		<ul class="placeul">
 			<li><a href="#">基本操作</a></li>
-			<li><img src="images/next.gif" ></li>
-			<li><a href="#">员工管理</a></li>
+			<li><img src="<%=basePath%>images/next.gif" ></li>
+			<li><a href="#">药品管理</a></li>
 		</ul>
 	</div>
 
@@ -51,7 +57,7 @@
 
 
 			<ul class="toolbar1">
-				<li style="border:0px"> <input class="form-control" placeholder="输入需要查询的员工名" style="width:180px;" type="text" id="keyword" name="keyword"/></li>&nbsp;&nbsp;
+				<li style="border:0px"> <input class="form-control" placeholder="输入需要查询的药品名" style="width:180px;" type="text" id="keyword" name="keyword"/></li>&nbsp;&nbsp;
 				 <button id="btn_selectUser" type="button" class="btn btn-info btn-sm">查询</button>
 				
 				<%-- <li><span><img src="<%=basePath%>images/t05.png" /></span>设置</li> --%>
@@ -63,38 +69,49 @@
 		<table class="tablelist">
 			<thead>
 				<tr>
-					<th><input id="all" name="all" type="checkbox" value="" /></th>
-					<th>序号</th>
-					<th>员工编号</th>
-					<th>员工性名</th>
-					<th>性别</th>
-					<th>年龄</th>
-					<th>电话</th>
-					<th>职位</th>
-					<th>工作时间</th>
+					<th style="width:40px"><input id="all" name="all" type="checkbox" value=""/></th>
+					<th style="width:50px">序号</th>
+					<th style="width:70px">药品编号</th>
+					<th>药品名</th>
+					<th style="width:70px">剂型</th>
+					<th style="width:50px">单位</th>
+					<th style="width:50px">类别</th>
+					<th >厂 家</th>
+					<th>批准文号</th>
+					<th>修改人</th>
+					<th>添加日期</th>
+					<th>产品说明</th>
+					
+					<th style="width:50px">序号</th>
+					<th style="width:70px">药品编号</th>
+					<th>药品名</th>
+					<th style="width:70px">剂型</th>
+					<th style="width:50px">单位</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${requestScope.page.list}" var="emp"
+				<c:forEach items="${requestScope.page.list}" var="drug"
 					varStatus="state">
 					<tr>
-						<td><input name="id_check" type="checkbox"
-							value="${emp.empId }" id="${emp.empId}"/></td>
-						<td>${state.count }</td>
-						<td>${emp.empCode }</td>
-						<td>${emp.empName }</td>
-						<c:choose>
-							<c:when test="${emp.sex eq 1}">
-								<td>男</td>
-							</c:when>
-							<c:otherwise>
-								<td>女</td>
-							</c:otherwise>
-						</c:choose>
-						<td>${emp.age }</td>
-						<td>${emp.tel }</td>
-						<td>${emp.title }</td>
-						<td>${emp.startdate }</td>
+						<td style="width:40px"><input name="id_check" type="checkbox"
+							value="${drug.drugId }" id="${drug.drugId}"/></td>
+						<td style="width:50px">${state.count }</td>
+						<td style="width:70px">${drug.drugCode }</td>
+						<td>${drug.drugName }</td>
+						<td style="width:70px">${drug.dosageformBean.dosageform }</td>
+						<td style="width:50px">${drug.drugUnitBean.unitname }</td>
+						<td>${drug.drugCategoryBean.category }</td>
+						<td>${drug.manufacturer }</td>
+						<td>${drug.approvalNumber }</td>
+						<td>${drug.modifier }</td>
+						<td>${drug.modifyTime }</td>
+						<td>${drug.memo }</td>
+						
+						<td style="width:50px">${state.count }</td>
+						<td style="width:70px">${drug.drugCode }</td>
+						<td>${drug.drugName }</td>
+						<td style="width:70px">${drug.dosageformBean.dosageform }</td>
+						<td style="width:50px">${drug.drugUnitBean.unitname }</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -108,9 +125,9 @@
 			<ul class="paginList">
 				<c:if test="${page.perIndex > 0}">
 					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/emp_showEmp.action?currPage=1">首页</a></li>
+						href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=1">首页</a></li>
 					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/emp_showEmp.action?currPage=${page.perIndex}"><span
+						href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=${page.perIndex}"><span
 							class="pagepre"></span></a></li>
 				</c:if>
 				<c:forEach begin="1" end="${page.totalPage }" var="p">
@@ -120,16 +137,16 @@
 						</c:when>
 						<c:otherwise>
 							<li class="paginItem"><a
-								href="${pageContext.request.contextPath }/emp_showEmp.action?currPage=${p}">${p}</a></li>
+								href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=${p}">${p}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				<c:if test="${page.nextIndex > 0}">
 					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/emp_showEmp.action?currPage=${page.nextIndex}"><span
+						href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=${page.nextIndex}"><span
 							class="pagenxt"></span></a></li>
 					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/emp_showEmp.action?currPage=${page.totalPage}">尾页</a></li>
+						href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=${page.totalPage}">尾页</a></li>
 				</c:if>
 				&nbsp;
 				&nbsp;
@@ -177,7 +194,7 @@
 $('.tablelist tbody tr:odd').addClass('odd');
 function jump(){
 var pc = $("#select_jumpPage option:selected").text();
-window.location.href="${pageContext.request.contextPath}/emp_showEmp.action?currPage=" + pc;
+window.location.href="${pageContext.request.contextPath}/drug_showDrug.action?currPage=" + pc;
 } 
 </script>
 </body>

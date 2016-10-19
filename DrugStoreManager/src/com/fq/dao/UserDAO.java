@@ -7,28 +7,29 @@ import com.fq.util.PageModel;
 
 public interface UserDAO{
 	
-	void register(UserBean userBean);
-	
-	UserBean loginOrNot(String username,String password);
-	
-	UserBean selectUserByName(String username);
-	
-	UserBean selectUserByUsercode(Integer usercode);
-	
-	UserBean selectUserByNameAndUserId(String username,String userid);
-	
-	void addUser(UserBean userBean,String time) throws Exception;
-	
-	void addUser(UserBean userBean);
-
-	PageModel<UserBean> splitUser(Integer currPage, Integer pageSize, String keyword);
-	//批量查询
-	List<UserBean> showAllUser(String ids);
-	//批量删除对象
-	void deleteAllUser(List<UserBean> userList);
-	//修改
-	void updateUser(UserBean userBean,String time);
-	//根据ID查询
-	UserBean selectById(String id);
+		//注册
+		void register(UserBean userBean);
+		//登录
+		UserBean loginOrNot(String username,String password);
+		//根据用户名查询
+		UserBean selectUserByName(String username);
+		//根据用户名和id查询
+		UserBean selectUserByNameAndUserId(String username,String userid);
+		//根据用户编码查询
+		UserBean selectUserByUsercode(Integer usercode);
+		//分页
+		PageModel<UserBean> splitUser(Integer currPage, Integer pageSize, String keyword);
+		//添加用户
+		void addUser(UserBean userBean,String time) throws Exception;
+		//添加用户
+		void addUser(UserBean userBean);
+		//批量查询
+		List<UserBean> showAllUser(String ids);
+		//批量删除
+		void deleteAllUser(List<UserBean> userList);
+		//修改用户
+		void updateUser(UserBean userBean,String time);
+		//根据id查询
+		UserBean selectById(String id);
 	
 }

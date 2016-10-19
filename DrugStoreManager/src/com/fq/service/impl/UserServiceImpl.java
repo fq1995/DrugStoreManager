@@ -1,6 +1,5 @@
 package com.fq.service.impl;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -10,15 +9,11 @@ import com.fq.dao.UserDAO;
 import com.fq.po.UserBean;
 import com.fq.service.UserService;
 import com.fq.util.PageModel;
-import com.fq.util.UUIDBuild;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserDAO userDAO;
-	
-	private UUIDBuild ubd = new UUIDBuild();
-	
 	
 	@Override
 	public void register(UserBean userBean) {

@@ -46,8 +46,8 @@
 							"menus":[{"menuid":"21","menuname":"员工列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/emp_showEmp.action?currPage=1"},
 									{"menuid":"22","menuname":"视频监控","icon":"icon-nav","url":"demo1.html"}
 								]
-						},{"menuid":"56","icon":"icon-sys","menuname":"部门管理",
-							"menus":[{"menuid":"31","menuname":"添加部门","icon":"icon-nav","url":"demo1.html"},
+						},{"menuid":"56","icon":"icon-sys","menuname":"药品管理",
+							"menus":[{"menuid":"31","menuname":"药品列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/drug_showDrug.action?currPage=1"},
 									{"menuid":"32","menuname":"部门列表","icon":"icon-nav","url":"demo2.html"}
 								]
 						},{"menuid":"28","icon":"icon-sys","menuname":"财务管理",
