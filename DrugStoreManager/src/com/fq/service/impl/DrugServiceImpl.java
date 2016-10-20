@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fq.dao.DrugDAO;
+import com.fq.po.DosageformBean;
 import com.fq.po.DrugBean;
-
+import com.fq.po.DrugCategoryBean;
+import com.fq.po.DrugUnitBean;
 import com.fq.service.DrugService;
 
 import com.fq.util.PageModel;
@@ -71,6 +73,21 @@ public class DrugServiceImpl implements DrugService {
 	public void updateDrug(DrugBean DrugBean) {
 		drugDAO.updateDrug(DrugBean);
 		
+	}
+
+	@Override
+	public List<DrugCategoryBean> selectCategory() {
+		return drugDAO.selectCategory();
+	}
+
+	@Override
+	public List<DrugUnitBean> selectUnit() {
+		return drugDAO.selectUnit();
+	}
+
+	@Override
+	public List<DosageformBean> selectForm() {
+		return drugDAO.selectForm();
 	}
 	
 	

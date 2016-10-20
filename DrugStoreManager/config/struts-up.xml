@@ -62,6 +62,7 @@
 		</action>
 		
 		<action name="drug_*" class="drugAction" method="{1}">
+			
 			<result name="doadd">/WEB-INF/drug/drugadd.jsp</result>
 			<result name="showDrug">/WEB-INF/drug/drugmanager.jsp</result>
 			<result name="addDrug">/WEB-INF/drug/drugadd.jsp</result>

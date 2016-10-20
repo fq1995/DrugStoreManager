@@ -73,6 +73,9 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 		if(null == keyword){
 			keyword="";
 		}
+		if(null != keyword){
+			request.put("keyword", keyword);
+		}
 		if(currPage == null) {
 			currPage = 1;
 		}

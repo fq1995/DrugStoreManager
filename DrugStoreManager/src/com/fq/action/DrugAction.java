@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.fq.po.DosageformBean;
 import com.fq.po.DrugBean;
+import com.fq.po.DrugCategoryBean;
+import com.fq.po.DrugUnitBean;
 import com.fq.service.DrugService;
 import com.fq.util.BaseAction;
 import com.fq.util.ConstantUtils;
@@ -46,18 +49,28 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>,Requ
 		if(null == keyword){
 			keyword="";
 		}
+		if(null != keyword){
+			request.put("keyword", keyword);
+		}
+		
 		if(currPage == null) {
 			currPage = 1;
 		}
 		PageModel<DrugBean>  page = drugService.splitDrug(currPage, ConstantUtils.PAGESIZE, keyword);
 		request.put("page", page);
-
 		return "showDrug";
 	}
 	/**
 	 * 跳转新增
 	 */
 	public String doaddDrug(){
+		List<DrugCategoryBean>  drugCategoryList = drugService.selectCategory();
+		List<DrugUnitBean> drugUnitList = drugService.selectUnit();
+		List<DosageformBean> dosageformList = drugService.selectForm();
+		
+		request.put("drugCategoryList",drugCategoryList);
+		request.put("drugUnitList",drugUnitList);
+		request.put("dosageformList",dosageformList);
 		return "doadd";
 	}
 	/**
@@ -66,7 +79,15 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>,Requ
 	 * @throws Exception 
 	 */
 	public String addDrug(){
+		List<DrugCategoryBean>  drugCategoryList = drugService.selectCategory();
+		List<DrugUnitBean> drugUnitList = drugService.selectUnit();
+		List<DosageformBean> dosageformList = drugService.selectForm();
+		
+		request.put("drugCategoryList",drugCategoryList);
+		request.put("drugUnitList",drugUnitList);
+		request.put("dosageformList",dosageformList);
 		if(null == selectDrugByName() && null == selectDrugByDrugcode()){
+			
 			try {
 				drugService.addDrug(drugBean,time);
 			} catch (Exception e) {
@@ -88,11 +109,19 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>,Requ
 		drugService.deleteAllDrug(listDrug);
 		return "show";
 	}
+	
 	/**
 	 * 编辑药品
 	 */
 	public String editDrug(){
 		DrugBean drugBean1 = drugService.selectById(id);
+		List<DrugCategoryBean>  drugCategoryList = drugService.selectCategory();
+		List<DrugUnitBean> drugUnitList = drugService.selectUnit();
+		List<DosageformBean> dosageformList = drugService.selectForm();
+		
+		request.put("drugCategoryList",drugCategoryList);
+		request.put("drugUnitList",drugUnitList);
+		request.put("dosageformList",dosageformList);
 		if(null!=drugBean1){
 			request.put("drug",drugBean1);
 		}
@@ -103,6 +132,13 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>,Requ
 	 * 修改药品 
 	 */
 	public String updateDrug(){
+		List<DrugCategoryBean>  drugCategoryList = drugService.selectCategory();
+		List<DrugUnitBean> drugUnitList = drugService.selectUnit();
+		List<DosageformBean> dosageformList = drugService.selectForm();
+		
+		request.put("drugCategoryList",drugCategoryList);
+		request.put("drugUnitList",drugUnitList);
+		request.put("dosageformList",dosageformList);
 		if(null == selectDrugByNameAndDrugId()){
 			drugService.updateDrug(drugBean,time);
 			return "show";

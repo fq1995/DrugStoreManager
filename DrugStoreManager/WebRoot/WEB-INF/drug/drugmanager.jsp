@@ -57,7 +57,7 @@
 
 
 			<ul class="toolbar1">
-				<li style="border:0px"> <input class="form-control" placeholder="输入需要查询的药品名" style="width:180px;" type="text" id="keyword" name="keyword"/></li>&nbsp;&nbsp;
+				<li style="border:0px"> <input class="form-control" placeholder="输入需要查询的药品名" value="${requestScope.keyword }" style="width:180px;" type="text" id="keyword" name="keyword"/></li>&nbsp;&nbsp;
 				 <button id="btn_selectUser" type="button" class="btn btn-info btn-sm">查询</button>
 				
 				<%-- <li><span><img src="<%=basePath%>images/t05.png" /></span>设置</li> --%>
@@ -82,11 +82,6 @@
 					<th>添加日期</th>
 					<th>产品说明</th>
 					
-					<th style="width:50px">序号</th>
-					<th style="width:70px">药品编号</th>
-					<th>药品名</th>
-					<th style="width:70px">剂型</th>
-					<th style="width:50px">单位</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -106,12 +101,7 @@
 						<td>${drug.modifier }</td>
 						<td>${drug.modifyTime }</td>
 						<td>${drug.memo }</td>
-						
-						<td style="width:50px">${state.count }</td>
-						<td style="width:70px">${drug.drugCode }</td>
-						<td>${drug.drugName }</td>
-						<td style="width:70px">${drug.dosageformBean.dosageform }</td>
-						<td style="width:50px">${drug.drugUnitBean.unitname }</td>
+					
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -124,29 +114,29 @@
 			</div>
 			<ul class="paginList">
 				<c:if test="${page.perIndex > 0}">
-					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=1">首页</a></li>
-					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=${page.perIndex}"><span
+					<li class="paginItem"><a 
+						href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=1&keyword=${keyword}">首页</a></li>
+					<li class="paginItem"><a 
+						href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=${page.perIndex}&keyword=${keyword}"><span
 							class="pagepre"></span></a></li>
 				</c:if>
 				<c:forEach begin="1" end="${page.totalPage }" var="p">
 					<c:choose>
 						<c:when test="${p eq page.currPage}">
-							<li class="paginItem"><a href="#" style="background-color:#337AB7;color:#FFFFFF">${p}</a></li>
+							<li class="paginItem"><a  href="#" style="background-color:#337AB7;color:#FFFFFF">${p}</a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="paginItem"><a
-								href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=${p}">${p}</a></li>
+							<li class="paginItem"><a 
+								href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=${p}&keyword=${keyword}">${p}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				<c:if test="${page.nextIndex > 0}">
-					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=${page.nextIndex}"><span
+					<li class="paginItem"><a id="next"
+						href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=${page.nextIndex}&keyword=${keyword}"><span
 							class="pagenxt"></span></a></li>
-					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=${page.totalPage}">尾页</a></li>
+					<li class="paginItem"><a id="total"
+						href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=${page.totalPage}&keyword=${keyword}">尾页</a></li>
 				</c:if>
 				&nbsp;
 				&nbsp;
@@ -194,7 +184,7 @@
 $('.tablelist tbody tr:odd').addClass('odd');
 function jump(){
 var pc = $("#select_jumpPage option:selected").text();
-window.location.href="${pageContext.request.contextPath}/drug_showDrug.action?currPage=" + pc;
+window.location.href="${pageContext.request.contextPath}/drug_showDrug.action?keyword=${keyword}&currPage="+pc;
 } 
 </script>
 </body>

@@ -10,7 +10,10 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.fq.dao.DrugDAO;
+import com.fq.po.DosageformBean;
 import com.fq.po.DrugBean;
+import com.fq.po.DrugCategoryBean;
+import com.fq.po.DrugUnitBean;
 import com.fq.util.BaseDAO;
 import com.fq.util.PageModel;
 import com.fq.util.UUIDBuild;
@@ -22,21 +25,21 @@ public class DrugDAOImpl extends BaseDAO<DrugBean> implements DrugDAO {
 	
 	@Override
 	public DrugBean selectDrugByName(String drugname) {
-		String hql ="from DrugBean where drugname=? and status=1";
+		String hql ="from DrugBean where drugName=? and status=1";
 		List<DrugBean> drugList = (List<DrugBean>) hibernateTemplate.find(hql, drugname);
 		return drugList==null||drugList.size()<=0?null:drugList.get(0);
 	}
 
 	@Override
-	public DrugBean selectDrugByDrugcode(Integer drugcode) {
-		String hql = "from DrugBean where drugcode=?";
-		List<DrugBean> drugList = (List<DrugBean>) hibernateTemplate.find(hql, drugcode);
+	public DrugBean selectDrugByDrugcode(Integer drugCode) {
+		String hql = "from DrugBean where drugCode=?";
+		List<DrugBean> drugList = (List<DrugBean>) hibernateTemplate.find(hql, drugCode);
 		return drugList==null||drugList.size()<=0?null:drugList.get(0);
 	}
 
 	@Override
 	public DrugBean selectDrugByNameAndDrugId(String drugname, String drugid) {
-		String hql = "from DrugBean where drugname =? and drugid !=? and status=1";
+		String hql = "from DrugBean where drugName =? and drugId !=? and status=1";
 		List<DrugBean> drugList = (List<DrugBean>) hibernateTemplate.find(hql, drugname,drugid);
 		return drugList==null||drugList.size()<=0?null:drugList.get(0);
 	}
@@ -47,6 +50,7 @@ public class DrugDAOImpl extends BaseDAO<DrugBean> implements DrugDAO {
 		Date date = sdf.parse(time);
 		drugBean.setModifyTime(date);
 		drugBean.setDrugId(UUIDBuild.getUUID());
+		drugBean.setStatus("1");
 		hibernateTemplate.save(drugBean);
 
 	}
@@ -98,6 +102,7 @@ public class DrugDAOImpl extends BaseDAO<DrugBean> implements DrugDAO {
 			e.printStackTrace();
 		}
 		drugBean.setModifyTime(date);
+		drugBean.setStatus("1");
 		getHibernateTemplate().update(drugBean);
 	}
 
@@ -113,4 +118,26 @@ public class DrugDAOImpl extends BaseDAO<DrugBean> implements DrugDAO {
 		
 	}
 
+	@Override
+	public List<DrugCategoryBean> selectCategory() {
+		String hql ="from DrugCategoryBean";
+		List<DrugCategoryBean> drugCategoryList = (List<DrugCategoryBean>) hibernateTemplate.find(hql);
+		return drugCategoryList==null||drugCategoryList.size()<=0?null:drugCategoryList;
+	}
+
+	@Override
+	public List<DrugUnitBean> selectUnit() {
+		String hql = "from DrugUnitBean";
+		List<DrugUnitBean> drugUnitList = (List<DrugUnitBean>) hibernateTemplate.find(hql);
+		return drugUnitList==null||drugUnitList.size()<=0?null:drugUnitList;
+	}
+
+	@Override
+	public List<DosageformBean> selectForm() {
+		String hql = "from DosageformBean";
+		List<DosageformBean> dosageformList = (List<DosageformBean>) hibernateTemplate.find(hql);
+		return dosageformList==null||dosageformList.size()<=0?null:dosageformList;
+	}
+
+	
 }

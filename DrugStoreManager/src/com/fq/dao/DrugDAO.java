@@ -2,7 +2,10 @@ package com.fq.dao;
 
 import java.util.List;
 
+import com.fq.po.DosageformBean;
 import com.fq.po.DrugBean;
+import com.fq.po.DrugCategoryBean;
+import com.fq.po.DrugUnitBean;
 import com.fq.util.PageModel;
 
 public interface DrugDAO {
@@ -28,4 +31,10 @@ public interface DrugDAO {
 	void updateDrug(DrugBean DrugBean);
 	//根据ID查询
 	DrugBean selectById(String id);
+	//查询类别
+	List<DrugCategoryBean> selectCategory();
+	//查询单位
+	List<DrugUnitBean> selectUnit();
+	//查询剂型
+	List<DosageformBean> selectForm();
 }
