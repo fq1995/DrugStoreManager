@@ -51,7 +51,7 @@
 
 
 			<ul class="toolbar1">
-				<li style="border:0px"> <input class="form-control" placeholder="输入需要查询的员工名" style="width:180px;" type="text" id="keyword" name="keyword"/></li>&nbsp;&nbsp;
+				<li style="border:0px"> <input class="form-control" placeholder="输入需要查询的员工名" style="width:180px;" type="text" id="keyword" name="keyword" value="${keyword }"/></li>&nbsp;&nbsp;
 				 <button id="btn_selectUser" type="button" class="btn btn-info btn-sm">查询</button>
 				
 				<%-- <li><span><img src="<%=basePath%>images/t05.png" /></span>设置</li> --%>
@@ -108,9 +108,9 @@
 			<ul class="paginList">
 				<c:if test="${page.perIndex > 0}">
 					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/emp_showEmp.action?currPage=1">首页</a></li>
+						href="${pageContext.request.contextPath }/emp_showEmp.action?currPage=1&keyword=${keyword }">首页</a></li>
 					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/emp_showEmp.action?currPage=${page.perIndex}"><span
+						href="${pageContext.request.contextPath }/emp_showEmp.action?currPage=${page.perIndex}&keyword=${keyword }"><span
 							class="pagepre"></span></a></li>
 				</c:if>
 				<c:forEach begin="1" end="${page.totalPage }" var="p">
@@ -126,10 +126,10 @@
 				</c:forEach>
 				<c:if test="${page.nextIndex > 0}">
 					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/emp_showEmp.action?currPage=${page.nextIndex}"><span
+						href="${pageContext.request.contextPath }/emp_showEmp.action?currPage=${page.nextIndex}&keyword=${keyword }"><span
 							class="pagenxt"></span></a></li>
 					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/emp_showEmp.action?currPage=${page.totalPage}">尾页</a></li>
+						href="${pageContext.request.contextPath }/emp_showEmp.action?currPage=${page.totalPage}&keyword=${keyword }">尾页</a></li>
 				</c:if>
 				&nbsp;
 				&nbsp;
@@ -177,7 +177,7 @@
 $('.tablelist tbody tr:odd').addClass('odd');
 function jump(){
 var pc = $("#select_jumpPage option:selected").text();
-window.location.href="${pageContext.request.contextPath}/emp_showEmp.action?currPage=" + pc;
+window.location.href="${pageContext.request.contextPath}/emp_showEmp.action?keyword=${keyword }&currPage=" + pc;
 } 
 </script>
 </body>

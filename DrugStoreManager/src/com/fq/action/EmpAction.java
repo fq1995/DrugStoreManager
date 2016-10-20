@@ -46,6 +46,10 @@ public class EmpAction extends BaseAction implements ModelDriven<EmployeeBean>,R
 		if(null == keyword){
 			keyword="";
 		}
+		if(null != keyword){
+			request.put("keyword", keyword);
+		}
+		
 		if(currPage == null) {
 			currPage = 1;
 		}
