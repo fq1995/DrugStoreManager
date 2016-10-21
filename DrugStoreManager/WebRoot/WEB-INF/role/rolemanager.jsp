@@ -149,5 +149,11 @@
 		</div>
 	</div>
 </body>
-
+<script type="text/javascript">
+$('.tablelist tbody tr:odd').addClass('odd');
+function jump(){
+var pc = $("#select_jumpPage option:selected").text();
+window.location.href="${pageContext.request.contextPath}/role_showRole.action?currPage="+pc;
+} 
+</script>
 </html>

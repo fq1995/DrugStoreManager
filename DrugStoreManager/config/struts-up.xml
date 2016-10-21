@@ -76,6 +76,21 @@
 			</result>
 		</action>
 		
+		<action name="form_*" class="dosageformAction" method="{1}">
+			
+			<result name="doadd">/WEB-INF/dosageform/formadd.jsp</result>
+			<result name="showForm">/WEB-INF/dosageform/formmanager.jsp</result>
+			<result name="addForm">/WEB-INF/dosageform/formadd.jsp</result>
+			<result name="show" type="redirectAction">form_showForm.action?currPage=1</result>
+			<result name="edit">/WEB-INF/dosageform/formupdate.jsp</result>
+			<result name="ajax_verifyCode" type="json">
+				<param name="root">flag</param>
+			</result>
+			<result name="ajax_verifyName" type="json">
+				<param name="root">mess</param>
+			</result>
+		</action>
+		
 	</package>
 	
 	

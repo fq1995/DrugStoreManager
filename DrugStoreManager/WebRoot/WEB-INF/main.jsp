@@ -48,7 +48,7 @@
 								]
 						},{"menuid":"56","icon":"icon-sys","menuname":"药品管理",
 							"menus":[{"menuid":"31","menuname":"药品列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/drug_showDrug.action?currPage=1"},
-									{"menuid":"32","menuname":"部门列表","icon":"icon-nav","url":"demo2.html"}
+									{"menuid":"32","menuname":"药品剂型","icon":"icon-nav","url":"${pageContext.request.contextPath}/form_showForm.action?currPage=1"}
 								]
 						},{"menuid":"28","icon":"icon-sys","menuname":"财务管理",
 							"menus":[{"menuid":"41","menuname":"收支分类","icon":"icon-nav","url":"demo.html"},

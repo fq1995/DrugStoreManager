@@ -10,7 +10,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>角色添加</title>
+<title>剂型修改</title>
 <link href="css/style1.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
@@ -25,28 +25,15 @@
  		$("input[name='time']").val(str);
  	});
  	$(function() {
- 		$("#rolename").css("background-color",""); 
- 		$("#rolecode").css("background-color",""); 
- 		//角色编号非空
- 		$("#rolecode").blur(function(){
- 	        var name = $("input[name='rolecode']").val(); 
- 	        if($.trim(name) == "" || name.length == 0 ||name.length >10){
- 	        	$("#rolecode").css("background-color","#FFB9B9"); 
+ 		$("#dosageform").css("background-color",""); 
+ 		//药品剂型名非空
+ 		$("#dosageform").blur(function(){
+ 	        var name = $("input[name='dosageform']").val(); 
+ 	        if($.trim(name) == "" || name.length == 0 ){
+ 	        	$("#dosageform").css("background-color","#FFB9B9"); 
  	        	$("#add").attr("disabled",true);
  	        }else{
- 	        	$("#rolecode").css("background-color","");
- 	        	$("#add").attr("disabled",false); 
- 	        }
- 		});
- 		
- 		//角色名非空
- 		$("#rolename").blur(function(){
- 	        var name = $("input[name='rolename']").val(); 
- 	        if($.trim(name) == "" || name.length == 0 ||name.length >10){
- 	        	$("#rolename").css("background-color","#FFB9B9"); 
- 	        	$("#add").attr("disabled",true);
- 	        }else{
- 	        	$("#rolename").css("background-color","");
+ 	        	$("#dosageform").css("background-color","");
  	        	$("#add").attr("disabled",false); 
  	        }
  		});
@@ -67,15 +54,13 @@
 		<div class="formtitle">
 			<span>基本信息</span>
 		</div>
-		<form action="role_addRole.action" method="post">
+		<form action="form_updateForm.action" method="post">
 			<input type="hidden" name="currPage" value="1">
+			<input type="hidden" name="dosageformId" value="${form.dosageformId }">
 			<!-- <input type="hidden" name="time"> -->
-
 			<ul class="forminfo">
-				<li><label>角色编号</label><input name="rolecode" type="text" id="rolecode"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入角色编号"/><i style="color: red">${message2}</i></li>
-				<li><label>角色名</label><input name="rolename" type="text" id="rolename"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入角色名" /><i>角色名不能超过10个字符</i><i style="color: red">${message}</i></li>
+				<li><label>药品剂型名</label><input name="dosageform" type="text" id="dosageform" value="${form.dosageform }"
+					class="form-control" style="width:200px; display:inline" placeholder="请输入药品剂型名" /><i></i><i style="color: red">${message}</i></li>
 				<li><input id="add" type="submit" class="btn btn-info btn-sm" disabled value="确认保存" /></li> 
 			</ul>
 		</form>
