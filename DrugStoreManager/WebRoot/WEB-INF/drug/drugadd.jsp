@@ -26,8 +26,8 @@
  		 
  	});
  	$(function() {
- 		$("#username").css("background-color",""); 
- 		$("#password").css("background-color",""); 
+ 		$("#drugName").css("background-color",""); 
+ 		$("#modifier").css("background-color",""); 
  		$("#drugCode").css("background-color",""); 
  		
  		//药品编号非空

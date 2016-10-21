@@ -10,12 +10,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>药品单位管理</title>
+<title>药品类别管理</title>
 <link href="<%=basePath%>css/style1.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
-<script src="<%=basePath%>js/unitmanager_operation.js" type="text/javascript" charset="utf-8"></script>
+<script src="<%=basePath%>js/categorymanager_operation.js" type="text/javascript" charset="utf-8"></script>
 <%-- <script src="<%=basePath%>js/usermanager_page.js" type="text/javascript" charset="utf-8"></script> --%>
 <style type="text/css">
 	th,td  
@@ -32,7 +32,7 @@
 		<ul class="placeul">
 			<li><a href="#">基本操作</a></li>
 			<li><img src="<%=basePath%>images/next.gif"></li>
-			<li><a href="#">药品单位管理</a></li>
+			<li><a href="#">药品类别管理</a></li>
 		</ul>
 	</div>
 
@@ -51,7 +51,7 @@
 
 
 			<ul class="toolbar1">
-				<li style="border:0px"> <input class="form-control" placeholder="输入需要查询的药品单位名" value="${requestScope.keyword }" style="width:180px;" type="text" id="keyword" name="keyword"/></li>&nbsp;&nbsp;
+				<li style="border:0px"> <input class="form-control" placeholder="输入需要查询的药品类别名" value="${requestScope.keyword }" style="width:180px;" type="text" id="keyword" name="keyword"/></li>&nbsp;&nbsp;
 				 <button id="btn_selectUser" type="button" class="btn btn-info btn-sm">查询</button>
 			</ul>
 
@@ -63,17 +63,17 @@
 				<tr>
 					<th><input id="all" name="all" type="checkbox" value="" /></th>
 					<th>序号</th>
-					<th>药品单位名</th>
+					<th>药品类别名</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${requestScope.page.list}" var="unit"
+				<c:forEach items="${requestScope.page.list}" var="category"
 					varStatus="state">
 					<tr>
 						<td><input name="id_check" type="checkbox"
-							value="${unit.unitnameId }" id="${unit.unitnameId}"/></td>
+							value="${category.categoryId }" id="${category.categoryId}"/></td>
 						<td>${state.count }</td>
-						<td>${unit.unitname }</td>
+						<td>${category.category }</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -87,9 +87,9 @@
 			<ul class="paginList">
 				<c:if test="${page.perIndex > 0}">
 					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/unit_showUnit.action?currPage=1&keyword=${keyword}">首页</a></li>
+						href="${pageContext.request.contextPath }/category_showCategory.action?currPage=1&keyword=${keyword}">首页</a></li>
 					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/unit_showUnit.action?currPage=${page.perIndex}&keyword=${keyword}"><span
+						href="${pageContext.request.contextPath }/category_showCategory.action?currPage=${page.perIndex}&keyword=${keyword}"><span
 							class="pagepre"></span></a></li>
 				</c:if>
 				<c:forEach begin="1" end="${page.totalPage }" var="p">
@@ -99,16 +99,16 @@
 						</c:when>
 						<c:otherwise>
 							<li class="paginItem"><a
-								href="${pageContext.request.contextPath }/unit_showUnit.action?currPage=${p}&keyword=${keyword}">${p}</a></li>
+								href="${pageContext.request.contextPath }/category_showCategory.action?currPage=${p}&keyword=${keyword}">${p}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				<c:if test="${page.nextIndex > 0}">
 					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/unit_showUnit.action?currPage=${page.nextIndex}&keyword=${keyword}"><span
+						href="${pageContext.request.contextPath }/category_showCategory.action?currPage=${page.nextIndex}&keyword=${keyword}"><span
 							class="pagenxt"></span></a></li>
 					<li class="paginItem"><a
-						href="${pageContext.request.contextPath }/unit_showUnit.action?currPage=${page.totalPage}&keyword=${keyword}">尾页</a></li>
+						href="${pageContext.request.contextPath }/category_showCategory.action?currPage=${page.totalPage}&keyword=${keyword}">尾页</a></li>
 				</c:if>
 				&nbsp;
 				&nbsp;
@@ -157,7 +157,7 @@
 $('.tablelist tbody tr:odd').addClass('odd');
 function jump(){
 var pc = $("#select_jumpPage option:selected").text();
-window.location.href="${pageContext.request.contextPath}/unit_showUnit.action?keyword=${keyword}&currPage="+pc;
+window.location.href="${pageContext.request.contextPath}/category_showCategory.action?keyword=${keyword}&currPage="+pc;
 } 
 </script>
 </html>

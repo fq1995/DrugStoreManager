@@ -63,7 +63,7 @@ public class DrugCategoryBean  implements java.io.Serializable {
         this.categoryId = categoryId;
     }
     
-    @Column(name="CATEGORY", length=8)
+    @Column(name="CATEGORY", length=20)
 
     public String getCategory() {
         return this.category;

@@ -10,7 +10,7 @@ import com.fq.util.PageModel;
 
 public interface DrugDAO {
 	
-	DrugBean selectDrugByName(String drugname);
+DrugBean selectDrugByName(String drugname);
 	
 	DrugBean selectDrugByDrugcode(Integer drugcode);
 	
@@ -37,4 +37,10 @@ public interface DrugDAO {
 	List<DrugUnitBean> selectUnit();
 	//查询剂型
 	List<DosageformBean> selectForm();
+	
+	
+	
+	
+	
+	
 }

@@ -63,7 +63,7 @@ public class DosageformBean  implements java.io.Serializable {
         this.dosageformId = dosageformId;
     }
     
-    @Column(name="DOSAGEFORM", length=4)
+    @Column(name="DOSAGEFORM", length=10)
 
     public String getDosageform() {
         return this.dosageform;

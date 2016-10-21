@@ -20,6 +20,7 @@ import javax.persistence.TemporalType;
 
 /**
  * InventoriesBean entity. @author MyEclipse Persistence Tools
+ * 库存
  */
 @Entity
 @Table(name="tbl_inventories"

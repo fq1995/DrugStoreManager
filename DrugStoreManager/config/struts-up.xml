@@ -10,7 +10,7 @@
 			<result name="error">login.jsp</result>
 			<result name="defult">register.jsp</result>
 		</global-results>
-		<!-- 配置首页访问的action -->
+		<!-- 用户管理 -->
 		<action name="user_*" class="userAction" method="{1}">
 			<result name="doadd">/WEB-INF/user/useradd.jsp</result>
 			<result name="showUser">/WEB-INF/user/usermanager.jsp</result>
@@ -25,6 +25,8 @@
 			</result>
 		</action>
 		
+		<!-- 角色管理 -->
+		
 		<action name="role_*" class="roleAction" method="{1}">
 			<result name="doadd">/WEB-INF/role/roleadd.jsp</result>
 			<result name="showRole">/WEB-INF/role/rolemanager.jsp</result>
@@ -36,6 +38,8 @@
 			</result>
 		</action>
 		
+		<!-- 权限管理 -->
+		
 		<action name="per_*" class="permissionAction" method="{1}">
 			<result name="doaddPer">/WEB-INF/per/peradd.jsp</result>
 			<result name="showPer">/WEB-INF/per/permanager.jsp</result>
@@ -46,6 +50,8 @@
 				<param name="root">mess</param>
 			</result>
 		</action>
+		
+		<!-- 员工管理 -->
 		
 		<action name="emp_*" class="empAction" method="{1}">
 			<result name="doadd">/WEB-INF/emp/empadd.jsp</result>
@@ -60,6 +66,8 @@
 				<param name="root">mess</param>
 			</result>
 		</action>
+		
+		<!-- 药品管理 -->
 		
 		<action name="drug_*" class="drugAction" method="{1}">
 			
@@ -76,6 +84,8 @@
 			</result>
 		</action>
 		
+		<!-- 药品剂型管理 -->
+		
 		<action name="form_*" class="dosageformAction" method="{1}">
 			
 			<result name="doadd">/WEB-INF/dosageform/formadd.jsp</result>
@@ -83,6 +93,40 @@
 			<result name="addForm">/WEB-INF/dosageform/formadd.jsp</result>
 			<result name="show" type="redirectAction">form_showForm.action?currPage=1</result>
 			<result name="edit">/WEB-INF/dosageform/formupdate.jsp</result>
+			<result name="ajax_verifyCode" type="json">
+				<param name="root">flag</param>
+			</result>
+			<result name="ajax_verifyName" type="json">
+				<param name="root">mess</param>
+			</result>
+		</action>
+		
+		<!-- 药品单位管理 -->
+		
+		<action name="unit_*" class="drugUnitAction" method="{1}">
+			
+			<result name="doadd">/WEB-INF/unit/unitadd.jsp</result>
+			<result name="showUnit">/WEB-INF/unit/unitmanager.jsp</result>
+			<result name="addUnit">/WEB-INF/unit/unitadd.jsp</result>
+			<result name="show" type="redirectAction">unit_showUnit.action?currPage=1</result>
+			<result name="edit">/WEB-INF/unit/unitupdate.jsp</result>
+			<result name="ajax_ve rifyCode" type="json">
+				<param name="root">flag</param>
+			</result>
+			<result name="ajax_verifyName" type="json">
+				<param name="root">mess</param>
+			</result>
+		</action>
+		
+		<!-- 药品类别管理 -->
+		
+		<action name="category_*" class="drugCategoryAction" method="{1}">
+			
+			<result name="doadd">/WEB-INF/category/categoryadd.jsp</result>
+			<result name="showCategory">/WEB-INF/category/categorymanager.jsp</result>
+			<result name="addCategory">/WEB-INF/category/categoryadd.jsp</result>
+			<result name="show" type="redirectAction">category_showCategory.action?currPage=1</result>
+			<result name="edit">/WEB-INF/category/categoryupdate.jsp</result>
 			<result name="ajax_verifyCode" type="json">
 				<param name="root">flag</param>
 			</result>

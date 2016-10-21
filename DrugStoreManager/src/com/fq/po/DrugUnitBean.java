@@ -63,7 +63,7 @@ public class DrugUnitBean  implements java.io.Serializable {
         this.unitnameId = unitnameId;
     }
     
-    @Column(name="UNITNAME", length=5)
+    @Column(name="UNITNAME", length=15)
 
     public String getUnitname() {
         return this.unitname;
