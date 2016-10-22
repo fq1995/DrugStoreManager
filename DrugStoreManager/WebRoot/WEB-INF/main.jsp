@@ -53,7 +53,7 @@
 									{"menuid":"32","menuname":"药品类别","icon":"icon-nav","url":"${pageContext.request.contextPath}/category_showCategory.action?currPage=1"}
 								]
 						},{"menuid":"28","icon":"icon-sys","menuname":"库存管理",
-							"menus":[{"menuid":"41","menuname":"库存列表","icon":"icon-nav","url":"demo.html"},
+							"menus":[{"menuid":"41","menuname":"库存列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/inventor_showInventor.action?currPage=1"},
 									{"menuid":"42","menuname":"报表统计","icon":"icon-nav","url":"demo1.html"},
 									{"menuid":"43","menuname":"添加支出","icon":"icon-nav","url":"demo2.html"}
 								]

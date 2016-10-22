@@ -135,6 +135,23 @@
 			</result>
 		</action>
 		
+		<!-- 药品管理 -->
+		
+		<action name="inventor_*" class="drugInventorAction" method="{1}">
+			
+			<result name="doadd">/WEB-INF/kucun/inventoradd.jsp</result>
+			<result name="showInventor">/WEB-INF/kucun/inventormanager.jsp</result>
+			<result name="addInventor">/WEB-INF/kucun/inventoradd.jsp</result>
+			<result name="show" type="redirectAction">inventor_showInventor.action?currPage=1</result>
+			<result name="edit">/WEB-INF/kucun/inventorupdate.jsp</result>
+			<result name="ajax_verifyCode" type="json">
+				<param name="root">flag</param>
+			</result>
+			<result name="ajax_verifyName" type="json">
+				<param name="root">mess</param>
+			</result>
+		</action>
+		
 	</package>
 	
 	

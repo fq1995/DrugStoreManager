@@ -76,7 +76,7 @@ public class InventoriesBean  implements java.io.Serializable {
     public void setStockId(String stockId) {
         this.stockId = stockId;
     }
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
         @JoinColumn(name="DRUG_ID")
 
     public DrugBean getDrugBean() {
