@@ -49,14 +49,13 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 		drugBean.setDrugId(UUIDBuild.getUUID());
 		drugBean.setStatus("1");
 		Bean.setStockId(UUIDBuild.getUUID());
-	/*	Bean.setDrugBean(drugBean);*/
 		hibernateTemplate.save(Bean);
 	}
 
 	@Override
-	public void addInventor(InventoriesBean Bean) {
-		Bean.setStockId(UUIDBuild.getUUID());
-		hibernateTemplate.save(Bean);
+	public void addInventor(InventoriesBean bean) {
+		bean.setStockId(UUIDBuild.getUUID());
+		hibernateTemplate.save(bean);
 
 	}
 

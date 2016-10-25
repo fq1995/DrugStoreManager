@@ -30,15 +30,15 @@ public class EmpDAOImpl extends BaseDAO<EmployeeBean> implements EmpDAO {
 	@Override
 	public EmployeeBean selectEmpByNameAndEmpId(String empName, String empId) {
 		String hql ="from EmployeeBean where empName=? and empId !=?";
-		List<EmployeeBean> perlist = (List<EmployeeBean>) hibernateTemplate.find(hql, empName,empId);
-		return perlist==null||perlist.size()<=0?null:perlist.get(0);
+		List<EmployeeBean> list = (List<EmployeeBean>) hibernateTemplate.find(hql, empName,empId);
+		return list==null||list.size()<=0?null:list.get(0);
 	}
 
 	@Override
 	public EmployeeBean selectEmpByEmpcode(String empCode) {
 		String hql ="from EmployeeBean where empCode=?";
-		List<EmployeeBean> perlist = (List<EmployeeBean>) hibernateTemplate.find(hql, empCode);
-		return perlist==null||perlist.size()<=0?null:perlist.get(0);
+		List<EmployeeBean> list = (List<EmployeeBean>) hibernateTemplate.find(hql, empCode);
+		return list==null||list.size()<=0?null:list.get(0);
 	}
 
 	@Override

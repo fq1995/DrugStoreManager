@@ -57,11 +57,21 @@
 									{"menuid":"42","menuname":"报表统计","icon":"icon-nav","url":"demo1.html"},
 									{"menuid":"43","menuname":"添加支出","icon":"icon-nav","url":"demo2.html"}
 								]
-						},{"menuid":"39","icon":"icon-sys","menuname":"商城管理",
-							"menus":[{"menuid":"51","menuname":"商品分类","icon":"icon-nav","url":"demo.html"},
+						},{"menuid":"39","icon":"icon-sys","menuname":"销售管理",
+							"menus":[{"menuid":"51","menuname":"销售列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/sale_showSale.action?currPage=1"},
 									{"menuid":"52","menuname":"商品列表","icon":"icon-nav","url":"demo1.html"},
 									{"menuid":"53","menuname":"商品订单","icon":"icon-nav","url":"demo2.html"}
 								]
+						},{"menuid":"40","icon":"icon-sys","menuname":"进货管理",
+							"menus":[{"menuid":"61","menuname":"销售列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/sale_showSale.action?currPage=1"},
+								{"menuid":"62","menuname":"商品列表","icon":"icon-nav","url":"demo1.html"},
+								{"menuid":"63","menuname":"商品订单","icon":"icon-nav","url":"demo2.html"}
+							]
+						},{"menuid":"51","icon":"icon-sys","menuname":"会员管理",
+							"menus":[{"menuid":"71","menuname":"会员列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/member_showMember.action?currPage=1"},
+								{"menuid":"72","menuname":"商品列表","icon":"icon-nav","url":"demo1.html"},
+								{"menuid":"73","menuname":"商品订单","icon":"icon-nav","url":"demo2.html"}
+							]
 						}
 				]};
         //设置登录窗口

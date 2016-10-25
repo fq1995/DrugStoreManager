@@ -2,9 +2,14 @@ package com.fq.po;
 
 // default package
 
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -25,11 +30,12 @@ public class MemberBean  implements java.io.Serializable {
      private String memberCode;
      private String memberName;
      private String sex;
-     private byte[] age;
+     private String age;
      private String memberLevel;
      private Integer integration;
      private String suppliertel;
-     private byte[] address;
+     private String address;
+     private Set<DrugSalesBean> drugSalesBeans = new HashSet<DrugSalesBean>(0);
 
 
     // Constructors
@@ -44,7 +50,7 @@ public class MemberBean  implements java.io.Serializable {
     }
     
     /** full constructor */
-    public MemberBean(String memberId, String memberCode, String memberName, String sex, byte[] age, String memberLevel, Integer integration, String suppliertel, byte[] address) {
+    public MemberBean(String memberId, String memberCode, String memberName, String sex, String age, String memberLevel, Integer integration, String suppliertel, String address, Set<DrugSalesBean> drugSalesBeans) {
         this.memberId = memberId;
         this.memberCode = memberCode;
         this.memberName = memberName;
@@ -54,6 +60,7 @@ public class MemberBean  implements java.io.Serializable {
         this.integration = integration;
         this.suppliertel = suppliertel;
         this.address = address;
+        this.drugSalesBeans = drugSalesBeans;
     }
 
    
@@ -100,17 +107,17 @@ public class MemberBean  implements java.io.Serializable {
         this.sex = sex;
     }
     
-    @Column(name="AGE")
+    @Column(name="AGE", length=3)
 
-    public byte[] getAge() {
+    public String getAge() {
         return this.age;
     }
     
-    public void setAge(byte[] age) {
+    public void setAge(String age) {
         this.age = age;
     }
     
-    @Column(name="MEMBER_LEVEL", length=1)
+    @Column(name="MEMBER_LEVEL", length=10)
 
     public String getMemberLevel() {
         return this.memberLevel;
@@ -130,7 +137,7 @@ public class MemberBean  implements java.io.Serializable {
         this.integration = integration;
     }
     
-    @Column(name="SUPPLIERTEL", length=11)
+    @Column(name="SUPPLIERTEL", length=20)
 
     public String getSuppliertel() {
         return this.suppliertel;
@@ -140,14 +147,23 @@ public class MemberBean  implements java.io.Serializable {
         this.suppliertel = suppliertel;
     }
     
-    @Column(name="ADDRESS")
+    @Column(name="ADDRESS", length=30)
 
-    public byte[] getAddress() {
+    public String getAddress() {
         return this.address;
     }
     
-    public void setAddress(byte[] address) {
+    public void setAddress(String address) {
         this.address = address;
+    }
+@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="memberBean")
+
+    public Set<DrugSalesBean> getDrugSalesBeans() {
+        return this.drugSalesBeans;
+    }
+    
+    public void setDrugSalesBeans(Set<DrugSalesBean> drugSalesBeans) {
+        this.drugSalesBeans = drugSalesBeans;
     }
    
 

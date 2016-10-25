@@ -11,17 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.fq.po.UserBean;
-import com.fq.service.UserService;
+import com.fq.po.MemberBean;
+import com.fq.service.MemberService;
 import com.fq.util.BaseAction;
 import com.fq.util.ConstantUtils;
 import com.fq.util.PageModel;
 import com.opensymphony.xwork2.ModelDriven;
 
-@Controller("userAction")
+@Controller("memberAction")
 @Scope("prototype")
-public class UserAction extends BaseAction implements ModelDriven<UserBean>,RequestAware{
-	//用户管理
+public class MemberAction extends BaseAction implements ModelDriven<MemberBean>,RequestAware{
+	//员工管理
 	private Map<String ,Object> session;
 	private Map<String, Object> request;
 	private boolean flag;
@@ -35,140 +35,114 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	
 	
 	@Autowired
-	private UserService userService;
-	private UserBean userBean = new UserBean();
+	private MemberService memberService;
+	private MemberBean memberBean = new MemberBean();
+	
 	/**
-	 * 用户登录
+	 * 员工分页
 	 * @return
 	 */
-	public String login(){
-		UserBean user = userService.loginOrNot(userBean.getUsername(), userBean.getPassword());
-		if(user!=null){
-			session.put("user", user);
-			return "ok";
-		}else{
-			request.put("tishi","用户名或密码错误");
-			return "error";
-		}
-	}
-	/**
-	 * 用户注册
-	 * @return
-	 */
-	public String registUser(){
-		if(null == selectUserByName()){
-			userService.register(userBean);
-			return "error";
-		}else{
-			request.put("message","用户名已被使用！");
-			return "defult";
-		}
-		
-	}
-	/**
-	 * 用户分页
-	 * @return
-	 */
-	public String showUser() {
+	public String showMember() {
 		if(null == keyword){
 			keyword="";
 		}
 		if(null != keyword){
 			request.put("keyword", keyword);
 		}
+		
 		if(currPage == null) {
 			currPage = 1;
 		}
-		PageModel<UserBean>  page = userService.splitUser(currPage,ConstantUtils.PAGESIZE,keyword);
+		PageModel<MemberBean>  page = memberService.splitMember(currPage,ConstantUtils.PAGESIZE,keyword);
 		request.put("page", page);
 
-		return "showUser";
+		return "showMember";
 	}
 	/**
-	 * 跳转新增
+	 * 跳转添加界面
 	 */
-	public String doaddUser(){
+	public String doaddMember(){
 		return "doadd";
 	}
 	/**
-	 * 新增用户
+	 * 新增员工
 	 * @return
 	 * @throws Exception 
 	 */
-	public String addUser(){
-		if(null == selectUserByName() && null == selectUserByUsercode()){
+	public String addMember(){
+		if(null == selectMemberByName() && null == selectMemberByMembercode()){
 			try {
-				userService.addUser(userBean,time);
+				memberService.addMember(memberBean);
 			} catch (Exception e) {
 				System.out.println("时间转换错误");
 				e.printStackTrace();
 			}
 			return "show";
 		}
-		request.put("message","用户名已被使用！");
-		request.put("message2","用户编号已被使用！");
-		return "addUser";
+		request.put("message","员工名已被使用！");
+		request.put("message2","员工编号已被使用！");
+		return "addMember";
 		
 	}
 	/**
-	 * 删除用户
+	 * 删除员工
 	 */
-	public String delUser(){
-		List<UserBean> listUser = userService.showAllUser(ids);
-		userService.deleteAllUser(listUser);
+	public String delMember(){
+		List<MemberBean> list = memberService.showAllMember(ids);
+		memberService.deleteAllMember(list);
 		return "show";
 	}
 	/**
-	 * 编辑用户
+	 * 编辑员工
 	 */
-	public String editUser(){
-		UserBean userBean1 = userService.selectById(id);
-		if(null!=userBean1){
-			request.put("user",userBean1);
+	public String editMember(){
+		MemberBean MemberBean1 = memberService.selectById(id);
+		if(null!=MemberBean1){
+			request.put("member",MemberBean1);
 		}
 		return "edit";
 	}
 		
 	/**
-	 * 修改用户 
+	 * 修改员工 
 	 */
-	public String updateUser(){
-		if(null == selectUserByNameAndUserId()){
-			userService.updateUser(userBean,time);
+	public String updateMember(){
+		if(null == selectMemberByNameAndMemberId()){
+			memberService.updateMember(memberBean);
 			return "show";
 		}
-		request.put("message","用户名已被使用！");
-		return editUser();
+		request.put("message","员工名已被使用！");
+		return editMember();
 	}
 	/**
-	 * 根据用户名查重
+	 * 根据员工名查重
 	 * @return
 	 */
-	public UserBean selectUserByName(){
-		UserBean bean =userService.selectUserByName(userBean.getUsername());
+	public MemberBean selectMemberByName(){
+		MemberBean bean =memberService.selectMemberByName(memberBean.getMemberName());
 		return bean;
 	}
 	/**
-	 * 根据用户名和id查重
+	 * 根据员工名和id查重
 	 * @return
 	 */
-	public UserBean selectUserByNameAndUserId(){
-		UserBean bean =userService.selectUserByNameAndUserId(userBean.getUsername(),userBean.getUserId());
+	public MemberBean selectMemberByNameAndMemberId(){
+		MemberBean bean =memberService.selectMemberByNameAndMemberId(memberBean.getMemberName(),memberBean.getMemberId());
 		return bean;
 	}
 	/**
-	 * 根据用户编号查重
+	 * 根据员工编号查重
 	 * @return
 	 */
-	public UserBean selectUserByUsercode(){
-		UserBean bean =userService.selectUserByUsercode(userBean.getUserCode());
+	public MemberBean selectMemberByMembercode(){
+		MemberBean bean =memberService.selectMemberByMembercode(memberBean.getMemberCode());
 		return bean;
 	}
 	/**
 	 * ajax校验验证码是否正确
 	 */
 	public String validateVerifyCode() {
-		HttpServletRequest request = ServletActionContext.getRequest();
+		 HttpServletRequest request = ServletActionContext.getRequest();
 		String verifyCode = (String)request.getParameter("yanzheng");
 		String code = (String) ServletActionContext.getRequest().getSession().getAttribute("code");
 		if(verifyCode.equalsIgnoreCase(code)) {
@@ -179,14 +153,14 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 		return "ajax_verifyCode";
 	}
 	/**
-	 * ajax校验用户名是否可用
+	 * ajax校验员工名是否可用
 	 */
 	public String validateName() {
-		UserBean bean =userService.selectUserByName(userBean.getUsername());
+		MemberBean bean =memberService.selectMemberByName(memberBean.getMemberName());
 		if(null == bean) {
-			mess = "用户名可用";
+			mess = "员工名可用";
 		} else if(null != bean){
-			mess = "用户名不可用";
+			mess = "员工名不可用";
 		}
 		return "ajax_verifyName";
 	}
@@ -198,8 +172,8 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	}
 
 	@Override
-	public UserBean getModel() {
-		return userBean;
+	public MemberBean getModel() {
+		return memberBean;
 	}
 	public Integer getCurrPage() {
 		return currPage;
