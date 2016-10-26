@@ -48,6 +48,7 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 	private DrugService drugService; 
 	private DrugSalesBean salesBean = new DrugSalesBean();
 	private DrugBean drugBean = salesBean.getDrugBean();
+	private UserBean userBean = salesBean.getUserBean();
 	
 	/**
 	 * 药品分页
@@ -109,7 +110,7 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 		
 			
 		try {
-			drugSaleService.addSale(drugBean,salesBean,time);
+			drugSaleService.addSale(userBean,drugBean,salesBean,time);
 		} catch (Exception e) {
 			System.out.println("时间转换错误");
 			e.printStackTrace();

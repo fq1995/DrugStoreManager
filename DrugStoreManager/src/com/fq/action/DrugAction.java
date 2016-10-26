@@ -41,6 +41,7 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>,Requ
 	private DrugService drugService;
 	private DrugBean drugBean = new DrugBean();
 	
+	
 	/**
 	 * 药品分页
 	 * @return
@@ -59,6 +60,37 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>,Requ
 		PageModel<DrugBean>  page = drugService.splitDrug(currPage, ConstantUtils.PAGESIZE, keyword);
 		request.put("page", page);
 		return "showDrug";
+	}
+	/**
+	 * 跳转到多条件查询
+	 */
+	public String doShowDrugByOptions() {
+		List<DrugCategoryBean>  drugCategoryList = drugService.selectCategory();
+		List<DrugUnitBean> drugUnitList = drugService.selectUnit();
+		List<DosageformBean> dosageformList = drugService.selectForm();
+		
+		request.put("drugCategoryList",drugCategoryList);
+		request.put("drugUnitList",drugUnitList);
+		request.put("dosageformList",dosageformList);
+		return "showDrugByOptions";
+	}
+	/**
+	 * 多条件查询
+	 * 
+	 */
+	public String showDrugByOptions(){
+		List<DrugCategoryBean>  drugCategoryList = drugService.selectCategory();
+		List<DrugUnitBean> drugUnitList = drugService.selectUnit();
+		List<DosageformBean> dosageformList = drugService.selectForm();
+		
+		request.put("drugCategoryList",drugCategoryList);
+		request.put("drugUnitList",drugUnitList);
+		request.put("dosageformList",dosageformList);
+		
+		PageModel<DrugBean>  page = drugService.splitDrug(currPage, ConstantUtils.PAGESIZE, drugBean.getDrugName(), drugBean.getDosageformBean().getDosageform(), 
+				drugBean.getDrugUnitBean().getUnitname(), drugBean.getDrugCategoryBean().getCategory(), drugBean.getManufacturer(), drugBean.getModifyTime(), drugBean.getModifier());
+		request.put("page", page);
+		return "showDrugByOptions";
 	}
 	/**
 	 * 跳转新增

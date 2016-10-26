@@ -133,7 +133,8 @@
 				<li><label>销售金额</label><input name="totalamount" type="text" id="totalamount" value="${sale.totalamount }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入销售金额"/><i>必填</i></li>
 				
-				<li><input id="add" type="submit" class="btn btn-info btn-sm"  value="确认保存" /></li>
+				<li><input id="add" type="submit" class="btn btn-info btn-sm"  value="确认保存" />&nbsp;&nbsp;&nbsp;&nbsp;
+					<input id="return" type="button" class="btn btn-info btn-sm" onclick="javascript:history.go(-1);" value="返回" /></li>
 			</ul>
 		</form>
 	</div>

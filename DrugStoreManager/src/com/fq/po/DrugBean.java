@@ -98,7 +98,7 @@ public class DrugBean  implements java.io.Serializable {
     public void setDrugId(String drugId) {
         this.drugId = drugId;
     }
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
         @JoinColumn(name="UNITNAME_ID")
 
     public DrugUnitBean getDrugUnitBean() {
@@ -108,7 +108,7 @@ public class DrugBean  implements java.io.Serializable {
     public void setDrugUnitBean(DrugUnitBean drugUnitBean) {
         this.drugUnitBean = drugUnitBean;
     }
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
         @JoinColumn(name="DOSAGEFORM_ID")
 
     public DosageformBean getDosageformBean() {
@@ -118,7 +118,7 @@ public class DrugBean  implements java.io.Serializable {
     public void setDosageformBean(DosageformBean dosageformBean) {
         this.dosageformBean = dosageformBean;
     }
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
         @JoinColumn(name="CATEGORY_ID")
 
     public DrugCategoryBean getDrugCategoryBean() {

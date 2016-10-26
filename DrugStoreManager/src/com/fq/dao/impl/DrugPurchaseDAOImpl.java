@@ -13,82 +13,88 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.fq.dao.DrugSaleDAO;
+import com.fq.dao.DrugPurchaseDAO;
 import com.fq.po.DosageformBean;
 import com.fq.po.DrugBean;
 import com.fq.po.DrugCategoryBean;
+import com.fq.po.DrugPurchaseBean;
 import com.fq.po.DrugSalesBean;
 import com.fq.po.DrugUnitBean;
-import com.fq.po.InventoriesBean;
 import com.fq.po.MemberBean;
 import com.fq.po.UserBean;
 import com.fq.util.BaseDAO;
 import com.fq.util.PageModel;
 import com.fq.util.UUIDBuild;
-@Repository("drugSaleDAO")
-public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleDAO {
+@Repository("drugPurchaseDAO")
+public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements DrugPurchaseDAO {
 
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
 	@Resource
 	SessionFactory sessionFactory;
 	
+	
 	@Override
-	public DrugSalesBean selectSaleByName(String name) {
-		String hql ="from DrugSalesBean where drugBean.drugName=? and drugBean.status=1";
-		List<DrugSalesBean> list = (List<DrugSalesBean>) hibernateTemplate.find(hql, name);
+	public DrugPurchaseBean selectPseByName(String name) {
+		String hql ="from DrugPurchaseBean where drugBean.drugName=? and drugBean.status=1";
+		List<DrugPurchaseBean> list = (List<DrugPurchaseBean>) hibernateTemplate.find(hql, name);
 		return list==null||list.size()<=0?null:list.get(0);
 	}
 
 	@Override
-	public DrugSalesBean selectSaleByDrugcode(Integer code) {
-		String hql = "from DrugSalesBean where drugBean.drugCode=?";
-		List<DrugSalesBean> list = (List<DrugSalesBean>) hibernateTemplate.find(hql,code);
+	public DrugPurchaseBean selectPseByDrugcode(Integer code) {
+		String hql = "from DrugPurchaseBean where drugBean.drugCode=?";
+		List<DrugPurchaseBean> list = (List<DrugPurchaseBean>) hibernateTemplate.find(hql,code);
 		return list==null||list.size()<=0?null:list.get(0);
 	}
 
 	@Override
-	public void addSale(DrugBean drugBean, DrugSalesBean bean, String time) throws Exception {
-		drugBean = bean.getDrugBean();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = sdf.parse(time);
-		bean.setSalesDate(date);
-		bean.setSalesId(UUIDBuild.getUUID());
-		Session session=sessionFactory.getCurrentSession();
-		session.clear();
-		session.load(drugBean, drugBean.getDrugId());
-		hibernateTemplate.merge(bean);
-		
+	public DrugPurchaseBean selectPseByDrugId(String id) {
+		String hql = "from DrugPurchaseBean where drugBean.drugId=?";
+		List<DrugPurchaseBean> list = (List<DrugPurchaseBean>) hibernateTemplate.find(hql,id);
+		return list==null||list.size()<=0?null:list.get(0);
 	}
-	
-	@Override
-	public void addSale(UserBean userBean, DrugBean drugBean, DrugSalesBean bean, String time) throws Exception {
-		drugBean = bean.getDrugBean();
-		userBean = bean.getUserBean();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = sdf.parse(time);
-		bean.setSalesDate(date);
-		bean.setSalesId(UUIDBuild.getUUID());
-		Session session=sessionFactory.getCurrentSession();
-		session.clear();
-		session.load(userBean, userBean.getUserId());
-		session.load(drugBean, drugBean.getDrugId());
-		hibernateTemplate.merge(bean);
-	}
-	
 
 	@Override
-	public PageModel<DrugSalesBean> splitSale(Integer currPage, Integer pageSize, String keyword) {
-		String hql_count = "select count(*) from DrugSalesBean where drugBean.drugName like :keyword";
-		String hql = "from DrugSalesBean where drugBean.drugName like :keyword ";
+	public void addPse(DrugBean drugBean, DrugPurchaseBean bean, String time) throws Exception {
+
+	}
+
+	@Override
+	public void addPse(DosageformBean dfBean, DrugCategoryBean dcBean, DrugUnitBean duBean, DrugBean drugBean,
+			DrugPurchaseBean drugPseBean, String time) {
+		drugBean = drugPseBean.getDrugBean();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = sdf.parse(time);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		drugPseBean.setPurchasedate(date);
+		Session session=sessionFactory.getCurrentSession();
+		session.load(dfBean, dfBean.getDosageformId());
+		session.load(dcBean, dcBean.getCategoryId());
+		session.load(duBean, duBean.getUnitnameId());
+		drugBean.setDrugId(UUIDBuild.getUUID());
+		drugBean.setModifyTime(date);
+		drugBean.setStatus("1");
+		drugPseBean.setPurchaseId(UUIDBuild.getUUID());
+		hibernateTemplate.merge(drugPseBean);
+	}
+
+	@Override
+	public PageModel<DrugPurchaseBean> splitPse(Integer currPage, Integer pageSize, String keyword) {
+		String hql_count = "select count(*) from DrugPurchaseBean where drugBean.drugName like :keyword";
+		String hql = "from DrugPurchaseBean where drugBean.drugName like :keyword ";
 		return super.split(hql, hql_count, currPage, pageSize,keyword);
 	}
 
 	@Override
-	public List<DrugSalesBean> showAllSale(String ids) {
+	public List<DrugPurchaseBean> showAllPse(String ids) {
 		String[] arr = ids.split(",");
 		StringBuilder sb = new StringBuilder();
-		String hql ="from DrugSalesBean where salesId in(";
+		String hql ="from DrugPurchaseBean where purchaseId in(";
 		sb.append(hql);
 		for(int i = 0;i<arr.length;i++){
 			if(i==arr.length-1){
@@ -97,35 +103,25 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 				sb.append("'").append(arr[i]).append("'").append(",");
 			}
 		}
-		List<DrugSalesBean> list = (List<DrugSalesBean>) hibernateTemplate.find(sb.toString());
+		List<DrugPurchaseBean> list = (List<DrugPurchaseBean>) hibernateTemplate.find(sb.toString());
 		return list==null||list.size()<=0?null:list;
 	}
 
 	@Override
-	public void deleteAllSale(List<DrugSalesBean> list) {
+	public void deleteAllPse(List<DrugPurchaseBean> list) {
 		getHibernateTemplate().deleteAll(list);
-		
+
 	}
 
 	@Override
-	public void updateSale(DrugSalesBean bean, String time) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date=null;
-		try {
-			date = sdf.parse(time);
-		} catch (ParseException e) {
-			System.out.println("时间转换错误");
-			e.printStackTrace();
-		}
-		bean.setSalesDate(date);
+	public void updatePse(DrugPurchaseBean bean) {
 		getHibernateTemplate().update(bean);
-		
+
 	}
-	
-	
+
 	@Override
-	public DrugSalesBean selectById(String id) {
-		DrugSalesBean bean = getHibernateTemplate().get(DrugSalesBean.class, id); 
+	public DrugPurchaseBean selectById(String id) {
+		DrugPurchaseBean bean = getHibernateTemplate().get(DrugPurchaseBean.class, id); 
 		return null==bean?null:bean;
 	}
 
@@ -165,20 +161,11 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 	}
 
 	@Override
-	public DrugSalesBean selectSaleByDrugId(String id) {
-		String hql = "from DrugSalesBean where drugBean.drugId=?";
-		List<DrugSalesBean> list = (List<DrugSalesBean>) hibernateTemplate.find(hql,id);
-		return list==null||list.size()<=0?null:list.get(0);
-	}
-
-	@Override
 	public List<UserBean> selectUser() {
 		String hql = "from UserBean";
 		List<UserBean> list = (List<UserBean>) hibernateTemplate.find(hql);
 		return list==null||list.size()<=0?null:list;
 	}
 
-	
-	
 
 }

@@ -85,7 +85,8 @@
 			<li><label>密码</label><input name="password" type="password" id="password" value="${user.password}"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入密码"/><i>密码长度在6~10位之间</i></li>
             <li><label>是否审核</label><cite><input name="status" type="radio" value="1" checked="checked" />是&nbsp;&nbsp;&nbsp;&nbsp;<input name="status" type="radio" value="0" />否</cite></li>
-            <li><input id="update" type="submit" class="btn btn-info btn-sm" disabled value="确认保存"/></li>
+            <li><input id="update" type="submit" class="btn btn-info btn-sm" disabled value="确认保存"/>&nbsp;&nbsp;&nbsp;&nbsp;
+					<input id="return" type="button" class="btn btn-info btn-sm" onclick="javascript:history.go(-1);" value="返回" /></li>
         </ul>
     </form>
 

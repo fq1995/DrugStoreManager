@@ -76,7 +76,8 @@
 					class="form-control" style="width:200px; display:inline" placeholder="请输入角色编号"/><i style="color: red">${message2}</i></li>
 				<li><label>角色名</label><input name="rolename" type="text" id="rolename"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入角色名" /><i>角色名不能超过10个字符</i><i style="color: red">${message}</i></li>
-				<li><input id="add" type="submit" class="btn btn-info btn-sm" disabled value="确认保存" /></li> 
+				<li><input id="add" type="submit" class="btn btn-info btn-sm" disabled value="确认保存" />&nbsp;&nbsp;&nbsp;&nbsp;
+					<input id="return" type="button" class="btn btn-info btn-sm" onclick="javascript:history.go(-1);" value="返回" /></li> 
 			</ul>
 		</form>
 	</div>

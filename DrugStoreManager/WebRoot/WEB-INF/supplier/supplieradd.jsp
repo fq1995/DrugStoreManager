@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset=utf-8 />
-<title>用户添加</title>
+<title>供货商添加</title>
 <link href="css/style1.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
@@ -26,43 +26,41 @@
  		 
  	});
  	$(function() {
- 		$("#username").css("background-color",""); 
- 		$("#password").css("background-color",""); 
- 		$("#usercode").css("background-color",""); 
+ 		$("#supplier").css("background-color",""); 
+ 		$("#name").css("background-color",""); 
+ 		$("#supplierCode").css("background-color",""); 
  		
- 		//用户编号非空
- 		$("#usercode").blur(function(){
- 			var name = $("input[name='usercode']").val(); 
- 	        if($.trim(name) == "" || name.length == 0 ||name.length >10){
- 	        	$("#usercode").css("background-color","#FFB9B9"); 
+ 		//供货商编号非空
+ 		$("#supplierCode").blur(function(){
+ 			var name = $("input[name='supplierCode']").val(); 
+ 	        if($.trim(name) == "" || name.length == 0 ){
+ 	        	$("#supplierCode").css("background-color","#FFB9B9"); 
  	        	$("#add").attr("disabled",true);   
  	        }else{
- 	        	$("#usercode").css("background-color",""); 
+ 	        	$("#supplierCode").css("background-color",""); 
  	        	$("#add").attr("disabled",false);   
  	        }
  		});
  		
- 		//用户名非空
- 		$("#username").blur(function(){
- 			var name = $("input[name='username']").val(); 
- 	        if($.trim(name) == "" || name.length == 0 ||name.length >10){
- 	        	$("#username").css("background-color","#FFB9B9"); 
+ 		//供货商名非空
+ 		$("#supplier").blur(function(){
+ 			var name = $("input[name='supplier']").val(); 
+ 	        if($.trim(name) == "" || name.length == 0){
+ 	        	$("#supplier").css("background-color","#FFB9B9"); 
  	        	$("#add").attr("disabled",true);   
  	        }else{
- 	        	$("#username").css("background-color",""); 
+ 	        	$("#supplier").css("background-color",""); 
  	        	$("#add").attr("disabled",false);   
  	        }
  		});
  		
  		//密码
- 		$("#password").blur(function(){
- 			var pass = $("#password").val();
+ 		$("#name").blur(function(){
+ 			var pass = $("#name").val();
  			if ($.trim(pass) == "" || pass.length == 0) {
- 				$("#password").css("background-color","#FFB9B9"); 
- 			}else if (pass.length<6 || pass.length>10) {
- 				$("#password").css("background-color","#FFB9B9"); 
+ 				$("#name").css("background-color","#FFB9B9"); 
  			}else{
- 				$("#password").css("background-color",""); 
+ 				$("#name").css("background-color",""); 
  				$("#add").attr("disabled",false);   
  	        }
  		});
@@ -85,22 +83,26 @@
 		<div class="formtitle">
 			<span>基本信息</span>
 		</div>
-		<form action="user_addUser.action" method="post">
+		<form action="sup_addSupplier.action" method="post">
 			<input type="hidden" name="currPage" value="1">
 			<input type="hidden" name="time">
 
 			<ul class="forminfo">
-				<li><label>用户编号</label><input name="userCode" type="text" id="userCode"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入用户编号"/><i style="color: red">${message2}</i></li>
-				<li ><label>用户名</label><input name="username" type="text" id="username"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入用户名"/><i>用户名不能超过10个字符</i><i style="color: red">${message}</i></li>
-				<li><label>密码</label><input name="password" type="password" id="password"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入密码"/><i>密码长度在6~10位之间</i></li>
+				<li><label>供货商编号</label><input name="supplierCode" type="text" id="supplierCode"
+					class="form-control" style="width:200px; display:inline" placeholder="请输入供货商编号"/><i>必填</i><i style="color: red">${message2}</i></li>
+				<li ><label>供货商名</label><input name="supplier" type="text" id="supplier"
+					class="form-control" style="width:200px; display:inline" placeholder="请输入供货商名"/><i>必填</i><i style="color: red">${message}</i></li>
+				<li><label>联系人</label><input name="name" type="text" id="name"
+					class="form-control" style="width:200px; display:inline" placeholder="请输入联系人"/><i>必填</i></li>
+				<li><label>联系电话</label><input name="tel" type="text" id="tel"
+					class="form-control" style="width:200px; display:inline" placeholder="请输入联系电话"/></li>
 				<li><label>是否审核</label><cite>
 					<input name="status" type="radio" value="1" checked="checked"<c:if test="status==1"> checked="checked"</c:if> />是&nbsp;&nbsp;&nbsp;&nbsp;
 					<input name="status" type="radio" value="0" <c:if test="status==0"> checked="checked"</c:if> />否</cite></li>
-				<li><input id="add" type="submit" class="btn btn-info btn-sm" disabled value="确认保存" />&nbsp;&nbsp;&nbsp;&nbsp;
-					<input id="return" type="button" class="btn btn-info btn-sm" onclick="javascript:history.go(-1);" value="返回" /></li>
+				<li><input id="add" type="submit" class="btn btn-info btn-sm" disabled value="确认保存" />
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<input id="return" type="button" class="btn btn-info btn-sm" onclick="javascript:history.go(-1);" value="返回" />
+				</li>
 			</ul>
 		</form>
 	</div>

@@ -73,6 +73,7 @@
 			
 			<result name="doadd">/WEB-INF/drug/drugadd.jsp</result>
 			<result name="showDrug">/WEB-INF/drug/drugmanager.jsp</result>
+			<result name="showDrugByOptions">/WEB-INF/drug/drugselect.jsp</result>
 			<result name="addDrug">/WEB-INF/drug/drugadd.jsp</result>
 			<result name="show" type="redirectAction">drug_showDrug.action?currPage=1</result>
 			<result name="edit">/WEB-INF/drug/drugupdate.jsp</result>
@@ -169,6 +170,22 @@
 			</result>
 		</action>
 		
+		<!-- 进货管理 -->
+		
+		<action name="pse_*" class="drugPurchaseAction" method="{1}">
+			
+			<result name="doadd">/WEB-INF/purchase/purchaseadd.jsp</result>
+			<result name="showPurchase">/WEB-INF/purchase/purchasemanager.jsp</result>
+			<result name="addPurchase">/WEB-INF/purchase/purchaseadd.jsp</result>
+			<result name="show" type="redirectAction">pse_showPurchase.action?currPage=1</result>
+			<result name="edit">/WEB-INF/purchase/purchaseupdate.jsp</result>
+			<result name="ajax_verifyCode" type="json">
+				<param name="root">flag</param>
+			</result>
+			<result name="ajax_verifyName" type="json">
+				<param name="root">mess</param>
+			</result>
+		</action>
 		
 		<!-- 会员管理 -->
 		
@@ -179,6 +196,23 @@
 			<result name="addMember">/WEB-INF/member/memberadd.jsp</result>
 			<result name="show" type="redirectAction">member_showMember.action?currPage=1</result>
 			<result name="edit">/WEB-INF/member/memberupdate.jsp</result>
+			<result name="ajax_verifyCode" type="json">
+				<param name="root">flag</param>
+			</result>
+			<result name="ajax_verifyName" type="json">
+				<param name="root">mess</param>
+			</result>
+		</action>
+		
+		<!-- 供货商管理 -->
+		
+		<action name="sup_*" class="supplierAction" method="{1}">
+			
+			<result name="doadd">/WEB-INF/supplier/supplieradd.jsp</result>
+			<result name="showSupplier">/WEB-INF/supplier/suppliermanager.jsp</result>
+			<result name="addSupplier">/WEB-INF/supplier/supplieradd.jsp</result>
+			<result name="show" type="redirectAction">sup_showSupplier.action?currPage=1</result>
+			<result name="edit">/WEB-INF/supplier/supplierupdate.jsp</result>
 			<result name="ajax_verifyCode" type="json">
 				<param name="root">flag</param>
 			</result>

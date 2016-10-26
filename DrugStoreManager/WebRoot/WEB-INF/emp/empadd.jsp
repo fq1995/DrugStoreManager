@@ -100,7 +100,8 @@
 					class="form-control" style="width:200px; display:inline" placeholder="请输入职位"/></li>
 				<li ><label>开始工作时间</label>
 					<input name="startdate" id="startdate" class="form-control" type="text" style="width:200px; display:inline"  onClick="WdatePicker({skin:'whyGreen',maxDate:'%y-%M-%d'})"/><i>请输入开始时间</i></li>				
-				<li><input id="add" type="submit" class="btn btn-info btn-sm" disabled value="确认保存" /></li>
+				<li><input id="add" type="submit" class="btn btn-info btn-sm" disabled value="确认保存" />&nbsp;&nbsp;&nbsp;&nbsp;
+					<input id="return" type="button" class="btn btn-info btn-sm" onclick="javascript:history.go(-1);" value="返回" /></li>
 			</ul>
 		</form>
 	</div>

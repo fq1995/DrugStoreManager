@@ -63,7 +63,7 @@
 									{"menuid":"53","menuname":"商品订单","icon":"icon-nav","url":"demo2.html"}
 								]
 						},{"menuid":"40","icon":"icon-sys","menuname":"进货管理",
-							"menus":[{"menuid":"61","menuname":"销售列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/sale_showSale.action?currPage=1"},
+							"menus":[{"menuid":"61","menuname":"进货列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/pse_showPurchase.action?currPage=1"},
 								{"menuid":"62","menuname":"商品列表","icon":"icon-nav","url":"demo1.html"},
 								{"menuid":"63","menuname":"商品订单","icon":"icon-nav","url":"demo2.html"}
 							]
@@ -71,6 +71,11 @@
 							"menus":[{"menuid":"71","menuname":"会员列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/member_showMember.action?currPage=1"},
 								{"menuid":"72","menuname":"商品列表","icon":"icon-nav","url":"demo1.html"},
 								{"menuid":"73","menuname":"商品订单","icon":"icon-nav","url":"demo2.html"}
+							]
+						},{"menuid":"62","icon":"icon-sys","menuname":"供货商管理",
+							"menus":[{"menuid":"81","menuname":"供货商列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/sup_showSupplier.action?currPage=1"},
+								{"menuid":"82","menuname":"商品列表","icon":"icon-nav","url":"demo1.html"},
+								{"menuid":"83","menuname":"商品订单","icon":"icon-nav","url":"demo2.html"}
 							]
 						}
 				]};

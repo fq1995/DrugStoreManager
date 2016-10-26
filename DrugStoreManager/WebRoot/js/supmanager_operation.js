@@ -17,7 +17,7 @@
 			alert("请选择要删除的数据");
 		}else{
 			alert(param);
-			window.location.href="drug_delDrug.action?&ids="+param;
+			window.location.href="sup_delSupplier.action?&ids="+param;
 		}
 	}
 	function update(){
@@ -35,22 +35,19 @@
 		}else if(count==0){
 			alert("请选择要修改的数据");
 		}else if(count==1){
-			window.location.href="drug_editDrug.action?&id="+param;
+			window.location.href="sup_editSupplier.action?&id="+param;
 		}
 	}
 	function init(){
-		//多条件查询
-		document.querySelector("#btn_select").addEventListener("click",()=>{
-			window.location.href="drug_doShowDrugByOptions.action";
-		},false);
 		//查询
 		document.querySelector("#btn_selectUser").addEventListener("click",()=>{
 			var keyword=document.querySelector("#keyword").value;
-			window.location.href="drug_showDrug.action?currPage=1&keyword="+keyword;
+			alert(keyword);
+			window.location.href="sup_showSupplier.action?currPage=1&keyword="+keyword;
 		},false);
 		//新增用户
 		document.querySelector("#btn_addUser").addEventListener("click",()=>{
-			window.location.href="drug_doaddDrug.action";
+			window.location.href="sup_doaddSupplier.action";
 		},false);
 		//修改用户
 		document.querySelector("#btn_updateUser").addEventListener("click",update,false);

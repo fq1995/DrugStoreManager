@@ -19,8 +19,8 @@ DrugSalesBean selectSaleByName(String name);
 	
 	void addSale(DrugBean drugBean,DrugSalesBean bean,String time) throws Exception;
 	
-	void addSale(DrugSalesBean bean);
-
+	void addSale(UserBean userBean,DrugBean drugBean,DrugSalesBean bean,String time) throws Exception;
+	
 	PageModel<DrugSalesBean> splitSale(Integer currPage, Integer pageSize, String keyword);
 	//批量查询
 	List<DrugSalesBean> showAllSale(String ids);
@@ -29,7 +29,6 @@ DrugSalesBean selectSaleByName(String name);
 	//修改
 	void updateSale(DrugSalesBean bean,String time);
 	
-	void updateSale(DrugSalesBean bean);
 	//根据ID查询
 	DrugSalesBean selectById(String id);
 	//查询类别

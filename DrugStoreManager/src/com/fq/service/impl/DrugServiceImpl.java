@@ -1,5 +1,6 @@
 package com.fq.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +89,12 @@ public class DrugServiceImpl implements DrugService {
 	@Override
 	public List<DosageformBean> selectForm() {
 		return drugDAO.selectForm();
+	}
+
+	@Override
+	public PageModel<DrugBean> splitDrug(Integer currPage, Integer pageSize, String drugName, String dosageform,
+			String drugUnit, String drugCategory, String manufacturer, Date modifyTime, String modifier) {
+		return drugDAO.splitDrug(currPage, pageSize, drugName, dosageform, drugUnit, drugCategory, manufacturer, modifyTime, modifier);
 	}
 	
 	

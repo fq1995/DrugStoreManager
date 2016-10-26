@@ -94,7 +94,7 @@ public class DrugPurchaseBean  implements java.io.Serializable {
     public void setPurchaseId(String purchaseId) {
         this.purchaseId = purchaseId;
     }
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
         @JoinColumn(name="DRUG_ID")
 
     public DrugBean getDrugBean() {

@@ -112,7 +112,8 @@
 				<li ><label>积分</label><input name="integration" type="text" id="integration" value="${member.integration}"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入积分"/></li>
 					
-				<li><input id="add" type="submit" class="btn btn-info btn-sm" disabled value="确认保存" /></li>
+				<li><input id="add" type="submit" class="btn btn-info btn-sm" disabled value="确认保存" />&nbsp;&nbsp;&nbsp;&nbsp;
+					<input id="return" type="button" class="btn btn-info btn-sm" onclick="javascript:history.go(-1);" value="返回" /></li>
 			</ul>
 		</form>
 	</div>

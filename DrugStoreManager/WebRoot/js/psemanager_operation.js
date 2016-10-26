@@ -1,5 +1,5 @@
 (function userManagerOperation(){
-	function deleteUser(){
+	function deletePer(){
 		let checks=document.getElementsByName("id_check");
 		let param="";
 		for(let i=0,len=checks.length;i<len;i++){
@@ -17,7 +17,7 @@
 			alert("请选择要删除的数据");
 		}else{
 			alert(param);
-			window.location.href="drug_delDrug.action?&ids="+param;
+			window.location.href="pse_delPurchase.action?&ids="+param;
 		}
 	}
 	function update(){
@@ -35,27 +35,18 @@
 		}else if(count==0){
 			alert("请选择要修改的数据");
 		}else if(count==1){
-			window.location.href="drug_editDrug.action?&id="+param;
+			window.location.href="pse_editPurchase.action?&id="+param;
 		}
 	}
 	function init(){
-		//多条件查询
-		document.querySelector("#btn_select").addEventListener("click",()=>{
-			window.location.href="drug_doShowDrugByOptions.action";
-		},false);
-		//查询
-		document.querySelector("#btn_selectUser").addEventListener("click",()=>{
-			var keyword=document.querySelector("#keyword").value;
-			window.location.href="drug_showDrug.action?currPage=1&keyword="+keyword;
-		},false);
-		//新增用户
+		//新增
 		document.querySelector("#btn_addUser").addEventListener("click",()=>{
-			window.location.href="drug_doaddDrug.action";
+			window.location.href="pse_doaddPurchase.action";
 		},false);
-		//修改用户
+		//修改
 		document.querySelector("#btn_updateUser").addEventListener("click",update,false);
-		//删除用户
-		document.querySelector("#btn_deleteUser").addEventListener("click",deleteUser,false);
+		//删除
+		document.querySelector("#btn_deleteUser").addEventListener("click",deletePer,false);
 		document.querySelector("#all").addEventListener("change",()=>{
 			let checks=document.getElementsByName("id_check");
 			let all_check=document.querySelector("#all");

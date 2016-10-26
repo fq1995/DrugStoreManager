@@ -64,7 +64,7 @@ public class DrugDAOImpl extends BaseDAO<DrugBean> implements DrugDAO {
 	@Override
 	public PageModel<DrugBean> splitDrug(Integer currPage, Integer pageSize, String keyword) {
 		String hql_count = "select count(*) from DrugBean where drugName like :keyword";
-		String hql = "from DrugBean where drugName like :keyword order by modifyTime desc";
+		String hql = "from DrugBean where drugName like :keyword order by drugCode desc";
 		return super.split(hql, hql_count, currPage, pageSize,keyword);
 	}
 
@@ -137,6 +137,46 @@ public class DrugDAOImpl extends BaseDAO<DrugBean> implements DrugDAO {
 		String hql = "from DosageformBean";
 		List<DosageformBean> dosageformList = (List<DosageformBean>) hibernateTemplate.find(hql);
 		return dosageformList==null||dosageformList.size()<=0?null:dosageformList;
+	}
+
+	@Override
+	public PageModel<DrugBean> splitDrug(Integer currPage, Integer pageSize, String drugName, String dosageform,
+			String drugUnit, String drugCategory, String manufacturer, Date modifyTime, String modifier) {
+		String hql_count = "select count(*) from DrugBean d inner join d.drugUnitBean du inner join d.dosageformBean df inner join d.drugCategoryBean dc on d.drugUnitBean.unitnameId = du.unitnameId and d.dosageformBean.dosageformId = df.dosageformId and d.drugCategoryBean.categoryId = dc.categoryId ";
+		String hql = "select d.* from DrugBean d inner join d.drugUnitBean du inner join d.dosageformBean df inner join d.drugCategoryBean dc on d.drugUnitBean.unitnameId = du.unitnameId and d.dosageformBean.dosageformId = df.dosageformId and d.drugCategoryBean.categoryId = dc.categoryId ";
+		StringBuffer sb1 = new StringBuffer(hql_count);
+		StringBuffer sb = new StringBuffer(hql);
+		if(null != drugName && !"".equals(drugName)){
+			sb1.append("and d.drugName  = '"+drugName+"'");
+			sb.append("and d.drugName  = '"+drugName+"'");
+		}
+		if(null != dosageform && !"".equals(dosageform)){
+			sb1.append("and df.dosageform   ='"+dosageform+"'");
+			sb.append("and df.dosageform   ='"+dosageform+"'");
+		}
+		if(null != drugUnit && !"".equals(drugUnit)){
+			sb1.append("and du.unitname  ='"+drugUnit+"'");
+			sb.append("and du.unitname  ='"+drugUnit+"'");
+		}
+		if(null != drugCategory && !"".equals(drugCategory)){
+			sb1.append("and dc.category   ='"+drugCategory+"'");
+			sb.append("and dc.category  ='"+drugCategory+"'");
+		}
+		if(null != manufacturer && !"".equals(manufacturer)){
+			sb1.append("and d.manufacturer   ='"+manufacturer+"'");
+			sb.append("and d.manufacturer   ='"+manufacturer+"'");
+		}
+		if(null != modifyTime && !"".equals(modifyTime)){
+			sb1.append("and d.modifyTime  ='"+modifyTime+"'");
+			sb.append("and d.modifyTime   ='"+modifyTime+"'");
+		}
+		if(null != modifier && !"".equals(modifier)){
+			sb1.append("and d.modifier   ='"+modifier+"'");
+			sb.append("and d.modifier  ='"+modifier+"'");
+		}
+		System.out.println(sb1.toString());
+		System.out.println(sb.toString());
+		return super.split(sb1.toString(), sb.toString(), currPage, pageSize);
 	}
 
 	

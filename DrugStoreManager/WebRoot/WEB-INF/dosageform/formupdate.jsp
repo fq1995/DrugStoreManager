@@ -61,7 +61,8 @@
 			<ul class="forminfo">
 				<li><label>药品剂型名</label><input name="dosageform" type="text" id="dosageform" value="${form.dosageform }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入药品剂型名" /><i></i><i style="color: red">${message}</i></li>
-				<li><input id="add" type="submit" class="btn btn-info btn-sm" disabled value="确认保存" /></li> 
+				<li><input id="add" type="submit" class="btn btn-info btn-sm" disabled value="确认保存" />&nbsp;&nbsp;&nbsp;&nbsp;
+					<input id="return" type="button" class="btn btn-info btn-sm" onclick="javascript:history.go(-1);" value="返回" /></li> 
 			</ul>
 		</form>
 	</div>

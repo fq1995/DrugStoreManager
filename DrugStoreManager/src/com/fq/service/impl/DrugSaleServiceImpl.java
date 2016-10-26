@@ -37,10 +37,6 @@ public class DrugSaleServiceImpl implements DrugSaleService {
 		
 	}
 
-	@Override
-	public void addSale(DrugSalesBean bean) {
-		
-	}
 
 	@Override
 	public PageModel<DrugSalesBean> splitSale(Integer currPage, Integer pageSize, String keyword) {
@@ -64,11 +60,6 @@ public class DrugSaleServiceImpl implements DrugSaleService {
 		
 	}
 
-	@Override
-	public void updateSale(DrugSalesBean bean) {
-		drugSaleDao.updateSale(bean);
-		
-	}
 
 	@Override
 	public DrugSalesBean selectById(String id) {
@@ -108,6 +99,12 @@ public class DrugSaleServiceImpl implements DrugSaleService {
 	@Override
 	public List<UserBean> selectUser() {
 		return drugSaleDao.selectUser();
+	}
+
+	@Override
+	public void addSale(UserBean userBean, DrugBean drugBean, DrugSalesBean bean, String time) throws Exception {
+		drugSaleDao.addSale(userBean, drugBean, bean, time);
+		
 	}
 
 	

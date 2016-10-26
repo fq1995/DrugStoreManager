@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
@@ -23,6 +24,8 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
+	@Autowired
+	private SessionFactory sessionFactory;
 	
 	@Override
 	public InventoriesBean selectInventorByName(String name) {
@@ -45,10 +48,9 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = sdf.parse(time);
 		Bean.setDate(date);
-		drugBean.setModifyTime(date);
-		drugBean.setDrugId(UUIDBuild.getUUID());
-		drugBean.setStatus("1");
+		hibernateTemplate.load(drugBean, drugBean.getDrugId());
 		Bean.setStockId(UUIDBuild.getUUID());
+		
 		hibernateTemplate.save(Bean);
 	}
 

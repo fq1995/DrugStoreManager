@@ -123,7 +123,8 @@
 				<li><label>修改人</label><input name="modifier" type="text" id="modifier"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入修改人"/><i>必填</i></li>
 				
-				<li><input id="add" type="submit" class="btn btn-info btn-sm" disabled value="确认保存" /></li>
+				<li><input id="add" type="submit" class="btn btn-info btn-sm" disabled value="确认保存" />&nbsp;&nbsp;&nbsp;&nbsp;
+					<input id="return" type="button" class="btn btn-info btn-sm" onclick="javascript:history.go(-1);" value="返回" /></li>
 			</ul>
 		</form>
 	</div>

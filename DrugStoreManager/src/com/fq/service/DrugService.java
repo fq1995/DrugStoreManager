@@ -1,5 +1,6 @@
 package com.fq.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.fq.po.DosageformBean;
@@ -21,6 +22,8 @@ public interface DrugService {
 	void addDrug(DrugBean DrugBean);
 
 	PageModel<DrugBean> splitDrug(Integer currPage, Integer pageSize, String keyword);
+	
+	PageModel<DrugBean> splitDrug(Integer currPage, Integer pageSize,String drugName,String dosageform,String drugUnit,String drugCategory,String manufacturer,Date modifyTime,String modifier);
 	//批量查询
 	List<DrugBean> showAllDrug(String ids);
 	//批量删除对象
