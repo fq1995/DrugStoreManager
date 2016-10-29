@@ -30,15 +30,11 @@ public class DrugInventorServiceImpl implements DrugInventorService {
 	}
 
 	@Override
-	public void addInventor(DrugBean drugBean,InventoriesBean bean, String time) throws Exception {
+	public void addInventor(DrugBean drugBean,InventoriesBean bean, String time){
 		drugInventorDao.addInventor(drugBean,bean,time);
 	}
 
-	@Override
-	public void addInventor(InventoriesBean bean) {
-		drugInventorDao.addInventor(bean);
-
-	}
+	
 
 	@Override
 	public PageModel<InventoriesBean> splitInventor(Integer currPage, Integer pageSize, String keyword) {
@@ -56,11 +52,6 @@ public class DrugInventorServiceImpl implements DrugInventorService {
 
 	}
 
-	@Override
-	public void updateInventor(InventoriesBean bean, String time) {
-		drugInventorDao.updateInventor(bean, time);
-
-	}
 
 	@Override
 	public void updateInventor(InventoriesBean bean) {

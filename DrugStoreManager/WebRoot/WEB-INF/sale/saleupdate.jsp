@@ -100,10 +100,15 @@
 			<input type="hidden" name="currPage" value="1"/>
 			<input type="hidden" name="time"/>
 			<input type="hidden" name="salesId" id="salesId" value="${sale.salesId }"/>
-
+			
+			<input type="hidden" name="drugBean.drugCode" id="drugCode" value="${sale.drugBean.drugCode }">
+			<input type="hidden" name="memberBean.memberCode" value="${sale.memberBean.memberCode }">
+			<input type="hidden" name="userBean.userCode" value="${sale.userBean.userCode }">
+			
+			
 			<ul class="forminfo">
 				<li><label>销售单编号</label><input name="salesCode" type="text" id="salesCode" value="${sale.salesCode }"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入销售单编号" /><i>必填</i></li>
+					class="form-control" style="width:200px; display:inline" readonly="readonly" placeholder="请输入销售单编号" /><i>必填</i></li>
 				<li><label>药品名称</label>
 					<select class="form-control" style="width:200px;height:34px"  name="drugBean.drugId">
 						<option value="${sale.drugBean.drugId }">${sale.drugBean.drugName }</option>
@@ -122,13 +127,13 @@
 					class="form-control" style="width:200px; display:inline" placeholder="请输入销售价格"/><i>必填</i></li>
 				<li><label>销售数量</label><input name="salesVolume" type="text" id="salesVolume" value="${sale.salesVolume }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入销售数量"/><i>必填</i></li>
-			<%-- <li><label>操作人</label>
+			 	<li><label>操作人</label>
 					<select class="form-control" style="width:200px;height:34px"  name="userBean.userId">
-						<option value="">请选择</option>
+						<option value="${sale.userBean.userId }">${sale.userBean.username }</option>
 					<c:forEach items="${userList }" var="user">
 						<option value="${user.userId }">${user.username }</option>
 					</c:forEach>
-					</select></li> --%>
+					</select></li> 
 					
 				<li><label>销售金额</label><input name="totalamount" type="text" id="totalamount" value="${sale.totalamount }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入销售金额"/><i>必填</i></li>

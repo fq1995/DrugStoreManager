@@ -96,6 +96,21 @@ public class DrugServiceImpl implements DrugService {
 			String drugUnit, String drugCategory, String manufacturer, Date modifyTime, String modifier) {
 		return drugDAO.splitDrug(currPage, pageSize, drugName, dosageform, drugUnit, drugCategory, manufacturer, modifyTime, modifier);
 	}
+
+	@Override
+	public DrugCategoryBean selectCategoryById(String id) {
+		return drugDAO.selectCategoryById(id);
+	}
+
+	@Override
+	public DrugUnitBean selectUnitById(String id) {
+		return drugDAO.selectUnitById(id);
+	}
+
+	@Override
+	public DosageformBean selectFormById(String id) {
+		return drugDAO.selectFormById(id);
+	}
 	
 	
 

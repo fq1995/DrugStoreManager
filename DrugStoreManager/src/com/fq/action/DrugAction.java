@@ -1,5 +1,8 @@
 package com.fq.action;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -86,10 +89,36 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>,Requ
 		request.put("drugCategoryList",drugCategoryList);
 		request.put("drugUnitList",drugUnitList);
 		request.put("dosageformList",dosageformList);
+ 
+		String drugName = (String) request.get("drugName");
+		request.put("drugName", drugName);
 		
-		PageModel<DrugBean>  page = drugService.splitDrug(currPage, ConstantUtils.PAGESIZE, drugBean.getDrugName(), drugBean.getDosageformBean().getDosageform(), 
-				drugBean.getDrugUnitBean().getUnitname(), drugBean.getDrugCategoryBean().getCategory(), drugBean.getManufacturer(), drugBean.getModifyTime(), drugBean.getModifier());
+		String modifier = (String) request.get("modifier");
+		request.put("modifier", modifier);
+		
+		DrugUnitBean dub = drugService.selectUnitById(drugBean.getDrugUnitBean().getUnitnameId());
+		request.put("unit", dub);
+		
+		DosageformBean dfb =  drugService.selectFormById(drugBean.getDosageformBean().getDosageformId());
+		request.put("dosageform", dfb);
+		
+		DrugCategoryBean dcb = drugService.selectCategoryById(drugBean.getDrugCategoryBean().getCategoryId());
+		request.put("category", dcb);
+		
+		String manufacturer = (String) request.get("manufacturer");
+		request.put("manufacturer",manufacturer);
+		
+		Date modifyTime = (Date) request.get("modifyTime");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		request.put("modifyTime", modifyTime);
+		
+		
+		PageModel<DrugBean>  page = drugService.splitDrug(currPage, ConstantUtils.PAGESIZE, drugBean.getDrugName(), drugBean.getDosageformBean().getDosageformId(), 
+				drugBean.getDrugUnitBean().getUnitnameId(), drugBean.getDrugCategoryBean().getCategoryId(), drugBean.getManufacturer(), drugBean.getModifyTime(), drugBean.getModifier());
 		request.put("page", page);
+		List<DrugBean> list = page.getList();
+		request.put("list", list);
 		return "showDrugByOptions";
 	}
 	/**

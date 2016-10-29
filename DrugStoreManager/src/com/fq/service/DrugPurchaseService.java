@@ -8,6 +8,7 @@ import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugPurchaseBean;
 import com.fq.po.DrugUnitBean;
 import com.fq.po.MemberBean;
+import com.fq.po.SupplierBean;
 import com.fq.po.UserBean;
 import com.fq.util.PageModel;
 
@@ -18,9 +19,7 @@ public interface DrugPurchaseService {
 	
 	DrugPurchaseBean selectPseByDrugId(String id);
 	
-	void addPse(DrugBean drugBean,DrugPurchaseBean bean,String time) throws Exception;
-	
-	void addPse(DosageformBean dfBean, DrugCategoryBean dcBean, DrugUnitBean duBean, DrugBean drugBean,
+	void addPse(SupplierBean supBean,DosageformBean dfBean, DrugCategoryBean dcBean, DrugUnitBean duBean, DrugBean drugBean,
 			DrugPurchaseBean drugPseBean, String time);
 	
 	PageModel<DrugPurchaseBean> splitPse(Integer currPage, Integer pageSize, String keyword);
@@ -44,6 +43,8 @@ public interface DrugPurchaseService {
 	List<MemberBean> selectMember();
 	//查询员工
 	List<UserBean> selectUser();
+	//查询供货商
+	List<SupplierBean> selectSupplier();
 	
 	
 

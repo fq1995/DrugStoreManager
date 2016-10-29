@@ -1,5 +1,5 @@
 package com.fq.util;
 
 public class ConstantUtils {
-	public static final Integer PAGESIZE =8; 
+	public static final Integer PAGESIZE =2; 
 }

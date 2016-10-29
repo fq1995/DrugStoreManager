@@ -42,7 +42,7 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 	@Override
 	public PageModel<UserBean> splitUser(Integer currPage, Integer pageSize,String keyword) {
 		String hql_count = "select count(*) from UserBean where username like :keyword";
-		String hql = "from UserBean where username like :keyword order by addtime desc";
+		String hql = "from UserBean where username like :keyword order by userCode desc";
 		return super.split(hql, hql_count, currPage, pageSize,keyword);
 	}
 

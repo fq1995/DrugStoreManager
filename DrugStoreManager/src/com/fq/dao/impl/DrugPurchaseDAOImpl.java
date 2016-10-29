@@ -21,6 +21,7 @@ import com.fq.po.DrugPurchaseBean;
 import com.fq.po.DrugSalesBean;
 import com.fq.po.DrugUnitBean;
 import com.fq.po.MemberBean;
+import com.fq.po.SupplierBean;
 import com.fq.po.UserBean;
 import com.fq.util.BaseDAO;
 import com.fq.util.PageModel;
@@ -56,12 +57,7 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 	}
 
 	@Override
-	public void addPse(DrugBean drugBean, DrugPurchaseBean bean, String time) throws Exception {
-
-	}
-
-	@Override
-	public void addPse(DosageformBean dfBean, DrugCategoryBean dcBean, DrugUnitBean duBean, DrugBean drugBean,
+	public void addPse(SupplierBean supBean,DosageformBean dfBean, DrugCategoryBean dcBean, DrugUnitBean duBean, DrugBean drugBean,
 			DrugPurchaseBean drugPseBean, String time) {
 		drugBean = drugPseBean.getDrugBean();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -73,9 +69,11 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 		}
 		drugPseBean.setPurchasedate(date);
 		Session session=sessionFactory.getCurrentSession();
+		session.clear();
 		session.load(dfBean, dfBean.getDosageformId());
 		session.load(dcBean, dcBean.getCategoryId());
 		session.load(duBean, duBean.getUnitnameId());
+		session.load(supBean, supBean.getSupplierId());
 		drugBean.setDrugId(UUIDBuild.getUUID());
 		drugBean.setModifyTime(date);
 		drugBean.setStatus("1");
@@ -115,7 +113,8 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 
 	@Override
 	public void updatePse(DrugPurchaseBean bean) {
-		getHibernateTemplate().update(bean);
+		
+		getHibernateTemplate().merge(bean);
 
 	}
 
@@ -164,6 +163,13 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 	public List<UserBean> selectUser() {
 		String hql = "from UserBean";
 		List<UserBean> list = (List<UserBean>) hibernateTemplate.find(hql);
+		return list==null||list.size()<=0?null:list;
+	}
+
+	@Override
+	public List<SupplierBean> selectSupplier() {
+		String hql = "from SupplierBean";
+		List<SupplierBean> list = (List<SupplierBean>) hibernateTemplate.find(hql);
 		return list==null||list.size()<=0?null:list;
 	}
 

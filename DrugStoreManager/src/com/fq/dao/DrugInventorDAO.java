@@ -15,18 +15,14 @@ public interface DrugInventorDAO {
 	
 	InventoriesBean selectInventorByDrugcode(Integer code);
 	
-	void addInventor(DrugBean drugBean,InventoriesBean bean,String time) throws Exception;
+	void addInventor(DrugBean drugBean,InventoriesBean bean,String time);
 	
-	void addInventor(InventoriesBean bean);
-
 	PageModel<InventoriesBean> splitInventor(Integer currPage, Integer pageSize, String keyword);
 	//批量查询
 	List<InventoriesBean> showAllInventor(String ids);
 	//批量删除对象
 	void deleteAllInventor(List<InventoriesBean> list);
 	//修改
-	void updateInventor(InventoriesBean bean,String time);
-	
 	void updateInventor(InventoriesBean bean);
 	//根据ID查询
 	InventoriesBean selectById(String id);

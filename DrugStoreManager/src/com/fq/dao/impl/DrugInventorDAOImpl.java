@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
@@ -43,23 +44,25 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 
 	
 	@Override
-	public void addInventor(DrugBean drugBean,InventoriesBean Bean, String time) throws Exception {
+	public void addInventor(DrugBean drugBean,InventoriesBean Bean, String time){
 		drugBean = Bean.getDrugBean();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = sdf.parse(time);
+		Date date =null;
+		try {
+			date = sdf.parse(time);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		drugBean.setModifier(time);
 		Bean.setDate(date);
-		hibernateTemplate.load(drugBean, drugBean.getDrugId());
 		Bean.setStockId(UUIDBuild.getUUID());
+		Session session=sessionFactory.getCurrentSession();
 		
-		hibernateTemplate.save(Bean);
+		drugBean.setDrugId(UUIDBuild.getUUID());
+		session.merge(Bean);
+//		hibernateTemplate.save(Bean);
 	}
 
-	@Override
-	public void addInventor(InventoriesBean bean) {
-		bean.setStockId(UUIDBuild.getUUID());
-		hibernateTemplate.save(bean);
-
-	}
 
 	@Override
 	public PageModel<InventoriesBean> splitInventor(Integer currPage, Integer pageSize, String keyword) {
@@ -92,23 +95,8 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 	}
 
 	@Override
-	public void updateInventor(InventoriesBean bean, String time) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date=null;
-		try {
-			date = sdf.parse(time);
-		} catch (ParseException e) {
-			System.out.println("时间转换错误");
-			e.printStackTrace();
-		}
-		bean.setDate(date);
-		getHibernateTemplate().update(bean);
-
-	}
-
-	@Override
-	public void updateInventor(InventoriesBean Bean) {
-		// TODO Auto-generated method stub
+	public void updateInventor(InventoriesBean bean) {
+		getHibernateTemplate().merge(bean);
 
 	}
 

@@ -93,7 +93,7 @@
 					<tr>
 					
 						<td style="width:40px"><input name="id_check" type="checkbox"
-							value="${sale.drugBean.drugId }" id="${sale.drugBean.drugId}"/></td>
+							value="${sale.salesId }" id="${sale.salesId}"/></td>
 						<td style="width:50px">${state.count }</td>
 						<td style="width:70px">${sale.drugBean.drugCode }</td>
 						<td>${sale.drugBean.drugName }</td>

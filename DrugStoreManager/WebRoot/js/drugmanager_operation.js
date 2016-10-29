@@ -39,7 +39,9 @@
 		}
 	}
 	function init(){
-		//多条件查询
+		
+		
+		//跳转多条件查询
 		document.querySelector("#btn_select").addEventListener("click",()=>{
 			window.location.href="drug_doShowDrugByOptions.action";
 		},false);
@@ -67,6 +69,7 @@
 				}
 			}
 		},false);
+		
 	}
 	window.addEventListener("load",init,false);
 })();

@@ -36,10 +36,16 @@ DrugBean selectDrugByName(String drugname);
 	DrugBean selectById(String id);
 	//查询类别
 	List<DrugCategoryBean> selectCategory();
+	//根据id查询类别
+	DrugCategoryBean selectCategoryById(String id);
 	//查询单位
 	List<DrugUnitBean> selectUnit();
+	//根据id查询单位
+	DrugUnitBean selectUnitById(String id);
 	//查询剂型
 	List<DosageformBean> selectForm();
+	//根据id查找剂型
+	DosageformBean selectFormById(String id);
 	
 	
 	

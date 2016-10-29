@@ -168,7 +168,7 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 		request.put("drugCategoryList",drugCategoryList);
 		request.put("drugUnitList",drugUnitList);
 		request.put("dosageformList",dosageformList);
-		if(null == selectSaleByDrugcode()){
+		if(null != selectSaleByDrugcode()){
 			drugSaleService.updateSale(salesBean,time);
 			return "show";
 		}

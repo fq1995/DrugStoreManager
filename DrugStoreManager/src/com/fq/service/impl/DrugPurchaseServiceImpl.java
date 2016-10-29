@@ -12,6 +12,7 @@ import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugPurchaseBean;
 import com.fq.po.DrugUnitBean;
 import com.fq.po.MemberBean;
+import com.fq.po.SupplierBean;
 import com.fq.po.UserBean;
 import com.fq.service.DrugPurchaseService;
 import com.fq.util.PageModel;
@@ -34,12 +35,6 @@ public class DrugPurchaseServiceImpl implements DrugPurchaseService {
 	@Override
 	public DrugPurchaseBean selectPseByDrugId(String id) {
 		return drugPseDao.selectPseByDrugId(id);
-	}
-
-	@Override
-	public void addPse(DrugBean drugBean, DrugPurchaseBean bean, String time) throws Exception {
-		drugPseDao.addPse(drugBean, bean, time);
-		
 	}
 
 	@Override
@@ -101,11 +96,16 @@ public class DrugPurchaseServiceImpl implements DrugPurchaseService {
 	}
 
 	@Override
-	public void addPse(DosageformBean dfBean, DrugCategoryBean dcBean, DrugUnitBean duBean, DrugBean drugBean,
+	public void addPse(SupplierBean supBean,DosageformBean dfBean, DrugCategoryBean dcBean, DrugUnitBean duBean, DrugBean drugBean,
 			DrugPurchaseBean drugPseBean, String time) {
-		drugPseDao.addPse(dfBean, dcBean, duBean, drugBean, drugPseBean, time);
+		drugPseDao.addPse(supBean, dfBean, dcBean, duBean, drugBean, drugPseBean, time);
 		
 		
+	}
+
+	@Override
+	public List<SupplierBean> selectSupplier() {
+		return drugPseDao.selectSupplier();
 	}
 	
 	

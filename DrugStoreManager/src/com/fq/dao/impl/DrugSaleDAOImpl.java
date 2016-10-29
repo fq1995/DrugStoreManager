@@ -19,7 +19,6 @@ import com.fq.po.DrugBean;
 import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugSalesBean;
 import com.fq.po.DrugUnitBean;
-import com.fq.po.InventoriesBean;
 import com.fq.po.MemberBean;
 import com.fq.po.UserBean;
 import com.fq.util.BaseDAO;
@@ -118,7 +117,20 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 			e.printStackTrace();
 		}
 		bean.setSalesDate(date);
-		getHibernateTemplate().update(bean);
+		
+		Session session=sessionFactory.getCurrentSession();
+		session.clear();
+		DrugSalesBean dsBean = (DrugSalesBean) session.get(DrugSalesBean.class, bean.getSalesId());
+		dsBean = bean; 
+		dsBean.setDrugBean(bean.getDrugBean());
+		getHibernateTemplate().saveOrUpdate(dsBean);
+		session.flush();
+		/*
+		dsBean.setMemberBean(bean.getMemberBean()); 
+		dsBean.setMemberprice(bean.getMemberprice());
+		dsBean.setSalepeice(bean.getSalepeice());
+		dsBean.setUserBean(bean.getUserBean());*/
+		/*getHibernateTemplate().merge(dsBean);*/
 		
 	}
 	

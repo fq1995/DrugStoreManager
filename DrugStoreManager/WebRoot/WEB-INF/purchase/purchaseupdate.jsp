@@ -10,10 +10,11 @@
 <html>
 <head>
 <meta charset=utf-8 />
-<title>药品修改</title>
+<title>药品进货修改</title>
 <link href="css/style1.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.min.js"></script>
 <script type="text/javascript">
  	$(function(){
@@ -23,51 +24,45 @@
  		str += mydate.getMonth()+1+"-";
  		str += mydate.getDate();
  		$("input[name='time']").val(str);
- 		
+ 		 
  	});
  	$(function() {
- 		
- 		
- 		
  		$("#drugName").css("background-color",""); 
  		$("#modifier").css("background-color",""); 
- 		$("#drugCode").css("background-color",""); 
+ 		$("input[name='drugBean.drugCode']").css("background-color",""); 
  		
  		//药品编号非空
- 		$("#drugCode").blur(function(){
- 			var name = $("input[name='drugCode']").val(); 
+ 		$("input[name='drugBean.drugCode']").blur(function(){
+ 			var name = $("input[name='drugBean.drugCode']").val(); 
  	        if($.trim(name) == "" || name.length == 0 ||name.length >10){
- 	        	$("#drugCode").css("background-color","#FFB9B9"); 
+ 	        	$("input[name='drugBean.drugCode']").css("background-color","#FFB9B9"); 
  	        	$("#add").attr("disabled",true);   
- 	        	return false;
  	        }else{
- 	        	$("#drugCode").css("background-color",""); 
+ 	        	$("input[name='drugBean.drugCode']").css("background-color",""); 
  	        	$("#add").attr("disabled",false);   
  	        }
  		});
  		
  		//药品名非空
- 		$("#drugName").blur(function(){
- 			var name = $("input[name='drugName']").val(); 
+ 		$("input[name='drugBean.drugName']").blur(function(){
+ 			var name = $("input[name='drugBean.drugName']").val(); 
  	        if($.trim(name) == "" || name.length == 0 ){
- 	        	$("#drugName").css("background-color","#FFB9B9"); 
+ 	        	$("input[name='drugBean.drugName']").css("background-color","#FFB9B9"); 
  	        	$("#add").attr("disabled",true);   
- 	        	return false;
  	        }else{
- 	        	$("#drugName").css("background-color",""); 
+ 	        	$("input[name='drugBean.drugName']").css("background-color",""); 
  	        	$("#add").attr("disabled",false);   
  	        }
  		});
  		
  		//修改人
- 		$("#modifier").blur(function(){
- 			var pass = $("#modifier").val();
+ 		$("input[name='drugBean.modifier']").blur(function(){
+ 			var pass = $("input[name='drugBean.modifier']").val();
  			if ($.trim(pass) == "" || pass.length == 0) {
- 				$("#modifier").css("background-color","#FFB9B9"); 
+ 				$("input[name='drugBean.modifier']").css("background-color","#FFB9B9"); 
  				$("#add").attr("disabled",true);   
- 				return false;
  			}else{
- 				$("#modifier").css("background-color",""); 
+ 				$("input[name='drugBean.modifier']").css("background-color",""); 
  				$("#add").attr("disabled",false);   
  	        }
  		});
@@ -90,47 +85,68 @@
 		<div class="formtitle">
 			<span>基本信息</span>
 		</div>
-		<form action="drug_updateDrug.action" method="post">
+		<form action="pse_addPurchase.action" method="post">
 			<input type="hidden" name="currPage" value="1">
 			<input type="hidden" name="time">
-			<input type="hidden" name="drugId" value="${drug.drugId }">
 
 			<ul class="forminfo">
-				<li><label>药品编号</label><input name="drugCode" type="text" id="drugCode" value="${drug.drugCode }"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入药品编号" /><i>必填</i><i style="color: red">${message2}</i></li>
-				<li><label>药品名</label><input name="drugName" type="text" id="drugName" value="${drug.drugName }"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入药品名"/><i>必填</i><i style="color: red">${message}</i></li>
+				<li><label>进货单编号</label><input name="purchaseCode" type="text" id="purchaseCode" value="${purchase.purchaseCode }"
+					class="form-control" style="width:200px; display:inline" placeholder="请输入进货单编号"/><i>必填</i></li>
+				<li><label>药品编号</label><input name="drugBean.drugCode" type="text" id="drugBean.drugCode" value="${purchase.drugBean.drugCode }"
+					class="form-control" style="width:200px; display:inline" placeholder="请输入药品编号"/><i>必填</i></li>
+				<li><label>药品名</label><input name="drugBean.drugName" type="text" id="drugBean.drugName" value="${purchase.drugBean.drugName}"
+					class="form-control" style="width:200px; display:inline" placeholder="请输入药品名"/><i>必填</i></li>
 				<li><label>剂型</label>
-					<select id="form" class="form-control" style="width:200px;height:34px"  name="dosageformBean.dosageformId" value="dosageformBean.dosageformId">
-						<option value="${drug.dosageformBean.dosageformId }">${drug.dosageformBean.dosageform }</option>
+					<select class="form-control" style="width:200px;height:34px"  name="drugBean.dosageformBean.dosageformId">
+						<option value="${purchase.drugBean.dosageformBean.dosageformId}">${purchase.drugBean.dosageformBean.dosageform}</option>
 					<c:forEach items="${dosageformList }" var="dosageform">
 						<option value="${dosageform.dosageformId }">${dosageform.dosageform }</option>
 					</c:forEach>
 					</select></li>
 				<li><label>单位</label>
-					<select class="form-control" style="width:200px;height:34px"  name="drugUnitBean.unitnameId">
-						<option value="${drug.drugUnitBean.unitnameId }">${drug.drugUnitBean.unitname }</option>
+					<select class="form-control" style="width:200px;height:34px" name="drugBean.drugUnitBean.unitnameId">
+						<option value="${purchase.drugBean.drugUnitBean.unitnameId}">${purchase.drugBean.drugUnitBean.unitname}</option>
 					<c:forEach items="${drugUnitList }" var="drugUnit">
 						<option value="${drugUnit.unitnameId }">${drugUnit.unitname }</option>
 					</c:forEach>
 					</select></li>
 				<li><label>类别</label>
-					<select class="form-control" style="width:200px;height:34px"  name="drugCategoryBean.categoryId">
-						<option value="${drug.drugCategoryBean.categoryId }">${drug.drugCategoryBean.category }</option>
+					<select class="form-control" style="width:200px;height:34px"  name="drugBean.drugCategoryBean.categoryId">
+						<option value="${purchase.drugBean.drugCategoryBean.categoryId}">${purchase.drugBean.drugCategoryBean.category}</option>
 					<c:forEach items="${drugCategoryList }" var="drugCategory">
 						<option value="${drugCategory.categoryId }">${drugCategory.category }</option>
 					</c:forEach>
 					</select></li>
-				<li><label>厂商</label><input name="manufacturer" type="text" id="manufacturer" value="${drug.manufacturer }"
+				<li><label>数量</label><input name="amount" type="text" id="amount" value="${purchase.amount }"
+					class="form-control" style="width:200px; display:inline" placeholder="请输入数量"/><i></i></li>
+				<li ><label>生产日期</label>
+					<input name="productionDate" id="productionDate" value="${purchase.productionDate }" class="form-control" type="text" style="width:200px; display:inline"  onClick="WdatePicker({skin:'whyGreen',maxDate:'%y-%M-%d'})"/><i>请输入生产日期</i></li>	
+				<li ><label>有效期</label>
+					<input name="validityDate" id="validityDate" value="${purchase.validityDate }" class="form-control" type="text" style="width:200px; display:inline"  onClick="WdatePicker({skin:'whyGreen'})"/><i>请输入有效期</i></li>	
+											
+				<li><label>进价</label><input name="purchaseprice" type="text" id="purchaseprice" value="${purchase.purchaseprice }"
+					class="form-control" style="width:200px; display:inline" placeholder="请输入进价"/><i></i></li>
+				<li ><label>进货日期</label>
+					<input name="purchasedate" id="purchasedate" value="${purchase.purchasedate }" class="form-control" type="text" style="width:200px; display:inline"  onClick="WdatePicker({skin:'whyGreen',maxDate:'%y-%M-%d'})"/><i>请输入进货日期</i></li>				
+				
+				<li><label>供货商</label>
+					<select class="form-control" style="width:200px;height:34px"  name="supplierBean.supplierId">
+						<option value="${purchase.supplierBean.supplierId }">${purchase.supplierBean.supplier }</option>
+					<c:forEach items="${supplierList }" var="supplier">
+						<option value="${supplier.supplierId }">${supplier.supplier }</option>
+					</c:forEach>
+					</select></li>
+				
+				<li><label>厂商</label><input name="drugBean.manufacturer" type="text" id="drugBean.manufacturer" value="${purchase.drugBean.manufacturer }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入生产厂商"/><i></i></li>
-				<li><label>产品说明</label><input name="memo" type="text" id="memo" value="${drug.memo }"
+				<li><label>产品说明</label><input name="drugBean.memo" type="text" id="drugBean.memo" value="${purchase.drugBean.memo }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入产品说明"/><i></i></li>
-				<li><label>批准文号</label><input name="approvalNumber" type="text" id="approvalNumber" value="${drug.approvalNumber }"
+				<li><label>批准文号</label><input name="drugBean.approvalNumber" type="text" id="drugBean.approvalNumber" value="${purchase.drugBean.approvalNumber}"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入批准文号"/><i></i></li>
-				<li><label>修改人</label><input name="modifier" type="text" id="modifier" value="${drug.modifier }"
+				<li><label>修改人</label><input name="drugBean.modifier" type="text" id="drugBean.modifier" value="${purchase.drugBean.modifier}"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入修改人"/><i>必填</i></li>
 				
-				<li><input id="add" type="submit" class="btn btn-info btn-sm" disabled value="确认保存" />&nbsp;&nbsp;&nbsp;&nbsp;
+				<li><input id="add" type="submit" class="btn btn-info btn-sm"  value="确认保存" />&nbsp;&nbsp;&nbsp;&nbsp;
 					<input id="return" type="button" class="btn btn-info btn-sm" onclick="javascript:history.go(-1);" value="返回" /></li>
 			</ul>
 		</form>

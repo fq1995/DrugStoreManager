@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -23,7 +24,6 @@
 	{  
  	white-space: nowrap;  
 	}  
-	
 </style> 
 </head>
 
@@ -42,11 +42,19 @@
 	    <form class="bs-example bs-example-form" role="form" action="drug_showDrugByOptions.action?currPage=1" method="post">
 	        <div class="input-group">
 	            <span class="input-group-addon">药品名</span>
-	            <input name="drugName" id="drugName" style="width:180px" type="text" class="form-control" placeholder="请输入药品名">
+	            <input value="${drugName }" name="drugName" id="drugName" style="width:180px" type="text" class="form-control" placeholder="请输入药品名" >
 	            
 	            <span class="input-group-addon">剂型</span>
-	            <select class="form-control" style="width:200px;height:34px"  name="dosageformBean.dosageformId">
-						<option value="">请选择剂型</option>
+	            <select class="form-control" style="width:200px;height:34px" name="dosageformBean.dosageformId">
+	            		<c:choose>
+	            			<c:when test="${dosageform.dosageformId eq null }">
+	            				<option value="">请选择剂型</option>
+	            			</c:when>
+	            			<c:otherwise>
+	            				<option value="${dosageform.dosageformId }">${dosageform.dosageform }</option>
+	            			</c:otherwise>
+	            		</c:choose>
+							
 					<c:forEach items="${dosageformList }" var="dosageform">
 						<option value="${dosageform.dosageformId }">${dosageform.dosageform }</option>
 					</c:forEach>
@@ -54,7 +62,15 @@
 	            
 	            <span class="input-group-addon">单位</span>
 	            <select class="form-control" style="width:200px;height:34px" name="drugUnitBean.unitnameId">
-						<option value="">请选择单位</option>
+						<c:choose>
+	            			<c:when test="${unit.unitnameId eq null }">
+	            				<option value="">请选择单位</option>
+	            			</c:when>
+	            			<c:otherwise>
+	            				<option value="${unit.unitnameId }">${unit.unitname }</option>
+	            			</c:otherwise>
+	            		</c:choose>
+						
 					<c:forEach items="${drugUnitList }" var="drugUnit">
 						<option value="${drugUnit.unitnameId }">${drugUnit.unitname }</option>
 					</c:forEach>
@@ -62,7 +78,15 @@
 	            
 	            <span class="input-group-addon">类别</span>
 	            <select class="form-control" style="width:200px;height:34px"  name="drugCategoryBean.categoryId">
-						<option value="">请选择类别</option>
+						<c:choose>
+	            			<c:when test="${category.categoryId eq null }">
+	            				<option value="">请选择类别</option>
+	            			</c:when>
+	            			<c:otherwise>
+	            				<option value="${category.categoryId }">${category.category }</option>
+	            			</c:otherwise>
+	            		</c:choose>
+						
 					<c:forEach items="${drugCategoryList }" var="drugCategory">
 						<option value="${drugCategory.categoryId }">${drugCategory.category }</option>
 					</c:forEach>
@@ -72,15 +96,16 @@
 	        <br>
 	        <div class="input-group">
 	            <span class="input-group-addon" style="width:70px">厂商</span>
-	            <input name="manufacturer" style="width:180px" type="text" class="form-control" placeholder="请输入厂商">
+	            <input id="manufacturer" name="manufacturer" value="${manufacturer }" style="width:180px" type="text" class="form-control" placeholder="请输入厂商">
 	            
 	            <span class="input-group-addon">添加时间</span>
-	            <input name="modifyTime" style="width:180px" type="text" class="form-control" placeholder="请输入添加时间" onClick="WdatePicker({skin:'whyGreen',maxDate:'%y-%M-%d'})">
+	            
+	            <input id="modifyTime" name="modifyTime"  value="<fmt:formatDate value="${modifyTime }" pattern="yyyy-MM-dd"/>" style="width:180px" type="text" class="form-control" placeholder="请输入添加时间" onClick="WdatePicker({skin:'whyGreen',maxDate:'%y-%M-%d'})">
 	            
 	            <span class="input-group-addon">修改人</span>
-	            <input name="modifier" style="width:180px" type="text" class="form-control" placeholder="请输入修改人">
+	            <input id="modifier" name="modifier" value="${modifier }" style="width:180px" type="text" class="form-control" value="${modifier }" placeholder="请输入修改人">
 	            
-	            <input style="width:180px;margin-left:50px" type="submit" class="form-control btn btn-info btn-sm" placeholder="twitterhandle" value="查询">
+	            <input style="width:180px;margin-left:50px" type="submit" class="form-control btn btn-info btn-sm" placeholder="twitterhandle" id="select" value="查询">
 	            
 	        </div>
 	        
@@ -111,11 +136,11 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${requestScope.page.list}" var="drug"
+				<c:forEach items="${requestScope.list}" var="drug"
 					varStatus="state">
 					<tr>
 						<td style="width:40px"><input name="id_check" type="checkbox"
-							value="${drug.drugId }" id="${drug.drugId}"/></td>
+							value="${drug.drugId }" id="${drug.drugId }"/></td>
 						<td style="width:50px">${state.count }</td>
 						<td style="width:70px">${drug.drugCode }</td>
 						<td>${drug.drugName }</td>
@@ -141,9 +166,9 @@
 			<ul class="paginList">
 				<c:if test="${page.perIndex > 0}">
 					<li class="paginItem"><a 
-						href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=1&keyword=${keyword}">首页</a></li>
+						href="${pageContext.request.contextPath }/drug_showDrugByOptions.action?currPage=1&modifyTime=${modifyTime }&manufacturer=${manufacturer }&drugCategoryBean.categoryId=${category.categoryId }&drugUnitBean.unitnameId=${unit.unitnameId}&dosageformBean.dosageformId=${dosageform.dosageformId }&modifier=${modifier }&keyword=${keyword}&drugName=${drugName}">首页</a></li>
 					<li class="paginItem"><a 
-						href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=${page.perIndex}&keyword=${keyword}"><span
+						href="${pageContext.request.contextPath }/drug_showDrugByOptions.action?currPage=${page.perIndex}&modifyTime=${modifyTime }&manufacturer=${manufacturer }&drugCategoryBean.categoryId=${category.categoryId }&drugUnitBean.unitnameId=${unit.unitnameId}&dosageformBean.dosageformId=${dosageform.dosageformId }&modifier=${modifier }&keyword=${keyword}&drugName=${drugName}"><span
 							class="pagepre"></span></a></li>
 				</c:if>
 				<c:forEach begin="1" end="${page.totalPage }" var="p">
@@ -153,16 +178,16 @@
 						</c:when>
 						<c:otherwise>
 							<li class="paginItem"><a 
-								href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=${p}&keyword=${keyword}">${p}</a></li>
+								href="${pageContext.request.contextPath }/drug_showDrugByOptions.action?currPage=${p}&drugCategoryBean.categoryId=${category.categoryId }&modifyTime=${modifyTime }&manufacturer=${manufacturer }&drugUnitBean.unitnameId=${unit.unitnameId}&dosageformBean.dosageformId=${dosageform.dosageformId }&modifier=${modifier }&keyword=${keyword}&drugName=${drugName}">${p}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				<c:if test="${page.nextIndex > 0}">
 					<li class="paginItem"><a id="next"
-						href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=${page.nextIndex}&keyword=${keyword}"><span
+						href="${pageContext.request.contextPath }/drug_showDrugByOptions.action?currPage=${page.nextIndex}&drugCategoryBean.categoryId=${category.categoryId }&modifyTime=${modifyTime }&manufacturer=${manufacturer }&drugUnitBean.unitnameId=${unit.unitnameId}&dosageformBean.dosageformId=${dosageform.dosageformId }&modifier=${modifier }&keyword=${keyword}&drugName=${drugName}"><span
 							class="pagenxt"></span></a></li>
 					<li class="paginItem"><a id="total"
-						href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=${page.totalPage}&keyword=${keyword}">尾页</a></li>
+						href="${pageContext.request.contextPath }/drug_showDrugByOptions.action?currPage=${page.totalPage}&drugCategoryBean.categoryId=${category.categoryId }&modifyTime=${modifyTime }&manufacturer=${manufacturer }&drugUnitBean.unitnameId=${unit.unitnameId}&dosageformBean.dosageformId=${dosageform.dosageformId }&modifier=${modifier }&keyword=${keyword}&drugName=${drugName}">尾页</a></li>
 				</c:if>
 				&nbsp;
 				&nbsp;
@@ -211,7 +236,7 @@
 $('.tablelist tbody tr:odd').addClass('odd');
 function jump(){
 var pc = $("#select_jumpPage option:selected").text();
-window.location.href="${pageContext.request.contextPath}/drug_showDrug.action?keyword=${keyword}&currPage="+pc;
+window.location.href="${pageContext.request.contextPath}/drug_showDrugByOptions.action?drugName=${drugName}&modifyTime=${modifyTime }&manufacturer=${manufacturer }&drugCategoryBean.categoryId=${category.categoryId }&drugUnitBean.unitnameId=${unit.unitnameId}&dosageformBean.dosageformId=${dosageform.dosageformId }&modifier=${modifier }&keyword=${keyword}&currPage="+pc;
 } 
 </script>
 

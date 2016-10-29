@@ -13,9 +13,10 @@ import org.springframework.stereotype.Controller;
 
 import com.fq.po.DosageformBean;
 import com.fq.po.DrugBean;
-import com.fq.po.DrugPurchaseBean;
 import com.fq.po.DrugCategoryBean;
+import com.fq.po.DrugPurchaseBean;
 import com.fq.po.DrugUnitBean;
+import com.fq.po.SupplierBean;
 import com.fq.service.DrugPurchaseService;
 import com.fq.util.BaseAction;
 import com.fq.util.ConstantUtils;
@@ -40,7 +41,6 @@ public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPu
 	@Autowired
 	private DrugPurchaseService drugPseService;
 	private DrugPurchaseBean drugPseBean = new DrugPurchaseBean();
-	private DrugBean drugBean = drugPseBean.getDrugBean();
 	/**
 	 * 药品进货分页
 	 * @return
@@ -64,41 +64,41 @@ public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPu
 	 * 跳转新增
 	 */
 	public String doaddPurchase(){
+		List<SupplierBean>  supplierList = drugPseService.selectSupplier();
 		List<DrugCategoryBean>  drugCategoryList = drugPseService.selectCategory();
 		List<DrugUnitBean> drugUnitList = drugPseService.selectUnit();
 		List<DosageformBean> dosageformList = drugPseService.selectForm();
 		
+		request.put("supplierList", supplierList);
 		request.put("drugCategoryList",drugCategoryList);
 		request.put("drugUnitList",drugUnitList);
 		request.put("dosageformList",dosageformList);
 		return "doadd";
 	}
-	/**
-	 * 新增药品进货
-	 * @return
-	 * @throws Exception 
-	 */
-	/*public String addPurchase(){
+	
+	public String addPurchase(){
+		List<SupplierBean>  supplierList = drugPseService.selectSupplier();
 		List<DrugCategoryBean>  drugCategoryList = drugPseService.selectCategory();
 		List<DrugUnitBean> drugUnitList = drugPseService.selectUnit();
 		List<DosageformBean> dosageformList = drugPseService.selectForm();
 		
+		request.put("supplierList", supplierList);
 		request.put("drugCategoryList",drugCategoryList);
 		request.put("drugUnitList",drugUnitList);
 		request.put("dosageformList",dosageformList);
 		
+		DrugBean drugBean = drugPseBean.getDrugBean();
 		DosageformBean dfBean = drugBean.getDosageformBean();
 		DrugCategoryBean dcBean = drugBean.getDrugCategoryBean();
-		DrugUnitBean duBean = drugBean.getDrugUnitBean();	
+		DrugUnitBean duBean = drugBean.getDrugUnitBean();
+		SupplierBean supBean = drugPseBean.getSupplierBean();
 		
-		drugPseService.addPse(dfBean, dcBean, duBean, drugBean, drugPseBean, time);
-		
-		return "show";
+		drugPseService.addPse(supBean,dfBean, dcBean, duBean, drugBean, drugPseBean, time);
 		request.put("message","药品进货名已被使用！");
 		request.put("message2","药品进货编号已被使用！");
 		return "addPurchase";
 		
-	}*/
+	}
 	/**
 	 * 删除药品进货
 	 */
@@ -113,10 +113,12 @@ public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPu
 	 */
 	public String editPurchase(){
 		DrugPurchaseBean drugPseBean = drugPseService.selectById(id);
+		List<SupplierBean>  supplierList = drugPseService.selectSupplier();
 		List<DrugCategoryBean>  drugCategoryList = drugPseService.selectCategory();
 		List<DrugUnitBean> drugUnitList = drugPseService.selectUnit();
 		List<DosageformBean> dosageformList = drugPseService.selectForm();
 		
+		request.put("supplierList", supplierList);
 		request.put("drugCategoryList",drugCategoryList);
 		request.put("drugUnitList",drugUnitList);
 		request.put("dosageformList",dosageformList);
@@ -130,10 +132,12 @@ public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPu
 	 * 修改药品进货 
 	 */
 	public String updatePurchase(){
+		List<SupplierBean>  supplierList = drugPseService.selectSupplier();
 		List<DrugCategoryBean>  drugCategoryList = drugPseService.selectCategory();
 		List<DrugUnitBean> drugUnitList = drugPseService.selectUnit();
 		List<DosageformBean> dosageformList = drugPseService.selectForm();
 		
+		request.put("supplierList", supplierList);
 		request.put("drugCategoryList",drugCategoryList);
 		request.put("drugUnitList",drugUnitList);
 		request.put("dosageformList",dosageformList);

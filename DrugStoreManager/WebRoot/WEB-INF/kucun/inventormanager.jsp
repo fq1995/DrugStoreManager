@@ -89,7 +89,7 @@
 					varStatus="state">
 					<tr>
 						<td style="width:40px"><input name="id_check" type="checkbox"
-							value="${inventor.drugBean.drugId }" id="${inventor.drugBean.drugId}"/></td>
+							value="${inventor.stockId }" id="${inventor.stockId}"/></td>
 						<td style="width:50px">${state.count }</td>
 						<td style="width:70px">${inventor.drugBean.drugCode }</td>
 						<td>${inventor.drugBean.drugName }</td>

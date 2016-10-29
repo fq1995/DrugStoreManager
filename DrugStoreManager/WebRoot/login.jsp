@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link rel="shortcut icon" type="image/ico" href="/images/favicon.ico" />
-    <title>Login</title>
+    <title>药店管理系统-登录</title>
     <link href="css/styles.css" type="text/css" media="screen" rel="stylesheet" />
     <link href="css/jquery-ui-1.8.16.custom.css" rel="stylesheet">
     <script src="js/jquery-1.6.2.min.js"></script>

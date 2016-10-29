@@ -80,6 +80,7 @@
 					<th>有效期</th>
 					<th>进价</th>
 					<th>进货日期</th>
+					
 					<th>供货商</th>
 					<th >厂 家</th>
 					<th>批准文号</th>
@@ -88,23 +89,28 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${requestScope.page.list}" var="drug"
+				<c:forEach items="${requestScope.page.list}" var="pse"
 					varStatus="state">
 					<tr>
 						<td style="width:40px"><input name="id_check" type="checkbox"
-							value="${drug.drugId }" id="${drug.drugId}"/></td>
+							value="${pse.purchaseId }" id="${pse.purchaseId}"/></td>
 						<td style="width:50px">${state.count }</td>
-						<td style="width:70px">${drug.drugCode }</td>
-						<td>${drug.drugName }</td>
-						<td style="width:70px">${drug.dosageformBean.dosageform }</td>
-						<td style="width:50px">${drug.drugUnitBean.unitname }</td>
-						<td>${drug.drugCategoryBean.category }</td>
-						<td>${drug.manufacturer }</td>
-						<td>${drug.approvalNumber }</td>
-						<td>${drug.modifier }</td>
-						<td>${drug.modifyTime }</td>
-						<td>${drug.memo }</td>
-					
+						<td style="width:70px">${pse.drugBean.drugCode }</td>
+						<td>${pse.drugBean.drugName }</td>
+						<td style="width:70px">${pse.drugBean.dosageformBean.dosageform }</td>
+						<td style="width:50px">${pse.drugBean.drugUnitBean.unitname }</td>
+						<td>${pse.drugBean.drugCategoryBean.category }</td>
+						
+						<td>${pse.amount }</td>
+						<td>${pse.productionDate }</td>
+						<td>${pse.validityDate }</td>
+						<td>${pse.purchaseprice }</td>
+						<td>${pse.purchasedate }</td>
+						
+						<td>${pse.supplierBean.supplier }</td>
+						<td>${pse.drugBean.manufacturer }</td>
+						<td>${pse.drugBean.approvalNumber }</td>
+						<td>${pse.drugBean.modifier }</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -118,9 +124,9 @@
 			<ul class="paginList">
 				<c:if test="${page.perIndex > 0}">
 					<li class="paginItem"><a 
-						href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=1&keyword=${keyword}">首页</a></li>
+						href="${pageContext.request.contextPath }/pse_showPurchase.action?currPage=1&keyword=${keyword}">首页</a></li>
 					<li class="paginItem"><a 
-						href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=${page.perIndex}&keyword=${keyword}"><span
+						href="${pageContext.request.contextPath }/pse_showPurchase.action?currPage=${page.perIndex}&keyword=${keyword}"><span
 							class="pagepre"></span></a></li>
 				</c:if>
 				<c:forEach begin="1" end="${page.totalPage }" var="p">
@@ -130,16 +136,16 @@
 						</c:when>
 						<c:otherwise>
 							<li class="paginItem"><a 
-								href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=${p}&keyword=${keyword}">${p}</a></li>
+								href="${pageContext.request.contextPath }/pse_showPurchase.action?currPage=${p}&keyword=${keyword}">${p}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				<c:if test="${page.nextIndex > 0}">
 					<li class="paginItem"><a id="next"
-						href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=${page.nextIndex}&keyword=${keyword}"><span
+						href="${pageContext.request.contextPath }/pse_showPurchase.action?currPage=${page.nextIndex}&keyword=${keyword}"><span
 							class="pagenxt"></span></a></li>
 					<li class="paginItem"><a id="total"
-						href="${pageContext.request.contextPath }/drug_showDrug.action?currPage=${page.totalPage}&keyword=${keyword}">尾页</a></li>
+						href="${pageContext.request.contextPath }/pse_showPurchase.action?currPage=${page.totalPage}&keyword=${keyword}">尾页</a></li>
 				</c:if>
 				&nbsp;
 				&nbsp;
@@ -188,7 +194,7 @@
 $('.tablelist tbody tr:odd').addClass('odd');
 function jump(){
 var pc = $("#select_jumpPage option:selected").text();
-window.location.href="${pageContext.request.contextPath}/drug_showDrug.action?keyword=${keyword}&currPage="+pc;
+window.location.href="${pageContext.request.contextPath}/pse_showPurchase.action?keyword=${keyword}&currPage="+pc;
 } 
 </script>
 

@@ -57,15 +57,16 @@ public class BaseDAO<E>{
 	}
 	
 	//计算总数据条数
-	private long getTotal(final String hql_count){
+	public long getTotal(final String hql_count){
 		//select count(*) from UserBean 
-		return  (long) getHibernateTemplate().execute(new HibernateCallback() {
+		return  (long)getHibernateTemplate().execute(new HibernateCallback() {
 			public Object doInHibernate(Session session) throws HibernateException {
 				Query query=session.createQuery(hql_count);
 				return query.list().get(0);
 			}
 		});
 	}
+	
 	private long getTotal(final String hql_count,final String keyword){
 		//select count(*) from UserBean 
 		return  (long) getHibernateTemplate().execute(new HibernateCallback() {

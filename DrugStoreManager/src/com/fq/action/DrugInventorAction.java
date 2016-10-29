@@ -25,7 +25,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Controller("drugInventorAction")
 @Scope("prototype")
 public class DrugInventorAction extends BaseAction implements ModelDriven<InventoriesBean>,RequestAware{
-	//药品管理
+	//药品库存管理
 	private Map<String ,Object> session;
 	private Map<String, Object> request;
 	private boolean flag;
@@ -44,7 +44,7 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 	private DrugBean drugBean = inventoriesBean.getDrugBean();
 	
 	/**
-	 * 药品分页
+	 * 药品库存分页
 	 * @return
 	 */
 	public String showInventor() {
@@ -63,7 +63,7 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 		return "showInventor";
 	}
 	/**
-	 * 跳转新增
+	 * 跳转新增库存
 	 */
 	public String doaddInventor(){
 		List<DrugCategoryBean>  drugCategoryList = inventorService.selectCategory();
@@ -76,7 +76,7 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 		return "doadd";
 	}
 	/**
-	 * 新增药品
+	 * 新增库存药品
 	 * @return
 	 * @throws Exception 
 	 */
@@ -89,13 +89,7 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 		request.put("drugUnitList",drugUnitList);
 		request.put("dosageformList",dosageformList);
 		if(null == selectInventorByName() && null == selectInventorByDrugcode()){
-			
-			try {
-				inventorService.addInventor(drugBean,inventoriesBean,time);
-			} catch (Exception e) {
-				System.out.println("时间转换错误");
-				e.printStackTrace();
-			}
+			inventorService.addInventor(drugBean,inventoriesBean,time);
 			return "show";
 		}
 		request.put("message","药品名已被使用！");
@@ -104,7 +98,7 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 		
 	}
 	/**
-	 * 删除药品
+	 * 删除库存药品
 	 */
 	public String delInventor(){
 		List<InventoriesBean> list = inventorService.showAllInventor(ids);
@@ -113,7 +107,7 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 	}
 	
 	/**
-	 * 编辑药品
+	 * 编辑库存药品
 	 */
 	public String editInventor(){
 		InventoriesBean bean1 = inventorService.selectById(id);
@@ -131,7 +125,7 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 	}
 		
 	/**
-	 * 修改药品 
+	 * 修改库存药品 
 	 */
 	public String updateInventor(){
 		List<DrugCategoryBean>  drugCategoryList = inventorService.selectCategory();
@@ -141,8 +135,8 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 		request.put("drugCategoryList",drugCategoryList);
 		request.put("drugUnitList",drugUnitList);
 		request.put("dosageformList",dosageformList);
-		if(null == selectInventorByDrugcode()){
-			inventorService.updateInventor(inventoriesBean,time);
+		if(null != selectInventorByDrugcode()){
+			inventorService.updateInventor(inventoriesBean);
 			return "show";
 		}
 		request.put("message","药品名已被使用！");

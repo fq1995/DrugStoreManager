@@ -140,44 +140,62 @@ public class DrugDAOImpl extends BaseDAO<DrugBean> implements DrugDAO {
 	}
 
 	@Override
-	public PageModel<DrugBean> splitDrug(Integer currPage, Integer pageSize, String drugName, String dosageform,
-			String drugUnit, String drugCategory, String manufacturer, Date modifyTime, String modifier) {
-		String hql_count = "select count(*) from DrugBean d inner join d.drugUnitBean du inner join d.dosageformBean df inner join d.drugCategoryBean dc on d.drugUnitBean.unitnameId = du.unitnameId and d.dosageformBean.dosageformId = df.dosageformId and d.drugCategoryBean.categoryId = dc.categoryId ";
-		String hql = "select d.* from DrugBean d inner join d.drugUnitBean du inner join d.dosageformBean df inner join d.drugCategoryBean dc on d.drugUnitBean.unitnameId = du.unitnameId and d.dosageformBean.dosageformId = df.dosageformId and d.drugCategoryBean.categoryId = dc.categoryId ";
+	public PageModel<DrugBean> splitDrug(Integer currPage, Integer pageSize, String drugName, String dosageformId,
+			String unitnameId, String categoryId, String manufacturer, Date modifyTime, String modifier) {
+		
+		String hql_count = "select count(*) from DrugBean d inner join d.drugUnitBean du inner join d.dosageformBean df inner join d.drugCategoryBean dc where d.drugUnitBean.unitnameId = du.unitnameId and d.dosageformBean.dosageformId = df.dosageformId and d.drugCategoryBean.categoryId = dc.categoryId ";
+		String hql = "select d from DrugBean d inner join d.drugUnitBean du inner join d.dosageformBean df inner join d.drugCategoryBean dc where d.drugUnitBean.unitnameId = du.unitnameId and d.dosageformBean.dosageformId = df.dosageformId and d.drugCategoryBean.categoryId = dc.categoryId ";
 		StringBuffer sb1 = new StringBuffer(hql_count);
 		StringBuffer sb = new StringBuffer(hql);
 		if(null != drugName && !"".equals(drugName)){
-			sb1.append("and d.drugName  = '"+drugName+"'");
-			sb.append("and d.drugName  = '"+drugName+"'");
+			sb1.append(" and d.drugName  = '"+drugName+"'");
+			sb.append(" and d.drugName  = '"+drugName+"'");
 		}
-		if(null != dosageform && !"".equals(dosageform)){
-			sb1.append("and df.dosageform   ='"+dosageform+"'");
-			sb.append("and df.dosageform   ='"+dosageform+"'");
+		if(null != dosageformId && !"".equals(dosageformId)){
+			sb1.append(" and df.dosageformId   ='"+dosageformId+"'");
+			sb.append(" and df.dosageformId   ='"+dosageformId+"'");
 		}
-		if(null != drugUnit && !"".equals(drugUnit)){
-			sb1.append("and du.unitname  ='"+drugUnit+"'");
-			sb.append("and du.unitname  ='"+drugUnit+"'");
+		if(null != unitnameId && !"".equals(unitnameId)){
+			sb1.append(" and du.unitnameId  ='"+unitnameId+"'");
+			sb.append(" and du.unitnameId  ='"+unitnameId+"'");
 		}
-		if(null != drugCategory && !"".equals(drugCategory)){
-			sb1.append("and dc.category   ='"+drugCategory+"'");
-			sb.append("and dc.category  ='"+drugCategory+"'");
+		if(null != categoryId && !"".equals(categoryId)){
+			sb1.append(" and dc.categoryId   ='"+categoryId+"'");
+			sb.append(" and dc.categoryId  ='"+categoryId+"'");
 		}
 		if(null != manufacturer && !"".equals(manufacturer)){
-			sb1.append("and d.manufacturer   ='"+manufacturer+"'");
-			sb.append("and d.manufacturer   ='"+manufacturer+"'");
+			sb1.append(" and d.manufacturer   ='"+manufacturer+"'");
+			sb.append(" and d.manufacturer   ='"+manufacturer+"'");
 		}
 		if(null != modifyTime && !"".equals(modifyTime)){
-			sb1.append("and d.modifyTime  ='"+modifyTime+"'");
-			sb.append("and d.modifyTime   ='"+modifyTime+"'");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			String str = sdf.format(modifyTime);
+			sb1.append(" and d.modifyTime  ='"+str+"'");
+			sb.append(" and d.modifyTime   ='"+str+"'");
 		}
 		if(null != modifier && !"".equals(modifier)){
-			sb1.append("and d.modifier   ='"+modifier+"'");
-			sb.append("and d.modifier  ='"+modifier+"'");
+			sb1.append(" and d.modifier   ='"+modifier+"'");
+			sb.append(" and d.modifier  ='"+modifier+"'");
 		}
 		System.out.println(sb1.toString());
 		System.out.println(sb.toString());
-		return super.split(sb1.toString(), sb.toString(), currPage, pageSize);
+		return super.split(sb.toString(), sb1.toString(), currPage, pageSize);
 	}
 
-	
+	@Override
+	public DrugCategoryBean selectCategoryById(String id) {
+		return getHibernateTemplate().get(DrugCategoryBean.class, id);
+		 
+	}
+
+	@Override
+	public DrugUnitBean selectUnitById(String id) {
+		return getHibernateTemplate().get(DrugUnitBean.class, id);
+	}
+
+	@Override
+	public DosageformBean selectFormById(String id) {
+		return getHibernateTemplate().get(DosageformBean.class, id);
+	}
+
 }

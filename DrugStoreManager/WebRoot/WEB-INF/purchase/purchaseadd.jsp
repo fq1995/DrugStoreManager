@@ -91,7 +91,7 @@
 
 			<ul class="forminfo">
 				<li><label>进货单编号</label><input name="purchaseCode" type="text" id="purchaseCode"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入药品编号"/><i>必填</i></li>
+					class="form-control" style="width:200px; display:inline" placeholder="请输入进货单编号"/><i>必填</i></li>
 				<li><label>药品编号</label><input name="drugBean.drugCode" type="text" id="drugBean.drugCode"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入药品编号"/><i>必填</i></li>
 				<li><label>药品名</label><input name="drugBean.drugName" type="text" id="drugBean.drugName"
@@ -117,6 +117,8 @@
 						<option value="${drugCategory.categoryId }">${drugCategory.category }</option>
 					</c:forEach>
 					</select></li>
+				<li><label>数量</label><input name="amount" type="text" id="amount"
+					class="form-control" style="width:200px; display:inline" placeholder="请输入数量"/><i></i></li>
 				<li ><label>生产日期</label>
 					<input name="productionDate" id="productionDate" class="form-control" type="text" style="width:200px; display:inline"  onClick="WdatePicker({skin:'whyGreen',maxDate:'%y-%M-%d'})"/><i>请输入生产日期</i></li>	
 				<li ><label>有效期</label>
@@ -126,6 +128,14 @@
 					class="form-control" style="width:200px; display:inline" placeholder="请输入进价"/><i></i></li>
 				<li ><label>进货日期</label>
 					<input name="purchasedate" id="purchasedate" class="form-control" type="text" style="width:200px; display:inline"  onClick="WdatePicker({skin:'whyGreen',maxDate:'%y-%M-%d'})"/><i>请输入进货日期</i></li>				
+				
+				<li><label>供货商</label>
+					<select class="form-control" style="width:200px;height:34px"  name="supplierBean.supplierId">
+						<option value="">请选择</option>
+					<c:forEach items="${supplierList }" var="supplier">
+						<option value="${supplier.supplierId }">${supplier.supplier }</option>
+					</c:forEach>
+					</select></li>
 				
 				<li><label>厂商</label><input name="drugBean.manufacturer" type="text" id="drugBean.manufacturer"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入生产厂商"/><i></i></li>
