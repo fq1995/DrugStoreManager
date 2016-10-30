@@ -173,5 +173,16 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 		return list==null||list.size()<=0?null:list;
 	}
 
+	@Override
+	public PageModel<DrugPurchaseBean> splitDateWarn(Integer currPage, Integer pagesize, String keyword) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String str = sdf.format(date);
+		
+		String hql_count = "select count(*) from DrugPurchaseBean where drugBean.drugName like :keyword and validityDate < '"+str+"'";
+		String hql = "from DrugPurchaseBean where drugBean.drugName like :keyword and validityDate < '"+str+"'";
+		return super.split(hql, hql_count, currPage, pagesize,keyword);
+	}
+
 
 }

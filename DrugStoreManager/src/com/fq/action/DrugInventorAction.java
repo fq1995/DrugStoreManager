@@ -63,6 +63,27 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 		return "showInventor";
 	}
 	/**
+	 * 药品库存预警分页
+	 * @return
+	 */
+	public String showWarn() {
+		if(null == keyword){
+			keyword="";
+		}
+		if(null != keyword){
+			request.put("keyword", keyword);
+		}
+		
+		if(currPage == null) {
+			currPage = 1;
+		}
+		PageModel<InventoriesBean>  page = inventorService.splitWarn(currPage, ConstantUtils.PAGESIZE, keyword);
+		request.put("page", page);
+		return "showInventor";
+	}
+	
+	
+	/**
 	 * 跳转新增库存
 	 */
 	public String doaddInventor(){

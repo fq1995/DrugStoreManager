@@ -45,6 +45,8 @@ public interface DrugPurchaseService {
 	List<UserBean> selectUser();
 	//查询供货商
 	List<SupplierBean> selectSupplier();
+	//有效期预警
+	PageModel<DrugPurchaseBean> splitDateWarn(Integer currPage, Integer pagesize, String keyword);
 	
 	
 

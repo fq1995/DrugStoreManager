@@ -127,4 +127,11 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 		return dosageformList==null||dosageformList.size()<=0?null:dosageformList;
 	}
 
+	@Override
+	public PageModel<InventoriesBean> splitWarn(Integer currPage, Integer pagesize, String keyword) {
+		String hql_count = "select count(*) from InventoriesBean where drugBean.drugName like :keyword and stocknumber <= stocklimit ";
+		String hql = "from InventoriesBean where drugBean.drugName like :keyword and stocknumber <= stocklimit ";
+		return super.split(hql, hql_count, currPage, pagesize,keyword);
+	}
+
 }

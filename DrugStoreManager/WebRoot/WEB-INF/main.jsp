@@ -54,6 +54,7 @@
 								]
 						},{"menuid":"28","icon":"icon-sys","menuname":"库存管理",
 							"menus":[{"menuid":"41","menuname":"库存列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/inventor_showInventor.action?currPage=1"},
+									{"menuid":"43","menuname":"库存下限预警","icon":"icon-nav","url":"${pageContext.request.contextPath}/inventor_showWarn.action?currPage=1"},
 									{"menuid":"42","menuname":"报表统计","icon":"icon-nav","url":"demo1.html"},
 									{"menuid":"43","menuname":"添加支出","icon":"icon-nav","url":"demo2.html"}
 								]
@@ -64,7 +65,7 @@
 								]
 						},{"menuid":"40","icon":"icon-sys","menuname":"进货管理",
 							"menus":[{"menuid":"61","menuname":"进货列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/pse_showPurchase.action?currPage=1"},
-								{"menuid":"62","menuname":"商品列表","icon":"icon-nav","url":"demo1.html"},
+								{"menuid":"62","menuname":"有效期预警","icon":"icon-nav","url":"${pageContext.request.contextPath}/pse_showDateWarn.action?currPage=1"},
 								{"menuid":"63","menuname":"商品订单","icon":"icon-nav","url":"demo2.html"}
 							]
 						},{"menuid":"51","icon":"icon-sys","menuname":"会员管理",

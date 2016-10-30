@@ -60,6 +60,27 @@ public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPu
 		request.put("page", page);
 		return "showPurchase";
 	}
+	
+	/**
+	 * 药品进货分页
+	 * @return
+	 */
+	public String showDateWarn() {
+		if(null == keyword){
+			keyword="";
+		}
+		if(null != keyword){
+			request.put("keyword", keyword);
+		}
+		
+		if(currPage == null) {
+			currPage = 1;
+		}
+		PageModel<DrugPurchaseBean>  page = drugPseService.splitDateWarn(currPage, ConstantUtils.PAGESIZE, keyword);
+		request.put("page", page);
+		return "showPurchase";
+	}
+	
 	/**
 	 * 跳转新增
 	 */

@@ -50,7 +50,7 @@
 				
 				<li id="" class="click"><span><img src="<%=basePath%>images/t04.png" /></span>统计</li>
 
-				<li id="btn_select" class="click"><span><img src="<%=basePath%>images/sousuo.png" /></span>多条件查询</li>
+				<li id="btn_warn" class="click"><span><img src="<%=basePath%>images/warn.png" /></span>有效期预警</li>
 			</ul>
 
 

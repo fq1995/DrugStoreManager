@@ -78,4 +78,9 @@ public class DrugInventorServiceImpl implements DrugInventorService {
 		return drugInventorDao.selectForm();
 	}
 
+	@Override
+	public PageModel<InventoriesBean> splitWarn(Integer currPage, Integer pagesize, String keyword) {
+		return drugInventorDao.splitWarn(currPage, pagesize, keyword);
+	}
+
 }

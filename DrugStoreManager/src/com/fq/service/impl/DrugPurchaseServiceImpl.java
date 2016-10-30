@@ -107,6 +107,11 @@ public class DrugPurchaseServiceImpl implements DrugPurchaseService {
 	public List<SupplierBean> selectSupplier() {
 		return drugPseDao.selectSupplier();
 	}
+
+	@Override
+	public PageModel<DrugPurchaseBean> splitDateWarn(Integer currPage, Integer pagesize, String keyword) {
+		return drugPseDao.splitDateWarn(currPage, pagesize, keyword);
+	}
 	
 	
 }

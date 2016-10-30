@@ -39,6 +39,11 @@
 		}
 	}
 	function init(){
+		//查询
+		document.querySelector("#btn_selectUser").addEventListener("click",()=>{
+			var keyword=document.querySelector("#keyword").value;
+			window.location.href="pse_showPurchase.action?currPage=1&keyword="+keyword;
+		},false);
 		//新增
 		document.querySelector("#btn_addUser").addEventListener("click",()=>{
 			window.location.href="pse_doaddPurchase.action";
@@ -57,6 +62,11 @@
 					checks[i].checked=false;
 				}
 			}
+		},false);
+		//有效期预警
+		document.querySelector("#btn_warn").addEventListener("click",()=>{
+			var keyword=document.querySelector("#keyword").value;
+			window.location.href="pse_showDateWarn.action?currPage=1&keyword="+keyword;
 		},false);
 	}
 	window.addEventListener("load",init,false);

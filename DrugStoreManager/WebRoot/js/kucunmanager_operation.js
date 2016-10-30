@@ -42,7 +42,6 @@
 		//查询
 		document.querySelector("#btn_selectUser").addEventListener("click",()=>{
 			var keyword=document.querySelector("#keyword").value;
-			alert(keyword);
 			window.location.href="inventor_showInventor.action?currPage=1&keyword="+keyword;
 		},false);
 		//新增用户
@@ -63,6 +62,12 @@
 					checks[i].checked=false;
 				}
 			}
+		},false);
+		
+		//库存预警查询
+		document.querySelector("#btn_warn").addEventListener("click",()=>{
+			var keyword=document.querySelector("#keyword").value;
+			window.location.href="inventor_showWarn.action?currPage=1&keyword="+keyword;
 		},false);
 	}
 	window.addEventListener("load",init,false);

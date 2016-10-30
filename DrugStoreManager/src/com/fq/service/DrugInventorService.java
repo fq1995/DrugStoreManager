@@ -32,4 +32,6 @@ public interface DrugInventorService {
 	List<DrugUnitBean> selectUnit();
 	//查询剂型
 	List<DosageformBean> selectForm();
+	//库存预警
+	PageModel<InventoriesBean> splitWarn(Integer currPage, Integer pagesize, String keyword);
 }
