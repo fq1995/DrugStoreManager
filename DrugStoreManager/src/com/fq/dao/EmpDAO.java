@@ -2,6 +2,7 @@ package com.fq.dao;
 
 import java.util.List;
 
+import com.fq.po.DrugBean;
 import com.fq.po.EmployeeBean;
 import com.fq.util.PageModel;
 
@@ -29,4 +30,6 @@ public interface EmpDAO {
 		void updateEmp(EmployeeBean empBean);
 		//根据id查询
 		EmployeeBean selectById(String id);
+		//查询所有员工
+		List<EmployeeBean> show();
 }

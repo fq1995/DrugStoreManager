@@ -1,5 +1,6 @@
 package com.fq.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,6 +106,11 @@ public class DrugSaleServiceImpl implements DrugSaleService {
 	public void addSale(UserBean userBean, DrugBean drugBean, DrugSalesBean bean, String time) throws Exception {
 		drugSaleDao.addSale(userBean, drugBean, bean, time);
 		
+	}
+
+	@Override
+	public List<DrugSalesBean> show(Date date) {
+		return drugSaleDao.show(date);
 	}
 
 	

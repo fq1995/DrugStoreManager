@@ -1,5 +1,6 @@
 package com.fq.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.fq.po.DosageformBean;
@@ -34,4 +35,6 @@ public interface DrugInventorService {
 	List<DosageformBean> selectForm();
 	//库存预警
 	PageModel<InventoriesBean> splitWarn(Integer currPage, Integer pagesize, String keyword);
+	//根据时间查询
+	List<InventoriesBean> selectByDate(Date date);
 }

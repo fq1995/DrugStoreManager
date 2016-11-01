@@ -70,6 +70,12 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 		return "showSale";
 	}
 	/**
+	 * 跳转打印界面
+	 */
+	public String doPrint(){
+		return "print";
+	}
+	/**
 	 * 跳转新增
 	 */
 	public String doaddSale(){

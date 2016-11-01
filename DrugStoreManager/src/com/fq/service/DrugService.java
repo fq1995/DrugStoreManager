@@ -11,6 +11,8 @@ import com.fq.util.PageModel;
 
 public interface DrugService {
 	
+	List<DrugBean> show();
+	
 	DrugBean selectDrugByName(String drugname);
 	
 	DrugBean selectDrugByDrugcode(Integer drugcode);

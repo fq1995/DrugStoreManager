@@ -31,4 +31,6 @@ public interface UserService {
 	void updateUser(UserBean userBean,String time);
 	//根据id查询
 	UserBean selectById(String id);
+	//查询用户
+	List<UserBean> show();
 }

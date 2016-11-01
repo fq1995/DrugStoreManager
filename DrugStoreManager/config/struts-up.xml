@@ -139,7 +139,7 @@
 		<!-- 库存管理 -->
 		
 		<action name="inventor_*" class="drugInventorAction" method="{1}">
-			
+			<result name="print">/WEB-INF/kucun/inventorprint.jsp</result>
 			<result name="doadd">/WEB-INF/kucun/inventoradd.jsp</result>
 			<result name="showInventor">/WEB-INF/kucun/inventormanager.jsp</result>
 			<result name="addInventor">/WEB-INF/kucun/inventoradd.jsp</result>
@@ -156,7 +156,7 @@
 		<!-- 销售管理 -->
 		
 		<action name="sale_*" class="drugSaleAction" method="{1}">
-			
+			<result name="print">/WEB-INF/sale/saleprint.jsp</result>
 			<result name="doadd">/WEB-INF/sale/saleadd.jsp</result>
 			<result name="showSale">/WEB-INF/sale/salemanager.jsp</result>
 			<result name="addSale">/WEB-INF/sale/saleadd.jsp</result>
@@ -173,7 +173,7 @@
 		<!-- 进货管理 -->
 		
 		<action name="pse_*" class="drugPurchaseAction" method="{1}">
-			
+			<result name="print">/WEB-INF/purchase/purchaseprint.jsp</result>
 			<result name="doadd">/WEB-INF/purchase/purchaseadd.jsp</result>
 			<result name="showPurchase">/WEB-INF/purchase/purchasemanager.jsp</result>
 			<result name="addPurchase">/WEB-INF/purchase/purchaseadd.jsp</result>
@@ -219,6 +219,12 @@
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
 			</result>
+		</action>
+		
+		<!-- 打印管理 -->
+		
+		<action name="print_*" class="printAction" method="{1}">
+			
 		</action>
 		
 	</package>

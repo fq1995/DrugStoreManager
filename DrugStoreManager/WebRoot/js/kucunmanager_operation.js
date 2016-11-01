@@ -69,6 +69,11 @@
 			var keyword=document.querySelector("#keyword").value;
 			window.location.href="inventor_showWarn.action?currPage=1&keyword="+keyword;
 		},false);
+		//跳转打印界面
+		document.querySelector("#btn_doprint").addEventListener("click",()=>{
+			window.location.href="inventor_doPrint.action";
+		},false);
+		
 	}
 	window.addEventListener("load",init,false);
 })();

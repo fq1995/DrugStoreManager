@@ -198,4 +198,11 @@ public class DrugDAOImpl extends BaseDAO<DrugBean> implements DrugDAO {
 		return getHibernateTemplate().get(DosageformBean.class, id);
 	}
 
+	@Override
+	public List<DrugBean> show() {
+		String hql ="from DrugBean";
+		List<DrugBean> list = (List<DrugBean>) hibernateTemplate.find(hql);
+		return list==null||list.size()<=0?null:list;
+	}
+
 }

@@ -1,5 +1,6 @@
 package com.fq.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,6 +112,11 @@ public class DrugPurchaseServiceImpl implements DrugPurchaseService {
 	@Override
 	public PageModel<DrugPurchaseBean> splitDateWarn(Integer currPage, Integer pagesize, String keyword) {
 		return drugPseDao.splitDateWarn(currPage, pagesize, keyword);
+	}
+
+	@Override
+	public List<DrugPurchaseBean> show(Date date) {
+		return drugPseDao.show(date);
 	}
 	
 	

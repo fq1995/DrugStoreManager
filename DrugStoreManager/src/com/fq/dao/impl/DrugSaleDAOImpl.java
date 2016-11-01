@@ -190,6 +190,15 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 		return list==null||list.size()<=0?null:list;
 	}
 
+	@Override
+	public List<DrugSalesBean> show(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+		String str = sdf.format(date);
+		String hql = "from DrugSalesBean where date_format(salesDate,'%Y-%m') = '"+str+"'";
+		List<DrugSalesBean> list = (List<DrugSalesBean>) hibernateTemplate.find(hql);
+		return list==null||list.size()<=0?null:list;
+	}
+
 	
 	
 

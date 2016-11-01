@@ -51,6 +51,8 @@
 				<li id="" class="click"><span><img src="<%=basePath%>images/t04.png" /></span>统计</li>
 
 				<li id="btn_warn" class="click"><span><img src="<%=basePath%>images/warn.png" /></span>有效期预警</li>
+			
+				<li id="btn_print" class="click"><span><img src="<%=basePath%>images/dayin.png" /></span>打印报表</li>
 			</ul>
 
 

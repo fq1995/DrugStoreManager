@@ -7,11 +7,15 @@ import com.fq.po.DosageformBean;
 import com.fq.po.DrugBean;
 import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugUnitBean;
+import com.fq.po.UserBean;
 import com.fq.util.PageModel;
 
 public interface DrugDAO {
 	
 DrugBean selectDrugByName(String drugname);
+	
+	
+	List<DrugBean> show();
 	
 	DrugBean selectDrugByDrugcode(Integer drugcode);
 	

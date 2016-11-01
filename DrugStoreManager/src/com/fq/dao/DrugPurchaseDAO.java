@@ -1,5 +1,6 @@
 package com.fq.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.fq.po.DosageformBean;
@@ -48,4 +49,7 @@ public interface DrugPurchaseDAO {
 	List<SupplierBean> selectSupplier();
 	//有效期预警
 	PageModel<DrugPurchaseBean> splitDateWarn(Integer currPage, Integer pagesize, String keyword);	
+	//查询进货
+	List<DrugPurchaseBean> show(Date date);
+	
 }

@@ -68,6 +68,11 @@
 			var keyword=document.querySelector("#keyword").value;
 			window.location.href="pse_showDateWarn.action?currPage=1&keyword="+keyword;
 		},false);
+		
+		//打印报表
+		document.querySelector("#btn_print").addEventListener("click",()=>{
+			window.location.href="pse_doprint.action";
+		},false);
 	}
 	window.addEventListener("load",init,false);
 })();

@@ -109,8 +109,7 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>,Requ
 		request.put("manufacturer",manufacturer);
 		
 		Date modifyTime = (Date) request.get("modifyTime");
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		
+
 		request.put("modifyTime", modifyTime);
 		
 		

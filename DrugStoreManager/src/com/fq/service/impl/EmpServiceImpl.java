@@ -76,4 +76,9 @@ public class EmpServiceImpl implements EmpService {
 		return empdao.selectEmpByEmpcode(empCode);
 	}
 
+	@Override
+	public List<EmployeeBean> show() {
+		return empdao.show();
+	}
+
 }

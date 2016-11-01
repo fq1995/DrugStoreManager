@@ -55,7 +55,7 @@
 						},{"menuid":"28","icon":"icon-sys","menuname":"库存管理",
 							"menus":[{"menuid":"41","menuname":"库存列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/inventor_showInventor.action?currPage=1"},
 									{"menuid":"43","menuname":"库存下限预警","icon":"icon-nav","url":"${pageContext.request.contextPath}/inventor_showWarn.action?currPage=1"},
-									{"menuid":"42","menuname":"报表统计","icon":"icon-nav","url":"demo1.html"},
+									{"menuid":"42","menuname":"报表统计","icon":"icon-nav","url":"${pageContext.request.contextPath}/inventor_doPrint.action"},
 									{"menuid":"43","menuname":"添加支出","icon":"icon-nav","url":"demo2.html"}
 								]
 						},{"menuid":"39","icon":"icon-sys","menuname":"销售管理",
@@ -77,6 +77,14 @@
 							"menus":[{"menuid":"81","menuname":"供货商列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/sup_showSupplier.action?currPage=1"},
 								{"menuid":"82","menuname":"商品列表","icon":"icon-nav","url":"demo1.html"},
 								{"menuid":"83","menuname":"商品订单","icon":"icon-nav","url":"demo2.html"}
+							]
+						},{"menuid":"73","icon":"icon-sys","menuname":"打印报表",
+							"menus":[{"menuid":"91","menuname":"用户表","icon":"icon-nav","url":"${pageContext.request.contextPath}/print_printUser.action"},
+								{"menuid":"92","menuname":"员工表","icon":"icon-nav","url":"${pageContext.request.contextPath}/print_printEmp.action"},
+								{"menuid":"93","menuname":"药品表","icon":"icon-nav","url":"${pageContext.request.contextPath}/print_printDrug.action"},
+								{"menuid":"94","menuname":"药品库存表","icon":"icon-nav","url":"${pageContext.request.contextPath}/inventor_doPrint.action"},
+								{"menuid":"95","menuname":"药品销售表","icon":"icon-nav","url":"${pageContext.request.contextPath}/sale_doPrint.action"},
+								{"menuid":"96","menuname":"药品进货表","icon":"icon-nav","url":"${pageContext.request.contextPath}/pse_doprint.action"},
 							]
 						}
 				]};

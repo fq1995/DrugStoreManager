@@ -10,6 +10,7 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.fq.dao.UserDAO;
+import com.fq.po.DrugBean;
 import com.fq.po.UserBean;
 import com.fq.util.BaseDAO;
 import com.fq.util.PageModel;
@@ -119,6 +120,13 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 		String hql ="from UserBean where username =? and userId !=? and status=1";
 		List<UserBean> Userlist = (List<UserBean>) hibernateTemplate.find(hql, username,userid);
 		return Userlist==null||Userlist.size()<=0?null:Userlist.get(0);
+	}
+
+	@Override
+	public List<UserBean> show() {
+		String hql ="from UserBean";
+		List<UserBean> list = (List<UserBean>) hibernateTemplate.find(hql);
+		return list==null||list.size()<=0?null:list;
 	}
 
 }

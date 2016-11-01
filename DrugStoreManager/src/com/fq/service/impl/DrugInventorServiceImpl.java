@@ -1,5 +1,6 @@
 package com.fq.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +82,11 @@ public class DrugInventorServiceImpl implements DrugInventorService {
 	@Override
 	public PageModel<InventoriesBean> splitWarn(Integer currPage, Integer pagesize, String keyword) {
 		return drugInventorDao.splitWarn(currPage, pagesize, keyword);
+	}
+
+	@Override
+	public List<InventoriesBean> selectByDate(Date date) {
+		return drugInventorDao.selectByDate(date);
 	}
 
 }

@@ -10,6 +10,7 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.fq.dao.EmpDAO;
+import com.fq.po.DrugBean;
 import com.fq.po.EmployeeBean;
 import com.fq.util.BaseDAO;
 import com.fq.util.PageModel;
@@ -113,6 +114,13 @@ public class EmpDAOImpl extends BaseDAO<EmployeeBean> implements EmpDAO {
 	@Override
 	public void updateEmp(EmployeeBean empBean) {
 		getHibernateTemplate().update(empBean);
+	}
+
+	@Override
+	public List<EmployeeBean> show() {
+		String hql ="from EmployeeBean";
+		List<EmployeeBean> list = (List<EmployeeBean>) hibernateTemplate.find(hql);
+		return list==null||list.size()<=0?null:list;
 	}
 
 }

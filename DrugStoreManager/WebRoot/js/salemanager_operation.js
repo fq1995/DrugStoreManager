@@ -64,6 +64,12 @@
 				}
 			}
 		},false);
+		//打印报表
+		document.querySelector("#btn_print").addEventListener("click",()=>{
+			window.location.href="sale_doPrint.action";
+		},false);
+		
+		
 	}
 	window.addEventListener("load",init,false);
 })();

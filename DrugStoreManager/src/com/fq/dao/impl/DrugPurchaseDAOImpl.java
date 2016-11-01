@@ -113,7 +113,6 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 
 	@Override
 	public void updatePse(DrugPurchaseBean bean) {
-		
 		getHibernateTemplate().merge(bean);
 
 	}
@@ -182,6 +181,15 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 		String hql_count = "select count(*) from DrugPurchaseBean where drugBean.drugName like :keyword and validityDate < '"+str+"'";
 		String hql = "from DrugPurchaseBean where drugBean.drugName like :keyword and validityDate < '"+str+"'";
 		return super.split(hql, hql_count, currPage, pagesize,keyword);
+	}
+
+	@Override
+	public List<DrugPurchaseBean> show(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+		String str = sdf.format(date);
+		String hql ="from DrugPurchaseBean where date_format(purchasedate,'%Y-%m') = '"+str+"'";
+		List<DrugPurchaseBean> list = (List<DrugPurchaseBean>) hibernateTemplate.find(hql);
+		return list==null||list.size()<=0?null:list;
 	}
 
 

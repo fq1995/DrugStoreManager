@@ -80,6 +80,12 @@ public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPu
 		request.put("page", page);
 		return "showPurchase";
 	}
+	/**
+	 * 跳转打印界面
+	 */
+	public String doprint(){
+		return "print";
+	}
 	
 	/**
 	 * 跳转新增

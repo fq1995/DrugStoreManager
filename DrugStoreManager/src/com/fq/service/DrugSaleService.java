@@ -1,5 +1,6 @@
 package com.fq.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.fq.po.DosageformBean;
@@ -45,4 +46,7 @@ DrugSalesBean selectSaleByName(String name);
 	DrugSalesBean selectSaleByDrugId(String id);
 	//查询员工
 	List<UserBean> selectUser();
+	//查询销售
+	List<DrugSalesBean> show(Date date);
+	
 }

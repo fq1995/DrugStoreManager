@@ -111,6 +111,11 @@ public class DrugServiceImpl implements DrugService {
 	public DosageformBean selectFormById(String id) {
 		return drugDAO.selectFormById(id);
 	}
+
+	@Override
+	public List<DrugBean> show() {
+		return drugDAO.show();
+	}
 	
 	
 

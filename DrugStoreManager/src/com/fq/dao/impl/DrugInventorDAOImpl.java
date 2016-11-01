@@ -134,4 +134,15 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 		return super.split(hql, hql_count, currPage, pagesize,keyword);
 	}
 
+	@Override
+	public List<InventoriesBean> selectByDate(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+		String str = sdf.format(date);
+		
+		String hql ="from InventoriesBean where date_format(date,'%Y-%m') = '"+str+"'";
+//		String hql ="from InventoriesBean where date between '"+str+"-01"+"' and '"+str+"-31"+"'";
+		List<InventoriesBean> List = (List<InventoriesBean>) hibernateTemplate.find(hql);
+		return List==null||List.size()<=0?null:List;
+	}
+
 }

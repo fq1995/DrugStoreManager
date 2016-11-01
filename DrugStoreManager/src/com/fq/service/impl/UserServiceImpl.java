@@ -80,4 +80,9 @@ public class UserServiceImpl implements UserService {
 		return userDAO.selectUserByNameAndUserId(username, userid);
 	}
 
+	@Override
+	public List<UserBean> show() {
+		return userDAO.show();
+	}
+
 }

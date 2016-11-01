@@ -1,5 +1,6 @@
 package com.fq.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.fq.po.DosageformBean;
@@ -24,6 +25,8 @@ public interface DrugInventorDAO {
 	void deleteAllInventor(List<InventoriesBean> list);
 	//修改
 	void updateInventor(InventoriesBean bean);
+	//根据时间查询
+	List<InventoriesBean> selectByDate(Date date);
 	//根据ID查询
 	InventoriesBean selectById(String id);
 	//查询类别
