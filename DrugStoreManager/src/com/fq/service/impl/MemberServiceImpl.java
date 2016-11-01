@@ -74,4 +74,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.selectById(id);
 	}
 
+	@Override
+	public List<MemberBean> show() {
+		return memberDao.show();
+	}
+
 }

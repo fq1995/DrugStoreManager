@@ -85,6 +85,8 @@
 								{"menuid":"94","menuname":"药品库存表","icon":"icon-nav","url":"${pageContext.request.contextPath}/inventor_doPrint.action"},
 								{"menuid":"95","menuname":"药品销售表","icon":"icon-nav","url":"${pageContext.request.contextPath}/sale_doPrint.action"},
 								{"menuid":"96","menuname":"药品进货表","icon":"icon-nav","url":"${pageContext.request.contextPath}/pse_doprint.action"},
+								{"menuid":"97","menuname":"会员表","icon":"icon-nav","url":"${pageContext.request.contextPath}/print_printMember.action"},
+								{"menuid":"98","menuname":"供货商表","icon":"icon-nav","url":"${pageContext.request.contextPath}/print_printSupplier.action"}
 							]
 						}
 				]};

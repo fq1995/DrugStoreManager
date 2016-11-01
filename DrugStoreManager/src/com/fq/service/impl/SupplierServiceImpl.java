@@ -63,4 +63,9 @@ public class SupplierServiceImpl implements SupplierService {
 		return supplierDao.selectById(id);
 	}
 
+	@Override
+	public List<SupplierBean> show() {
+		return supplierDao.show();
+	}
+
 }

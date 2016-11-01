@@ -12,17 +12,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.poi.hssf.usermodel.HSSFFont;
-import org.apache.poi.hssf.usermodel.HSSFFooter;
-import org.apache.poi.hssf.usermodel.HSSFPrintSetup;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +29,16 @@ import com.fq.po.DrugPurchaseBean;
 import com.fq.po.DrugSalesBean;
 import com.fq.po.EmployeeBean;
 import com.fq.po.InventoriesBean;
+import com.fq.po.MemberBean;
+import com.fq.po.SupplierBean;
 import com.fq.po.UserBean;
 import com.fq.service.DrugInventorService;
 import com.fq.service.DrugPurchaseService;
 import com.fq.service.DrugSaleService;
 import com.fq.service.DrugService;
 import com.fq.service.EmpService;
+import com.fq.service.MemberService;
+import com.fq.service.SupplierService;
 import com.fq.service.UserService;
 import com.fq.util.DownloadUtil;
 
@@ -60,7 +59,10 @@ public class PrintAction implements RequestAware {
 	private DrugSaleService drugSaleService;
 	@Autowired
 	private DrugPurchaseService drugPurchaseService;
-
+	@Autowired
+	private MemberService memberService;
+	@Autowired
+	private SupplierService supplierService;
 	private HttpServletResponse response = ServletActionContext.getResponse();
 	private Date date;
 
@@ -255,7 +257,7 @@ public class PrintAction implements RequestAware {
 		// 大标题 合并单元格
 		nRow = sheet.getRow(rowNo++);
 		nCell = nRow.getCell(colNo);
-		nCell.setCellValue(inputDate.replaceFirst("-0", "-").replaceFirst("-", "年") + "月份药品表");
+		nCell.setCellValue("药品表");
 		rowNo++;
 
 		// 处理数据
@@ -306,7 +308,7 @@ public class PrintAction implements RequestAware {
 		DownloadUtil du = new DownloadUtil();
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		wb.write(os);
-		du.download(os, response, inputDate.replaceFirst("-0", "-").replaceFirst("-", "年") + "月份药品表.xls");
+		du.download(os, response, "药品表.xls");
 
 	}
 
@@ -362,7 +364,7 @@ public class PrintAction implements RequestAware {
 		// 大标题 合并单元格
 		nRow = sheet.getRow(rowNo++);
 		nCell = nRow.getCell(colNo);
-		nCell.setCellValue(inputDate.replaceFirst("-0", "-").replaceFirst("-", "年") + "月份员工表");
+		nCell.setCellValue("员工表");
 		rowNo++;
 
 		// 处理数据
@@ -456,7 +458,7 @@ public class PrintAction implements RequestAware {
 
 		nRow = sheet.getRow(rowNo++);
 		nCell = nRow.getCell(colNo);
-		nCell.setCellValue(inputDate.replaceFirst("-0", "-").replaceFirst("-", "年") + "月份用户表");
+		nCell.setCellValue("用户表");
 		rowNo++;
 
 		// 处理数据
@@ -493,7 +495,204 @@ public class PrintAction implements RequestAware {
 		DownloadUtil du = new DownloadUtil();
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		wb.write(os);
-		du.download(os, response, inputDate.replaceFirst("-0", "-").replaceFirst("-", "年") + "月份用户表.xls");
+		du.download(os, response, "用户表.xls");
+
+	}
+
+	// 打印供货商
+	public void printSupplier() throws IOException {
+		date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+		String inputDate = sdf.format(date);
+		List<SupplierBean> list = supplierService.show();
+
+		String path = ServletActionContext.getRequest().getSession().getServletContext().getRealPath("/")
+				+ "/xlsprint/";
+		InputStream is = new FileInputStream(new File(path + "supplier.xls"));
+		Workbook wb = new HSSFWorkbook(is);
+		Sheet sheet = wb.getSheetAt(0);
+		Row nRow = null;
+		Cell nCell = null;
+
+		int rowNo = 0; // 行号
+		int colNo = 1; // 列号
+
+		// 获取模板单元格样式
+		nRow = sheet.getRow(2);
+
+		// 供货商编号
+		nCell = nRow.getCell(1);
+		CellStyle codeStyle = nCell.getCellStyle();
+
+		// 供货商名
+		nCell = nRow.getCell(2);
+		CellStyle nameStyle = nCell.getCellStyle();
+
+		// 联系人
+		nCell = nRow.getCell(3);
+		CellStyle supStyle = nCell.getCellStyle();
+
+
+		// 电话
+		nCell = nRow.getCell(4);
+		CellStyle telStyle = nCell.getCellStyle();
+
+		// 状态
+		nCell = nRow.getCell(5);
+		CellStyle stutasStyle = nCell.getCellStyle();
+
+
+		nRow = sheet.getRow(rowNo++);
+		nCell = nRow.getCell(colNo);
+		nCell.setCellValue(inputDate.replaceFirst("-0", "-").replaceFirst("-", "年") + "月份供货商表");
+		rowNo++;
+
+		// 处理数据
+		for (int j = 0; j < list.size(); j++) {
+			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+			colNo = 1;
+			SupplierBean bean = list.get(j); // 获取库存对象
+
+			nRow = sheet.createRow(rowNo++);
+			nRow.setHeightInPoints(24);
+
+			nCell = nRow.createCell(colNo++);
+			nCell.setCellValue(bean.getSupplierCode());
+			nCell.setCellStyle(codeStyle);
+
+			nCell = nRow.createCell(colNo++);
+			nCell.setCellValue(bean.getSupplier());
+			nCell.setCellStyle(nameStyle);
+
+			nCell = nRow.createCell(colNo++);
+			nCell.setCellValue(bean.getName());
+			nCell.setCellStyle(supStyle);
+
+			nCell = nRow.createCell(colNo++);
+			nCell.setCellValue(bean.getTel());
+			nCell.setCellStyle(telStyle);
+
+			nCell = nRow.createCell(colNo++);
+			if("1".equals(bean.getStatus())){
+				nCell.setCellValue("已审核");
+			}else{
+				nCell.setCellValue("未审核");
+			}
+			nCell.setCellStyle(stutasStyle);
+
+		}
+		// 下载
+		DownloadUtil du = new DownloadUtil();
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		wb.write(os);
+		du.download(os, response, "供货商表.xls");
+
+	}
+
+	// 打印会员
+	public void printMember() throws IOException {
+		date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+		String inputDate = sdf.format(date);
+		List<MemberBean> list = memberService.show();
+
+		String path = ServletActionContext.getRequest().getSession().getServletContext().getRealPath("/")
+				+ "/xlsprint/";
+		InputStream is = new FileInputStream(new File(path + "member.xls"));
+		Workbook wb = new HSSFWorkbook(is);
+		Sheet sheet = wb.getSheetAt(0);
+		Row nRow = null;
+		Cell nCell = null;
+
+		int rowNo = 0; // 行号
+		int colNo = 1; // 列号
+
+		// 获取模板单元格样式
+		nRow = sheet.getRow(2);
+
+		// 会员编号
+		nCell = nRow.getCell(1);
+		CellStyle codeStyle = nCell.getCellStyle();
+
+		// 会员姓名
+		nCell = nRow.getCell(2);
+		CellStyle nameStyle = nCell.getCellStyle();
+
+		// 会员性别
+		nCell = nRow.getCell(3);
+		CellStyle sexStyle = nCell.getCellStyle();
+
+		// 会员年龄
+		nCell = nRow.getCell(4);
+		CellStyle ageStyle = nCell.getCellStyle();
+
+		// 会员等级
+		nCell = nRow.getCell(5);
+		CellStyle levelStyle = nCell.getCellStyle();
+
+		// 会员电话
+		nCell = nRow.getCell(6);
+		CellStyle telStyle = nCell.getCellStyle();
+
+		// 会员地址
+		nCell = nRow.getCell(7);
+		CellStyle addStyle = nCell.getCellStyle();
+
+		// 会员积分
+		nCell = nRow.getCell(6);
+		CellStyle intStyle = nCell.getCellStyle();
+
+		nRow = sheet.getRow(rowNo++);
+		nCell = nRow.getCell(colNo);
+		nCell.setCellValue(inputDate.replaceFirst("-0", "-").replaceFirst("-", "年") + "月份会员表");
+		rowNo++;
+
+		// 处理数据
+		for (int j = 0; j < list.size(); j++) {
+			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+			colNo = 1;
+			MemberBean bean = list.get(j); // 获取库存对象
+
+			nRow = sheet.createRow(rowNo++);
+			nRow.setHeightInPoints(24);
+
+			nCell = nRow.createCell(colNo++);
+			nCell.setCellValue(bean.getMemberCode());
+			nCell.setCellStyle(codeStyle);
+
+			nCell = nRow.createCell(colNo++);
+			nCell.setCellValue(bean.getMemberName());
+			nCell.setCellStyle(nameStyle);
+
+			nCell = nRow.createCell(colNo++);
+			nCell.setCellValue(bean.getAge());
+			nCell.setCellStyle(ageStyle);
+
+			nCell = nRow.createCell(colNo++);
+			nCell.setCellValue(bean.getSex());
+			nCell.setCellStyle(sexStyle);
+
+			nCell = nRow.createCell(colNo++);
+			nCell.setCellValue(bean.getMemberLevel());
+			nCell.setCellStyle(levelStyle);
+
+			nCell = nRow.createCell(colNo++);
+			nCell.setCellValue(bean.getSuppliertel());
+			nCell.setCellStyle(telStyle);
+
+			nCell = nRow.createCell(colNo++);
+			nCell.setCellValue(bean.getAddress());
+			nCell.setCellStyle(addStyle);
+
+			nCell = nRow.createCell(colNo++);
+			nCell.setCellValue(bean.getIntegration());
+			nCell.setCellStyle(intStyle);
+		}
+		// 下载
+		DownloadUtil du = new DownloadUtil();
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		wb.write(os);
+		du.download(os, response, "会员表.xls");
 
 	}
 
@@ -651,8 +850,8 @@ public class PrintAction implements RequestAware {
 
 		// 获取模板单元格样式
 		nRow = sheet.getRow(2);
-		
-		//药品进货单号
+
+		// 药品进货单号
 		nCell = nRow.getCell(1);
 		CellStyle codeStyle = nCell.getCellStyle();
 
@@ -672,30 +871,30 @@ public class PrintAction implements RequestAware {
 		nCell = nRow.getCell(5);
 		CellStyle cateStyle = nCell.getCellStyle();
 
-		//数量
+		// 数量
 		nCell = nRow.getCell(6);
 		CellStyle amountStyle = nCell.getCellStyle();
-		
-		//生产日期
+
+		// 生产日期
 		nCell = nRow.getCell(7);
 		CellStyle prodateStyle = nCell.getCellStyle();
-		
-		//有效期
+
+		// 有效期
 		nCell = nRow.getCell(8);
 		CellStyle vardateStyle = nCell.getCellStyle();
-		
-		//进货日期
+
+		// 进货日期
 		nCell = nRow.getCell(9);
 		CellStyle jindateStyle = nCell.getCellStyle();
-		
-		//供货商
+
+		// 供货商
 		nCell = nRow.getCell(10);
 		CellStyle supStyle = nCell.getCellStyle();
-		
+
 		// 生产厂商
 		nCell = nRow.getCell(11);
 		CellStyle facturerStyle = nCell.getCellStyle();
-		
+
 		// 批准文号
 		nCell = nRow.getCell(12);
 		CellStyle ApproStyle = nCell.getCellStyle();
@@ -717,11 +916,11 @@ public class PrintAction implements RequestAware {
 
 			nRow = sheet.createRow(rowNo++);
 			nRow.setHeightInPoints(24);
-			
+
 			nCell = nRow.createCell(colNo++);
 			nCell.setCellValue(bean.getPurchaseCode());
 			nCell.setCellStyle(codeStyle);
-			
+
 			nCell = nRow.createCell(colNo++);
 			nCell.setCellValue(bean.getDrugBean().getDrugName());
 			nCell.setCellStyle(nameStyle);
@@ -737,7 +936,7 @@ public class PrintAction implements RequestAware {
 			nCell = nRow.createCell(colNo++);
 			nCell.setCellValue(bean.getDrugBean().getDrugCategoryBean().getCategory());
 			nCell.setCellStyle(cateStyle);
-			
+
 			nCell = nRow.createCell(colNo++);
 			nCell.setCellValue(bean.getAmount());
 			nCell.setCellStyle(amountStyle);
@@ -745,20 +944,19 @@ public class PrintAction implements RequestAware {
 			nCell = nRow.createCell(colNo++);
 			nCell.setCellValue(sdf.format(bean.getProductionDate()));
 			nCell.setCellStyle(prodateStyle);
-			
-			
+
 			nCell = nRow.createCell(colNo++);
 			nCell.setCellValue(sdf.format(bean.getValidityDate()));
 			nCell.setCellStyle(vardateStyle);
-			
+
 			nCell = nRow.createCell(colNo++);
 			nCell.setCellValue(sdf.format(bean.getPurchasedate()));
 			nCell.setCellStyle(jindateStyle);
-			
+
 			nCell = nRow.createCell(colNo++);
 			nCell.setCellValue(bean.getSupplierBean().getSupplier());
 			nCell.setCellStyle(amountStyle);
-			
+
 			nCell = nRow.createCell(colNo++);
 			nCell.setCellValue(bean.getDrugBean().getManufacturer());
 			nCell.setCellStyle(facturerStyle);
@@ -781,8 +979,6 @@ public class PrintAction implements RequestAware {
 
 	}
 
-	
-	
 	@Override
 	public void setRequest(Map<String, Object> request) {
 		this.request = request;

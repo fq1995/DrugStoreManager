@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.fq.dao.MemberDAO;
 import com.fq.po.EmployeeBean;
 import com.fq.po.MemberBean;
+import com.fq.po.UserBean;
 import com.fq.util.BaseDAO;
 import com.fq.util.PageModel;
 import com.fq.util.UUIDBuild;
@@ -100,6 +101,13 @@ public class MemberDAOImpl extends BaseDAO<MemberBean> implements MemberDAO {
 	public MemberBean selectById(String id) {
 		MemberBean bean = getHibernateTemplate().get(MemberBean.class, id);
 		return null==bean?null:bean;
+	}
+
+	@Override
+	public List<MemberBean> show() {
+		String hql ="from MemberBean";
+		List<MemberBean> list = (List<MemberBean>) hibernateTemplate.find(hql);
+		return list==null||list.size()<=0?null:list;
 	}
 
 }

@@ -29,4 +29,6 @@ public interface MemberService {
 		void updateMember(MemberBean memberBean);
 		//根据id查询
 		MemberBean selectById(String id);
+		//查询全部
+		List<MemberBean> show();
 }

@@ -24,4 +24,6 @@ public interface SupplierService {
 	void updateSup(SupplierBean supBean);
 	//根据id查询
 	SupplierBean selectById(String id);
+	//查询所有
+	List<SupplierBean> show();
 }

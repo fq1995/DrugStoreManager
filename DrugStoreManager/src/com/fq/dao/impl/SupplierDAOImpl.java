@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.fq.dao.SupplierDAO;
 import com.fq.po.SupplierBean;
+import com.fq.po.UserBean;
 import com.fq.util.BaseDAO;
 import com.fq.util.PageModel;
 import com.fq.util.UUIDBuild;
@@ -88,6 +89,13 @@ public class SupplierDAOImpl extends BaseDAO<SupplierBean> implements SupplierDA
 	public SupplierBean selectById(String id) {
 		SupplierBean supBean = getHibernateTemplate().get(SupplierBean.class, id);
 		return null==supBean?null:supBean;
+	}
+
+	@Override
+	public List<SupplierBean> show() {
+		String hql ="from SupplierBean";
+		List<SupplierBean> list = (List<SupplierBean>) hibernateTemplate.find(hql);
+		return list==null||list.size()<=0?null:list;
 	}
 
 }
