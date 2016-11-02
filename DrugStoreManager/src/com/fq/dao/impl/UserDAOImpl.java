@@ -23,6 +23,8 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 
 	@Override
 	public void register(UserBean userBean) {
+		userBean.setUserId(UUIDBuild.getUUID());
+		userBean.setStatus(1);
 		hibernateTemplate.save(userBean);
 	}
 

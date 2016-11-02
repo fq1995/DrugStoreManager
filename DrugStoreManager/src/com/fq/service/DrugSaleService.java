@@ -18,8 +18,6 @@ DrugSalesBean selectSaleByName(String name);
 	
 	DrugSalesBean selectSaleByDrugcode(Integer code);
 	
-	void addSale(DrugBean drugBean,DrugSalesBean bean,String time) throws Exception;
-	
 	void addSale(UserBean userBean,DrugBean drugBean,DrugSalesBean bean,String time) throws Exception;
 	
 	PageModel<DrugSalesBean> splitSale(Integer currPage, Integer pageSize, String keyword);
@@ -43,10 +41,12 @@ DrugSalesBean selectSaleByName(String name);
 	//查询会员
 	List<MemberBean> selectMember();
 	//根据药品ID查询
-	DrugSalesBean selectSaleByDrugId(String id);
+	DrugBean selectSaleByDrugId(String id);
 	//查询员工
 	List<UserBean> selectUser();
 	//查询销售
 	List<DrugSalesBean> show(Date date);
+	//查询会员电话
+	MemberBean selectSaleByTel(String suppliertel);
 	
 }

@@ -82,7 +82,7 @@ public class UserBean  implements java.io.Serializable {
     public void setUserId(String userId) {
         this.userId = userId;
     }
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
         @JoinColumn(name="ROLEID")
 
     public RoleBean getRoleBean() {
@@ -93,7 +93,7 @@ public class UserBean  implements java.io.Serializable {
         this.roleBean = roleBean;
     }
     
-    @Column(name="USER_CODE", nullable=false)
+    @Column(name="USER_CODE", nullable=true)
 
     public Integer getUserCode() {
         return this.userCode;

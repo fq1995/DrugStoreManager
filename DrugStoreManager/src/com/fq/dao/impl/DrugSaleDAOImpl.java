@@ -46,19 +46,6 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 		return list==null||list.size()<=0?null:list.get(0);
 	}
 
-	@Override
-	public void addSale(DrugBean drugBean, DrugSalesBean bean, String time) throws Exception {
-		drugBean = bean.getDrugBean();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = sdf.parse(time);
-		bean.setSalesDate(date);
-		bean.setSalesId(UUIDBuild.getUUID());
-		Session session=sessionFactory.getCurrentSession();
-		session.clear();
-		session.load(drugBean, drugBean.getDrugId());
-		hibernateTemplate.merge(bean);
-		
-	}
 	
 	@Override
 	public void addSale(UserBean userBean, DrugBean drugBean, DrugSalesBean bean, String time) throws Exception {
@@ -70,8 +57,7 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 		bean.setSalesId(UUIDBuild.getUUID());
 		Session session=sessionFactory.getCurrentSession();
 		session.clear();
-		session.load(userBean, userBean.getUserId());
-		session.load(drugBean, drugBean.getDrugId());
+		
 		hibernateTemplate.merge(bean);
 	}
 	
@@ -176,10 +162,11 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 		return memberList==null||memberList.size()<=0?null:memberList;
 	}
 
+	
 	@Override
-	public DrugSalesBean selectSaleByDrugId(String id) {
-		String hql = "from DrugSalesBean where drugBean.drugId=?";
-		List<DrugSalesBean> list = (List<DrugSalesBean>) hibernateTemplate.find(hql,id);
+	public DrugBean selectSaleByDrugId(String id) {
+		String hql = "from DrugBean where drugId =?";
+		List<DrugBean> list = (List<DrugBean>) hibernateTemplate.find(hql,id);
 		return list==null||list.size()<=0?null:list.get(0);
 	}
 
@@ -197,6 +184,13 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 		String hql = "from DrugSalesBean where date_format(salesDate,'%Y-%m') = '"+str+"'";
 		List<DrugSalesBean> list = (List<DrugSalesBean>) hibernateTemplate.find(hql);
 		return list==null||list.size()<=0?null:list;
+	}
+
+	@Override
+	public MemberBean selectSaleByTel(String suppliertel) {
+		String hql ="from MemberBean where suppliertel =?";
+		List<MemberBean> list = (List<MemberBean>) hibernateTemplate.find(hql,suppliertel);
+		return list==null||list.size()<=0?null:list.get(0);
 	}
 
 	

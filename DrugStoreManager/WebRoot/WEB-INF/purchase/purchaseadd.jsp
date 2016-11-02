@@ -66,7 +66,20 @@
  				$("#add").attr("disabled",false);   
  	        }
  		});
- 		
+ 		//数量
+ 		$("#amount").blur(function(){
+ 			var volue = $("#amount").val();
+ 			if(!isNaN(volue)){
+ 				if($.trim(volue) == "" || volue.length == 0){
+ 	 				alert("数量不能为空");
+ 	 			}
+ 				else if(volue <= 0){
+ 	 				alert("数量必须大于0");
+ 				}
+ 			}else{
+ 			   alert("输入的不是数字");
+ 			}
+ 		});
  		
  		
  	});

@@ -29,9 +29,9 @@ public class ValidateCode {
 	// 验证码图片Buffer
 	private BufferedImage buffImg=null;
 
-	private char[] codeSequence = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+	private char[] codeSequence = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',  'J',
 			'K', 'L', 'M', 'N',  'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
-			'X', 'Y', 'Z',  '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+			'X', 'Y', 'Z', '2', '3', '4', '5', '6', '7', '8', '9' };
 
 	public  ValidateCode() {
 		this.createCode();

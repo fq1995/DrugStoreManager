@@ -15,6 +15,7 @@ import com.fq.po.DrugBean;
 import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugUnitBean;
 import com.fq.util.BaseDAO;
+import com.fq.util.ConstantUtils;
 import com.fq.util.PageModel;
 import com.fq.util.UUIDBuild;
 @Repository("drugDAO")
@@ -51,6 +52,7 @@ public class DrugDAOImpl extends BaseDAO<DrugBean> implements DrugDAO {
 		drugBean.setModifyTime(date);
 		drugBean.setDrugId(UUIDBuild.getUUID());
 		drugBean.setStatus("1");
+		drugBean.setMemberprice(drugBean.getSalepeice()*ConstantUtils.discount);
 		hibernateTemplate.save(drugBean);
 
 	}
@@ -103,6 +105,7 @@ public class DrugDAOImpl extends BaseDAO<DrugBean> implements DrugDAO {
 		}
 		drugBean.setModifyTime(date);
 		drugBean.setStatus("1");
+		drugBean.setMemberprice(drugBean.getSalepeice()*ConstantUtils.discount);
 		getHibernateTemplate().update(drugBean);
 	}
 

@@ -28,6 +28,67 @@
  		 
  	});
  	$(function() {
+ 		//药品名称
+ 		$("#drugname").blur(function(){
+ 			var drugid = $("#drugname").val();
+ 			$.ajax({
+ 				url:'sale_validateid.action',
+ 				type:'POST',
+ 				data:{'drugid':drugid},
+ 				dataType:'json',
+ 				success:function(data){ 
+ 					if(data != 0){
+		 				$("#salepeice").val(data);
+ 					}
+ 			     },
+ 				 error:function(data){  
+ 					alert("请选择药品名称");
+ 		         }  
+ 	  		});
+ 		});
+ 		
+ 		
+ 		//会员电话
+ 		$("#suppliertel").blur(function(){
+ 	 		var tel = $("#suppliertel").val();
+ 	 		var saleprice = $("#salepeice").val();
+ 	 		$.ajax({
+ 				url:'sale_validateTel.action',
+ 				type:'POST',
+ 				data:{'tel':tel},
+ 				dataType:'json',
+ 				success:function(data){ 
+ 					if(data == "无此会员"){
+ 						$("#mess").html("无此会员");
+ 					}
+ 					else if(data=="会员可用"){
+ 						$("#salepeice").val((saleprice*0.9).toFixed(2));
+ 						$("#mess").html("会员可用");
+ 			        }
+ 			     }  
+ 	  		});
+ 		});
+ 		
+ 		
+ 		//销售总金额
+ 		$("#salesVolume").blur(function() {
+ 			var volue = $("#salesVolume").val();
+ 			var saleprice = $("#salepeice").val();
+ 			if(!isNaN(volue)){
+ 				if($.trim(volue) == "" || volue.length == 0){
+ 	 				alert("数量不能为空");
+ 	 			}
+ 				else if(volue <= 0){
+ 	 				alert("数量必须大于0");
+ 	 			}else{
+ 	 				$("#totalamount").val(volue*saleprice);
+ 	 			}
+ 				
+ 			}else{
+ 			   alert("输入的不是数字");
+ 			}
+ 		});
+ 		
 /* 		$("#drugBean.drugName").css("background-color",""); 
  		$("#drugBean.modifier").css("background-color",""); 
  		$("#drugBean.drugCode").css("background-color",""); 
@@ -110,23 +171,25 @@
 				<li><label>销售单编号</label><input name="salesCode" type="text" id="salesCode" value="${sale.salesCode }"
 					class="form-control" style="width:200px; display:inline" readonly="readonly" placeholder="请输入销售单编号" /><i>必填</i></li>
 				<li><label>药品名称</label>
-					<select class="form-control" style="width:200px;height:34px"  name="drugBean.drugId">
+					<select id="drugname" class="form-control" style="width:200px;height:34px"  name="drugBean.drugId">
 						<option value="${sale.drugBean.drugId }">${sale.drugBean.drugName }</option>
 					<c:forEach items="${drugList }" var="drug">
 						<option value="${drug.drugId }">${drug.drugName }</option>
 					</c:forEach>
 					</select></li>
 				<li><label>查询会员</label>
-					<select class="form-control" style="width:200px;height:34px"  name="memberBean.memberId">
-						<option value="${sale.memberBean.memberId}">${sale.memberBean.memberName }</option>
-					<c:forEach items="${memberList }" var="member">
-						<option value="${member.memberId }">${member.memberName }</option>
-					</c:forEach>
-					</select></li>
+					<input name="memberBean.suppliertel" type="text" id="suppliertel" value="${sale.memberBean.suppliertel }"
+					class="form-control" style="width:200px; display:inline" placeholder="请输入客户电话"/><i>必填</i><i id="mess" style="color: red"></i>
+				</li>
+				
 				<li><label>销售单价</label><input name="salepeice" type="text" id="salepeice" value="${sale.salepeice }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入销售价格"/><i>必填</i></li>
 				<li><label>销售数量</label><input name="salesVolume" type="text" id="salesVolume" value="${sale.salesVolume }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入销售数量"/><i>必填</i></li>
+					
+				<li><label>销售金额</label><input name="totalamount" type="text" id="totalamount" value="${sale.totalamount }"
+					class="form-control" style="width:200px; display:inline" placeholder="请输入销售金额"/><i>必填</i></li>
+				
 			 	<li><label>操作人</label>
 					<select class="form-control" style="width:200px;height:34px"  name="userBean.userId">
 						<option value="${sale.userBean.userId }">${sale.userBean.username }</option>
@@ -134,10 +197,6 @@
 						<option value="${user.userId }">${user.username }</option>
 					</c:forEach>
 					</select></li> 
-					
-				<li><label>销售金额</label><input name="totalamount" type="text" id="totalamount" value="${sale.totalamount }"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入销售金额"/><i>必填</i></li>
-				
 				<li><input id="add" type="submit" class="btn btn-info btn-sm"  value="确认保存" />&nbsp;&nbsp;&nbsp;&nbsp;
 					<input id="return" type="button" class="btn btn-info btn-sm" onclick="javascript:history.go(-1);" value="返回" /></li>
 			</ul>

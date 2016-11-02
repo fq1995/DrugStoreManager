@@ -19,7 +19,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<!-- 指定配置文件的位置 -->
-		<param-value>Classpath:spring.xml</param-value>
+		<param-value>classpath:spring.xml</param-value>
 	</context-param>
 	<!--配置spring的监听器 -->
 	<listener>

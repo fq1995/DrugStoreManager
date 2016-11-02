@@ -114,6 +114,8 @@
 						<option value="${drugCategory.categoryId }">${drugCategory.category }</option>
 					</c:forEach>
 					</select></li>
+				<li><label>销售价</label><input name="salepeice" type="text" id="salepeice"
+					class="form-control" style="width:200px; display:inline" placeholder="请输入销售价"/><i></i></li>
 				<li><label>厂商</label><input name="manufacturer" type="text" id="manufacturer"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入生产厂商"/><i></i></li>
 				<li><label>产品说明</label><input name="memo" type="text" id="memo"

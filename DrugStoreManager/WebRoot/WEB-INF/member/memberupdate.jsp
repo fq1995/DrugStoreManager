@@ -55,10 +55,47 @@
  	        	$("#add").attr("disabled",false);   
  	        }
  		});
- 		$("#tel").blur(function(){
+ 		//年龄
+ 		$("#age").blur(function(){
+ 			var age = $("#age").val();
+ 			if(!isNaN(age)){
+ 				if($.trim(age) == "" || age.length == 0 || age.length >3 || age <= 0){
+ 	 				alert("年龄不符合条件");
+ 	 			}
+ 			}else{
+ 			   alert("输入的不是数字");
+ 			}
+ 		});
+ 		
+ 		//会员等级
+ 		$("#memberLevel").blur(function(){
+ 			var memberLevel = $("#memberLevel").val();
+ 			if(!isNaN(memberLevel)){
+ 				if($.trim(memberLevel) == "" || memberLevel.length == 0 || memberLevel <= 0){
+ 	 				alert("会员等级不符合条件");
+ 	 			}
+ 			}else{
+ 			   alert("输入的不是数字");
+ 			}
+ 		});
+ 		
+ 		//积分
+ 		$("#integration").blur(function(){
+ 			var integration = $("#integration").val();
+ 			if(!isNaN(integration)){
+ 				if($.trim(integration) == "" || integration.length == 0 || integration <= 0){
+ 	 				alert("积分不符合条件");
+ 	 			}
+ 			}else{
+ 			   alert("输入的不是数字");
+ 			}
+ 		});
+ 		
+ 		//电话
+ 		$("#suppliertel").blur(function(){
  			$("#relti").html("");
- 			var tel = $("#tel").val();
- 	        if (!tel) {
+ 			var tel = $("#suppliertel").val();
+ 	        if ($.trim(tel) == "" || tel.length == 0 ) {
  	            //alert("手机号不能为空！");
  	            $("#relti").html("手机号不能为空！");
  	            return false;

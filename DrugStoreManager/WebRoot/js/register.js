@@ -12,6 +12,26 @@
 		$("img[name='duihao4']").css("display","none"); 
 	}
 	$(function() {
+		alert("=========");
+		$("#loginbtn").focus(function () {
+			var inputVerifyCode = $("#inputVerifyCode").val();
+			var name = $("input[name='username']").val();
+			var pass = $("#password").val();
+			var pass2 = $("#password2").val();
+			
+			if(null == name || $.trim(name) == ''){
+				alert("请输入用户名");
+			}else if(null == pass || $.trim(pass) == ''){
+				alert("请输入密码");
+			}else if(null == pass2 || $.trim(pass2) == ''){
+				alert("请再次输入密码");
+			}else if(null == inputVerifyCode || $.trim(inputVerifyCode) == ''){
+				alert("请输入验证码");
+			}
+		});
+	});
+	
+	$(function() {
   		//验证码
   		$("#inputVerifyCode").blur(function(){
   			var verifyCode = $("#inputVerifyCode").val();

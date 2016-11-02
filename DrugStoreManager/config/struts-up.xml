@@ -165,8 +165,11 @@
 			<result name="ajax_verifyCode" type="json">
 				<param name="root">flag</param>
 			</result>
-			<result name="ajax_verifyName" type="json">
+			<result name="ajax_verifyTel" type="json">
 				<param name="root">mess</param>
+			</result>
+			<result name="ajax_verifyName" type="json">
+				<param name="root">price</param>
 			</result>
 		</action>
 		

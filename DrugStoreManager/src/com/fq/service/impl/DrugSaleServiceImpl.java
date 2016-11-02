@@ -32,12 +32,6 @@ public class DrugSaleServiceImpl implements DrugSaleService {
 		return drugSaleDao.selectSaleByDrugcode(code);
 	}
 
-	@Override
-	public void addSale(DrugBean drugBean, DrugSalesBean bean, String time) throws Exception {
-		drugSaleDao.addSale(drugBean, bean, time);
-		
-	}
-
 
 	@Override
 	public PageModel<DrugSalesBean> splitSale(Integer currPage, Integer pageSize, String keyword) {
@@ -93,8 +87,8 @@ public class DrugSaleServiceImpl implements DrugSaleService {
 	}
 
 	@Override
-	public DrugSalesBean selectSaleByDrugId(String id) {
-		return drugSaleDao.selectById(id);
+	public DrugBean selectSaleByDrugId(String id) {
+		return drugSaleDao.selectSaleByDrugId(id);
 	}
 
 	@Override
@@ -111,6 +105,11 @@ public class DrugSaleServiceImpl implements DrugSaleService {
 	@Override
 	public List<DrugSalesBean> show(Date date) {
 		return drugSaleDao.show(date);
+	}
+
+	@Override
+	public MemberBean selectSaleByTel(String suppliertel) {
+		return drugSaleDao.selectSaleByTel(suppliertel);
 	}
 
 	

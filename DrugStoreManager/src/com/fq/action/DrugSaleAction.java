@@ -19,7 +19,6 @@ import com.fq.po.DrugUnitBean;
 import com.fq.po.MemberBean;
 import com.fq.po.UserBean;
 import com.fq.service.DrugSaleService;
-import com.fq.service.DrugService;
 import com.fq.util.BaseAction;
 import com.fq.util.ConstantUtils;
 import com.fq.util.PageModel;
@@ -41,14 +40,14 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 	private String keyword;
 	private String drugId;
 	
+	private Double price;
 	
 	@Autowired
 	private DrugSaleService drugSaleService;
-	@Autowired
-	private DrugService drugService; 
 	private DrugSalesBean salesBean = new DrugSalesBean();
 	private DrugBean drugBean = salesBean.getDrugBean();
 	private UserBean userBean = salesBean.getUserBean();
+	private MemberBean membean = new MemberBean();
 	
 	/**
 	 * 药品分页
@@ -113,7 +112,6 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 		request.put("drugCategoryList",drugCategoryList);
 		request.put("drugUnitList",drugUnitList);
 		request.put("dosageformList",dosageformList);
-		
 			
 		try {
 			drugSaleService.addSale(userBean,drugBean,salesBean,time);
@@ -226,15 +224,27 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 		return "ajax_verifyCode";
 	}
 	/**
-	 * ajax校验药品名是否可用
+	 * ajax校验会员电话是否可用
 	 */
-	public String validateName() {
-		DrugSalesBean bean =drugSaleService.selectSaleByName(salesBean.getDrugBean().getDrugName());
+	public String validateTel() {
+		 HttpServletRequest request = ServletActionContext.getRequest();
+		String tel = (String) request.getParameter("tel");
+		MemberBean bean =drugSaleService.selectSaleByTel(tel);
 		if(null == bean) {
-			mess = "药品名可用";
+			mess = "无此会员";
 		} else if(null != bean){
-			mess = "药品名不可用";
+			mess = "会员可用";
 		}
+		return "ajax_verifyTel";
+	}
+	/**
+	 * ajax校验会员电话是否可用
+	 */
+	public String validateid() {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		String drugid = (String) request.getParameter("drugid");
+		DrugBean bean =drugSaleService.selectSaleByDrugId(drugid);
+		price = bean.getSalepeice();
 		return "ajax_verifyName";
 	}
 	
@@ -300,4 +310,11 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 	public void setDrugId(String drugId) {
 		this.drugId = drugId;
 	}
+	public Double getPrice() {
+		return price;
+	}
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	
 }
