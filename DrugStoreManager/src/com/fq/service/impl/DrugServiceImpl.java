@@ -36,13 +36,8 @@ public class DrugServiceImpl implements DrugService {
 	}
 
 	@Override
-	public void addDrug(DrugBean DrugBean, String time) throws Exception {
-		drugDAO.addDrug(DrugBean, time);
-	}
-
-	@Override
-	public void addDrug(DrugBean DrugBean) {
-		drugDAO.addDrug(DrugBean);
+	public void addDrug(Integer drugCode, DrugBean drugBean, String time) throws Exception {
+		drugDAO.addDrug(drugCode,drugBean, time);
 	}
 
 	@Override
@@ -115,6 +110,11 @@ public class DrugServiceImpl implements DrugService {
 	@Override
 	public List<DrugBean> show() {
 		return drugDAO.show();
+	}
+
+	@Override
+	public Integer select() {
+		return drugDAO.select();
 	}
 	
 	

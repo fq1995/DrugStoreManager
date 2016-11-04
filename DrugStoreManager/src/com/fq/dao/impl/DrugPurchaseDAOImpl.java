@@ -57,7 +57,7 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 	}
 
 	@Override
-	public void addPse(SupplierBean supBean,DosageformBean dfBean, DrugCategoryBean dcBean, DrugUnitBean duBean, DrugBean drugBean,
+	public void addPse(Integer drugCode, Integer pseCode, SupplierBean supBean,DosageformBean dfBean, DrugCategoryBean dcBean, DrugUnitBean duBean, DrugBean drugBean,
 			DrugPurchaseBean drugPseBean, String time) {
 		drugBean = drugPseBean.getDrugBean();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -67,6 +67,7 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		drugPseBean.setPurchaseCode((++pseCode).toString());
 		drugPseBean.setPurchasedate(date);
 		Session session=sessionFactory.getCurrentSession();
 		session.clear();
@@ -77,6 +78,7 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 		drugBean.setDrugId(UUIDBuild.getUUID());
 		drugBean.setModifyTime(date);
 		drugBean.setStatus("1");
+		drugBean.setDrugCode(++drugCode);
 		drugPseBean.setPurchaseId(UUIDBuild.getUUID());
 		hibernateTemplate.merge(drugPseBean);
 	}
@@ -190,6 +192,14 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 		String hql ="from DrugPurchaseBean where date_format(purchasedate,'%Y-%m') = '"+str+"'";
 		List<DrugPurchaseBean> list = (List<DrugPurchaseBean>) hibernateTemplate.find(hql);
 		return list==null||list.size()<=0?null:list;
+	}
+
+	@Override
+	public Integer selectCode() {
+		String hql = "select max(purchaseCode) from DrugPurchaseBean";
+		List<String> list = (List<String>) hibernateTemplate.find(hql);
+		Integer pseCode = Integer.valueOf(list.get(0));
+		return pseCode; 
 	}
 
 

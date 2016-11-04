@@ -89,9 +89,9 @@
 			<input type="hidden" name="time">
 
 			<ul class="forminfo">
-				<li><label>库存单编号</label><input name="stockCode" type="text" id="stockCode" 
+				<li><label>库存单编号</label><input name="stockCode" type="text" id="stockCode" value="${requestScope.stockCode+1 }" readonly="readonly"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入库存单编号" /><i>必填</i></li>
-				<li><label>药品编号</label><input name="drugBean.drugCode" type="text" id="drugBean.drugCode"
+				<li><label>药品编号</label><input name="drugBean.drugCode" type="text" id="drugBean.drugCode" value="${requestScope.drugCode+1 }" readonly="readonly"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入药品编号"/><i>必填</i><i style="color: red">${message2}</i></li>
 				<li><label>药品名</label><input name="drugBean.drugName" type="text" id="drugBean.drugName"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入药品名"/><i>必填</i><i style="color: red">${message}</i></li>

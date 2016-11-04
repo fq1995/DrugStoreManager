@@ -26,295 +26,334 @@ import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("drugSaleAction")
 @Scope("prototype")
-public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesBean>,RequestAware{
-	//药品管理
-	private Map<String ,Object> session;
+public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesBean>, RequestAware {
+	// 药品管理
+	private Map<String, Object> session;
 	private Map<String, Object> request;
 	private boolean flag;
 	private Integer currPage;
-	 
+
 	private String ids;
 	private String id;
 	private String time;
 	private String mess;
 	private String keyword;
 	private String drugId;
-	
+	private Integer saleCode;
 	private Double price;
-	
+
 	@Autowired
 	private DrugSaleService drugSaleService;
 	private DrugSalesBean salesBean = new DrugSalesBean();
 	private DrugBean drugBean = salesBean.getDrugBean();
 	private UserBean userBean = salesBean.getUserBean();
 	private MemberBean membean = new MemberBean();
-	
+
 	/**
 	 * 药品分页
+	 * 
 	 * @return
 	 */
 	public String showSale() {
-		if(null == keyword){
-			keyword="";
+		if (null == keyword) {
+			keyword = "";
 		}
-		if(null != keyword){
+		if (null != keyword) {
 			request.put("keyword", keyword);
 		}
-		
-		if(currPage == null) {
+
+		if (currPage == null) {
 			currPage = 1;
 		}
- 		PageModel<DrugSalesBean>  page = drugSaleService.splitSale(currPage, ConstantUtils.PAGESIZE, keyword);
+		PageModel<DrugSalesBean> page = drugSaleService.splitSale(currPage, ConstantUtils.PAGESIZE, keyword);
 		request.put("page", page);
 		return "showSale";
 	}
+
 	/**
 	 * 跳转打印界面
 	 */
-	public String doPrint(){
+	public String doPrint() {
 		return "print";
 	}
+
 	/**
 	 * 跳转新增
 	 */
-	public String doaddSale(){
+	public String doaddSale() {
 		List<MemberBean> memberList = drugSaleService.selectMember();
 		List<UserBean> userList = drugSaleService.selectUser();
 		List<DrugBean> drugList = drugSaleService.selectDrug();
-		List<DrugCategoryBean>  drugCategoryList = drugSaleService.selectCategory();
+		List<DrugCategoryBean> drugCategoryList = drugSaleService.selectCategory();
 		List<DrugUnitBean> drugUnitList = drugSaleService.selectUnit();
 		List<DosageformBean> dosageformList = drugSaleService.selectForm();
-		
+		saleCode = drugSaleService.selectCode();
+
+		request.put("saleCode", saleCode);
 		request.put("userList", userList);
 		request.put("memberList", memberList);
 		request.put("drugList", drugList);
-		request.put("drugCategoryList",drugCategoryList);
-		request.put("drugUnitList",drugUnitList);
-		request.put("dosageformList",dosageformList);
+		request.put("drugCategoryList", drugCategoryList);
+		request.put("drugUnitList", drugUnitList);
+		request.put("dosageformList", dosageformList);
 		return "doadd";
 	}
+
 	/**
 	 * 新增药品
+	 * 
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
-	public String addSale(){
+	public String addSale() {
 		List<UserBean> userList = drugSaleService.selectUser();
 		List<MemberBean> memberList = drugSaleService.selectMember();
 		List<DrugBean> drugList = drugSaleService.selectDrug();
-		List<DrugCategoryBean>  drugCategoryList = drugSaleService.selectCategory();
+		List<DrugCategoryBean> drugCategoryList = drugSaleService.selectCategory();
 		List<DrugUnitBean> drugUnitList = drugSaleService.selectUnit();
 		List<DosageformBean> dosageformList = drugSaleService.selectForm();
-		
+
 		request.put("userList", userList);
 		request.put("memberList", memberList);
 		request.put("drugList", drugList);
-		request.put("drugCategoryList",drugCategoryList);
-		request.put("drugUnitList",drugUnitList);
-		request.put("dosageformList",dosageformList);
-			
+		request.put("drugCategoryList", drugCategoryList);
+		request.put("drugUnitList", drugUnitList);
+		request.put("dosageformList", dosageformList);
+		saleCode = drugSaleService.selectCode();
 		try {
-			drugSaleService.addSale(userBean,drugBean,salesBean,time);
+			drugSaleService.addSale(saleCode, userBean, drugBean, salesBean, time);
 		} catch (Exception e) {
 			System.out.println("时间转换错误");
 			e.printStackTrace();
 		}
 		return "addSale";
-		
+
 	}
+
 	/**
 	 * 删除药品
 	 */
-	public String delInventor(){
+	public String delInventor() {
 		List<DrugSalesBean> list = drugSaleService.showAllSale(ids);
 		drugSaleService.deleteAllSale(list);
 		return "show";
 	}
-	
+
 	/**
 	 * 编辑药品
 	 */
-	public String editSale(){
+	public String editSale() {
 		DrugSalesBean bean1 = drugSaleService.selectById(id);
 		List<UserBean> userList = drugSaleService.selectUser();
 		List<MemberBean> memberList = drugSaleService.selectMember();
 		List<DrugBean> drugList = drugSaleService.selectDrug();
-		List<DrugCategoryBean>  drugCategoryList = drugSaleService.selectCategory();
+		List<DrugCategoryBean> drugCategoryList = drugSaleService.selectCategory();
 		List<DrugUnitBean> drugUnitList = drugSaleService.selectUnit();
 		List<DosageformBean> dosageformList = drugSaleService.selectForm();
-		
+
 		request.put("userList", userList);
 		request.put("memberList", memberList);
 		request.put("drugList", drugList);
-		request.put("drugCategoryList",drugCategoryList);
-		request.put("drugUnitList",drugUnitList);
-		request.put("dosageformList",dosageformList);
-		if(null != bean1){
-			request.put("sale",bean1);
+		request.put("drugCategoryList", drugCategoryList);
+		request.put("drugUnitList", drugUnitList);
+		request.put("dosageformList", dosageformList);
+		if (null != bean1) {
+			request.put("sale", bean1);
 		}
 		return "edit";
 	}
-		
+
 	/**
-	 * 修改药品 
+	 * 修改药品
 	 */
-	public String updateSale(){
+	public String updateSale() {
 		List<UserBean> userList = drugSaleService.selectUser();
 		List<MemberBean> memberList = drugSaleService.selectMember();
 		List<DrugBean> drugList = drugSaleService.selectDrug();
-		List<DrugCategoryBean>  drugCategoryList = drugSaleService.selectCategory();
+		List<DrugCategoryBean> drugCategoryList = drugSaleService.selectCategory();
 		List<DrugUnitBean> drugUnitList = drugSaleService.selectUnit();
 		List<DosageformBean> dosageformList = drugSaleService.selectForm();
-		
+
 		request.put("userList", userList);
 		request.put("memberList", memberList);
 		request.put("drugList", drugList);
-		request.put("drugCategoryList",drugCategoryList);
-		request.put("drugUnitList",drugUnitList);
-		request.put("dosageformList",dosageformList);
-		if(null != selectSaleByDrugcode()){
-			drugSaleService.updateSale(salesBean,time);
+		request.put("drugCategoryList", drugCategoryList);
+		request.put("drugUnitList", drugUnitList);
+		request.put("dosageformList", dosageformList);
+		if (null != selectSaleByDrugcode()) {
+			drugSaleService.updateSale(salesBean, time);
 			return "show";
 		}
-		request.put("message","药品名已被使用！");
+		request.put("message", "药品名已被使用！");
 		return editSale();
 	}
-	
-	/*public void selectDrugByName(){
-		System.out.println(drugId);
-		HttpServletRequest request = ServletActionContext.getRequest();
-		String drugId = (String)request.getParameter("drugId");
-		String code = (String) ServletActionContext.getRequest().getSession().getAttribute("code");
-		DrugSalesBean bean = drugSaleService.selectSaleByDrugId(drugId);
-		Double salePrice = bean.getSalepeice();
-		Double memberPrice = bean.getMemberprice();
-		request.setAttribute("salePrice", salePrice);
-		request.setAttribute("memberPrice", memberPrice);
-		
-	}*/
+
+	/*
+	 * public void selectDrugByName(){ System.out.println(drugId);
+	 * HttpServletRequest request = ServletActionContext.getRequest(); String
+	 * drugId = (String)request.getParameter("drugId"); String code = (String)
+	 * ServletActionContext.getRequest().getSession().getAttribute("code");
+	 * DrugSalesBean bean = drugSaleService.selectSaleByDrugId(drugId); Double
+	 * salePrice = bean.getSalepeice(); Double memberPrice =
+	 * bean.getMemberprice(); request.setAttribute("salePrice", salePrice);
+	 * request.setAttribute("memberPrice", memberPrice);
+	 * 
+	 * }
+	 */
 	/**
 	 * 根据药品名查重
+	 * 
 	 * @return
 	 */
-	public DrugSalesBean selectSaleByName(){
-		DrugSalesBean bean =drugSaleService.selectSaleByName(salesBean.getDrugBean().getDrugName());
+	public DrugSalesBean selectSaleByName() {
+		DrugSalesBean bean = drugSaleService.selectSaleByName(salesBean.getDrugBean().getDrugName());
 		return bean;
 	}
-	
+
 	/**
 	 * 根据药品编号查重
+	 * 
 	 * @return
 	 */
-	public DrugSalesBean selectSaleByDrugcode(){
-		DrugSalesBean bean =drugSaleService.selectSaleByDrugcode(salesBean.getDrugBean().getDrugCode());
+	public DrugSalesBean selectSaleByDrugcode() {
+		DrugSalesBean bean = drugSaleService.selectSaleByDrugcode(salesBean.getDrugBean().getDrugCode());
 		return bean;
 	}
+
 	/**
 	 * ajax校验验证码是否正确
 	 */
 	public String validateVerifyCode() {
-		 HttpServletRequest request = ServletActionContext.getRequest();
-		String verifyCode = (String)request.getParameter("yanzheng");
+		HttpServletRequest request = ServletActionContext.getRequest();
+		String verifyCode = (String) request.getParameter("yanzheng");
 		String code = (String) ServletActionContext.getRequest().getSession().getAttribute("code");
-		if(verifyCode.equalsIgnoreCase(code)) {
+		if (verifyCode.equalsIgnoreCase(code)) {
 			flag = true;
-		} else if(!verifyCode.equalsIgnoreCase(code)){
+		} else if (!verifyCode.equalsIgnoreCase(code)) {
 			flag = false;
 		}
 		return "ajax_verifyCode";
 	}
+
 	/**
 	 * ajax校验会员电话是否可用
 	 */
 	public String validateTel() {
-		 HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletRequest request = ServletActionContext.getRequest();
 		String tel = (String) request.getParameter("tel");
-		MemberBean bean =drugSaleService.selectSaleByTel(tel);
-		if(null == bean) {
+		MemberBean bean = drugSaleService.selectSaleByTel(tel);
+		if (null == bean) {
 			mess = "无此会员";
-		} else if(null != bean){
+		} else if (null != bean) {
 			mess = "会员可用";
 		}
 		return "ajax_verifyTel";
 	}
+
 	/**
 	 * ajax校验会员电话是否可用
 	 */
 	public String validateid() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String drugid = (String) request.getParameter("drugid");
-		DrugBean bean =drugSaleService.selectSaleByDrugId(drugid);
+		DrugBean bean = drugSaleService.selectSaleByDrugId(drugid);
 		price = bean.getSalepeice();
 		return "ajax_verifyName";
 	}
-	
-	
+
 	@Override
 	public void setSession(Map<String, Object> session) {
-		this.session=session;
+		this.session = session;
 	}
 
 	@Override
 	public DrugSalesBean getModel() {
 		return salesBean;
 	}
+
 	public Integer getCurrPage() {
 		return currPage;
 	}
+
 	public void setCurrPage(Integer currPage) {
 		this.currPage = currPage;
 	}
+
 	public String getIds() {
 		return ids;
 	}
+
 	public void setIds(String ids) {
 		this.ids = ids;
 	}
+
 	public String getId() {
 		return id;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
+
 	public boolean isFlag() {
 		return flag;
 	}
+
 	public void setFlag(boolean flag) {
 		this.flag = flag;
 	}
+
 	public String getTime() {
 		return time;
 	}
+
 	public void setTime(String time) {
 		this.time = time;
 	}
+
 	@Override
 	public void setRequest(Map<String, Object> request) {
 		this.request = request;
 	}
+
 	public String getMess() {
 		return mess;
 	}
+
 	public void setMess(String mess) {
 		this.mess = mess;
 	}
+
 	public String getKeyword() {
 		return keyword;
 	}
+
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
+
 	public String getDrugId() {
 		return drugId;
 	}
+
 	public void setDrugId(String drugId) {
 		this.drugId = drugId;
 	}
+
 	public Double getPrice() {
 		return price;
 	}
+
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-	
+
+	public Integer getSaleCode() {
+		return saleCode;
+	}
+
+	public void setSaleCode(Integer saleCode) {
+		this.saleCode = saleCode;
+	}
+
 }

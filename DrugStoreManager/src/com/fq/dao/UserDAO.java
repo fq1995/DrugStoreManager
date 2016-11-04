@@ -20,9 +20,7 @@ public interface UserDAO{
 		//分页
 		PageModel<UserBean> splitUser(Integer currPage, Integer pageSize, String keyword);
 		//添加用户
-		void addUser(UserBean userBean,String time) throws Exception;
-		//添加用户
-		void addUser(UserBean userBean);
+		void addUser(Integer code,UserBean userBean,String time) throws Exception;
 		//批量查询
 		List<UserBean> showAllUser(String ids);
 		//批量删除
@@ -33,4 +31,6 @@ public interface UserDAO{
 		UserBean selectById(String id);
 		//查询用户
 		List<UserBean> show();
+		//查询用户编码
+		List<Integer> selectCode();
 }

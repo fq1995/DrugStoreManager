@@ -33,7 +33,7 @@
  		$("#drugname").blur(function(){
  			var drugid = $("#drugname").val();
  			$.ajax({
- 				url:'sale_validateid.action',
+ 				url:'form_validateName.action',
  				type:'POST',
  				data:{'drugid':drugid},
  				dataType:'json',
@@ -165,7 +165,7 @@
 			<input type="hidden" name="time">
 
 			<ul class="forminfo">
-				<li><label>销售单编号</label><input name="salesCode" type="text" id="salesCode" 
+				<li><label>销售单编号</label><input name="salesCode" type="text" id="salesCode" value="${requestScope.saleCode+1 }" readonly="readonly"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入销售单编号" /><i>必填</i></li>
 				<li><label>药品名称</label>
 					<select class="form-control" style="width:200px;height:34px" id="drugname" name="drugBean.drugId">

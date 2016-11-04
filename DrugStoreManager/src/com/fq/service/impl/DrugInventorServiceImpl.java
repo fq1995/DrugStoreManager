@@ -31,8 +31,8 @@ public class DrugInventorServiceImpl implements DrugInventorService {
 	}
 
 	@Override
-	public void addInventor(DrugBean drugBean,InventoriesBean bean, String time){
-		drugInventorDao.addInventor(drugBean,bean,time);
+	public void addInventor(Integer code,Integer drugCode,DrugBean drugBean,InventoriesBean bean, String time){
+		drugInventorDao.addInventor(code,drugCode,drugBean,bean,time);
 	}
 
 	
@@ -87,6 +87,11 @@ public class DrugInventorServiceImpl implements DrugInventorService {
 	@Override
 	public List<InventoriesBean> selectByDate(Date date) {
 		return drugInventorDao.selectByDate(date);
+	}
+
+	@Override
+	public Integer select() {
+		return drugInventorDao.select();
 	}
 
 }

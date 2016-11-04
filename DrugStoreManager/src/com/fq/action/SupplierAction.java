@@ -3,9 +3,6 @@ package com.fq.action;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -21,7 +18,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Controller("supplierAction")
 @Scope("prototype")
 public class SupplierAction extends BaseAction implements ModelDriven<SupplierBean>,RequestAware{
-	//用户管理
+	//供货商管理
 	private Map<String ,Object> session;
 	private Map<String, Object> request;
 	private boolean flag;
@@ -32,14 +29,14 @@ public class SupplierAction extends BaseAction implements ModelDriven<SupplierBe
 	private String time;
 	private String mess;
 	private String keyword;
-	
+	private Integer code;
 	
 	@Autowired
 	private SupplierService supService;
 	private SupplierBean supBean = new SupplierBean();
 	
 	/**
-	 * 用户分页
+	 * 供货商分页
 	 * @return
 	 */
 	public String showSupplier() {
@@ -61,25 +58,28 @@ public class SupplierAction extends BaseAction implements ModelDriven<SupplierBe
 	 * 跳转新增
 	 */
 	public String doaddSupplier(){
+		code = supService.select();
+		request.put("code", code);
 		return "doadd";
 	}
 	/**
-	 * 新增用户
+	 * 新增供货商
 	 * @return
 	 * @throws Exception 
 	 */
 	public String addSupplier(){
 		if(null == selectSupplierByName() && null == selectSupplierBySuppliercode()){
-			supService.addSup(supBean);
+			code = supService.select();
+			supService.addSup(code,supBean);
 			return "show";
 		}
-		request.put("message","用户名已被使用！");
-		request.put("message2","用户编号已被使用！");
+		request.put("message","供货商名已被使用！");
+		request.put("message2","供货商编号已被使用！");
 		return "addSupplier";
 		
 	}
 	/**
-	 * 删除用户
+	 * 删除供货商
 	 */
 	public String delSupplier(){
 		List<SupplierBean> listSupplier = supService.showAllSup(ids);
@@ -87,7 +87,7 @@ public class SupplierAction extends BaseAction implements ModelDriven<SupplierBe
 		return "show";
 	}
 	/**
-	 * 编辑用户
+	 * 编辑供货商
 	 */
 	public String editSupplier(){
 		SupplierBean supBean1 = supService.selectById(id);
@@ -98,18 +98,18 @@ public class SupplierAction extends BaseAction implements ModelDriven<SupplierBe
 	}
 		
 	/**
-	 * 修改用户 
+	 * 修改供货商 
 	 */
 	public String updateSupplier(){
 		if(null == selectSupplierByNameAndSupplierId()){
 			supService.updateSup(supBean);
 			return "show";
 		}
-		request.put("message","用户名已被使用！");
+		request.put("message","供货商名已被使用！");
 		return editSupplier();
 	}
 	/**
-	 * 根据用户名查重
+	 * 根据供货商名查重
 	 * @return
 	 */
 	public SupplierBean selectSupplierByName(){
@@ -117,7 +117,7 @@ public class SupplierAction extends BaseAction implements ModelDriven<SupplierBe
 		return bean;
 	}
 	/**
-	 * 根据用户名和id查重
+	 * 根据供货商名和id查重
 	 * @return
 	 */
 	public SupplierBean selectSupplierByNameAndSupplierId(){
@@ -125,7 +125,7 @@ public class SupplierAction extends BaseAction implements ModelDriven<SupplierBe
 		return bean;
 	}
 	/**
-	 * 根据用户编号查重
+	 * 根据供货商编号查重
 	 * @return
 	 */
 	public SupplierBean selectSupplierBySuppliercode(){
@@ -133,28 +133,14 @@ public class SupplierAction extends BaseAction implements ModelDriven<SupplierBe
 		return bean;
 	}
 	/**
-	 * ajax校验验证码是否正确
-	 */
-	public String validateVerifyCode() {
-		HttpServletRequest request = ServletActionContext.getRequest();
-		String verifyCode = (String)request.getParameter("yanzheng");
-		String code = (String) ServletActionContext.getRequest().getSession().getAttribute("code");
-		if(verifyCode.equalsIgnoreCase(code)) {
-			flag = true;
-		} else if(!verifyCode.equalsIgnoreCase(code)){
-			flag = false;
-		}
-		return "ajax_verifyCode";
-	}
-	/**
-	 * ajax校验用户名是否可用
+	 * ajax校验供货商名是否可用
 	 */
 	public String validateName() {
 		SupplierBean bean =supService.selectSupByName(supBean.getSupplier());
 		if(null == bean) {
-			mess = "用户名可用";
+			mess = "供货商名可用";
 		} else if(null != bean){
-			mess = "用户名不可用";
+			mess = "供货商名不可用";
 		}
 		return "ajax_verifyName";
 	}
@@ -214,6 +200,12 @@ public class SupplierAction extends BaseAction implements ModelDriven<SupplierBe
 	}
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+	public Integer getCode() {
+		return code;
+	}
+	public void setCode(Integer code) {
+		this.code = code;
 	}
 	
 }

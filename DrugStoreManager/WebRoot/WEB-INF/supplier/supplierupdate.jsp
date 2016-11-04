@@ -64,6 +64,25 @@
   	        }
   		});
   		
+  		//电话
+ 		$("#tel").blur(function(){
+ 			$("#relti").html("");
+ 			var tel = $("#tel").val();
+ 	        if ($.trim(tel) == "" || tel.length == 0 ) {
+ 	            //alert("手机号不能为空！");
+ 	            $("#relti").html("手机号不能为空！");
+ 	            return false;
+ 	        }
+ 	        //正则表达式
+ 	        var reg = /(1[3-9]\d{9}$)/;
+ 	        if (!reg.test(tel))
+ 	        {
+ 	           //alert("请输入正确格式的手机号码！");
+ 	           $("#relti").html("请输入正确格式的手机号码！");
+ 	            return false;
+ 	        }
+ 		});
+  		
   	});
     </script>
 </head>
@@ -93,7 +112,7 @@
 				<li><label>联系人</label><input name="name" type="text" id="name" value="${supplier.name }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入联系人"/><i>必填</i></li>
 				<li><label>联系电话</label><input name="tel" type="text" id="tel" value="${supplier.tel }"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入联系电话"/></li>
+					class="form-control" style="width:200px; display:inline" placeholder="请输入联系电话"/>&nbsp;&nbsp;&nbsp;&nbsp;<span id="relti" style="color:red;display:inline-block"></span></li>
 				<li><label>是否审核</label><cite>
 					<input name="status" type="radio" value="1" checked="checked"/>是&nbsp;&nbsp;&nbsp;&nbsp;
 					<input name="status" type="radio" value="0" />否</cite></li>

@@ -16,7 +16,7 @@ public interface DrugInventorDAO {
 	
 	InventoriesBean selectInventorByDrugcode(Integer code);
 	
-	void addInventor(DrugBean drugBean,InventoriesBean bean,String time);
+	void addInventor(Integer code,Integer drugCode, DrugBean drugBean, InventoriesBean bean, String time);
 	
 	PageModel<InventoriesBean> splitInventor(Integer currPage, Integer pageSize, String keyword);
 	//批量查询
@@ -37,4 +37,6 @@ public interface DrugInventorDAO {
 	List<DosageformBean> selectForm();
 	//库存预警
 	PageModel<InventoriesBean> splitWarn(Integer currPage, Integer pagesize, String keyword);
+	//查询编号
+	Integer select();
 }

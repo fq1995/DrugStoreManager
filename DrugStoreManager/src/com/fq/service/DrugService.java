@@ -19,9 +19,7 @@ public interface DrugService {
 	
 	DrugBean selectDrugByNameAndDrugId(String drugname,String drugid);
 	
-	void addDrug(DrugBean DrugBean,String time) throws Exception;
-	
-	void addDrug(DrugBean DrugBean);
+	void addDrug(Integer drugCode,DrugBean DrugBean,String time) throws Exception;
 
 	PageModel<DrugBean> splitDrug(Integer currPage, Integer pageSize, String keyword);
 	
@@ -48,4 +46,6 @@ public interface DrugService {
 	List<DosageformBean> selectForm();
 	//根据id查找剂型
 	DosageformBean selectFormById(String id);
+	//查询药品编号
+	Integer select();
 }

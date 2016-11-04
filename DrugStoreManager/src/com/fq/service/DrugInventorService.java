@@ -16,7 +16,7 @@ public interface DrugInventorService {
 	
 	InventoriesBean selectInventorByDrugcode(Integer code);
 	
-	void addInventor(DrugBean drugBean,InventoriesBean bean,String time);
+	void addInventor(Integer code, Integer drugCode, DrugBean drugBean, InventoriesBean bean, String time);
 	
 	PageModel<InventoriesBean> splitInventor(Integer currPage, Integer pageSize, String keyword);
 	//批量查询
@@ -37,4 +37,6 @@ public interface DrugInventorService {
 	PageModel<InventoriesBean> splitWarn(Integer currPage, Integer pagesize, String keyword);
 	//根据时间查询
 	List<InventoriesBean> selectByDate(Date date);
+	//查询编号
+	Integer select();
 }

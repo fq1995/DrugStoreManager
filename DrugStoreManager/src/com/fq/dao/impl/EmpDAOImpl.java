@@ -45,26 +45,19 @@ public class EmpDAOImpl extends BaseDAO<EmployeeBean> implements EmpDAO {
 	@Override
 	public PageModel<EmployeeBean> splitEmp(Integer currPage, Integer pageSize, String keyword) {
 		String hql_count = "select count(*) from EmployeeBean where empName like :keyword";
-		String hql = "from EmployeeBean where empName like :keyword order by startdate desc";
+		String hql = "from EmployeeBean where empName like :keyword order by empCode desc";
 		return super.split(hql, hql_count, currPage, pageSize,keyword);
 	}
 
-	@Override
-	public void addEmp(EmployeeBean empBean, String time) throws Exception {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = sdf.parse(time);
-		empBean.setStartdate(date);
-		empBean.setEmpId(UUIDBuild.getUUID());
-		hibernateTemplate.save(empBean);
-
-	}
 
 	@Override
-	public void addEmp(EmployeeBean empBean) {
+	public void addEmp(Integer empCode,EmployeeBean empBean) {
+		empBean.setEmpCode((++empCode).toString());
 		empBean.setEmpId(UUIDBuild.getUUID());
 		hibernateTemplate.save(empBean);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<EmployeeBean> showAllEmp(String ids) {
 		String[] arr = ids.split(",");
@@ -91,19 +84,6 @@ public class EmpDAOImpl extends BaseDAO<EmployeeBean> implements EmpDAO {
 
 	}
 
-	@Override
-	public void updateEmp(EmployeeBean empBean, String time) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date=null;
-		try {
-			date = sdf.parse(time);
-		} catch (ParseException e) {
-			System.out.println("时间转换错误");
-			e.printStackTrace();
-		}
-		empBean.setStartdate(date);
-		getHibernateTemplate().update(empBean);
-	}
 
 	@Override
 	public EmployeeBean selectById(String id) {
@@ -121,6 +101,14 @@ public class EmpDAOImpl extends BaseDAO<EmployeeBean> implements EmpDAO {
 		String hql ="from EmployeeBean";
 		List<EmployeeBean> list = (List<EmployeeBean>) hibernateTemplate.find(hql);
 		return list==null||list.size()<=0?null:list;
+	}
+
+	@Override
+	public Integer selectCode() {
+		String hql = "select max(empCode) from EmployeeBean";
+		List<String> list = (List<String>) hibernateTemplate.find(hql);
+		Integer empCode =Integer.valueOf(list.get(0));
+		return empCode;
 	}
 
 }

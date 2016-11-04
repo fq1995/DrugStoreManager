@@ -122,9 +122,9 @@
 			<input type="hidden" name="time">
 
 			<ul class="forminfo">
-				<li><label>会员编号</label><input name="memberCode" type="text" id="memberCode"
+				<li><label>会员编号</label><input name="memberCode" type="text" id="memberCode" value="${requestScope.memCode+1}" readonly="readonly"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入会员编号"/><i style="color: red">${message2}</i></li>
-				<li ><label>会员性名</label><input name="memberName" type="text" id="memberName"
+				<li ><label>会员姓名</label><input name="memberName" type="text" id="memberName"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入会员名"/><i>会员性名不能超过4个字符</i><i style="color: red">${message}</i></li>
 				<li><label>性别</label><cite>
 					<input name="sex" type="radio" value="1" checked="checked"<c:if test="sex==1"> checked="checked"</c:if> />男&nbsp;&nbsp;&nbsp;&nbsp;

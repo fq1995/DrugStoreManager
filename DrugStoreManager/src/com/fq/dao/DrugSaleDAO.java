@@ -20,7 +20,7 @@ public interface DrugSaleDAO {
 	
 	DrugBean selectSaleByDrugId(String id);
 	
-	void addSale(UserBean userBean,DrugBean drugBean,DrugSalesBean bean,String time) throws Exception;
+	void addSale(Integer saleCode, UserBean userBean, DrugBean drugBean, DrugSalesBean bean,String time) throws Exception;
 	
 	PageModel<DrugSalesBean> splitSale(Integer currPage, Integer pageSize, String keyword);
 	//批量查询
@@ -48,5 +48,7 @@ public interface DrugSaleDAO {
 	List<DrugSalesBean> show(Date date);
 	//查询会员电话
 	MemberBean selectSaleByTel(String suppliertel);
+	//查询编号
+	Integer selectCode();
 
 }

@@ -31,15 +31,10 @@ public class EmpServiceImpl implements EmpService {
 		return empdao.splitEmp(currPage, pageSize, keyword);
 	}
 
-	@Override
-	public void addEmp(EmployeeBean empBean, String time) throws Exception {
-		empdao.addEmp(empBean,time);
-
-	}
 
 	@Override
-	public void addEmp(EmployeeBean empBean) {
-		empdao.addEmp(empBean);
+	public void addEmp(Integer empCode,EmployeeBean empBean) {
+		empdao.addEmp(empCode,empBean);
 
 	}
 
@@ -54,12 +49,6 @@ public class EmpServiceImpl implements EmpService {
 
 	}
 
-	@Override
-	public void updateEmp(EmployeeBean empBean, String time) {
-		empdao.updateEmp(empBean, time);
-
-	}
-	
 	@Override
 	public void updateEmp(EmployeeBean empBean) {
 		empdao.updateEmp(empBean);
@@ -79,6 +68,11 @@ public class EmpServiceImpl implements EmpService {
 	@Override
 	public List<EmployeeBean> show() {
 		return empdao.show();
+	}
+
+	@Override
+	public Integer selectCode() {
+		return empdao.selectCode();
 	}
 
 }

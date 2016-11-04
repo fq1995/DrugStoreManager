@@ -36,14 +36,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void addMember(MemberBean memberBean, String time) throws Exception {
-		
-
-	}
-
-	@Override
-	public void addMember(MemberBean memberBean) {
-		memberDao.addMember(memberBean);
+	public void addMember(Integer code,MemberBean memberBean) {
+		memberDao.addMember(code,memberBean);
 
 	}
 
@@ -55,11 +49,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void deleteAllMember(List<MemberBean> memberList) {
 		memberDao.deleteAllMember(memberList);
-
-	}
-
-	@Override
-	public void updateMember(MemberBean memberBean, String time) {
 
 	}
 
@@ -77,6 +66,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<MemberBean> show() {
 		return memberDao.show();
+	}
+
+	@Override
+	public Integer selectCode() {
+		return memberDao.selectCode();
 	}
 
 }

@@ -14,11 +14,11 @@ import com.fq.util.PageModel;
 
 public interface DrugSaleService {
 	
-DrugSalesBean selectSaleByName(String name);
+	DrugSalesBean selectSaleByName(String name);
 	
 	DrugSalesBean selectSaleByDrugcode(Integer code);
 	
-	void addSale(UserBean userBean,DrugBean drugBean,DrugSalesBean bean,String time) throws Exception;
+	void addSale(Integer saleCode, UserBean userBean,DrugBean drugBean,DrugSalesBean bean,String time) throws Exception;
 	
 	PageModel<DrugSalesBean> splitSale(Integer currPage, Integer pageSize, String keyword);
 	//批量查询
@@ -27,7 +27,6 @@ DrugSalesBean selectSaleByName(String name);
 	void deleteAllSale(List<DrugSalesBean> list);
 	//修改
 	void updateSale(DrugSalesBean bean,String time);
-	
 	//根据ID查询
 	DrugSalesBean selectById(String id);
 	//查询类别
@@ -48,5 +47,7 @@ DrugSalesBean selectSaleByName(String name);
 	List<DrugSalesBean> show(Date date);
 	//查询会员电话
 	MemberBean selectSaleByTel(String suppliertel);
+	//查询编号
+	Integer selectCode();
 	
 }

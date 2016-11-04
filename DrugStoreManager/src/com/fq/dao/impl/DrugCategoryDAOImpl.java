@@ -19,7 +19,7 @@ public class DrugCategoryDAOImpl extends BaseDAO<DrugCategoryBean> implements Dr
 	
 	@Override
 	public DrugCategoryBean selectDrugCategoryByName(String name) {
-		String hql ="from DrugCategoryBean where category=?";
+		String hql ="from DrugCategoryBean where category =?";
 		List<DrugCategoryBean> categoryList = (List<DrugCategoryBean>) hibernateTemplate.find(hql, name);
 		return categoryList==null||categoryList.size()<=0?null:categoryList.get(0);
 	}

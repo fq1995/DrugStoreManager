@@ -50,11 +50,6 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 	}
 
 	@Override
-	public void addUser(UserBean userBean){
-		 hibernateTemplate.save(userBean);
-	}
-
-	@Override
 	public List<UserBean> showAllUser(String ids) {
 			String[] arr = ids.split(",");
 			StringBuilder sb = new StringBuilder();
@@ -101,11 +96,12 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 	}
 
 	@Override
-	public void addUser(UserBean userBean, String time) throws Exception {
+	public void addUser(Integer code,UserBean userBean, String time) throws Exception {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = sdf.parse(time);
 		userBean.setAddtime(date);
 		userBean.setUserId(UUIDBuild.getUUID());
+		userBean.setUserCode(++code);
 		hibernateTemplate.save(userBean);
 		
 	}
@@ -128,6 +124,13 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 	public List<UserBean> show() {
 		String hql ="from UserBean";
 		List<UserBean> list = (List<UserBean>) hibernateTemplate.find(hql);
+		return list==null||list.size()<=0?null:list;
+	}
+
+	@Override
+	public List<Integer> selectCode() {
+		String hql ="select max(userCode) from UserBean";
+		List<Integer> list =  (List<Integer>) hibernateTemplate.find(hql);
 		return list==null||list.size()<=0?null:list;
 	}
 

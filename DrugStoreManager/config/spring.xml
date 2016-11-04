@@ -114,7 +114,6 @@
 	<!-- 指定事物加在哪一层上面   事物的实现机制其实是环绕通知 -->
 	<!-- 手动配置在那一层上面加事务控制 -->
 	<aop:config>
-		<!-- <aop:pointcut id="transactionPointcut" expression="execution(* com.fq.service..*.*(..)) "  /> -->
 		<aop:pointcut id="transactionPointcut" expression="execution(* com.fq.service..*.*(..)) "  /> 
 		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
 	</aop:config>

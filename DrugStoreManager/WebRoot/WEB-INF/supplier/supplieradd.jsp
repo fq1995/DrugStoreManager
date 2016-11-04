@@ -65,7 +65,24 @@
  	        }
  		});
  		
- 		
+ 		//电话
+ 		$("#tel").blur(function(){
+ 			$("#relti").html("");
+ 			var tel = $("#tel").val();
+ 	        if ($.trim(tel) == "" || tel.length == 0 ) {
+ 	            //alert("手机号不能为空！");
+ 	            $("#relti").html("手机号不能为空！");
+ 	            return false;
+ 	        }
+ 	        //正则表达式
+ 	        var reg = /(1[3-9]\d{9}$)/;
+ 	        if (!reg.test(tel))
+ 	        {
+ 	           //alert("请输入正确格式的手机号码！");
+ 	           $("#relti").html("请输入正确格式的手机号码！");
+ 	            return false;
+ 	        }
+ 		});
  		
  	});
 </script>
@@ -88,14 +105,14 @@
 			<input type="hidden" name="time">
 
 			<ul class="forminfo">
-				<li><label>供货商编号</label><input name="supplierCode" type="text" id="supplierCode"
+				<li><label>供货商编号</label><input name="supplierCode" type="text" id="supplierCode" value="${requestScope.code+1 }" readonly="readonly" 
 					class="form-control" style="width:200px; display:inline" placeholder="请输入供货商编号"/><i>必填</i><i style="color: red">${message2}</i></li>
 				<li ><label>供货商名</label><input name="supplier" type="text" id="supplier"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入供货商名"/><i>必填</i><i style="color: red">${message}</i></li>
 				<li><label>联系人</label><input name="name" type="text" id="name"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入联系人"/><i>必填</i></li>
 				<li><label>联系电话</label><input name="tel" type="text" id="tel"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入联系电话"/></li>
+					class="form-control" style="width:200px; display:inline" placeholder="请输入联系电话"/>&nbsp;&nbsp;&nbsp;&nbsp;<span id="relti" style="color:red;display:inline-block"></span></li>
 				<li><label>是否审核</label><cite>
 					<input name="status" type="radio" value="1" checked="checked"<c:if test="status==1"> checked="checked"</c:if> />是&nbsp;&nbsp;&nbsp;&nbsp;
 					<input name="status" type="radio" value="0" <c:if test="status==0"> checked="checked"</c:if> />否</cite></li>

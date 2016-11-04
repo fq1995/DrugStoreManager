@@ -93,7 +93,7 @@ public class DrugSalesBean  implements java.io.Serializable {
     public void setDrugBean(DrugBean drugBean) {
         this.drugBean = drugBean;
     }
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
         @JoinColumn(name="MEMBER_ID")
 
     public MemberBean getMemberBean() {

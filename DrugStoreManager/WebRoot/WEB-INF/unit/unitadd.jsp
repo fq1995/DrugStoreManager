@@ -30,13 +30,31 @@
  		//药品单位名非空
  		$("#unitname").blur(function(){
  			var name = $("input[name='unitname']").val(); 
- 	        if($.trim(name) == "" || name.length == 0 ){
- 	        	$("#unitname").css("background-color","#FFB9B9"); 
- 	        	$("#add").attr("disabled",true);   
- 	        }else{
- 	        	$("#unitname").css("background-color",""); 
- 	        	$("#add").attr("disabled",false);   
- 	        }
+ 			$.ajax({
+				url:'unit_validateName.action',
+				type:'POST',
+				data:{'name':name},
+				dataType:'json',
+				success:function(data){ 
+					if($.trim(name) == "" || name.length == 0 ){
+						$("#unitname").css("background-color","#FFB9B9"); 
+		 	        	$("#add").attr("disabled",true);
+		 	        }else if("药品单位名可用" ==data){
+		 	        	$("#unitname").css("background-color",""); 
+		 	        	$("#add").attr("disabled",false); 
+		 	        	$("#message").html("药品单位名可用");
+		 	        }else if("药品单位名不可用" ==data){
+		 	        	$("#message").html("药品单位名不可用");
+		 	        	$("#add").attr("disabled",true);
+		 	       		$("#unitname").css("background-color","#FFB9B9"); 
+		 	        }else{
+		 	        	$("#message").html("药品单位不可为空");
+		 	        }
+			     },
+				 error:function(data){  
+		         }  
+	  		});
+ 			
  		});
  	});
 </script>
@@ -58,7 +76,7 @@
 			<input type="hidden" name="currPage" value="1">
 			<ul class="forminfo">
 				<li><label>药品单位名</label><input name="unitname" type="text" id="unitname"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入药品单位名"/><i>必填</i><i style="color: red">${message}</i></li>
+					class="form-control" style="width:200px; display:inline" placeholder="请输入药品单位名"/><i>必填</i><i id="message" style="color: red">${message}</i></li>
 				<li><input id="add" type="submit" class="btn btn-info btn-sm" disabled value="确认保存" />&nbsp;&nbsp;&nbsp;&nbsp;
 					<input id="return" type="button" class="btn btn-info btn-sm" onclick="javascript:history.go(-1);" value="返回" /></li>
 			</ul>

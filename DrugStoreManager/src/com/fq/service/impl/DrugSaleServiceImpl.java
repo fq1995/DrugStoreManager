@@ -97,8 +97,8 @@ public class DrugSaleServiceImpl implements DrugSaleService {
 	}
 
 	@Override
-	public void addSale(UserBean userBean, DrugBean drugBean, DrugSalesBean bean, String time) throws Exception {
-		drugSaleDao.addSale(userBean, drugBean, bean, time);
+	public void addSale(Integer saleCode, UserBean userBean, DrugBean drugBean, DrugSalesBean bean, String time) throws Exception {
+		drugSaleDao.addSale(saleCode, userBean, drugBean, bean, time);
 		
 	}
 
@@ -110,6 +110,11 @@ public class DrugSaleServiceImpl implements DrugSaleService {
 	@Override
 	public MemberBean selectSaleByTel(String suppliertel) {
 		return drugSaleDao.selectSaleByTel(suppliertel);
+	}
+
+	@Override
+	public Integer selectCode() {
+		return drugSaleDao.selectCode();
 	}
 
 	

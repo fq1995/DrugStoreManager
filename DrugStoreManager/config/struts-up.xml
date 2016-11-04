@@ -94,9 +94,6 @@
 			<result name="addForm">/WEB-INF/dosageform/formadd.jsp</result>
 			<result name="show" type="redirectAction">form_showForm.action?currPage=1</result>
 			<result name="edit">/WEB-INF/dosageform/formupdate.jsp</result>
-			<result name="ajax_verifyCode" type="json">
-				<param name="root">flag</param>
-			</result>
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
 			</result>
@@ -111,9 +108,6 @@
 			<result name="addUnit">/WEB-INF/unit/unitadd.jsp</result>
 			<result name="show" type="redirectAction">unit_showUnit.action?currPage=1</result>
 			<result name="edit">/WEB-INF/unit/unitupdate.jsp</result>
-			<result name="ajax_ve rifyCode" type="json">
-				<param name="root">flag</param>
-			</result>
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
 			</result>
@@ -128,9 +122,6 @@
 			<result name="addCategory">/WEB-INF/category/categoryadd.jsp</result>
 			<result name="show" type="redirectAction">category_showCategory.action?currPage=1</result>
 			<result name="edit">/WEB-INF/category/categoryupdate.jsp</result>
-			<result name="ajax_verifyCode" type="json">
-				<param name="root">flag</param>
-			</result>
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
 			</result>
@@ -145,9 +136,6 @@
 			<result name="addInventor">/WEB-INF/kucun/inventoradd.jsp</result>
 			<result name="show" type="redirectAction">inventor_showInventor.action?currPage=1</result>
 			<result name="edit">/WEB-INF/kucun/inventorupdate.jsp</result>
-			<result name="ajax_verifyCode" type="json">
-				<param name="root">flag</param>
-			</result>
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
 			</result>
@@ -182,9 +170,6 @@
 			<result name="addPurchase">/WEB-INF/purchase/purchaseadd.jsp</result>
 			<result name="show" type="redirectAction">pse_showPurchase.action?currPage=1</result>
 			<result name="edit">/WEB-INF/purchase/purchaseupdate.jsp</result>
-			<result name="ajax_verifyCode" type="json">
-				<param name="root">flag</param>
-			</result>
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
 			</result>
@@ -199,9 +184,6 @@
 			<result name="addMember">/WEB-INF/member/memberadd.jsp</result>
 			<result name="show" type="redirectAction">member_showMember.action?currPage=1</result>
 			<result name="edit">/WEB-INF/member/memberupdate.jsp</result>
-			<result name="ajax_verifyCode" type="json">
-				<param name="root">flag</param>
-			</result>
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
 			</result>
@@ -216,9 +198,6 @@
 			<result name="addSupplier">/WEB-INF/supplier/supplieradd.jsp</result>
 			<result name="show" type="redirectAction">sup_showSupplier.action?currPage=1</result>
 			<result name="edit">/WEB-INF/supplier/supplierupdate.jsp</result>
-			<result name="ajax_verifyCode" type="json">
-				<param name="root">flag</param>
-			</result>
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
 			</result>

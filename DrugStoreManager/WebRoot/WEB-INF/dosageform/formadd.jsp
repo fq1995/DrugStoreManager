@@ -16,26 +16,36 @@
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
 <script src="js/jquery-1.6.2.min.js"></script>
 <script type="text/javascript">
- 	$(function(){
- 		var str = "";
- 		var mydate = new Date();
- 		str += mydate.getFullYear()+"-";
- 		str += mydate.getMonth()+1+"-";
- 		str += mydate.getDate();
- 		$("input[name='time']").val(str);
- 	});
  	$(function() {
  		$("#dosageform").css("background-color",""); 
  		//药品剂型名非空
  		$("#dosageform").blur(function(){
  	        var name = $("input[name='dosageform']").val(); 
- 	        if($.trim(name) == "" || name.length == 0 ){
- 	        	$("#dosageform").css("background-color","#FFB9B9"); 
- 	        	$("#add").attr("disabled",true);
- 	        }else{
- 	        	$("#dosageform").css("background-color","");
- 	        	$("#add").attr("disabled",false); 
- 	        }
+ 	       	$.ajax({
+				url:'form_validateName.action',
+				type:'POST',
+				data:{'name':name},
+				dataType:'json',
+				success:function(data){ 
+					if($.trim(name) == "" || name.length == 0 ){
+		 	        	$("#dosageform").css("background-color","#FFB9B9"); 
+		 	        	$("#add").attr("disabled",true);
+		 	        }else if("药品剂型名可用" ==data){
+		 	        	$("#dosageform").css("background-color","");
+		 	        	$("#add").attr("disabled",false); 
+		 	        	$("#message").html("药品剂型名可用");
+		 	        }else if("药品剂型名不可用" ==data){
+		 	        	$("#message").html("药品剂型名不可用");
+		 	        	$("#add").attr("disabled",true);
+		 	        	$("#dosageform").css("background-color","#FFB9B9"); 
+		 	        }else{
+		 	        	$("#message").html("药品剂型不可为空");
+		 	        }
+			     },
+				 error:function(data){  
+		         }  
+	  		});
+ 	        
  		});
  		
  	});
@@ -56,10 +66,9 @@
 		</div>
 		<form action="form_addForm.action" method="post">
 			<input type="hidden" name="currPage" value="1">
-			<!-- <input type="hidden" name="time"> -->
 			<ul class="forminfo">
 				<li><label>药品剂型名</label><input name="dosageform" type="text" id="dosageform"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入药品剂型名" /><i></i><i style="color: red">${message}</i></li>
+					class="form-control" style="width:200px; display:inline" placeholder="请输入药品剂型名" /><i id="message" style="color: red">${message}</i></li>
 				<li><input id="add" type="submit" class="btn btn-info btn-sm" disabled value="确认保存" />&nbsp;&nbsp;&nbsp;&nbsp;
 					<input id="return" type="button" class="btn btn-info btn-sm" onclick="javascript:history.go(-1);" value="返回" /></li> 
 			</ul>

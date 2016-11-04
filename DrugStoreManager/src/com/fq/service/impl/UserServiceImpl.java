@@ -38,8 +38,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void addUser(UserBean userBean,String time) throws Exception {
-		userDAO.addUser(userBean,time);
+	public void addUser(Integer code,UserBean userBean,String time) throws Exception {
+		userDAO.addUser(code,userBean,time);
 		
 	}
 	//批量查询
@@ -64,11 +64,6 @@ public class UserServiceImpl implements UserService {
 		return userDAO.selectById(id);
 	}
 
-	@Override
-	public void addUser(UserBean userBean) {
-		 userDAO.addUser(userBean);
-		
-	}
 
 	@Override
 	public UserBean selectUserByUsercode(Integer usercode) {
@@ -83,6 +78,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<UserBean> show() {
 		return userDAO.show();
+	}
+
+	@Override
+	public List<Integer> selectCode() {
+		return userDAO.selectCode();
 	}
 
 }

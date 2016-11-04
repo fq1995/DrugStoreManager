@@ -90,8 +90,8 @@
 			<input type="hidden" name="time">
 
 			<ul class="forminfo">
-				<li><label>用户编号</label><input name="userCode" type="text" id="userCode"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入用户编号"/><i style="color: red">${message2}</i></li>
+				<li><label>用户编号</label><input readonly="readonly" name="userCode" type="text" id="userCode" value="${requestScope.userCode+1 }"
+					class="form-control" style="width:200px; display:inline"/></li>
 				<li ><label>用户名</label><input name="username" type="text" id="username"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入用户名"/><i>用户名不能超过10个字符</i><i style="color: red">${message}</i></li>
 				<li><label>密码</label><input name="password" type="password" id="password"

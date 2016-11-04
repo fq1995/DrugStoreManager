@@ -36,8 +36,8 @@ public class SupplierServiceImpl implements SupplierService {
 	}
 
 	@Override
-	public void addSup(SupplierBean supBean) {
-		supplierDao.addSup(supBean);
+	public void addSup(Integer code,SupplierBean supBean) {
+		supplierDao.addSup(code,supBean);
 
 	}
 
@@ -66,6 +66,11 @@ public class SupplierServiceImpl implements SupplierService {
 	@Override
 	public List<SupplierBean> show() {
 		return supplierDao.show();
+	}
+
+	@Override
+	public Integer select() {
+		return supplierDao.select();
 	}
 
 }

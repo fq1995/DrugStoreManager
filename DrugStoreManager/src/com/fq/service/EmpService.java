@@ -18,19 +18,17 @@ public interface EmpService {
 	//分页
 	PageModel<EmployeeBean> splitEmp(Integer currPage, Integer pageSize, String keyword);
 	//添加员工
-	void addEmp(EmployeeBean empBean,String time) throws Exception;
-	//添加员工
-	void addEmp(EmployeeBean empBean);
+	void addEmp(Integer empCode,EmployeeBean empBean);
 	//批量查询
 	List<EmployeeBean> showAllEmp(String ids);
 	//批量删除
 	void deleteAllEmp(List<EmployeeBean> empList);
-	//修改员工
-	void updateEmp(EmployeeBean empBean,String time);
 	//修改员工
 	void updateEmp(EmployeeBean empBean);
 	//根据id查询
 	EmployeeBean selectById(String id);
 	//查询所有员工
 	List<EmployeeBean> show();
+	//查询员工编号
+	Integer selectCode();
 }

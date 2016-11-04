@@ -44,7 +44,7 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 
 	
 	@Override
-	public void addInventor(DrugBean drugBean,InventoriesBean Bean, String time){
+	public void addInventor(Integer code,Integer drugCode,DrugBean drugBean,InventoriesBean Bean, String time){
 		drugBean = Bean.getDrugBean();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date =null;
@@ -53,7 +53,10 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		drugBean.setModifier(time);
+		drugBean.setDrugCode(++drugCode);
+		drugBean.setStatus("1");
+		drugBean.setModifyTime(date);
+		Bean.setStockCode((++code).toString());
 		Bean.setDate(date);
 		Bean.setStockId(UUIDBuild.getUUID());
 		Session session=sessionFactory.getCurrentSession();
@@ -66,8 +69,8 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 
 	@Override
 	public PageModel<InventoriesBean> splitInventor(Integer currPage, Integer pageSize, String keyword) {
-		String hql_count = "select count(*) from InventoriesBean where drugBean.drugName like :keyword";
-		String hql = "from InventoriesBean where drugBean.drugName like :keyword ";
+		String hql_count = "select count(*) from InventoriesBean where drugBean.drugName like :keyword " ;
+		String hql = "from InventoriesBean where drugBean.drugName like :keyword order by drugBean.drugCode desc";
 		return super.split(hql, hql_count, currPage, pageSize,keyword);
 	}
 
@@ -143,6 +146,14 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 //		String hql ="from InventoriesBean where date between '"+str+"-01"+"' and '"+str+"-31"+"'";
 		List<InventoriesBean> List = (List<InventoriesBean>) hibernateTemplate.find(hql);
 		return List==null||List.size()<=0?null:List;
+	}
+
+	@Override
+	public Integer select() {
+		String hql = "select max(stockCode) from InventoriesBean";
+		List<String> list = (List<String>) hibernateTemplate.find(hql);
+		Integer code = Integer.valueOf(list.get(0));
+		return code;
 	}
 
 }

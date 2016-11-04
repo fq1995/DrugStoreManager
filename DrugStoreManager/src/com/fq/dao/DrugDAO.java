@@ -21,10 +21,8 @@ DrugBean selectDrugByName(String drugname);
 	
 	DrugBean selectDrugByNameAndDrugId(String drugname,String drugid);
 	
-	void addDrug(DrugBean DrugBean,String time) throws Exception;
+	void addDrug(Integer drugCode, DrugBean drugBean,String time) ;
 	
-	void addDrug(DrugBean DrugBean);
-
 	PageModel<DrugBean> splitDrug(Integer currPage, Integer pageSize, String keyword);
 	
 	PageModel<DrugBean> splitDrug(Integer currPage, Integer pageSize,String drugName,String dosageform,String drugUnit,String drugCategory,String manufacturer,Date modifyTime,String modifier);
@@ -50,7 +48,8 @@ DrugBean selectDrugByName(String drugname);
 	List<DosageformBean> selectForm();
 	//根据id查找剂型
 	DosageformBean selectFormById(String id);
-	
+	//查询药品编号
+	Integer select();
 	
 	
 	

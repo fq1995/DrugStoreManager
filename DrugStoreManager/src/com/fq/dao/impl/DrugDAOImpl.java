@@ -46,19 +46,19 @@ public class DrugDAOImpl extends BaseDAO<DrugBean> implements DrugDAO {
 	}
 
 	@Override
-	public void addDrug(DrugBean drugBean, String time) throws Exception {
+	public void addDrug(Integer drugCode, DrugBean drugBean, String time){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = sdf.parse(time);
+		Date date = null;
+		try {
+			date = sdf.parse(time);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		drugBean.setDrugCode(++drugCode);
 		drugBean.setModifyTime(date);
 		drugBean.setDrugId(UUIDBuild.getUUID());
 		drugBean.setStatus("1");
 		drugBean.setMemberprice(drugBean.getSalepeice()*ConstantUtils.discount);
-		hibernateTemplate.save(drugBean);
-
-	}
-
-	@Override
-	public void addDrug(DrugBean drugBean) {
 		hibernateTemplate.save(drugBean);
 
 	}
@@ -151,8 +151,9 @@ public class DrugDAOImpl extends BaseDAO<DrugBean> implements DrugDAO {
 		StringBuffer sb1 = new StringBuffer(hql_count);
 		StringBuffer sb = new StringBuffer(hql);
 		if(null != drugName && !"".equals(drugName)){
-			sb1.append(" and d.drugName  = '"+drugName+"'");
-			sb.append(" and d.drugName  = '"+drugName+"'");
+			sb1.append(" and d.drugName  like '%"+drugName+"%'");
+			sb.append(" and d.drugName  like '%"+drugName+"%'");
+//			sb.append(" and d.drugName  like '"+drugName+"'");
 		}
 		if(null != dosageformId && !"".equals(dosageformId)){
 			sb1.append(" and df.dosageformId   ='"+dosageformId+"'");
@@ -206,6 +207,14 @@ public class DrugDAOImpl extends BaseDAO<DrugBean> implements DrugDAO {
 		String hql ="from DrugBean";
 		List<DrugBean> list = (List<DrugBean>) hibernateTemplate.find(hql);
 		return list==null||list.size()<=0?null:list;
+	}
+
+	@Override
+	public Integer select() {
+		String hql = "select max(drugCode) from DrugBean";
+		List<Integer> list = (List<Integer>) hibernateTemplate.find(hql);
+		Integer drugCode = list.get(0);
+		return drugCode;
 	}
 
 }

@@ -85,7 +85,7 @@
 			<input type="hidden" name="time">
 
 			<ul class="forminfo">
-				<li><label>员工编号</label><input name="empCode" type="text" id="empCode"
+				<li><label>员工编号</label><input name="empCode" type="text" id="empCode" value="${requestScope.empCode+1}" readonly="readonly"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入员工编号"/><i style="color: red">${message2}</i></li>
 				<li ><label>员工性名</label><input name="empName" type="text" id="empName"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入员工名"/><i>员工性名不能超过4个字符</i><i style="color: red">${message}</i></li>

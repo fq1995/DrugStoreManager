@@ -32,7 +32,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	private String time;
 	private String mess;
 	private String keyword;
-	
+	private Integer userCode;
 	
 	@Autowired
 	private UserService userService;
@@ -88,6 +88,8 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	 * 跳转新增
 	 */
 	public String doaddUser(){
+		userCode = userService.selectCode().get(0);
+		request.put("userCode", userCode);
 		return "doadd";
 	}
 	/**
@@ -97,8 +99,9 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	 */
 	public String addUser(){
 		if(null == selectUserByName() && null == selectUserByUsercode()){
+			userCode = userService.selectCode().get(0);
 			try {
-				userService.addUser(userBean,time);
+				userService.addUser(userCode,userBean,time);
 			} catch (Exception e) {
 				System.out.println("时间转换错误");
 				e.printStackTrace();
@@ -247,5 +250,12 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
+	public Integer getUserCode() {
+		return userCode;
+	}
+	public void setUserCode(Integer userCode) {
+		this.userCode = userCode;
+	}
+	
 	
 }

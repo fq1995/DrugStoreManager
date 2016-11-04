@@ -48,17 +48,19 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 
 	
 	@Override
-	public void addSale(UserBean userBean, DrugBean drugBean, DrugSalesBean bean, String time) throws Exception {
-		drugBean = bean.getDrugBean();
-		userBean = bean.getUserBean();
+	public void addSale(Integer saleCode, UserBean userBean, DrugBean drugBean, DrugSalesBean bean, String time) throws Exception {
+//		drugBean = bean.getDrugBean();
+//		userBean = bean.getUserBean();
+		MemberBean mbean = bean.getMemberBean();
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = sdf.parse(time);
 		bean.setSalesDate(date);
+		bean.setSalesCode((++saleCode).toString());
 		bean.setSalesId(UUIDBuild.getUUID());
 		Session session=sessionFactory.getCurrentSession();
 		session.clear();
-		
-		hibernateTemplate.merge(bean);
+		session.merge(bean);
 	}
 	
 
@@ -191,6 +193,14 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 		String hql ="from MemberBean where suppliertel =?";
 		List<MemberBean> list = (List<MemberBean>) hibernateTemplate.find(hql,suppliertel);
 		return list==null||list.size()<=0?null:list.get(0);
+	}
+
+	@Override
+	public Integer selectCode() {
+		String hql = "select max(salesCode) from DrugSalesBean";
+		List<String> list = (List<String>) hibernateTemplate.find(hql);
+		Integer saleCode = Integer.valueOf(list.get(0));
+		return saleCode;
 	}
 
 	

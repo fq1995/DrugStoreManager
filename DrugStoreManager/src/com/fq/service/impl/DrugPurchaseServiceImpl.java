@@ -97,9 +97,9 @@ public class DrugPurchaseServiceImpl implements DrugPurchaseService {
 	}
 
 	@Override
-	public void addPse(SupplierBean supBean,DosageformBean dfBean, DrugCategoryBean dcBean, DrugUnitBean duBean, DrugBean drugBean,
+	public void addPse(Integer drugCode, Integer pseCode,SupplierBean supBean,DosageformBean dfBean, DrugCategoryBean dcBean, DrugUnitBean duBean, DrugBean drugBean,
 			DrugPurchaseBean drugPseBean, String time) {
-		drugPseDao.addPse(supBean, dfBean, dcBean, duBean, drugBean, drugPseBean, time);
+		drugPseDao.addPse(drugCode, pseCode,supBean, dfBean, dcBean, duBean, drugBean, drugPseBean, time);
 		
 		
 	}
@@ -117,6 +117,11 @@ public class DrugPurchaseServiceImpl implements DrugPurchaseService {
 	@Override
 	public List<DrugPurchaseBean> show(Date date) {
 		return drugPseDao.show(date);
+	}
+
+	@Override
+	public Integer selectCode() {
+		return drugPseDao.selectCode();
 	}
 	
 	

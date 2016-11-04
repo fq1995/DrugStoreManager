@@ -20,7 +20,7 @@ public interface SupplierDAO {
 	PageModel<SupplierBean> splitSup(Integer currPage, Integer pageSize, String keyword);
 
 	// 添加供货商
-	void addSup(SupplierBean supBean);
+	void addSup(Integer code,SupplierBean supBean);
 
 	// 批量查询
 	List<SupplierBean> showAllSup(String ids);
@@ -36,5 +36,7 @@ public interface SupplierDAO {
 
 	// 查询所有
 	List<SupplierBean> show();
-
+	
+	// 查询编号
+	Integer select();
 }

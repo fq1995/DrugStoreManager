@@ -47,14 +47,10 @@ public class MemberDAOImpl extends BaseDAO<MemberBean> implements MemberDAO {
 		return super.split(hql, hql_count, currPage, pageSize,keyword);
 	}
 
-	@Override
-	public void addMember(MemberBean memberBean, String time) throws Exception {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
-	public void addMember(MemberBean memberBean) {
+	public void addMember(Integer code,MemberBean memberBean) {
+		memberBean.setMemberCode((++code).toString());
 		memberBean.setMemberId(UUIDBuild.getUUID());
 		hibernateTemplate.save(memberBean);
 	}
@@ -86,12 +82,6 @@ public class MemberDAOImpl extends BaseDAO<MemberBean> implements MemberDAO {
 	}
 
 	@Override
-	public void updateMember(MemberBean memberBean, String time) {
-		
-
-	}
-
-	@Override
 	public void updateMember(MemberBean memberBean) {
 		getHibernateTemplate().update(memberBean);
 
@@ -109,5 +99,14 @@ public class MemberDAOImpl extends BaseDAO<MemberBean> implements MemberDAO {
 		List<MemberBean> list = (List<MemberBean>) hibernateTemplate.find(hql);
 		return list==null||list.size()<=0?null:list;
 	}
+
+	@Override
+	public Integer selectCode() {
+		String hql = "select max(memberCode) from MemberBean";
+		List<String> list = (List<String>) hibernateTemplate.find(hql);
+		Integer code = Integer.valueOf(list.get(0));
+		return code;
+	}
+
 
 }

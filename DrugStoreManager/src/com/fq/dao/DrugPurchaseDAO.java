@@ -21,7 +21,7 @@ public interface DrugPurchaseDAO {
 	
 	DrugPurchaseBean selectPseByDrugId(String id);
 	
-	void addPse(SupplierBean supBean, DosageformBean dfBean, DrugCategoryBean dcBean, DrugUnitBean duBean, DrugBean drugBean,
+	void addPse(Integer drugCode, Integer pseCode, SupplierBean supBean, DosageformBean dfBean, DrugCategoryBean dcBean, DrugUnitBean duBean, DrugBean drugBean,
 			DrugPurchaseBean drugPseBean, String time);
 	
 	PageModel<DrugPurchaseBean> splitPse(Integer currPage, Integer pageSize, String keyword);
@@ -51,5 +51,6 @@ public interface DrugPurchaseDAO {
 	PageModel<DrugPurchaseBean> splitDateWarn(Integer currPage, Integer pagesize, String keyword);	
 	//查询进货
 	List<DrugPurchaseBean> show(Date date);
-	
+	//查询编号
+	Integer selectCode();
 }

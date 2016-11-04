@@ -44,14 +44,33 @@
  		
  		//药品名非空
  		$("#drugName").blur(function(){
+ 			$("#message").html("");
  			var name = $("input[name='drugName']").val(); 
- 	        if($.trim(name) == "" || name.length == 0 ){
- 	        	$("#drugName").css("background-color","#FFB9B9"); 
- 	        	$("#add").attr("disabled",true);   
- 	        }else{
- 	        	$("#drugName").css("background-color",""); 
- 	        	$("#add").attr("disabled",false);   
- 	        }
+ 			$.ajax({
+				url:'drug_validateName.action',
+				type:'POST',
+				data:{'name':name},
+				dataType:'json',
+				success:function(data){ 
+					if($.trim(name) == "" || name.length == 0 ){
+						$("#drugName").css("background-color","#FFB9B9"); 
+		 	        	$("#add").attr("disabled",true);
+		 	        }else if("药品名可用" ==data){
+		 	        	$("#drugName").css("background-color",""); 
+		 	        	$("#add").attr("disabled",false); 
+		 	        	$("#message").html("药品名可用");
+		 	        }else if("药品名不可用" ==data){
+		 	        	$("#message").html("药品名不可用");
+		 	        	$("#add").attr("disabled",true);
+		 	        	$("#drugName").css("background-color","#FFB9B9"); 
+		 	        }else{
+		 	        	$("#message").html("药品名不可为空");
+		 	        }
+			     },
+				 error:function(data){  
+		         }  
+	  		});
+ 			
  		});
  		
  		//修改人
@@ -88,11 +107,11 @@
 			<input type="hidden" name="currPage" value="1">
 			<input type="hidden" name="time">
 
-			<ul class="forminfo">
-				<li><label>药品编号</label><input name="drugCode" type="text" id="drugCode"
+			<ul class="forminfo"> 
+				<li><label>药品编号</label><input name="drugCode" type="text" id="drugCode" value="${requestScope.drugCode+1 }" readonly="readonly"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入药品编号"/><i>必填</i><i style="color: red">${message2}</i></li>
 				<li><label>药品名</label><input name="drugName" type="text" id="drugName"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入药品名"/><i>必填</i><i style="color: red">${message}</i></li>
+					class="form-control" style="width:200px; display:inline" placeholder="请输入药品名"/><i>必填</i><i id="message" style="color: red">${message}</i></li>
 				<li><label>剂型</label>
 					<select class="form-control" style="width:200px;height:34px"  name="dosageformBean.dosageformId">
 						<option value="">请选择</option>

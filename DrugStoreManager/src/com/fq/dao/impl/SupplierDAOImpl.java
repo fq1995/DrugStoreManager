@@ -47,7 +47,8 @@ public class SupplierDAOImpl extends BaseDAO<SupplierBean> implements SupplierDA
 	}
 
 	@Override
-	public void addSup(SupplierBean supBean) {
+	public void addSup(Integer code,SupplierBean supBean) {
+		supBean.setSupplierCode((++code).toString());
 		supBean.setSupplierId(UUIDBuild.getUUID());
 		hibernateTemplate.save(supBean);
 
@@ -96,6 +97,14 @@ public class SupplierDAOImpl extends BaseDAO<SupplierBean> implements SupplierDA
 		String hql ="from SupplierBean";
 		List<SupplierBean> list = (List<SupplierBean>) hibernateTemplate.find(hql);
 		return list==null||list.size()<=0?null:list;
+	}
+
+	@Override
+	public Integer select() {
+		String hql = "select max(supplierCode) from SupplierBean";
+		List<String> list = (List<String>) hibernateTemplate.find(hql);
+		Integer code = Integer.valueOf(list.get(0));
+		return code;
 	}
 
 }
