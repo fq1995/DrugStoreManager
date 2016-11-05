@@ -29,9 +29,12 @@
 	<constant name="struts.tag.altSyntax" value="true" />
 	<!-- 对于WebLogic,Orion,OC4J此属性应该设置成true -->
 	<constant name="struts.dispatcher.parametersWorkaround" value="false" />
+	<!-- 样式 -->
+	<constant name="struts.ui.theme" value="simple"></constant>
 	<!-- 在strtus2-json-plugin包下的struts-plugin.xml里的包  以后的包都要继承这个包 -->
 	<package name="crm-default" extends="json-default">
-		
+	
+	
 	</package>
 	<include file="struts-up.xml"></include>
 </struts>

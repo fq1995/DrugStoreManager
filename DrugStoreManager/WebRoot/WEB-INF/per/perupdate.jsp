@@ -52,10 +52,10 @@
     <input type="hidden" name="id" value="${per.perid}">
    
         <ul class="forminfo">
-        	<li><label>角色编号</label><input name="percode" type="text" id="percode" value="${per.percode}"
+        	<li><label>权限编号</label><input name="percode" type="text" id="percode" value="${per.percode}"
 					class="form-control" style="width:200px; display:inline" readonly="readonly"/></li>
-            <li><label>角色名</label><input id="pername" name="pername" type="text" class="form-control" 
-            style="width:200px; display:inline" placeholder="请输入权限名" value="${per.pername}"/><i>角色名不能超过10个字符</i><i style="color: red">${message}</i></li>
+            <li><label>权限名</label><input id="pername" name="pername" type="text" class="form-control" 
+            style="width:200px; display:inline" placeholder="请输入权限名" value="${per.pername}"/><i>权限名不能超过10个字符</i><i style="color: red">${message}</i></li>
             <li><input id="update" type="submit" class="btn btn-info btn-sm" disabled value="确认保存"/>&nbsp;&nbsp;&nbsp;&nbsp;
 					<input id="return" type="button" class="btn btn-info btn-sm" onclick="javascript:history.go(-1);" value="返回" /></li>
         </ul>

@@ -4,6 +4,7 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 	<package name="shop" extends="json-default" namespace="/">
+		
 		<!-- 设置一个全局的页面 -->
 		<global-results>
 			<result name="ok">/WEB-INF/main.jsp</result>
@@ -15,7 +16,8 @@
 			<result name="doadd">/WEB-INF/user/useradd.jsp</result>
 			<result name="showUser">/WEB-INF/user/usermanager.jsp</result>
 			<result name="addUser">/WEB-INF/user/useradd.jsp</result>
-			<result name="show" type="redirectAction">user_showUser.action?currPage=1</result>
+			<result name="show" type="redirectAction">user_showUser.action?currPage=1
+			</result>
 			<result name="edit">/WEB-INF/user/userupdate.jsp</result>
 			<result name="ajax_verifyCode" type="json">
 				<param name="root">flag</param>
@@ -24,40 +26,43 @@
 				<param name="root">mess</param>
 			</result>
 		</action>
-		
+
 		<!-- 角色管理 -->
-		
+
 		<action name="role_*" class="roleAction" method="{1}">
 			<result name="doadd">/WEB-INF/role/roleadd.jsp</result>
 			<result name="showRole">/WEB-INF/role/rolemanager.jsp</result>
 			<result name="addRole">/WEB-INF/role/roleadd.jsp</result>
-			<result name="show" type="redirectAction">role_showRole.action?currPage=1</result>
+			<result name="show" type="redirectAction">role_showRole.action?currPage=1
+			</result>
 			<result name="edit">/WEB-INF/role/roleupdate.jsp</result>
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
 			</result>
 		</action>
-		
+
 		<!-- 权限管理 -->
-		
+
 		<action name="per_*" class="permissionAction" method="{1}">
 			<result name="doaddPer">/WEB-INF/per/peradd.jsp</result>
 			<result name="showPer">/WEB-INF/per/permanager.jsp</result>
 			<result name="addPer">/WEB-INF/per/peradd.jsp</result>
-			<result name="show" type="redirectAction">per_showPer.action?currPage=1</result>
+			<result name="show" type="redirectAction">per_showPer.action?currPage=1
+			</result>
 			<result name="edit">/WEB-INF/per/perupdate.jsp</result>
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
 			</result>
 		</action>
-		
+
 		<!-- 员工管理 -->
-		
+
 		<action name="emp_*" class="empAction" method="{1}">
 			<result name="doadd">/WEB-INF/emp/empadd.jsp</result>
 			<result name="showEmp">/WEB-INF/emp/empmanager.jsp</result>
 			<result name="addEmp">/WEB-INF/emp/empadd.jsp</result>
-			<result name="show" type="redirectAction">emp_showEmp.action?currPage=1</result>
+			<result name="show" type="redirectAction">emp_showEmp.action?currPage=1
+			</result>
 			<result name="edit">/WEB-INF/emp/empupdate.jsp</result>
 			<result name="ajax_verifyCode" type="json">
 				<param name="root">flag</param>
@@ -66,16 +71,17 @@
 				<param name="root">mess</param>
 			</result>
 		</action>
-		
+
 		<!-- 药品管理 -->
-		
+
 		<action name="drug_*" class="drugAction" method="{1}">
-			
+
 			<result name="doadd">/WEB-INF/drug/drugadd.jsp</result>
 			<result name="showDrug">/WEB-INF/drug/drugmanager.jsp</result>
 			<result name="showDrugByOptions">/WEB-INF/drug/drugselect.jsp</result>
 			<result name="addDrug">/WEB-INF/drug/drugadd.jsp</result>
-			<result name="show" type="redirectAction">drug_showDrug.action?currPage=1</result>
+			<result name="show" type="redirectAction">drug_showDrug.action?currPage=1
+			</result>
 			<result name="edit">/WEB-INF/drug/drugupdate.jsp</result>
 			<result name="ajax_verifyCode" type="json">
 				<param name="root">flag</param>
@@ -84,71 +90,76 @@
 				<param name="root">mess</param>
 			</result>
 		</action>
-		
+
 		<!-- 药品剂型管理 -->
-		
+
 		<action name="form_*" class="dosageformAction" method="{1}">
-			
+
 			<result name="doadd">/WEB-INF/dosageform/formadd.jsp</result>
 			<result name="showForm">/WEB-INF/dosageform/formmanager.jsp</result>
 			<result name="addForm">/WEB-INF/dosageform/formadd.jsp</result>
-			<result name="show" type="redirectAction">form_showForm.action?currPage=1</result>
+			<result name="show" type="redirectAction">form_showForm.action?currPage=1
+			</result>
 			<result name="edit">/WEB-INF/dosageform/formupdate.jsp</result>
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
 			</result>
 		</action>
-		
+
 		<!-- 药品单位管理 -->
-		
+
 		<action name="unit_*" class="drugUnitAction" method="{1}">
-			
+
 			<result name="doadd">/WEB-INF/unit/unitadd.jsp</result>
 			<result name="showUnit">/WEB-INF/unit/unitmanager.jsp</result>
 			<result name="addUnit">/WEB-INF/unit/unitadd.jsp</result>
-			<result name="show" type="redirectAction">unit_showUnit.action?currPage=1</result>
+			<result name="show" type="redirectAction">unit_showUnit.action?currPage=1
+			</result>
 			<result name="edit">/WEB-INF/unit/unitupdate.jsp</result>
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
 			</result>
 		</action>
-		
+
 		<!-- 药品类别管理 -->
-		
+
 		<action name="category_*" class="drugCategoryAction" method="{1}">
-			
+
 			<result name="doadd">/WEB-INF/category/categoryadd.jsp</result>
 			<result name="showCategory">/WEB-INF/category/categorymanager.jsp</result>
 			<result name="addCategory">/WEB-INF/category/categoryadd.jsp</result>
-			<result name="show" type="redirectAction">category_showCategory.action?currPage=1</result>
+			<result name="show" type="redirectAction">category_showCategory.action?currPage=1
+			</result>
 			<result name="edit">/WEB-INF/category/categoryupdate.jsp</result>
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
 			</result>
 		</action>
-		
+
 		<!-- 库存管理 -->
-		
+
 		<action name="inventor_*" class="drugInventorAction" method="{1}">
 			<result name="print">/WEB-INF/kucun/inventorprint.jsp</result>
 			<result name="doadd">/WEB-INF/kucun/inventoradd.jsp</result>
 			<result name="showInventor">/WEB-INF/kucun/inventormanager.jsp</result>
 			<result name="addInventor">/WEB-INF/kucun/inventoradd.jsp</result>
-			<result name="show" type="redirectAction">inventor_showInventor.action?currPage=1</result>
+			<result name="show" type="redirectAction">inventor_showInventor.action?currPage=1
+			</result>
 			<result name="edit">/WEB-INF/kucun/inventorupdate.jsp</result>
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
 			</result>
 		</action>
-		
+
 		<!-- 销售管理 -->
-		
+
 		<action name="sale_*" class="drugSaleAction" method="{1}">
 			<result name="print">/WEB-INF/sale/saleprint.jsp</result>
 			<result name="doadd">/WEB-INF/sale/saleadd.jsp</result>
 			<result name="showSale">/WEB-INF/sale/salemanager.jsp</result>
 			<result name="addSale">/WEB-INF/sale/saleadd.jsp</result>
-			<result name="show" type="redirectAction">sale_showSale.action?currPage=1</result>
+			<result name="show" type="redirectAction">sale_showSale.action?currPage=1
+			</result>
 			<result name="edit">/WEB-INF/sale/saleupdate.jsp</result>
 			<result name="ajax_verifyCode" type="json">
 				<param name="root">flag</param>
@@ -160,56 +171,69 @@
 				<param name="root">price</param>
 			</result>
 		</action>
-		
+
 		<!-- 进货管理 -->
-		
+
 		<action name="pse_*" class="drugPurchaseAction" method="{1}">
 			<result name="print">/WEB-INF/purchase/purchaseprint.jsp</result>
 			<result name="doadd">/WEB-INF/purchase/purchaseadd.jsp</result>
 			<result name="showPurchase">/WEB-INF/purchase/purchasemanager.jsp</result>
 			<result name="addPurchase">/WEB-INF/purchase/purchaseadd.jsp</result>
-			<result name="show" type="redirectAction">pse_showPurchase.action?currPage=1</result>
+			<result name="show" type="redirectAction">pse_showPurchase.action?currPage=1
+			</result>
 			<result name="edit">/WEB-INF/purchase/purchaseupdate.jsp</result>
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
 			</result>
 		</action>
-		
+
 		<!-- 会员管理 -->
-		
+
 		<action name="member_*" class="memberAction" method="{1}">
-			
+
 			<result name="doadd">/WEB-INF/member/memberadd.jsp</result>
 			<result name="showMember">/WEB-INF/member/membermanager.jsp</result>
 			<result name="addMember">/WEB-INF/member/memberadd.jsp</result>
-			<result name="show" type="redirectAction">member_showMember.action?currPage=1</result>
+			<result name="show" type="redirectAction">member_showMember.action?currPage=1
+			</result>
 			<result name="edit">/WEB-INF/member/memberupdate.jsp</result>
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
 			</result>
 		</action>
-		
+
 		<!-- 供货商管理 -->
-		
+
 		<action name="sup_*" class="supplierAction" method="{1}">
-			
+
 			<result name="doadd">/WEB-INF/supplier/supplieradd.jsp</result>
 			<result name="showSupplier">/WEB-INF/supplier/suppliermanager.jsp</result>
 			<result name="addSupplier">/WEB-INF/supplier/supplieradd.jsp</result>
-			<result name="show" type="redirectAction">sup_showSupplier.action?currPage=1</result>
+			<result name="show" type="redirectAction">sup_showSupplier.action?currPage=1
+			</result>
 			<result name="edit">/WEB-INF/supplier/supplierupdate.jsp</result>
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
 			</result>
 		</action>
-		
+
 		<!-- 打印管理 -->
-		
+
 		<action name="print_*" class="printAction" method="{1}">
-			
 		</action>
-		
+
+		<!-- 上传图片 -->
+		<action name="sim" class="simpleUplodeAction">
+			<result name="success">/WEB-INF/drug/drugadd.jsp</result>
+
+			<interceptor-ref name="fileUpload">
+				<!-- 限制上传文件大小 -->
+				<param name="maximumSize">4000000</param>
+				<!-- 限制上传文件类型 -->
+				<param name="allowedExtensions">.jpg,.gif</param>
+			</interceptor-ref>
+		</action>
 	</package>
-	
-	
+
+
 </struts>

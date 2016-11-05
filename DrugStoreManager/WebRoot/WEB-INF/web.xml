@@ -38,6 +38,7 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
+<!-- 	验证码        -->
 	<servlet>
 		<servlet-name>ValidateImgServlet</servlet-name>
 		<servlet-class>com.fq.util.ValidateImgServlet</servlet-class>

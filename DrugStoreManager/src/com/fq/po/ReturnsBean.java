@@ -40,7 +40,6 @@ public class ReturnsBean  implements java.io.Serializable {
      private Double money;
      private byte[] reason;
      private Date submitTime;
-     private Set<BussinessBean> bussinessBeans = new HashSet<BussinessBean>(0);
 
 
     // Constructors
@@ -55,7 +54,7 @@ public class ReturnsBean  implements java.io.Serializable {
     }
     
     /** full constructor */
-    public ReturnsBean(String returnId, DrugBean drugBean, UserBean userBean, DrugPurchaseBean drugPurchaseBean, String returnCode, Integer amount, Double money, byte[] reason, Date submitTime, Set<BussinessBean> bussinessBeans) {
+    public ReturnsBean(String returnId, DrugBean drugBean, UserBean userBean, DrugPurchaseBean drugPurchaseBean, String returnCode, Integer amount, Double money, byte[] reason, Date submitTime) {
         this.returnId = returnId;
         this.drugBean = drugBean;
         this.userBean = userBean;
@@ -65,7 +64,6 @@ public class ReturnsBean  implements java.io.Serializable {
         this.money = money;
         this.reason = reason;
         this.submitTime = submitTime;
-        this.bussinessBeans = bussinessBeans;
     }
 
    
@@ -161,16 +159,6 @@ public class ReturnsBean  implements java.io.Serializable {
     public void setSubmitTime(Date submitTime) {
         this.submitTime = submitTime;
     }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="returnsBean")
-
-    public Set<BussinessBean> getBussinessBeans() {
-        return this.bussinessBeans;
-    }
-    
-    public void setBussinessBeans(Set<BussinessBean> bussinessBeans) {
-        this.bussinessBeans = bussinessBeans;
-    }
-   
 
 
 

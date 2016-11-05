@@ -52,7 +52,7 @@
     <input type="hidden" name="id" value="${role.roleid}">
    
         <ul class="forminfo">
-        	<li><label>角色编号</label><input name="rolecode" type="text" id="rolecode" value="${role.rolecode}"
+        	<li><label>角色编号</label><input name="rolecode" type="text" id="rolecode" value="${role.rolecode}" 
 					class="form-control" style="width:200px; display:inline" readonly="readonly"/></li>
             <li><label>角色名</label><input id="rolename" name="rolename" type="text" class="form-control" 
             style="width:200px; display:inline" placeholder="请输入角色名" value="${role.rolename}"/><i>角色名不能超过10个字符</i><i style="color: red">${message}</i></li>

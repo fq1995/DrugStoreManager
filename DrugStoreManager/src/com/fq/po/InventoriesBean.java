@@ -38,7 +38,6 @@ public class InventoriesBean  implements java.io.Serializable {
      private Integer stocknumber;
      private Integer stocklimit;
      private Date date;
-     private Set<BussinessBean> bussinessBeans = new HashSet<BussinessBean>(0);
 
 
     // Constructors
@@ -53,14 +52,13 @@ public class InventoriesBean  implements java.io.Serializable {
     }
     
     /** full constructor */
-    public InventoriesBean(String stockId, DrugBean drugBean, String stockCode, Integer stocknumber, Integer stocklimit, Date date, Set<BussinessBean> bussinessBeans) {
+    public InventoriesBean(String stockId, DrugBean drugBean, String stockCode, Integer stocknumber, Integer stocklimit, Date date) {
         this.stockId = stockId;
         this.drugBean = drugBean;
         this.stockCode = stockCode;
         this.stocknumber = stocknumber;
         this.stocklimit = stocklimit;
         this.date = date;
-        this.bussinessBeans = bussinessBeans;
     }
 
    
@@ -125,15 +123,6 @@ public class InventoriesBean  implements java.io.Serializable {
     
     public void setDate(Date date) {
         this.date = date;
-    }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="inventoriesBean")
-
-    public Set<BussinessBean> getBussinessBeans() {
-        return this.bussinessBeans;
-    }
-    
-    public void setBussinessBeans(Set<BussinessBean> bussinessBeans) {
-        this.bussinessBeans = bussinessBeans;
     }
    
 

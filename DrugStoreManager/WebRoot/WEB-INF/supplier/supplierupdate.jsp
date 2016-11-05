@@ -105,7 +105,7 @@
  	<input type="hidden" name="supplierId" value="${supplier.supplierId}">
     
         <ul class="forminfo">
-				<li><label>供货商编号</label><input name="supplierCode" type="text" id="supplierCode" value="${supplier.supplierCode }"
+				<li><label>供货商编号</label><input name="supplierCode" type="text" id="supplierCode" value="${supplier.supplierCode }" readonly="readonly"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入供货商编号"/><i>必填</i><i style="color: red">${message2}</i></li>
 				<li ><label>供货商名</label><input name="supplier" type="text" id="supplier" value="${supplier.supplier }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入供货商名"/><i>必填</i><i style="color: red">${message}</i></li>

@@ -45,7 +45,6 @@ public class DrugPurchaseBean  implements java.io.Serializable {
      private Float totalamount;
      private Date purchasedate;
      private Double memberprice;
-     private Set<BussinessBean> bussinessBeans = new HashSet<BussinessBean>(0);
      private Set<ReturnsBean> returnsBeans = new HashSet<ReturnsBean>(0);
 
 
@@ -62,7 +61,7 @@ public class DrugPurchaseBean  implements java.io.Serializable {
     }
     
     /** full constructor */
-    public DrugPurchaseBean(String purchaseId, DrugBean drugBean, UserBean userBean, SupplierBean supplierBean, String purchaseCode, String drugname, Integer amount, Date productionDate, Date validityDate, Double purchaseprice, Double salepeice, Float totalamount, Date purchasedate, Double memberprice, Set<BussinessBean> bussinessBeans, Set<ReturnsBean> returnsBeans) {
+    public DrugPurchaseBean(String purchaseId, DrugBean drugBean, UserBean userBean, SupplierBean supplierBean, String purchaseCode, String drugname, Integer amount, Date productionDate, Date validityDate, Double purchaseprice, Double salepeice, Float totalamount, Date purchasedate, Double memberprice,Set<ReturnsBean> returnsBeans) {
         this.purchaseId = purchaseId;
         this.drugBean = drugBean;
         this.userBean = userBean;
@@ -77,7 +76,6 @@ public class DrugPurchaseBean  implements java.io.Serializable {
         this.totalamount = totalamount;
         this.purchasedate = purchasedate;
         this.memberprice = memberprice;
-        this.bussinessBeans = bussinessBeans;
         this.returnsBeans = returnsBeans;
     }
 
@@ -223,15 +221,6 @@ public class DrugPurchaseBean  implements java.io.Serializable {
     
     public void setMemberprice(Double memberprice) {
         this.memberprice = memberprice;
-    }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="drugPurchaseBean")
-
-    public Set<BussinessBean> getBussinessBeans() {
-        return this.bussinessBeans;
-    }
-    
-    public void setBussinessBeans(Set<BussinessBean> bussinessBeans) {
-        this.bussinessBeans = bussinessBeans;
     }
 @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="drugPurchaseBean")
 

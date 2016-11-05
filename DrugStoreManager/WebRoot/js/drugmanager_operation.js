@@ -20,6 +20,8 @@
 			window.location.href="drug_delDrug.action?&ids="+param;
 		}
 	}
+	
+	
 	function update(){
 		let checks=document.getElementsByName("id_check");
 		let param="";
@@ -38,8 +40,8 @@
 			window.location.href="drug_editDrug.action?&id="+param;
 		}
 	}
+	
 	function init(){
-		
 		
 		//跳转多条件查询
 		document.querySelector("#btn_select").addEventListener("click",()=>{

@@ -41,7 +41,6 @@ public class DrugSalesBean  implements java.io.Serializable {
      private Integer salesVolume;
      private Date salesDate;
      private Float totalamount;
-     private Set<BussinessBean> bussinessBeans = new HashSet<BussinessBean>(0);
 
 
     // Constructors
@@ -56,7 +55,7 @@ public class DrugSalesBean  implements java.io.Serializable {
     }
     
     /** full constructor */
-    public DrugSalesBean(String salesId, DrugBean drugBean, MemberBean memberBean, UserBean userBean, String salesCode, Double salepeice, Double memberprice, Integer salesVolume, Date salesDate, Float totalamount, Set<BussinessBean> bussinessBeans) {
+    public DrugSalesBean(String salesId, DrugBean drugBean, MemberBean memberBean, UserBean userBean, String salesCode, Double salepeice, Double memberprice, Integer salesVolume, Date salesDate, Float totalamount) {
         this.salesId = salesId;
         this.drugBean = drugBean;
         this.memberBean = memberBean;
@@ -67,7 +66,6 @@ public class DrugSalesBean  implements java.io.Serializable {
         this.salesVolume = salesVolume;
         this.salesDate = salesDate;
         this.totalamount = totalamount;
-        this.bussinessBeans = bussinessBeans;
     }
 
    
@@ -172,15 +170,6 @@ public class DrugSalesBean  implements java.io.Serializable {
     
     public void setTotalamount(Float totalamount) {
         this.totalamount = totalamount;
-    }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="drugSalesBean")
-
-    public Set<BussinessBean> getBussinessBeans() {
-        return this.bussinessBeans;
-    }
-    
-    public void setBussinessBeans(Set<BussinessBean> bussinessBeans) {
-        this.bussinessBeans = bussinessBeans;
     }
    
 

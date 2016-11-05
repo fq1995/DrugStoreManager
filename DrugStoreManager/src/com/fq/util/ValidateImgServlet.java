@@ -1,6 +1,5 @@
 package com.fq.util;
 
-
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -8,8 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-
 
 public class ValidateImgServlet extends HttpServlet {
 
@@ -25,7 +22,7 @@ public class ValidateImgServlet extends HttpServlet {
         HttpSession session = reqeust.getSession();  
           
         ValidateCode vCode = new ValidateCode(120,40,5,100);  
-        session.setAttribute("code", vCode.getCode());  //2345
+        session.setAttribute("code", vCode.getCode()); 
         vCode.write(response.getOutputStream());  
 	}
 	

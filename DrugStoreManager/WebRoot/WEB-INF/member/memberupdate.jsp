@@ -131,7 +131,7 @@
 			<input type="hidden" name="memberId" value="${member.memberId }">
 
 		<ul class="forminfo">
-				<li><label>会员编号</label><input name="memberCode" type="text" id="memberCode" value="${member.memberCode}"
+				<li><label>会员编号</label><input name="memberCode" type="text" id="memberCode" value="${member.memberCode}" readonly="readonly"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入会员编号"/><i style="color: red">${message2}</i></li>
 				<li ><label>会员性名</label><input name="memberName" type="text" id="memberName" value="${member.memberName}"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入会员名"/><i>会员性名不能超过4个字符</i><i style="color: red">${message}</i></li>

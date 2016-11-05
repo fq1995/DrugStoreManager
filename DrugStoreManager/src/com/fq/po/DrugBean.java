@@ -47,8 +47,9 @@ public class DrugBean  implements java.io.Serializable {
      private String status;
      private Double salepeice;
      private Double memberprice;
+     private String oldName;
+     private String newName;
      private Set<InventoriesBean> inventoriesBeans = new HashSet<InventoriesBean>(0);
-     private Set<BussinessBean> bussinessBeans = new HashSet<BussinessBean>(0);
      private Set<ReturnsBean> returnsBeans = new HashSet<ReturnsBean>(0);
      private Set<DrugPurchaseBean> drugPurchaseBeans = new HashSet<DrugPurchaseBean>(0);
      private Set<DrugSalesBean> drugSalesBeans = new HashSet<DrugSalesBean>(0);
@@ -67,7 +68,7 @@ public class DrugBean  implements java.io.Serializable {
     }
     
     /** full constructor */
-    public DrugBean(String drugId, DrugUnitBean drugUnitBean, DosageformBean dosageformBean, DrugCategoryBean drugCategoryBean, Integer drugCode, String drugName, String manufacturer, String approvalNumber, String modifier, Date modifyTime, String memo, String status, Double salepeice, Double memberprice, Set<InventoriesBean> inventoriesBeans, Set<BussinessBean> bussinessBeans, Set<ReturnsBean> returnsBeans, Set<DrugPurchaseBean> drugPurchaseBeans, Set<DrugSalesBean> drugSalesBeans) {
+    public DrugBean(String drugId, DrugUnitBean drugUnitBean, DosageformBean dosageformBean, DrugCategoryBean drugCategoryBean, Integer drugCode, String drugName, String manufacturer, String approvalNumber, String modifier, Date modifyTime, String memo, String status, Double salepeice, Double memberprice,  String oldName, String newName, Set<InventoriesBean> inventoriesBeans, Set<ReturnsBean> returnsBeans, Set<DrugPurchaseBean> drugPurchaseBeans, Set<DrugSalesBean> drugSalesBeans) {
         this.drugId = drugId;
         this.drugUnitBean = drugUnitBean;
         this.dosageformBean = dosageformBean;
@@ -82,8 +83,9 @@ public class DrugBean  implements java.io.Serializable {
         this.status = status;
         this.salepeice = salepeice;
         this.memberprice = memberprice;
+        this.oldName = oldName;
+        this.newName = newName;
         this.inventoriesBeans = inventoriesBeans;
-        this.bussinessBeans = bussinessBeans;
         this.returnsBeans = returnsBeans;
         this.drugPurchaseBeans = drugPurchaseBeans;
         this.drugSalesBeans = drugSalesBeans;
@@ -232,6 +234,27 @@ public class DrugBean  implements java.io.Serializable {
     public void setMemberprice(Double memberprice) {
         this.memberprice = memberprice;
     }
+    
+    @Column(name="old_name", length=100)
+
+    public String getOldName() {
+        return this.oldName;
+    }
+    
+    public void setOldName(String oldName) {
+        this.oldName = oldName;
+    }
+    
+    @Column(name="new_name", length=100)
+
+    public String getNewName() {
+        return this.newName;
+    }
+    
+    public void setNewName(String newName) {
+        this.newName = newName;
+    }
+    
 @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="drugBean")
 
     public Set<InventoriesBean> getInventoriesBeans() {
@@ -240,15 +263,6 @@ public class DrugBean  implements java.io.Serializable {
     
     public void setInventoriesBeans(Set<InventoriesBean> inventoriesBeans) {
         this.inventoriesBeans = inventoriesBeans;
-    }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="drugBean")
-
-    public Set<BussinessBean> getBussinessBeans() {
-        return this.bussinessBeans;
-    }
-    
-    public void setBussinessBeans(Set<BussinessBean> bussinessBeans) {
-        this.bussinessBeans = bussinessBeans;
     }
 @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="drugBean")
 
@@ -278,12 +292,5 @@ public class DrugBean  implements java.io.Serializable {
         this.drugSalesBeans = drugSalesBeans;
     }
    
-
-
-
-
-
-
-
 
 }

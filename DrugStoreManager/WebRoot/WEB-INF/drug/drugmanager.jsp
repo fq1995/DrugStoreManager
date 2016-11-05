@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix ="s" uri="/struts-tags"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -13,9 +14,41 @@
 <title>药品管理</title>
 <link href="<%=basePath%>css/style1.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="<%=basePath%>css/lanrenzhijia.css" media="all">
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.min.js"></script>
-<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
 <script src="<%=basePath%>js/drugmanager_operation.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
+		<script>
+			jQuery(document).ready(function($) {
+				 $(".theme-login").on("mouseenter", function () {
+					
+				    var $this = $(this);
+				    var realpath = $("#realpath").val();
+				    var realPath = $(this).attr("id");
+					$("#images").attr("src",realPath); 
+					
+					
+				    $this.find(".theme-popover-mask").show();
+				    $('.theme-popover').slideDown(200);
+				}).on("mouseleave", function () {
+				    var $this = $(this);
+				    $this.find(".theme-popover-mask").hide();
+				    $('.theme-popover').slideUp(200);
+				    
+				}); 
+				 $('.theme-poptit .close').click(function() {
+						$('.theme-popover-mask').fadeOut(100);
+						$('.theme-popover').slideUp(200);
+				});
+				 
+			})
+		</script>
+<script type="text/javascript">
+	$(function(){
+		
+	})
+</script>
+
 
 <style type="text/css">
 	th,td  
@@ -27,6 +60,7 @@
 </head>
 
 <body>
+	<input type="hidden" name="param">
 	<div class="place">
 		<span>位置：</span>
 		<ul class="placeul">
@@ -35,7 +69,7 @@
 			<li><a href="#">药品管理</a></li>
 		</ul>
 	</div>
-
+	
 	<div class="rightinfo">
 
 		<div class="tools">
@@ -58,7 +92,7 @@
 
 			<ul class="toolbar1">
 				<li style="border:0px"> <input class="form-control" placeholder="输入需要查询的药品名" value="${requestScope.keyword }" style="width:180px;" type="text" id="keyword" name="keyword"/></li>&nbsp;&nbsp;
-				 <button id="btn_selectUser" type="button" class="btn btn-info btn-sm">查询</button>
+				 <button id="btn_selectUser" type="button" class="btn btn-info btn-sm btn-large">查询</button>
 				
 				<%-- <li><span><img src="<%=basePath%>images/t05.png" /></span>设置</li> --%>
 			</ul>
@@ -72,7 +106,7 @@
 					<th style="width:40px"><input id="all" name="all" type="checkbox" value=""/></th>
 					<th style="width:50px">序号</th>
 					<th style="width:70px">药品编号</th>
-					<th>药品名</th>
+					<th onclick="">药品名</th>
 					<th style="width:70px">剂型</th>
 					<th style="width:50px">单位</th>
 					<th style="width:50px">类别</th>
@@ -81,18 +115,18 @@
 					<th>修改人</th>
 					<th>添加日期</th>
 					<th>产品说明</th>
-					
+					<th>查看图片</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${requestScope.page.list}" var="drug"
-					varStatus="state">
+				 <c:forEach items="${requestScope.page.list}" var="drug"
+					varStatus="state"> 
 					<tr>
 						<td style="width:40px"><input name="id_check" type="checkbox"
 							value="${drug.drugId }" id="${drug.drugId}"/></td>
 						<td style="width:50px">${state.count }</td>
 						<td style="width:70px">${drug.drugCode }</td>
-						<td>${drug.drugName }</td>
+						<td onclick="">${drug.drugName }</td>
 						<td style="width:70px">${drug.dosageformBean.dosageform }</td>
 						<td style="width:50px">${drug.drugUnitBean.unitname }</td>
 						<td>${drug.drugCategoryBean.category }</td>
@@ -101,13 +135,32 @@
 						<td>${drug.modifier }</td>
 						<td>${drug.modifyTime }</td>
 						<td>${drug.memo }</td>
-					
+						<td>
+							<a name="picture" class="btn btn-primary btn-large theme-login" id="${ pageContext.request.contextPath }/upload/${drug.oldName } " href="javascript:;">查看图片</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 		</div>
-
+		
+		<!-- 弹框 -->
+		<div class="theme-popover">
+			<div class="theme-poptit">
+				<a href="javascript:;" title="关闭" class="close">×</a>
+				<h3>药品图片</h3>
+			</div>
+			<div class="theme-popbod dform" style="width: auto;height: 190px;padding-top: 10px;padding-bottom: 30px">
+				<ol style="padding-top: 0px;padding-bottom: 10px">
+					<li><img id="images" src="" style="width: 400px;height: 270px;"></li>
+				</ol>
+			</div>
+		</div>
+		<div class="theme-popover-mask"></div>
+						
+		
+		<!-- 分页 -->
+		
 		<div class="pagin">
 			<div class="message">
 				共<i class="blue">${page.total }</i>条记录，当前显示第&nbsp;<i class="blue">${page.currPage }</i>页

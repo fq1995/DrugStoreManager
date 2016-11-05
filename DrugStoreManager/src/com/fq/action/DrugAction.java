@@ -1,9 +1,13 @@
 package com.fq.action;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -17,6 +21,7 @@ import com.fq.service.DrugService;
 import com.fq.util.BaseAction;
 import com.fq.util.ConstantUtils;
 import com.fq.util.PageModel;
+import com.fq.util.StrUtils;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("drugAction")
@@ -27,7 +32,8 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 	private Map<String, Object> request;
 	private boolean flag;
 	private Integer currPage;
-
+	
+	private String param;
 	private String ids;
 	private String id;
 	private String time;
@@ -35,6 +41,11 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 	private String keyword;
 	private Integer drugCode;
 	private String name;
+	private File photo;
+	private String photoFileName;
+	private String newFileName;
+	private String photoContentType;
+	private String path; 
 	@Autowired
 	private DrugService drugService;
 	private DrugBean drugBean = new DrugBean();
@@ -135,7 +146,44 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 		
 		return "doadd";
 	}
-
+	/**
+	 * 上传图片
+	 */
+	public String addPicture(){
+		if(photo != null){
+			//利用程序建立upload文件
+			String path=ServletActionContext.getServletContext().getRealPath("/upload");
+			System.out.println(path);
+			System.out.println(photoContentType);
+			File fupload = new File(path);
+			if(!fupload.exists()){
+				fupload.mkdirs();
+			}
+			//指定本地文件的名字
+			//重命名
+			if(photoFileName==null){
+				mess="上传文件失败";
+				return "doadd";
+			}
+			newFileName = StrUtils.getNewFileName()+photoFileName.substring(photoFileName.indexOf("."));
+			
+			File newFile = new File(fupload,newFileName);
+			try {
+				FileUtils.copyFile(photo, newFile);
+				request.put("photoFileName", photoFileName);
+				request.put("newFileName", newFileName);
+				 
+				mess="上传成功";
+			} catch (IOException e) {
+				mess="上传失敗"; 
+				e.printStackTrace();
+			}
+		}
+		return "";
+		
+		
+	}
+	
 	/**
 	 * 新增药品
 	 * 
@@ -150,7 +198,41 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 		request.put("drugCategoryList", drugCategoryList);
 		request.put("drugUnitList", drugUnitList);
 		request.put("dosageformList", dosageformList);
+		
 		if (null == selectDrugByName() && null == selectDrugByDrugcode()) {
+			
+			if(photo != null){
+				//利用程序建立upload文件
+				String path=ServletActionContext.getServletContext().getRealPath("/upload");
+				request.put("path", path);
+				File fupload = new File(path);
+				if(!fupload.exists()){
+					fupload.mkdirs();
+				}
+				//指定本地文件的名字
+				//重命名
+				if(photoFileName==null){
+					mess="上传文件失败";
+					return "doadd";
+				}
+				newFileName = StrUtils.getNewFileName()+photoFileName.substring(photoFileName.indexOf("."));
+				
+				File newFile = new File(fupload,newFileName);
+				try {
+					FileUtils.copyFile(photo, newFile);
+					request.put("photoFileName", photoFileName);
+					request.put("newFileName", newFileName);
+					 
+					drugBean.setOldName(photoFileName);
+					drugBean.setNewName(newFileName);
+					mess="上传成功";
+				} catch (IOException e) {
+					mess="上传失敗"; 
+					e.printStackTrace();
+				}
+			}
+			
+			
 			drugCode = drugService.select();
 			try {
 				drugService.addDrug(drugCode,drugBean, time);
@@ -188,7 +270,10 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 		request.put("drugUnitList", drugUnitList);
 		request.put("dosageformList", dosageformList);
 		if (null != drugBean1) {
+			
 			request.put("drug", drugBean1);
+			
+			
 		}
 		return "edit";
 	}
@@ -205,6 +290,37 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 		request.put("drugUnitList", drugUnitList);
 		request.put("dosageformList", dosageformList);
 		if (null == selectDrugByNameAndDrugId()) {
+			
+			if(photo != null){
+				//利用程序建立upload文件
+				String path=ServletActionContext.getServletContext().getRealPath("/upload");
+				request.put("path", path);
+				File fupload = new File(path);
+				if(!fupload.exists()){
+					fupload.mkdirs();
+				}
+				//指定本地文件的名字
+				//重命名
+				if(photoFileName==null){
+					mess="上传文件失败";
+					return "doadd";
+				}
+				newFileName = StrUtils.getNewFileName()+photoFileName.substring(photoFileName.indexOf("."));
+				
+				File newFile = new File(fupload,newFileName);
+				try {
+					FileUtils.copyFile(photo, newFile);
+					request.put("photoFileName", photoFileName);
+					request.put("newFileName", newFileName);
+					 
+					drugBean.setOldName(photoFileName);
+					drugBean.setNewName(newFileName);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			
 			drugService.updateDrug(drugBean, time);
 			return "show";
 		}
@@ -343,6 +459,54 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public File getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(File photo) {
+		this.photo = photo;
+	}
+
+	public String getPhotoFileName() {
+		return photoFileName;
+	}
+
+	public void setPhotoFileName(String photoFileName) {
+		this.photoFileName = photoFileName;
+	}
+
+	public String getNewFileName() {
+		return newFileName;
+	}
+
+	public void setNewFileName(String newFileName) {
+		this.newFileName = newFileName;
+	}
+
+	public String getPhotoContentType() {
+		return photoContentType;
+	}
+
+	public void setPhotoContentType(String photoContentType) {
+		this.photoContentType = photoContentType;
+	}
+
+	public String getParam() {
+		return param;
+	}
+
+	public void setParam(String param) {
+		this.param = param;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
 	}
 	
 }

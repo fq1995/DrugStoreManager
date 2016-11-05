@@ -88,13 +88,13 @@
 		<div class="formtitle">
 			<span>基本信息</span>
 		</div>
-		<form action="drug_updateDrug.action" method="post">
+		<form action="drug_updateDrug.action" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="currPage" value="1">
 			<input type="hidden" name="time">
 			<input type="hidden" name="drugId" value="${drug.drugId }">
 
 			<ul class="forminfo">
-				<li><label>药品编号</label><input name="drugCode" type="text" id="drugCode" value="${drug.drugCode }"
+				<li><label>药品编号</label><input name="drugCode" type="text" id="drugCode" value="${drug.drugCode }" readonly="readonly"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入药品编号" /><i>必填</i><i style="color: red">${message2}</i></li>
 				<li><label>药品名</label><input name="drugName" type="text" id="drugName" value="${drug.drugName }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入药品名"/><i>必填</i><i style="color: red">${message}</i></li>
@@ -125,6 +125,9 @@
 					class="form-control" style="width:200px; display:inline" placeholder="请输入生产厂商"/><i></i></li>
 				<li><label>产品说明</label><input name="memo" type="text" id="memo" value="${drug.memo }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入产品说明"/><i></i></li>
+				<li><label>药品图片</label>
+				<img alt="" src="${pageContext.request.contextPath}/upload/${drug.oldName}" style="width:80px;height:48px ">
+				<input name="photo" type="file" id="photo" style="border: none"></li></li>				
 				<li><label>批准文号</label><input name="approvalNumber" type="text" id="approvalNumber" value="${drug.approvalNumber }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入批准文号"/><i></i></li>
 				<li><label>修改人</label><input name="modifier" type="text" id="modifier" value="${drug.modifier }"
