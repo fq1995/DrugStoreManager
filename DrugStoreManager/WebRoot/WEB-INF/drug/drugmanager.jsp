@@ -23,8 +23,8 @@
 				 $(".theme-login").on("mouseenter", function () {
 					
 				    var $this = $(this);
-				    var realpath = $("#realpath").val();
 				    var realPath = $(this).attr("id");
+				    //alert(realPath);
 					$("#images").attr("src",realPath); 
 					
 					
@@ -134,9 +134,9 @@
 						<td>${drug.approvalNumber }</td>
 						<td>${drug.modifier }</td>
 						<td>${drug.modifyTime }</td>
-						<td>${drug.memo }</td>
+						<td> ${drug.memo} </td>
 						<td>
-							<a name="picture" class="btn btn-primary btn-large theme-login" id="${ pageContext.request.contextPath }/upload/${drug.oldName } " href="javascript:;">查看图片</a>
+							<a name="picture" class="btn btn-primary btn-large theme-login" id="/picturepath/${drug.newName } " href="javascript:;">查看图片</a>
 						</td>
 					</tr>
 				</c:forEach>

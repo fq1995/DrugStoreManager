@@ -152,7 +152,7 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 	public String addPicture(){
 		if(photo != null){
 			//利用程序建立upload文件
-			String path=ServletActionContext.getServletContext().getRealPath("/upload");
+			path=ServletActionContext.getServletContext().getRealPath("\\/upload");
 			System.out.println(path);
 			System.out.println(photoContentType);
 			File fupload = new File(path);
@@ -203,7 +203,9 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 			
 			if(photo != null){
 				//利用程序建立upload文件
-				String path=ServletActionContext.getServletContext().getRealPath("/upload");
+				/*String path=ServletActionContext.getServletContext().getRealPath("/upload");*/
+				String path= ConstantUtils.picturepath;
+				
 				request.put("path", path);
 				File fupload = new File(path);
 				if(!fupload.exists()){
@@ -293,7 +295,8 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 			
 			if(photo != null){
 				//利用程序建立upload文件
-				String path=ServletActionContext.getServletContext().getRealPath("/upload");
+//				path=ServletActionContext.getServletContext().getRealPath("/upload");
+				path= ConstantUtils.picturepath;
 				request.put("path", path);
 				File fupload = new File(path);
 				if(!fupload.exists()){
