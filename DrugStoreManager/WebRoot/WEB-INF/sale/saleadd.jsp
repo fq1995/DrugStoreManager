@@ -33,7 +33,7 @@
  		$("#drugname").blur(function(){
  			var drugid = $("#drugname").val();
  			$.ajax({
- 				url:'form_validateName.action',
+ 				url:'sale_validateid.action',
  				type:'POST',
  				data:{'drugid':drugid},
  				dataType:'json',

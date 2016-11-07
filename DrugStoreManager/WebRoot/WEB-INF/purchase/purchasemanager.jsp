@@ -97,7 +97,7 @@
 						<td style="width:40px"><input name="id_check" type="checkbox"
 							value="${pse.purchaseId }" id="${pse.purchaseId}"/></td>
 						<td style="width:50px">${state.count }</td>
-						<td style="width:70px">${pse.drugBean.drugCode }</td>
+						<td style="width:70px">${pse.purchaseCode }</td>
 						<td>${pse.drugBean.drugName }</td>
 						<td style="width:70px">${pse.drugBean.dosageformBean.dosageform }</td>
 						<td style="width:50px">${pse.drugBean.drugUnitBean.unitname }</td>

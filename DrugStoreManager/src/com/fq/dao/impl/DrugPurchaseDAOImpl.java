@@ -85,8 +85,8 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 
 	@Override
 	public PageModel<DrugPurchaseBean> splitPse(Integer currPage, Integer pageSize, String keyword) {
-		String hql_count = "select count(*) from DrugPurchaseBean where drugBean.drugName like :keyword";
-		String hql = "from DrugPurchaseBean where drugBean.drugName like :keyword ";
+		String hql_count = "select count(*) from DrugPurchaseBean where drugBean.drugName like :keyword  order by purchaseCode desc";
+		String hql = "from DrugPurchaseBean where drugBean.drugName like :keyword  order by purchaseCode desc";
 		return super.split(hql, hql_count, currPage, pageSize,keyword);
 	}
 

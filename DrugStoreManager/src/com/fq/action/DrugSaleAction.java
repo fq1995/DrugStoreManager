@@ -41,6 +41,7 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 	private String drugId;
 	private Integer saleCode;
 	private Double price;
+	private String name;
 
 	@Autowired
 	private DrugSaleService drugSaleService;
@@ -236,6 +237,23 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 	}
 
 	/**
+	 * ajax校验药品名是否可用
+	 *
+	public String validateName() {
+		if(null != name){
+			DrugSalesBean bean = drugSaleService.selectSaleByName(name);
+			if (null == bean) {
+				mess = "药品名可用";
+			} else if (null != bean) {
+				mess = "药品名不可用";
+			}
+			return "ajax_verifyName";
+		}
+		return "doadd";
+	}*/
+	
+	
+	/**
 	 * ajax校验会员电话是否可用
 	 */
 	public String validateTel() {
@@ -251,7 +269,7 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 	}
 
 	/**
-	 * ajax校验会员电话是否可用
+	 * ajax校验药品是否可用
 	 */
 	public String validateid() {
 		HttpServletRequest request = ServletActionContext.getRequest();
@@ -354,6 +372,14 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 
 	public void setSaleCode(Integer saleCode) {
 		this.saleCode = saleCode;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }
