@@ -28,7 +28,6 @@ import javax.persistence.TemporalType;
 
 public class UserBean  implements java.io.Serializable {
 
-
     // Fields    
 
      private String userId;
@@ -38,6 +37,8 @@ public class UserBean  implements java.io.Serializable {
      private String password;
      private Date addtime;
      private Integer status;
+     private String email;
+     private String nickname;
      private Set<DrugPurchaseBean> drugPurchaseBeans = new HashSet<DrugPurchaseBean>(0);
      private Set<DrugSalesBean> drugSalesBeans = new HashSet<DrugSalesBean>(0);
      private Set<ReturnsBean> returnsBeans = new HashSet<ReturnsBean>(0);
@@ -56,7 +57,7 @@ public class UserBean  implements java.io.Serializable {
     }
     
     /** full constructor */
-    public UserBean(String userId, RoleBean roleBean, Integer userCode, String username, String password, Date addtime, Integer status, Set<DrugPurchaseBean> drugPurchaseBeans, Set<DrugSalesBean> drugSalesBeans, Set<ReturnsBean> returnsBeans) {
+    public UserBean(String userId, RoleBean roleBean, Integer userCode, String username, String password, Date addtime, Integer status,String email,  String nickname, Set<DrugPurchaseBean> drugPurchaseBeans, Set<DrugSalesBean> drugSalesBeans, Set<ReturnsBean> returnsBeans) {
         this.userId = userId;
         this.roleBean = roleBean;
         this.userCode = userCode;
@@ -64,6 +65,8 @@ public class UserBean  implements java.io.Serializable {
         this.password = password;
         this.addtime = addtime;
         this.status = status;
+        this.email = email;
+        this.nickname = nickname;
         this.drugPurchaseBeans = drugPurchaseBeans;
         this.drugSalesBeans = drugSalesBeans;
         this.returnsBeans = returnsBeans;
@@ -132,6 +135,16 @@ public class UserBean  implements java.io.Serializable {
     public void setAddtime(Date addtime) {
         this.addtime = addtime;
     }
+    @Column(name="nickname", length=40)
+
+    public String getNickname() {
+        return this.nickname;
+    }
+    
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+    
     
     @Column(name="status")
 
@@ -168,6 +181,16 @@ public class UserBean  implements java.io.Serializable {
     
     public void setReturnsBeans(Set<ReturnsBean> returnsBeans) {
         this.returnsBeans = returnsBeans;
+    }
+
+    @Column(name="email", length=100)
+
+    public String getEmail() {
+        return this.email;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
     }
    
 

@@ -109,7 +109,7 @@
         line-height: 20px;color: #fff; font-family: Verdana, 微软雅黑,黑体">
         <span id="opt_info" border="false" region="center" style=" width: 20px; height: 20px;"></span>
        
-        <span style="float:right; padding-right:20px;" class="head"> <span id="time" style="..."></span>&nbsp;&nbsp;欢迎&nbsp;&nbsp;<span name="username" id="username">${username}</span>  <a style="text-decoration:none;cursor: hand;cursor: pointer;" href="#" id="loginOut">安全退出</a></span>
+        <span style="float:right; padding-right:20px;" class="head"> <span id="time" style="..."></span>&nbsp;&nbsp;欢迎&nbsp;&nbsp;<span name="username" id="username">${nickname}</span>  <a style="text-decoration:none;cursor: hand;cursor: pointer;" href="#" id="loginOut">安全退出</a></span>
         <span style="padding-left:10px; font-size: 16px; "><img src="<%=basePath%>images/blocks.gif" width="20" height="20" align="absmiddle" /> 药店管理系统</span>
         <span name="time"></span>
     </div>

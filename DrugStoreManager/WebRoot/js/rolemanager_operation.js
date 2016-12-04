@@ -16,8 +16,10 @@
 		if(param==""){
 			alert("请选择要删除的数据");
 		}else{
-			alert(param);
-			window.location.href="role_delRole.action?&ids="+param;
+//			alert(param);
+			if(confirm("您确定要删除吗？")){
+				window.location.href="role_delRole.action?&ids="+param;
+			}
 		}
 	}
 	function update(){

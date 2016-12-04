@@ -33,10 +33,16 @@
         <form name="form1" method="post" action="user_registUser.action">
             <fieldset class="form">
                 <p>
-                    <label class="loginlabel" for="username">
-                        用户名:</label>
-                    <input class="logininput ui-keyboard-input ui-widget-content ui-corner-all" name="username"
-                           id="username" type="text" value="" placeholder="请输入用户名"/>&nbsp;&nbsp;<img name="duihao1" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_" name="tip_"></span><i class="exit" style="color: red">${message}</i><i id="mess" style="color: red"></i>
+                    <label class="loginlabel" for="nickname">
+                      昵称:</label>
+                    <input class="logininput ui-keyboard-input ui-widget-content ui-corner-all" name="nickname"
+                           id="nickname" type="text" value="" placeholder="请输入昵称"/>&nbsp;&nbsp;<img name="duihao1" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_" name="tip_"></span><i class="exit" style="color: red"></i><i id="mess" style="color: red"></i>
+                </p>
+                <p>
+                    <label class="loginlabel" for="email">
+                        邮箱:</label>
+                    <input class="logininput ui-keyboard-input ui-widget-content ui-corner-all" name="email"
+                           id="email" type="text" value="" placeholder="请输入邮箱"/>&nbsp;&nbsp;<img name="duihao0" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_1" name="tip_"></span><i class="exit" style="color: red">${message}</i><i id="mes" style="color: red"></i>
                 </p>
                 <p>
                     <label class="loginlabel" for="password">

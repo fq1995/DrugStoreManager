@@ -30,7 +30,7 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 
 	@Override
 	public UserBean loginOrNot(String username, String password) {
-		String hql ="from UserBean where username=? and password=? and status=1";
+		String hql ="from UserBean where email=? and password=? and status=1";
 		List<UserBean> UserList = (List<UserBean>) hibernateTemplate.find(hql, new Object[]{username,password});
 		return UserList==null||UserList.size()<=0?null:UserList.get(0);
 	}
@@ -132,6 +132,13 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 		String hql ="select max(userCode) from UserBean";
 		List<Integer> list =  (List<Integer>) hibernateTemplate.find(hql);
 		return list==null||list.size()<=0?null:list;
+	}
+
+	@Override
+	public UserBean selectUserByEmail(String email) {
+		String hql ="from UserBean where email =?";
+		List<UserBean> list =  (List<UserBean>) hibernateTemplate.find(hql,email);
+		return list==null||list.size()<=0?null:list.get(0);
 	}
 
 }

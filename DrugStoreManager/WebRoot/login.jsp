@@ -59,11 +59,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <fieldset class="form">
             <span id="ti"><center><font id="tish">${tishi }</font></center></span>
                 <p>
-                    <label class="loginlabel" for="user_name">
+         <label class="loginlabel" for="email">
+                        用户账号:</label>
+                    <input class="logininput ui-keyboard-input ui-widget-content ui-corner-all " name="email"
+                           id="email" type="text" value="" placeholder="请输入邮箱账号"/>&nbsp;&nbsp;<img name="duihao1" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_" name="tip_"></span>
+                </p>
+                    <!-- <label class="loginlabel" for="username">
                         用户账号:</label>
                     <input class="logininput ui-keyboard-input ui-widget-content ui-corner-all " name="username"
                            id="username" type="text" value="" placeholder="请输入账号"/>&nbsp;&nbsp;<img name="duihao1" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_" name="tip_"></span>
-                </p>
+                </p> -->
                 <p>
                     <label class="loginlabel" for="password">
                         密码:</label>

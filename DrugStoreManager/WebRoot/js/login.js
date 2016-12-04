@@ -4,10 +4,10 @@ function change() {
 $(function() {
 	$("#loginbtn").focus(function () {
 		var inputVerifyCode = $("#inputVerifyCode").val();
-		var name = $("input[name='username']").val();
+		var name = $("input[name='email']").val();
 		var pass = $("#password").val();
 		if(null == name || $.trim(name) == ''){
-			alert("请输入用户名");
+			alert("请输入邮箱账号");
 		}else if(null == pass || $.trim(pass) == ''){
 			alert("请输入密码");
 		}else if(null == inputVerifyCode || $.trim(inputVerifyCode) == ''){
@@ -55,9 +55,9 @@ function clean() {
 }
 $(function() {
 	// 用户名非空
-	$("#username").blur(function() {
+	$("#email").blur(function() {
 		$(".tip_").html("");
-		var name = $("input[name='username']").val();
+		var name = $("input[name='email']").val();
 		$("img[name='duihao1']").css("display", "none");
 		$("#tip_").html("");
 		if ($.trim(name) == "" || name.length == 0) {
@@ -93,7 +93,7 @@ $(function() {
 		
 	})
 	
-	$("#username").focus(function() {
+	$("#email").focus(function() {
 		$("#ti").html("");
 	});
 	$("#password").focus(function() {

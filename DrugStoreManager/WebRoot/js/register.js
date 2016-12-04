@@ -3,24 +3,26 @@
   	}
 	function clean(){
 		$("#mess").html("");
+		$("#mes").html("");
 		$(".tip_").html("");
+		$(".tip_1").html("");
 		$(".tip_pass").html("");
 		$(".tip_pass2").html("");
+		$("img[name='duihao0']").css("display","none"); 
 		$("img[name='duihao1']").css("display","none"); 
 		$("img[name='duihao2']").css("display","none"); 
 		$("img[name='duihao3']").css("display","none"); 
 		$("img[name='duihao4']").css("display","none"); 
 	}
 	$(function() {
-		alert("=========");
 		$("#loginbtn").focus(function () {
 			var inputVerifyCode = $("#inputVerifyCode").val();
-			var name = $("input[name='username']").val();
+			var name = $("input[name='email']").val();
 			var pass = $("#password").val();
 			var pass2 = $("#password2").val();
 			
 			if(null == name || $.trim(name) == ''){
-				alert("请输入用户名");
+				alert("请输入邮箱");
 			}else if(null == pass || $.trim(pass) == ''){
 				alert("请输入密码");
 			}else if(null == pass2 || $.trim(pass2) == ''){
@@ -52,21 +54,22 @@
   			       }  
   	  		});
   		});
+  		
   		//用户名
-  		$("#username").blur(function(){
+  		$("#nickname").blur(function(){
   			$("#mess").html("");
   			$(".exit").html("");
   			$(".tip_").html("");
   			$("img[name='duihao1']").css("display","none"); 
   		    $("#tip_").html("");
-			var username = $("#username").val();
+			var nickname = $("#nickname").val();
 	  		$.ajax({
 				url:'user_validateName.action',
 				type:'POST',
-				data:{'username':username},
+				data:{'username':nickname},
 				dataType:'json',
 				success:function(data){ 
-					if($.trim(username) == "" || username.length == 0){
+					if($.trim(nickname) == "" || nickname.length == 0){
 			            $(".tip_").html("<a style='color:red'>用户名不能为空</a>");
 			            
 			        }  
@@ -76,6 +79,41 @@
 					
 					else if(data=="用户名可用"){
 			        	$("img[name='duihao1']").css("display",""); 
+			        }
+			     }  
+	  		});
+		});
+
+  		
+  		//邮箱
+  		$("#email").blur(function(){
+  			$("#mes").html("");
+  			$(".exit").html("");
+  			$(".tip_1").html("");
+  			$("img[name='duihao0']").css("display","none"); 
+  		    $("#tip_").html("");
+			var email = $("#email").val();
+			 var reg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+	  		$.ajax({
+				url:'user_validateEmail.action',
+				type:'POST',
+				data:{'email':email},
+				dataType:'json',
+				success:function(data){ 
+					if($.trim(email) == "" || email.length == 0){
+			            $(".tip_1").html("<a style='color:red'>邮箱不能为空</a>");
+			            
+			        }else if (!reg.test(email)){
+			 	           //alert("请输入正确格式的手机号码！");
+			 	           $("#mes").html("请输入正确格式的邮箱！");
+			 	            return false;
+			 	    }
+					else if(data == "邮箱不可用"){
+						$("#mes").html("邮箱不可用");
+					}
+					
+					else if(data=="邮箱可用"){
+			        	$("img[name='duihao0']").css("display",""); 
 			        }
 			     }  
 	  		});
@@ -104,8 +142,6 @@
 			$("img[name='duihao3']").css("display","none"); 
 			var pass = $("#password").val();
 			var rpass = $("#password2").val();
-			/* alert(pass);
-			alert(rpass); */
 			if ($.trim(rpass) == "" || rpass.length == 0) {
 				$(".tip_pass2").html("<a style='color:red'>密码不能为空</a>");
 			}else if (rpass.length<6 || rpass.length>10) {

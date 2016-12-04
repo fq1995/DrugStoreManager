@@ -85,4 +85,9 @@ public class UserServiceImpl implements UserService {
 		return userDAO.selectCode();
 	}
 
+	@Override
+	public UserBean selectUserByEmail(String email) {
+		return userDAO.selectUserByEmail(email);
+	}
+
 }

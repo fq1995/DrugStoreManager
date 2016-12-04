@@ -16,8 +16,10 @@
 		if(param==""){
 			alert("请选择要删除的数据");
 		}else{
-			alert(param);
-			window.location.href="emp_delEmp.action?&ids="+param;
+//			alert(param);
+			if(confirm("您确定要删除吗？")){
+				window.location.href="emp_delEmp.action?&ids="+param;
+			}
 		}
 	}
 	function update(){
@@ -42,7 +44,7 @@
 		//查询
 		document.querySelector("#btn_selectUser").addEventListener("click",()=>{
 			var keyword=document.querySelector("#keyword").value;
-			alert(keyword);
+//			alert(keyword);
 			window.location.href="emp_showEmp.action?currPage=1&keyword="+keyword;
 		},false);
 		//新增用户

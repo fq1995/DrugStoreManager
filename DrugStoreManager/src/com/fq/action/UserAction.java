@@ -31,6 +31,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	private String id;
 	private String time;
 	private String mess;
+	private String mes;
 	private String keyword;
 	private Integer userCode;
 	
@@ -42,9 +43,11 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	 * @return
 	 */
 	public String login(){
-		UserBean user = userService.loginOrNot(userBean.getUsername(), userBean.getPassword());
+		UserBean user = userService.loginOrNot(userBean.getEmail(), userBean.getPassword());
 		if(user!=null){
 			session.put("user", user);
+			session.put("username",user.getUsername());
+			session.put("nickname", user.getNickname());
 			return "ok";
 		}else{
 			request.put("tishi","用户名或密码错误");
@@ -60,7 +63,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 			userService.register(userBean);
 			return "error";
 		}else{
-			request.put("message","用户名已被使用！");
+			request.put("message","邮箱已被使用！");
 			return "defult";
 		}
 		
@@ -152,6 +155,13 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 		return bean;
 	}
 	/**
+	 * 根据用户邮箱查询
+	 */
+	public UserBean selectUserByEmail(){
+		UserBean bean = userService.selectUserByEmail(userBean.getEmail());
+		return bean;
+	}  
+	/**
 	 * 根据用户名和id查重
 	 * @return
 	 */
@@ -192,6 +202,21 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 			mess = "用户名不可用";
 		}
 		return "ajax_verifyName";
+	}
+	
+	/**
+	 * ajax校验邮箱是否可用
+	 */
+	public String validateEmail() {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		String email = (String)request.getParameter("email");
+		UserBean bean =userService.selectUserByEmail(email);
+		if(null == bean) {
+			mes = "邮箱名可用";
+		} else if(null != bean){
+			mes = "邮箱名不可用";
+		}
+		return "ajax_verifyEmail";
 	}
 	
 	
@@ -255,6 +280,12 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	}
 	public void setUserCode(Integer userCode) {
 		this.userCode = userCode;
+	}
+	public String getMes() {
+		return mes;
+	}
+	public void setMes(String mes) {
+		this.mes = mes;
 	}
 	
 	

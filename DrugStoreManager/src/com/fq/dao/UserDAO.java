@@ -33,4 +33,6 @@ public interface UserDAO{
 		List<UserBean> show();
 		//查询用户编码
 		List<Integer> selectCode();
+		//查询邮箱
+		UserBean selectUserByEmail(String email);
 }
