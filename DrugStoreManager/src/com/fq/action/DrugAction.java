@@ -23,7 +23,11 @@ import com.fq.util.ConstantUtils;
 import com.fq.util.PageModel;
 import com.fq.util.StrUtils;
 import com.opensymphony.xwork2.ModelDriven;
-
+/**
+ * 
+ * @author fu
+ * 药品管理
+ */
 @Controller("drugAction")
 @Scope("prototype")
 public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, RequestAware {

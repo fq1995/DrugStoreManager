@@ -3,9 +3,6 @@ package com.fq.action;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -17,7 +14,11 @@ import com.fq.util.BaseAction;
 import com.fq.util.ConstantUtils;
 import com.fq.util.PageModel;
 import com.opensymphony.xwork2.ModelDriven;
-
+/**
+ * 
+ * @author fu
+ * 员工管理
+ */
 @Controller("empAction")
 @Scope("prototype")
 public class EmpAction extends BaseAction implements ModelDriven<EmployeeBean>, RequestAware {

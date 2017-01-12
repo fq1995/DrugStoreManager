@@ -14,7 +14,11 @@ import com.fq.util.BaseAction;
 import com.fq.util.ConstantUtils;
 import com.fq.util.PageModel;
 import com.opensymphony.xwork2.ModelDriven;
-
+/**
+ * 
+ * @author fu
+ * 供货商管理
+ */
 @Controller("supplierAction")
 @Scope("prototype")
 public class SupplierAction extends BaseAction implements ModelDriven<SupplierBean>,RequestAware{

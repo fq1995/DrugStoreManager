@@ -3,12 +3,7 @@ package com.fq.action;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.criteria.CriteriaBuilder.In;
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
-import org.aspectj.internal.lang.annotation.ajcDeclareAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -25,7 +20,11 @@ import com.fq.util.BaseAction;
 import com.fq.util.ConstantUtils;
 import com.fq.util.PageModel;
 import com.opensymphony.xwork2.ModelDriven;
-
+/**
+ * 
+ * @author fu
+ * 药品进货管理
+ */
 @Controller("drugPurchaseAction")
 @Scope("prototype")
 public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPurchaseBean>, RequestAware {

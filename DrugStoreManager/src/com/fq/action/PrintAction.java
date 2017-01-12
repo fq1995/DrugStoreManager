@@ -41,7 +41,11 @@ import com.fq.service.MemberService;
 import com.fq.service.SupplierService;
 import com.fq.service.UserService;
 import com.fq.util.DownloadUtil;
-
+/**
+ * 
+ * @author fu
+ * 打印报表
+ */
 @Controller("printAction")
 @Scope("prototype")
 public class PrintAction implements RequestAware {

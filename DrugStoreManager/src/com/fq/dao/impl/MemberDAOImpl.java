@@ -7,9 +7,7 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.fq.dao.MemberDAO;
-import com.fq.po.EmployeeBean;
 import com.fq.po.MemberBean;
-import com.fq.po.UserBean;
 import com.fq.util.BaseDAO;
 import com.fq.util.PageModel;
 import com.fq.util.UUIDBuild;

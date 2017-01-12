@@ -10,7 +10,6 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.fq.dao.UserDAO;
-import com.fq.po.DrugBean;
 import com.fq.po.UserBean;
 import com.fq.util.BaseDAO;
 import com.fq.util.PageModel;

@@ -12,7 +12,7 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 /**
  * 验证码生成器
- * @author dsna
+ * @author fu
  *
  */
 public class ValidateCode {

@@ -14,7 +14,11 @@ import com.fq.util.BaseAction;
 import com.fq.util.ConstantUtils;
 import com.fq.util.PageModel;
 import com.opensymphony.xwork2.ModelDriven;
-
+/**
+ * 
+ * @author fu
+ * 角色管理
+ */
 @Controller("roleAction")
 @Scope("prototype")
 public class RoleAction extends BaseAction implements ModelDriven<RoleBean>,RequestAware{

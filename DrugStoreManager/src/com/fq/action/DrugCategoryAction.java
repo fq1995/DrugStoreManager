@@ -8,14 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.fq.po.DosageformBean;
 import com.fq.po.DrugCategoryBean;
 import com.fq.service.DrugCategoryService;
 import com.fq.util.BaseAction;
 import com.fq.util.ConstantUtils;
 import com.fq.util.PageModel;
 import com.opensymphony.xwork2.ModelDriven;
-
+/**
+ * 
+ * @author fu
+ * 药品类别管理
+ */
 @Controller("drugCategoryAction")
 @Scope("prototype")
 public class DrugCategoryAction extends BaseAction implements ModelDriven<DrugCategoryBean>, RequestAware {

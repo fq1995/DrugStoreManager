@@ -14,7 +14,11 @@ import com.fq.util.BaseAction;
 import com.fq.util.ConstantUtils;
 import com.fq.util.PageModel;
 import com.opensymphony.xwork2.ModelDriven;
-
+/**
+ * 
+ * @author fu
+ * 权限管理
+ */
 @Controller("permissionAction")
 @Scope("prototype")
 public class PermissionAction extends BaseAction implements ModelDriven<PermissionBean>,RequestAware{

@@ -23,11 +23,15 @@ import com.fq.util.BaseAction;
 import com.fq.util.ConstantUtils;
 import com.fq.util.PageModel;
 import com.opensymphony.xwork2.ModelDriven;
-
+/**
+ * 
+ * @author fu
+ * 药品销售管理
+ */
 @Controller("drugSaleAction")
 @Scope("prototype")
 public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesBean>, RequestAware {
-	// 药品管理
+	// 药品销售管理
 	private Map<String, Object> session;
 	private Map<String, Object> request;
 	private boolean flag;

@@ -15,42 +15,56 @@ import com.fq.util.PageModel;
 
 public interface DrugPurchaseService {
 	DrugPurchaseBean selectPseByName(String name);
-	
+
 	DrugPurchaseBean selectPseByDrugcode(Integer code);
-	
+
 	DrugPurchaseBean selectPseByDrugId(String id);
-	
-	void addPse(Integer drugCode, Integer pseCode,SupplierBean supBean,DosageformBean dfBean, DrugCategoryBean dcBean, DrugUnitBean duBean, DrugBean drugBean,
-			DrugPurchaseBean drugPseBean, String time);
-	
+
+	void addPse(Integer drugCode, Integer pseCode, SupplierBean supBean, DosageformBean dfBean, DrugCategoryBean dcBean,
+			DrugUnitBean duBean, DrugBean drugBean, DrugPurchaseBean drugPseBean, String time);
+
 	PageModel<DrugPurchaseBean> splitPse(Integer currPage, Integer pageSize, String keyword);
-	//批量查询
+
+	// 批量查询
 	List<DrugPurchaseBean> showAllPse(String ids);
-	//批量删除对象
+
+	// 批量删除对象
 	void deleteAllPse(List<DrugPurchaseBean> list);
-	//修改
+
+	// 修改
 	void updatePse(DrugPurchaseBean bean);
-	//根据ID查询
+
+	// 根据ID查询
 	DrugPurchaseBean selectById(String id);
-	//查询类别
+
+	// 查询类别
 	List<DrugCategoryBean> selectCategory();
-	//查询单位
+
+	// 查询单位
 	List<DrugUnitBean> selectUnit();
-	//查询剂型
+
+	// 查询剂型
 	List<DosageformBean> selectForm();
-	//查询药品
+
+	// 查询药品
 	List<DrugBean> selectDrug();
-	//查询会员
+
+	// 查询会员
 	List<MemberBean> selectMember();
-	//查询员工
+
+	// 查询员工
 	List<UserBean> selectUser();
-	//查询供货商
+
+	// 查询供货商
 	List<SupplierBean> selectSupplier();
-	//有效期预警
+
+	// 有效期预警
 	PageModel<DrugPurchaseBean> splitDateWarn(Integer currPage, Integer pagesize, String keyword);
-	//查询进货
+
+	// 查询进货
 	List<DrugPurchaseBean> show(Date date);
-	//查询编号
+
+	// 查询编号
 	Integer selectCode();
 
 }

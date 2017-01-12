@@ -14,7 +14,11 @@ import com.fq.util.BaseAction;
 import com.fq.util.ConstantUtils;
 import com.fq.util.PageModel;
 import com.opensymphony.xwork2.ModelDriven;
-
+/**
+ * 
+ * @author fu
+ * 药品剂型管理
+ */
 @Controller("dosageformAction")
 @Scope("prototype")
 public class DosageformAction extends BaseAction implements ModelDriven<DosageformBean>, RequestAware {

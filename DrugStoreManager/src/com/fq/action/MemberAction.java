@@ -14,7 +14,11 @@ import com.fq.util.BaseAction;
 import com.fq.util.ConstantUtils;
 import com.fq.util.PageModel;
 import com.opensymphony.xwork2.ModelDriven;
-
+/**
+ * 
+ * @author fu
+ * 会员管理
+ */
 @Controller("memberAction")
 @Scope("prototype")
 public class MemberAction extends BaseAction implements ModelDriven<MemberBean>, RequestAware {

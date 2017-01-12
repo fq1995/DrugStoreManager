@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.fq.dao.SupplierDAO;
 import com.fq.po.SupplierBean;
-import com.fq.po.UserBean;
 import com.fq.util.BaseDAO;
 import com.fq.util.PageModel;
 import com.fq.util.UUIDBuild;

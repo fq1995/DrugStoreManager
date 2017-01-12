@@ -17,7 +17,11 @@ import com.fq.util.BaseAction;
 import com.fq.util.ConstantUtils;
 import com.fq.util.PageModel;
 import com.opensymphony.xwork2.ModelDriven;
-
+/**
+ * 
+ * @author fu
+ * 用户管理
+ */
 @Controller("userAction")
 @Scope("prototype")
 public class UserAction extends BaseAction implements ModelDriven<UserBean>,RequestAware{

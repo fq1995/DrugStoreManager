@@ -21,7 +21,11 @@ import com.fq.util.BaseAction;
 import com.fq.util.ConstantUtils;
 import com.fq.util.PageModel;
 import com.opensymphony.xwork2.ModelDriven;
-
+/**
+ * 
+ * @author fu
+ * 药品库存管理 
+ */
 @Controller("drugInventorAction")
 @Scope("prototype")
 public class DrugInventorAction extends BaseAction implements ModelDriven<InventoriesBean>, RequestAware {
