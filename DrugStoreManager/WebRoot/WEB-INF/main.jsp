@@ -10,6 +10,7 @@
 <head id="Head1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>药店管理系统</title>
+    <link rel="shortcut icon" href="images/favicon.ico"/>
     <link href="<%=basePath%>css/default.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="<%=basePath%>js/themes/default/easyui.css" />
     <link rel="stylesheet" type="text/css" href="<%=basePath%>js/themes/icon.css" />
@@ -176,7 +177,7 @@
         <span id="opt_info" border="false" region="center" style=" width: 20px; height: 20px;"></span>
        
         <span style="float:right; padding-right:20px;" class="head"> <span id="time" style="..."></span>&nbsp;&nbsp;欢迎&nbsp;&nbsp;<span name="username" id="username">${nickname}</span> <a style="text-decoration:none;cursor: hand;cursor: pointer;" href="#" id="editpass">修改密码</a> <a style="text-decoration:none;cursor: hand;cursor: pointer;" href="#" id="loginOut">安全退出</a></span>
-        <span style="padding-left:10px; font-size: 16px; "><img src="<%=basePath%>images/blocks.gif" width="20" height="20" align="absmiddle" /> 药店管理系统</span>
+        <span style="padding-left:10px; font-size: 16px; "><img src="<%=basePath%>images/logo3.jpg" width="20" height="20" align="absmiddle" /> 药店管理系统</span>
         <span name="time"></span>
     </div>
     <div region="south" split="true" style="height: 30px; background: #D2E0F2; ">

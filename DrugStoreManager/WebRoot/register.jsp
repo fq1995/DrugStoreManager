@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <link rel="shortcut icon" type="image/ico" href="/images/favicon.ico" />
+    <link rel="shortcut icon" href="images/favicon.ico"/>
     <title>register</title>
     <link href="css/styles.css" type="text/css" media="screen" rel="stylesheet" />
     <link href="css/jquery-ui-1.8.16.custom.css" rel="stylesheet">

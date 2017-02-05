@@ -64,9 +64,9 @@
 	<div class="place">
 		<span>位置：</span>
 		<ul class="placeul">
-			<li><a href="#">基本操作</a></li>
-			<li><img src="<%=basePath%>images/next.gif" ></li>
 			<li><a href="#">药品管理</a></li>
+			<li><img src="<%=basePath%>images/next.gif" ></li>
+			<li><a href="#">药品列表</a></li>
 		</ul>
 	</div>
 	

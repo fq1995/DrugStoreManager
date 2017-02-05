@@ -99,9 +99,11 @@
 	<div class="place">
 		<span>位置：</span>
 		<ul class="placeul">
-			<li><a href="#">首页</a></li>
+			<li><a href="#">药品管理</a></li>
+			<li><img src="<%=basePath%>images/next.gif" ></li>
+			<li><a href="#">药品列表</a></li>
 			<li><img src="images/next.gif"></li>
-			<li><a href="#">表单</a></li>
+			<li><a href="#">药品添加</a></li>
 		</ul>
 	</div>
 	<div class="formbody">
