@@ -3,22 +3,29 @@ function change() {
 }
 $(function() {
 	$("#loginbtn").focus(function () {
+		var reg = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
 		var inputVerifyCode = $("#inputVerifyCode").val();
 		var name = $("input[name='email']").val();
 		var pass = $("#password").val();
 		if(null == name || $.trim(name) == ''){
 			alert("请输入邮箱账号");
-		}else if(null == pass || $.trim(pass) == ''){
+			$("input[name='email']").focus();
+		}else if (!reg.test(name)){
+	        alert("请输入正确格式的邮箱！");
+	        $("input[name='email']").focus();
+	    }else if(null == pass || $.trim(pass) == ''){
 			alert("请输入密码");
+			$("#password").focus();
 		}else if(null == inputVerifyCode || $.trim(inputVerifyCode) == ''){
 			alert("请输入验证码");
+			$("#inputVerifyCode").focus();
 		}
 	});
 });
 
 
 $(function() {
-	
+	//验证码
 	$("#inputVerifyCode").blur(function() {
 		var verifyCode = $("#inputVerifyCode").val();
 		$.ajax({
@@ -54,16 +61,22 @@ function clean() {
 	$("img[name='duihao4']").css("display", "none");
 }
 $(function() {
-	// 用户名非空
+	
+	// 用户帐号非空
 	$("#email").blur(function() {
+		var reg = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
 		$(".tip_").html("");
 		var name = $("input[name='email']").val();
 		$("img[name='duihao1']").css("display", "none");
 		$("#tip_").html("");
 		if ($.trim(name) == "" || name.length == 0) {
-			$(".tip_").html("<a style='color:red'>用户名不能为空</a>");
-			return;
-		} else {
+			$(".tip_").html("<a style='color:red'>用户帐号不能为空</a>");
+			$("input[name='email']").focus();
+		}else if (!reg.test(name)){
+	        $(".tip_").html("<a style='color:red'>请输入正确格式的邮箱！</a>");
+	        $("input[name='email']").focus();
+	        return false;
+	    }else {
 			$("img[name='duihao1']").css("display", "");
 		}
 	});
@@ -83,15 +96,6 @@ $(function() {
 	});
 });
 $(function() {
-	$("#loginbtn").onMouseUp(function(){
-		
-		var verifyCode = $("#inputVerifyCode").val();
-		if (verifyCode.trim.length != 0) {
-			
-			$("#loginbtn").css("disabled",false);
-		}
-		
-	})
 	
 	$("#email").focus(function() {
 		$("#ti").html("");

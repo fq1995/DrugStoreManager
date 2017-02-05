@@ -140,4 +140,10 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 		return list==null||list.size()<=0?null:list.get(0);
 	}
 
+	@Override
+	public void editpass(UserBean userBean, String newpass) {
+		userBean.setPassword(newpass);
+		hibernateTemplate.update(userBean);
+	}
+
 }

@@ -90,4 +90,10 @@ public class UserServiceImpl implements UserService {
 		return userDAO.selectUserByEmail(email);
 	}
 
+	@Override
+	public void editpass(UserBean userBean,String newpass) {
+		userDAO.editpass(userBean,newpass);
+		
+	}
+
 }

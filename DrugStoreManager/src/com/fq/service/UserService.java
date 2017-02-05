@@ -48,4 +48,7 @@ public interface UserService {
 
 	// 查询邮箱
 	UserBean selectUserByEmail(String email);
+	
+	//修改密码
+	void editpass(UserBean userBean,String newpass);
 }

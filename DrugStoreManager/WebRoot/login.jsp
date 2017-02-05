@@ -65,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                            id="email" type="text" value="" placeholder="请输入邮箱账号"/>&nbsp;&nbsp;<img name="duihao1" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_" name="tip_"></span>
                 </p>
                     <!-- <label class="loginlabel" for="username">
-                        用户账号:</label>
+                        用户名称:</label>
                     <input class="logininput ui-keyboard-input ui-widget-content ui-corner-all " name="username"
                            id="username" type="text" value="" placeholder="请输入账号"/>&nbsp;&nbsp;<img name="duihao1" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_" name="tip_"></span>
                 </p> -->

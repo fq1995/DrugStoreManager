@@ -16,19 +16,32 @@
 	}
 	$(function() {
 		$("#loginbtn").focus(function () {
+			var reg = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
 			var inputVerifyCode = $("#inputVerifyCode").val();
+			var nickname = $("#nickname").val();
 			var name = $("input[name='email']").val();
 			var pass = $("#password").val();
 			var pass2 = $("#password2").val();
 			
-			if(null == name || $.trim(name) == ''){
+			
+			if(null == nickname || $.trim(nickname) == ''){
+				alert("请输入昵称");
+				$("#nickname").focus();
+			}else if(null == name || $.trim(name) == ''){
 				alert("请输入邮箱");
-			}else if(null == pass || $.trim(pass) == ''){
+				$("input[name='email']").focus();
+			}else if (!reg.test(name)){
+		        alert("请输入正确格式的邮箱！");
+		        $("input[name='email']").focus();
+		    }else if(null == pass || $.trim(pass) == ''){
 				alert("请输入密码");
+				$("#password").focus();
 			}else if(null == pass2 || $.trim(pass2) == ''){
 				alert("请再次输入密码");
+				$("#password2").focus();
 			}else if(null == inputVerifyCode || $.trim(inputVerifyCode) == ''){
 				alert("请输入验证码");
+				$("#inputVerifyCode").focus();
 			}
 		});
 	});
@@ -104,7 +117,6 @@
 			            $(".tip_1").html("<a style='color:red'>邮箱不能为空</a>");
 			            
 			        }else if (!reg.test(email)){
-			 	           //alert("请输入正确格式的手机号码！");
 			 	           $("#mes").html("请输入正确格式的邮箱！");
 			 	            return false;
 			 	    }

@@ -38,6 +38,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	private String mes;
 	private String keyword;
 	private Integer userCode;
+	private String newpass;
 	
 	@Autowired
 	private UserService userService;
@@ -71,6 +72,14 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 			return "defult";
 		}
 		
+	}
+	/**
+	 * 修改密码
+	 */
+	public void editpass(){
+		 newpass = ServletActionContext.getRequest().getParameter("newpass");
+		 userBean = (UserBean) ServletActionContext.getRequest().getSession().getAttribute("user");
+		 userService.editpass(userBean, newpass);
 	}
 	/**
 	 * 用户分页
@@ -290,6 +299,12 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	}
 	public void setMes(String mes) {
 		this.mes = mes;
+	}
+	public String getNewpass() {
+		return newpass;
+	}
+	public void setNewpass(String newpass) {
+		this.newpass = newpass;
 	}
 	
 	
