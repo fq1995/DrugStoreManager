@@ -36,9 +36,14 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 
 	@Override
 	public UserBean selectUserByName(String username) {
-		String hql ="from UserBean where username=? and status=1";
-		List<UserBean> Userlist = (List<UserBean>) hibernateTemplate.find(hql, username);
-		return Userlist==null||Userlist.size()<=0?null:Userlist.get(0);
+		if(null!=username || "".equals(username)){
+			String hql ="from UserBean where username=? and status=1";
+			List<UserBean> Userlist = (List<UserBean>) hibernateTemplate.find(hql, username);
+			return Userlist==null||Userlist.size()<=0?null:Userlist.get(0);			
+		}else{
+			return null;
+		}
+		
 	}
 
 	@Override
@@ -144,6 +149,17 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 	public void editpass(UserBean userBean, String newpass) {
 		userBean.setPassword(newpass);
 		hibernateTemplate.update(userBean);
+	}
+
+	@Override
+	public UserBean selectUserByNickName(String nickname) {
+		if(null!=nickname || "".equals(nickname)){
+			String hql ="from UserBean where nickname=? and status=1";
+			List<UserBean> Userlist = (List<UserBean>) hibernateTemplate.find(hql, nickname);
+			return Userlist==null||Userlist.size()<=0?null:Userlist.get(0);			
+		}else{
+			return null;
+		}
 	}
 
 }

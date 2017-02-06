@@ -2,8 +2,10 @@
   		 $("#verifyCode").attr("src","validateImg?a=" + new Date().getTime());
   	}
 	function clean(){
+		$("#messs").html("");
 		$("#mess").html("");
 		$("#mes").html("");
+		$(".tip_name").html("");
 		$(".tip_").html("");
 		$(".tip_1").html("");
 		$(".tip_pass").html("");
@@ -12,19 +14,24 @@
 		$("img[name='duihao1']").css("display","none"); 
 		$("img[name='duihao2']").css("display","none"); 
 		$("img[name='duihao3']").css("display","none"); 
-		$("img[name='duihao4']").css("display","none"); 
+		$("img[name='duihao4']").css("display","none");
+		$("img[name='duihao6']").css("display","none");
 	}
 	$(function() {
 		$("#loginbtn").focus(function () {
 			var reg = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
 			var inputVerifyCode = $("#inputVerifyCode").val();
+			var username = $("#username").val();
 			var nickname = $("#nickname").val();
 			var name = $("input[name='email']").val();
 			var pass = $("#password").val();
 			var pass2 = $("#password2").val();
 			
 			
-			if(null == nickname || $.trim(nickname) == ''){
+			if(null == username || $.trim(username) == ''){
+				alert("请输入用户名");
+				$("#username").focus();
+			}else if(null == nickname || $.trim(nickname) == ''){
 				alert("请输入昵称");
 				$("#nickname").focus();
 			}else if(null == name || $.trim(name) == ''){
@@ -77,9 +84,9 @@
   		    $("#tip_").html("");
 			var nickname = $("#nickname").val();
 	  		$.ajax({
-				url:'user_validateName.action',
+				url:'user_validateNickName.action',
 				type:'POST',
-				data:{'username':nickname},
+				data:{'nickname':nickname},
 				dataType:'json',
 				success:function(data){ 
 					if($.trim(nickname) == "" || nickname.length == 0){
@@ -96,7 +103,35 @@
 			     }  
 	  		});
 		});
-
+  		
+  		//用户名
+  		$("#username").blur(function(){
+  			$("#messs").html("");
+  			$(".exit").html("");
+  			$(".tip_name").html("");
+  			$("img[name='duihao6']").css("display","none"); 
+  		    $("#tip_name").html("");
+			var username = $("#username").val();
+	  		$.ajax({
+				url:'user_validateName.action',
+				type:'POST',
+				data:{'username':username},
+				dataType:'json',
+				success:function(data){ 
+					if($.trim(username) == "" || username.length == 0){
+			            $(".tip_name").html("<a style='color:red'>用户名不能为空</a>");
+			            
+			        }  
+					else if(data == "用户名不可用"){
+						$("#messs").html("用户名不可用");
+					}
+					
+					else if(data=="用户名可用"){
+			        	$("img[name='duihao6']").css("display",""); 
+			        }
+			     }  
+	  		});
+		});
   		
   		//邮箱
   		$("#email").blur(function(){

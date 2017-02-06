@@ -96,4 +96,9 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+	@Override
+	public UserBean selectUserByNickName(String nickname) {
+		return userDAO.selectUserByNickName(nickname);
+	}
+
 }

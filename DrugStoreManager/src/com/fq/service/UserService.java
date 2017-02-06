@@ -51,4 +51,6 @@ public interface UserService {
 	
 	//修改密码
 	void editpass(UserBean userBean,String newpass);
+	
+	UserBean selectUserByNickName(String nickname);
 }

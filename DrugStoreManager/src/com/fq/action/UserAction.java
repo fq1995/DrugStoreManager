@@ -39,7 +39,8 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	private String keyword;
 	private Integer userCode;
 	private String newpass;
-	
+	private String nickname;
+	private String username;
 	@Autowired
 	private UserService userService;
 	private UserBean userBean = new UserBean();
@@ -205,10 +206,25 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 		return "ajax_verifyCode";
 	}
 	/**
+	 * ajax校验昵称是否可用
+	 */
+	public String validateNickName() {
+		nickname = ServletActionContext.getRequest().getParameter("nickname");
+		UserBean bean =userService.selectUserByNickName(nickname);
+		if(null == bean) {
+			mess = "用户名可用";
+		} else if(null != bean){
+			mess = "用户名不可用";
+		}
+		return "ajax_verifyName";
+	}
+	
+	/**
 	 * ajax校验用户名是否可用
 	 */
 	public String validateName() {
-		UserBean bean =userService.selectUserByName(userBean.getUsername());
+		username = ServletActionContext.getRequest().getParameter("username");
+		UserBean bean =userService.selectUserByName(username);
 		if(null == bean) {
 			mess = "用户名可用";
 		} else if(null != bean){

@@ -32,6 +32,12 @@
         </div>
         <form name="form1" method="post" action="user_registUser.action">
             <fieldset class="form">
+            <p>
+                    <label class="loginlabel" for="username">
+                      用户名:</label>
+                    <input class="logininput ui-keyboard-input ui-widget-content ui-corner-all" name="username"
+                           id="username" type="text" value="" placeholder="请输入用户名"/>&nbsp;&nbsp;<img name="duihao6" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_name" name="tip_name"></span><i class="exit" style="color: red"></i><i id="messs" style="color: red"></i>
+                </p>
                 <p>
                     <label class="loginlabel" for="nickname">
                       昵称:</label>
