@@ -68,7 +68,7 @@
   	  		});
   		});
   		
-  		//用户名
+  		//昵称
   		$("#nickname").blur(function(){
   			$("#mess").html("");
   			$(".exit").html("");
