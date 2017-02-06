@@ -74,13 +74,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <label class="loginlabel" for="password">
                         密码:</label>
                     <span>
-                        <input class="logininput" name="password" id="password" type="password" placeholder="请输入密码"/>&nbsp;&nbsp;<img name="duihao2" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_pass" name="tip_"></span>
+                        <input class="logininput ui-keyboard-input ui-widget-content ui-corner-all" name="password" id="password" type="password" placeholder="请输入密码"/>&nbsp;&nbsp;<img name="duihao2" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_pass" name="tip_"></span>
                     </span>
                 </p>
                 <p>
                     <label class="loginlabel" for="yanzheng">
                         验证码:</label>
-                    <span><input id="inputVerifyCode" class="logininput ui-keyboard-input ui-widget-content ui-corner-all" name="yanzheng" type="text" value="" onclick="JavaScript:this.value=''" style="width: 80px;" placeholder="请输入验证码"/>
+                    <span><input id="inputVerifyCode" class="logininput ui-keyboard-input ui-widget-content ui-corner-all" name="yanzheng" type="text" value="" onclick="JavaScript:this.value=''" style="width: 80px;" placeholder="请输入验证码"/></span>
                      <span><img id="verifyCode" src="validateImg" onclick="change()" style="width:100px ;height: 25px"/></span>
                      <img name="duihao4" alt="" src="images/yes.jpg" style="display:none"/>
                     <span id="tishi" style="width:40px;height:25px;color:red"></span>

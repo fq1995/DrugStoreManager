@@ -48,14 +48,14 @@
                     <label class="loginlabel" for="password">
                         密码:</label>
                     <span>
-                        <input class="logininput"   name="password" id="password" type="password" placeholder="请输入密码" />&nbsp;&nbsp;<img name="duihao2" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_pass" name="tip_"></span>
+                        <input class="logininput ui-keyboard-input ui-widget-content ui-corner-all "   name="password" id="password" type="password" placeholder="请输入密码" />&nbsp;&nbsp;<img name="duihao2" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_pass" name="tip_"></span>
                     </span>
                 </p>
                 <p>
                     <label class="loginlabel" for="password2">
                         确定密码:</label>
                     <span>
-                        <input class="logininput" name="password2" id="password2" type="password" placeholder="请再次输入密码"/><img name="duihao3" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_pass2" name="tip_"></span>
+                        <input class="logininput ui-keyboard-input ui-widget-content ui-corner-all" name="password2" id="password2" type="password" placeholder="请再次输入密码"/><img name="duihao3" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_pass2" name="tip_"></span>
                     </span>
 				</P>
 				<p>

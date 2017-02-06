@@ -83,11 +83,11 @@
 				dataType:'json',
 				success:function(data){ 
 					if($.trim(nickname) == "" || nickname.length == 0){
-			            $(".tip_").html("<a style='color:red'>用户名不能为空</a>");
+			            $(".tip_").html("<a style='color:red'>昵称不能为空</a>");
 			            
 			        }  
 					else if(data == "用户名不可用"){
-						$("#mess").html("用户名不可用");
+						$("#mess").html("昵称不可用");
 					}
 					
 					else if(data=="用户名可用"){

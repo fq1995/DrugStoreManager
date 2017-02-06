@@ -90,10 +90,10 @@
 
 			<ul class="forminfo">
 				<li><label>库存单编号</label><input name="stockCode" type="text" id="stockCode" value="${requestScope.stockCode+1 }" readonly="readonly"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入库存单编号" /><i>必填</i></li>
-				<li><label>药品编号</label><input name="drugBean.drugCode" type="text" id="drugBean.drugCode" value="${requestScope.drugCode+1 }" readonly="readonly"
+					class="form-control" style="width:200px; display:inline" placeholder="请输入库存单编号" /><i></i></li>
+				<li><label>药品编号</label><input name="drugBean.drugCode" type="text" id="drugCode" value="${requestScope.drugCode+1 }" readonly="readonly"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入药品编号"/><i>必填</i><i style="color: red">${message2}</i></li>
-				<li><label>药品名</label><input name="drugBean.drugName" type="text" id="drugBean.drugName"
+				<li><label>药品名</label><input name="drugBean.drugName" type="text" id="drugName"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入药品名"/><i>必填</i><i style="color: red">${message}</i></li>
 				<li><label>剂型</label>
 					<select class="form-control" style="width:200px;height:34px"  name="drugBean.dosageformBean.dosageformId">
@@ -116,13 +116,13 @@
 						<option value="${drugCategory.categoryId }">${drugCategory.category }</option>
 					</c:forEach>
 					</select></li>
-				<li><label>厂商</label><input name="drugBean.manufacturer" type="text" id="drugBean.manufacturer"
+				<li><label>厂商</label><input name="drugBean.manufacturer" type="text" id="manufacturer"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入生产厂商"/><i></i></li>
-				<li><label>产品说明</label><input name="drugBean.memo" type="text" id="drugBean.memo"
+				<li><label>产品说明</label><input name="drugBean.memo" type="text" id="memo"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入产品说明"/><i></i></li>
-				<li><label>批准文号</label><input name="drugBean.approvalNumber" type="text" id="drugBean.approvalNumber"
+				<li><label>批准文号</label><input name="drugBean.approvalNumber" type="text" id="approvalNumber"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入批准文号"/><i></i></li>
-				<li><label>修改人</label><input name="drugBean.modifier" type="text" id="drugBean.modifier"
+				<li><label>修改人</label><input name="drugBean.modifier" type="text" id="modifier"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入修改人"/><i>必填</i></li>
 				<li><label>库存数量</label><input name="stocknumber" type="text" id="stocknumber"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入库存数量"/><i>必填</i></li>
