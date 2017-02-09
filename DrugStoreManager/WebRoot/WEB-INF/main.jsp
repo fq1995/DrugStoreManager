@@ -53,15 +53,17 @@
 								]
 						},{"menuid":"28","icon":"icon-sys","menuname":"库存管理",
 							"menus":[{"menuid":"41","menuname":"库存列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/inventor_showInventor.action?currPage=1"},
-									{"menuid":"43","menuname":"库存下限预警","icon":"icon-nav","url":"${pageContext.request.contextPath}/inventor_showWarn.action?currPage=1"},
+									{"menuid":"43","menuname":"库存下限预警","icon":"icon-nav","url":"${pageContext.request.contextPath}/inventor_showWarn.action?currPage=1&f=warn"},
+									{"menuid":"44","menuname":"有效期预警","icon":"icon-nav","url":"${pageContext.request.contextPath}/pse_showDateWarn.action?currPage=1&f=datawarn"},
+									{"menuid":"62","menuname":"过期药品","icon":"icon-nav","url":"${pageContext.request.contextPath}/pse_showOverDate.action?currPage=1&f=overdate"},
 									{"menuid":"42","menuname":"报表统计","icon":"icon-nav","url":"${pageContext.request.contextPath}/inventor_doPrint.action"}
 								]
 						},{"menuid":"39","icon":"icon-sys","menuname":"销售管理",
 							"menus":[{"menuid":"51","menuname":"销售列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/sale_showSale.action?currPage=1"}
 								]
 						},{"menuid":"40","icon":"icon-sys","menuname":"进货管理",
-							"menus":[{"menuid":"61","menuname":"进货列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/pse_showPurchase.action?currPage=1"},
-								{"menuid":"62","menuname":"有效期预警","icon":"icon-nav","url":"${pageContext.request.contextPath}/pse_showDateWarn.action?currPage=1"}
+							"menus":[{"menuid":"61","menuname":"进货列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/pse_showPurchase.action?currPage=1"}
+								
 							]
 						},{"menuid":"51","icon":"icon-sys","menuname":"会员管理",
 							"menus":[{"menuid":"71","menuname":"会员列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/member_showMember.action?currPage=1"}

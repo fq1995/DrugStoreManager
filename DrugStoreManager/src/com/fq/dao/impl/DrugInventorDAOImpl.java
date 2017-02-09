@@ -156,4 +156,6 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 		return code;
 	}
 
+	
+
 }

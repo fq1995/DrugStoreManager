@@ -53,4 +53,6 @@ public interface DrugPurchaseDAO {
 	List<DrugPurchaseBean> show(Date date);
 	//查询编号
 	Integer selectCode();
+	
+	PageModel<DrugPurchaseBean> splitOverDate(Integer currPage, Integer pagesize, String keyword);
 }

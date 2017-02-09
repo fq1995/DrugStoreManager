@@ -66,5 +66,8 @@ public interface DrugPurchaseService {
 
 	// 查询编号
 	Integer selectCode();
+	
+	// 过期药
+	PageModel<DrugPurchaseBean> splitOverDate(Integer currPage, Integer pagesize, String keyword);
 
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -52,6 +53,10 @@
 
 				<li id="btn_warn" class="click"><span><img src="<%=basePath%>images/warn.png" /></span>库存预警</li>
 				
+				<li id="btn_warn2" class="click"><span><img src="<%=basePath%>images/warn.png" /></span>有效期预警</li>
+				
+				<li id="btn_warn3" class="click"><span><img src="<%=basePath%>images/warn.png" /></span>过期药品</li>
+				
 				<li id="btn_doprint" class="click"><span><img src="<%=basePath%>images/dayin.png" /></span>打印报表</li>
 			</ul>
 
@@ -66,6 +71,7 @@
 		</div>
 
 		<div style="overflow:auto; width:100%; height:auto;">
+
 		<table class="tablelist">
 			<thead>
 				<tr>
@@ -102,8 +108,19 @@
 						<td>${inventor.drugBean.approvalNumber }</td>
 						<td>${inventor.drugBean.modifier }</td>
 						<td>${inventor.drugBean.modifyTime }</td>
+						<c:choose>
+						<c:when test="${f eq 'warn' }">
+						<td style="background-color: #F7C709">${inventor.stocknumber }</td>
+						<td style="background-color: #E6421A">${inventor.stocklimit }</td>
+						</c:when>
+						<c:otherwise>
 						<td>${inventor.stocknumber }</td>
 						<td>${inventor.stocklimit }</td>
+						</c:otherwise>
+						</c:choose>
+						
+						 
+						
 						<td>${inventor.drugBean.memo }</td>
 						<td>${inventor.date }</td>
 					

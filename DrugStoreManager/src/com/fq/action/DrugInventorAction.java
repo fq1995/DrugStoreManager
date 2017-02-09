@@ -13,9 +13,11 @@ import org.springframework.stereotype.Controller;
 import com.fq.po.DosageformBean;
 import com.fq.po.DrugBean;
 import com.fq.po.DrugCategoryBean;
+import com.fq.po.DrugPurchaseBean;
 import com.fq.po.DrugUnitBean;
 import com.fq.po.InventoriesBean;
 import com.fq.service.DrugInventorService;
+import com.fq.service.DrugPurchaseService;
 import com.fq.service.DrugService;
 import com.fq.util.BaseAction;
 import com.fq.util.ConstantUtils;
@@ -42,11 +44,13 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 	private String keyword;
 	private Integer stockCode;
 	private Integer drugCode;
-	
+	private String f;
 	@Autowired
 	private DrugInventorService inventorService;
 	@Autowired
 	private DrugService drugService;
+	@Autowired
+	private DrugPurchaseService drugPseService;
 	private InventoriesBean inventoriesBean = new InventoriesBean();
 	private DrugBean drugBean = inventoriesBean.getDrugBean();
 
@@ -79,6 +83,7 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 	 * @return
 	 */
 	public String showWarn() {
+		f = ServletActionContext.getRequest().getParameter("f");
 		if (null == keyword) {
 			keyword = "";
 		}
@@ -94,6 +99,8 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 		return "showInventor";
 	}
 
+	
+	
 	/**
 	 * 跳转新增库存
 	 */
@@ -310,6 +317,14 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 
 	public void setDrugCode(Integer drugCode) {
 		this.drugCode = drugCode;
+	}
+
+	public String getF() {
+		return f;
+	}
+
+	public void setF(String f) {
+		this.f = f;
 	}
 	
 }

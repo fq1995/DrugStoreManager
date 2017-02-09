@@ -123,6 +123,11 @@ public class DrugPurchaseServiceImpl implements DrugPurchaseService {
 	public Integer selectCode() {
 		return drugPseDao.selectCode();
 	}
+
+	@Override
+	public PageModel<DrugPurchaseBean> splitOverDate(Integer currPage, Integer pagesize, String keyword) {
+		return drugPseDao.splitOverDate(currPage, pagesize, keyword);
+	}
 	
 	
 }

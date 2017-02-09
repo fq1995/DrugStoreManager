@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -50,7 +51,7 @@
 				
 				<li id="" class="click"><span><img src="<%=basePath%>images/t04.png" /></span>统计</li>
 
-				<li id="btn_warn" class="click"><span><img src="<%=basePath%>images/warn.png" /></span>有效期预警</li>
+				<%-- <li id="btn_warn" class="click"><span><img src="<%=basePath%>images/warn.png" /></span>有效期预警</li> --%>
 			
 				<li id="btn_print" class="click"><span><img src="<%=basePath%>images/dayin.png" /></span>打印报表</li>
 			</ul>
@@ -66,6 +67,7 @@
 		</div>
 
 		<div style="overflow:auto; width:100%; height:auto;">
+		
 		<table class="tablelist">
 			<thead>
 				<tr>
@@ -102,10 +104,21 @@
 						<td style="width:70px">${pse.drugBean.dosageformBean.dosageform }</td>
 						<td style="width:50px">${pse.drugBean.drugUnitBean.unitname }</td>
 						<td>${pse.drugBean.drugCategoryBean.category }</td>
-						
 						<td>${pse.amount }</td>
 						<td>${pse.productionDate }</td>
+						
+						<c:choose>
+						<c:when test="${f eq 'datawarn'}">
+						<td style="background-color: #F7C709">${pse.validityDate }</td>
+						</c:when>
+						<c:when test="${f eq 'overdate'}">
+						<td style="background-color: #E6421A">${pse.validityDate }</td>
+						</c:when>
+						<c:otherwise>
 						<td>${pse.validityDate }</td>
+						</c:otherwise>
+						</c:choose>
+						
 						<td>${pse.purchaseprice }</td>
 						<td>${pse.purchasedate }</td>
 						

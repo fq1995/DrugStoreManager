@@ -3,6 +3,10 @@ package com.fq.action;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -41,7 +45,8 @@ public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPu
 	private String keyword;
 	private Integer pseCode;
 	private Integer drugCode;
-
+	private String f;
+	
 	@Autowired
 	private DrugPurchaseService drugPseService;
 	@Autowired
@@ -70,11 +75,34 @@ public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPu
 	}
 
 	/**
-	 * 药品进货分页
+	 * 过期药品检查
+	 * 
+	 * @return
+	 */
+	public String showOverDate() {
+		f = ServletActionContext.getRequest().getParameter("f");
+		if (null == keyword) {
+			keyword = "";
+		}
+		if (null != keyword) {
+			request.put("keyword", keyword);
+		}
+
+		if (currPage == null) {
+			currPage = 1;
+		}
+		PageModel<DrugPurchaseBean> page = drugPseService.splitOverDate(currPage, ConstantUtils.PAGESIZE, keyword);
+		request.put("page", page);
+		return "showPurchase";
+	}
+
+	/**
+	 * 有效期预警
 	 * 
 	 * @return
 	 */
 	public String showDateWarn() {
+		f = ServletActionContext.getRequest().getParameter("f");
 		if (null == keyword) {
 			keyword = "";
 		}
@@ -90,6 +118,7 @@ public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPu
 		return "showPurchase";
 	}
 
+	
 	/**
 	 * 跳转打印界面
 	 */
@@ -310,6 +339,14 @@ public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPu
 
 	public void setDrugCode(Integer drugCode) {
 		this.drugCode = drugCode;
+	}
+
+	public String getF() {
+		return f;
+	}
+
+	public void setF(String f) {
+		this.f = f;
 	}
 	
 }

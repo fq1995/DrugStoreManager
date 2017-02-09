@@ -71,6 +71,15 @@
 			var keyword=document.querySelector("#keyword").value;
 			window.location.href="inventor_showWarn.action?currPage=1&keyword="+keyword;
 		},false);
+		
+		//有效期预警
+		
+		//过期药品查询
+		document.querySelector("#btn_warn3").addEventListener("click",()=>{
+			var keyword=document.querySelector("#keyword").value;
+			window.location.href="pse_showDateWarn.action?currPage=1&keyword="+keyword;
+		},false);
+		
 		//跳转打印界面
 		document.querySelector("#btn_doprint").addEventListener("click",()=>{
 			window.location.href="inventor_doPrint.action";

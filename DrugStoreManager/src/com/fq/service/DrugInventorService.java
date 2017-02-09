@@ -5,9 +5,9 @@ import java.util.List;
 
 import com.fq.po.DosageformBean;
 import com.fq.po.DrugBean;
-import com.fq.po.InventoriesBean;
 import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugUnitBean;
+import com.fq.po.InventoriesBean;
 import com.fq.util.PageModel;
 
 public interface DrugInventorService {
@@ -49,4 +49,6 @@ public interface DrugInventorService {
 
 	// 查询编号
 	Integer select();
+	
+	 
 }

@@ -180,7 +180,7 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 		String str = sdf.format(date);
 		
 		String hql_count = "select count(*) from DrugPurchaseBean where drugBean.drugName like :keyword and validityDate < '"+str+"'";
-		String hql = "from DrugPurchaseBean where drugBean.drugName like :keyword and validityDate < '"+str+"'";
+		String hql = "from DrugPurchaseBean where drugBean.drugName like :keyword and datediff(validityDate,str_to_date('"+str+"','%Y-%m-%d')) between 0 and 90 ";
 		return super.split(hql, hql_count, currPage, pagesize,keyword);
 	}
 
@@ -199,6 +199,17 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 		List<String> list = (List<String>) hibernateTemplate.find(hql);
 		Integer pseCode = Integer.valueOf(list.get(0));
 		return pseCode; 
+	}
+
+	@Override
+	public PageModel<DrugPurchaseBean> splitOverDate(Integer currPage, Integer pagesize, String keyword) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String str = sdf.format(date);
+		
+		String hql_count = "select count(*) from DrugPurchaseBean where drugBean.drugName like :keyword and validityDate < '"+str+"'";
+		String hql = "from DrugPurchaseBean where drugBean.drugName like :keyword and validityDate < '"+str+"'";
+		return super.split(hql, hql_count, currPage, pagesize,keyword);
 	}
 
 
