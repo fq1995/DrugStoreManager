@@ -59,7 +59,7 @@
 
 			<ul class="toolbar1">
 				<li style="border:0px"> <input class="form-control" placeholder="输入需要查询的药品名" value="${requestScope.keyword }" style="width:180px;" type="text" id="keyword" name="keyword"/></li>&nbsp;&nbsp;
-				 <button id="btn_selectUser" type="button" class="btn btn-info btn-sm">查询</button>
+				<li style="border:0px"><button id="btn_selectUser" type="button" class="btn btn-info btn-sm">查询</button></li>
 				
 				<%-- <li><span><img src="<%=basePath%>images/t05.png" /></span>设置</li> --%>
 			</ul>
@@ -111,7 +111,7 @@
 						<c:when test="${f eq 'datawarn'}">
 						<td style="background-color: #F7C709">${pse.validityDate }</td>
 						</c:when>
-						<c:when test="${f eq 'overdate'}">
+						<c:when test="${f eq 'overdata'}">
 						<td style="background-color: #E6421A">${pse.validityDate }</td>
 						</c:when>
 						<c:otherwise>

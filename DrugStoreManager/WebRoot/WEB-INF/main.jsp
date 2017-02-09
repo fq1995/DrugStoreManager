@@ -17,6 +17,7 @@
     <script type="text/javascript" src="<%=basePath%>js/jquery-1.6.2.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>js/jquery.easyui.min.1.2.2.js"></script>
 	<script type="text/javascript" src='<%=basePath%>js/outlook2.js'> </script>
+
 	<script type="text/javascript">
 	
 		function currentTime() {
@@ -55,7 +56,7 @@
 							"menus":[{"menuid":"41","menuname":"库存列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/inventor_showInventor.action?currPage=1"},
 									{"menuid":"43","menuname":"库存下限预警","icon":"icon-nav","url":"${pageContext.request.contextPath}/inventor_showWarn.action?currPage=1&f=warn"},
 									{"menuid":"44","menuname":"有效期预警","icon":"icon-nav","url":"${pageContext.request.contextPath}/pse_showDateWarn.action?currPage=1&f=datawarn"},
-									{"menuid":"62","menuname":"过期药品","icon":"icon-nav","url":"${pageContext.request.contextPath}/pse_showOverDate.action?currPage=1&f=overdate"},
+									{"menuid":"62","menuname":"过期药品","icon":"icon-nav","url":"${pageContext.request.contextPath}/pse_showOverDate.action?currPage=1&f=overdata"},
 									{"menuid":"42","menuname":"报表统计","icon":"icon-nav","url":"${pageContext.request.contextPath}/inventor_doPrint.action"}
 								]
 						},{"menuid":"39","icon":"icon-sys","menuname":"销售管理",
@@ -186,15 +187,15 @@
         <div class="footer">Copyright ©2017 付强. All rights reserved.</div>
     </div>
     <div region="west" hide="true" split="true" title="导航菜单" style="width:180px;" id="west">
-<div id="nav" class="easyui-accordion" fit="true" border="false">
-		<!--  导航内容 -->
+			<div id="nav" class="easyui-accordion" fit="true" border="false">
+			<!--  导航内容 -->
 				
 			</div>
 
     </div>
     <div id="mainPanle" region="center" style="background: #eee; overflow-y:hidden">
-        <div id="tabs" class="easyui-tabs"  fit="true" border="false" >
-
+        <div  id="tabs" class="easyui-tabs"  fit="true" border="false" >
+			
 		</div>
     </div>
     

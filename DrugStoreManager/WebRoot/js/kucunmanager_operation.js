@@ -69,15 +69,19 @@
 		//库存预警查询
 		document.querySelector("#btn_warn").addEventListener("click",()=>{
 			var keyword=document.querySelector("#keyword").value;
-			window.location.href="inventor_showWarn.action?currPage=1&keyword="+keyword;
+			window.location.href="inventor_showWarn.action?currPage=1&f=warn&keyword="+keyword;
 		},false);
 		
 		//有效期预警
+		document.querySelector("#btn_warn2").addEventListener("click",()=>{
+			var keyword=document.querySelector("#keyword").value;
+			window.location.href="pse_showDateWarn.action?currPage=1&f=datawarn&keyword="+keyword;
+		},false);
 		
 		//过期药品查询
 		document.querySelector("#btn_warn3").addEventListener("click",()=>{
 			var keyword=document.querySelector("#keyword").value;
-			window.location.href="pse_showDateWarn.action?currPage=1&keyword="+keyword;
+			window.location.href="pse_showOverDate.action?currPage=1&f=overdata&keyword="+keyword;
 		},false);
 		
 		//跳转打印界面
