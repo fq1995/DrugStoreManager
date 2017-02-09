@@ -2,6 +2,7 @@ package com.fq.dao.impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugUnitBean;
 import com.fq.po.InventoriesBean;
 import com.fq.util.BaseDAO;
+import com.fq.util.DrugBuy;
 import com.fq.util.PageModel;
 import com.fq.util.UUIDBuild;
 @Repository("drugInventorDAO")
@@ -154,6 +156,17 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 		List<String> list = (List<String>) hibernateTemplate.find(hql);
 		Integer code = Integer.valueOf(list.get(0));
 		return code;
+	}
+
+	@Override
+	public List<DrugBuy> addPurchase(List<InventoriesBean> list) {
+		List<DrugBuy> druglist = new ArrayList<DrugBuy>();
+		DrugBuy drugbuy = new DrugBuy();
+		for(InventoriesBean bean :list){
+			drugbuy.setDrugBean(bean.getDrugBean());
+			druglist.add(drugbuy);
+		}
+		return druglist;
 	}
 
 	

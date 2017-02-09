@@ -145,6 +145,8 @@
 			<result name="print">/WEB-INF/kucun/inventorprint.jsp</result>
 			<result name="doadd">/WEB-INF/kucun/inventoradd.jsp</result>
 			<result name="showInventor">/WEB-INF/kucun/inventormanager.jsp</result>
+			<result name="showInventor2">/WEB-INF/kucun/inventormanager2.jsp</result>
+			<result name="showbuylist">/WEB-INF/purchase/buymanager.jsp</result>
 			<result name="addInventor">/WEB-INF/kucun/inventoradd.jsp</result>
 			<result name="show" type="redirectAction">inventor_showInventor.action?currPage=1
 			</result>

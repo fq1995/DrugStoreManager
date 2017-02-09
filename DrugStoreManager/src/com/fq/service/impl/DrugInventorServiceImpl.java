@@ -13,6 +13,7 @@ import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugUnitBean;
 import com.fq.po.InventoriesBean;
 import com.fq.service.DrugInventorService;
+import com.fq.util.DrugBuy;
 import com.fq.util.PageModel;
 @Service("drugInventorService")
 public class DrugInventorServiceImpl implements DrugInventorService {
@@ -92,6 +93,12 @@ public class DrugInventorServiceImpl implements DrugInventorService {
 	@Override
 	public Integer select() {
 		return drugInventorDao.select();
+	}
+
+	@Override
+	public List<DrugBuy> addPurchase(List<InventoriesBean> list) {
+		return drugInventorDao.addPurchase(list);
+		
 	}
 
 	

@@ -40,7 +40,29 @@
 			window.location.href="inventor_editInventor.action?&id="+param;
 		}
 	}
-	
+	function buy(){
+		let checks=document.getElementsByName("id_check");
+		let param="";
+		for(let i=0,len=checks.length;i<len;i++){
+			if(checks[i].checked==true){
+				if(param==""){
+					param+=checks[i].id;
+				}else{
+					param+=",";
+					param+=checks[i].id;
+				}
+
+			}
+		}
+		if(param==""){
+			alert("请选择要采购的药品");
+		}else{
+//			alert(param);
+			if(confirm("您确定要采购吗？")){
+				window.location.href="inventor_buyInventor.action?&ids="+param;
+			}
+		}
+	}
 	function init(){
 		//查询
 		document.querySelector("#btn_selectUser").addEventListener("click",()=>{
@@ -55,7 +77,8 @@
 		document.querySelector("#btn_updateUser").addEventListener("click",update,false);
 		//删除用户
 		document.querySelector("#btn_deleteUser").addEventListener("click",deleteUser,false);
-		
+		//添加进采购单
+		document.querySelector("#btn_buy").addEventListener("click",buy,false);
 		document.querySelector("#all").addEventListener("change",()=>{
 			let checks=document.getElementsByName("id_check");
 			let all_check=document.querySelector("#all");
@@ -68,11 +91,7 @@
 			}
 		},false);
 		
-		//库存预警查询
-		document.querySelector("#btn_warn").addEventListener("click",()=>{
-			var keyword=document.querySelector("#keyword").value;
-			window.location.href="inventor_showWarn.action?currPage=1&f=warn&keyword="+keyword;
-		},false);
+		
 		
 		//有效期预警
 		document.querySelector("#btn_warn2").addEventListener("click",()=>{
@@ -90,6 +109,7 @@
 		document.querySelector("#btn_doprint").addEventListener("click",()=>{
 			window.location.href="inventor_doPrint.action";
 		},false);
+		
 		
 	}
 	window.addEventListener("load",init,false);

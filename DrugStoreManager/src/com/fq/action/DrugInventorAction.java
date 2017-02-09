@@ -21,6 +21,7 @@ import com.fq.service.DrugPurchaseService;
 import com.fq.service.DrugService;
 import com.fq.util.BaseAction;
 import com.fq.util.ConstantUtils;
+import com.fq.util.DrugBuy;
 import com.fq.util.PageModel;
 import com.opensymphony.xwork2.ModelDriven;
 /**
@@ -96,7 +97,7 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 		}
 		PageModel<InventoriesBean> page = inventorService.splitWarn(currPage, ConstantUtils.PAGESIZE, keyword);
 		request.put("page", page);
-		return "showInventor";
+		return "showInventor2";
 	}
 
 	
@@ -145,7 +146,15 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 		return "addInventor";
 
 	}
-
+	/**
+	 * 添加进采购单
+	 */
+	public String buyInventor(){
+		List<InventoriesBean> list = inventorService.showAllInventor(ids);
+		List<DrugBuy> buylist = inventorService.addPurchase(list);
+		return "showbuylist";
+	}
+	
 	/**
 	 * 删除库存药品
 	 */

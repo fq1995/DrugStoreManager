@@ -8,6 +8,7 @@ import com.fq.po.DrugBean;
 import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugUnitBean;
 import com.fq.po.InventoriesBean;
+import com.fq.util.DrugBuy;
 import com.fq.util.PageModel;
 
 public interface DrugInventorDAO {
@@ -39,4 +40,6 @@ public interface DrugInventorDAO {
 	PageModel<InventoriesBean> splitWarn(Integer currPage, Integer pagesize, String keyword);
 	//查询编号
 	Integer select();
+	
+	List<DrugBuy> addPurchase(List<InventoriesBean> list);
 }

@@ -16,7 +16,7 @@
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
-<script src="<%=basePath%>js/kucunmanager_operation.js" type="text/javascript" charset="utf-8"></script>
+<script src="<%=basePath%>js/kucunmanager_operation2.js" type="text/javascript" charset="utf-8"></script>
 
 <style type="text/css">
 	th,td  
@@ -51,7 +51,7 @@
 				
 				<li id="" class="click"><span><img src="<%=basePath%>images/t04.png" /></span>统计</li>
 				
-				<li id="btn_warn" class="click"><span><img src="<%=basePath%>images/warn.png" /></span>库存预警</li>
+				<li id="btn_buy" class="click"><span><img src="<%=basePath%>images/buy.gif" /></span>添加进采购单</li>
 				
 				<li id="btn_warn2" class="click"><span><img src="<%=basePath%>images/warn.png" /></span>有效期预警</li>
 				

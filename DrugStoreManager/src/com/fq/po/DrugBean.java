@@ -18,6 +18,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+import com.fq.util.DrugBuy;
+
 
 /**
  * DrugBean entity. @author MyEclipse Persistence Tools
@@ -51,6 +53,7 @@ public class DrugBean  implements java.io.Serializable {
      private String newName;
      private Set<InventoriesBean> inventoriesBeans = new HashSet<InventoriesBean>(0);
      private Set<ReturnsBean> returnsBeans = new HashSet<ReturnsBean>(0);
+     private Set<DrugBuy> drugBuies = new HashSet<DrugBuy>(0);
      private Set<DrugPurchaseBean> drugPurchaseBeans = new HashSet<DrugPurchaseBean>(0);
      private Set<DrugSalesBean> drugSalesBeans = new HashSet<DrugSalesBean>(0);
 
@@ -68,7 +71,7 @@ public class DrugBean  implements java.io.Serializable {
     }
     
     /** full constructor */
-    public DrugBean(String drugId, DrugUnitBean drugUnitBean, DosageformBean dosageformBean, DrugCategoryBean drugCategoryBean, Integer drugCode, String drugName, String manufacturer, String approvalNumber, String modifier, Date modifyTime, String memo, String status, Double salepeice, Double memberprice,  String oldName, String newName, Set<InventoriesBean> inventoriesBeans, Set<ReturnsBean> returnsBeans, Set<DrugPurchaseBean> drugPurchaseBeans, Set<DrugSalesBean> drugSalesBeans) {
+    public DrugBean(String drugId, DrugUnitBean drugUnitBean, DosageformBean dosageformBean, DrugCategoryBean drugCategoryBean, Integer drugCode, String drugName, String manufacturer, String approvalNumber, String modifier, Date modifyTime, String memo, String status, Double salepeice, Double memberprice,  String oldName, String newName, Set<InventoriesBean> inventoriesBeans, Set<DrugBuy> drugBuies, Set<ReturnsBean> returnsBeans, Set<DrugPurchaseBean> drugPurchaseBeans, Set<DrugSalesBean> drugSalesBeans) {
         this.drugId = drugId;
         this.drugUnitBean = drugUnitBean;
         this.dosageformBean = dosageformBean;
@@ -86,6 +89,7 @@ public class DrugBean  implements java.io.Serializable {
         this.oldName = oldName;
         this.newName = newName;
         this.inventoriesBeans = inventoriesBeans;
+        this.drugBuies = drugBuies;
         this.returnsBeans = returnsBeans;
         this.drugPurchaseBeans = drugPurchaseBeans;
         this.drugSalesBeans = drugSalesBeans;
@@ -263,6 +267,15 @@ public class DrugBean  implements java.io.Serializable {
     
     public void setInventoriesBeans(Set<InventoriesBean> inventoriesBeans) {
         this.inventoriesBeans = inventoriesBeans;
+    }
+@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="drugBean")
+
+    public Set<DrugBuy> getDrugBuies() {
+        return this.drugBuies;
+    }
+    
+    public void setDrugBuies(Set<DrugBuy> drugBuies) {
+        this.drugBuies = drugBuies;
     }
 @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="drugBean")
 
