@@ -17,7 +17,10 @@
     <script type="text/javascript" src="<%=basePath%>js/jquery-1.6.2.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>js/jquery.easyui.min.1.2.2.js"></script>
 	<script type="text/javascript" src='<%=basePath%>js/outlook2.js'> </script>
-
+	<script type="text/javascript">
+	//有效期预警
+	window.showModalDialog('${pageContext.request.contextPath}/pse_showDateWarn.action?currPage=1&f=datawarn','药品有效期预警','dialogWidth:1200px;dialogHeight:400px;dialogLeft:100px;dialogTop:200px;center:yes;help:yes;resizable:yes;status:yes') 
+	</script>
 	<script type="text/javascript">
 	
 		function currentTime() {
