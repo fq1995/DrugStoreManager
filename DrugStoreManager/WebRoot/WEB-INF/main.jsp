@@ -19,7 +19,8 @@
 	<script type="text/javascript" src='<%=basePath%>js/outlook2.js'> </script>
 	<script type="text/javascript">
 	//有效期预警
-	window.showModalDialog('${pageContext.request.contextPath}/pse_showDateWarn.action?currPage=1&f=datawarn','药品有效期预警','dialogWidth:1200px;dialogHeight:400px;dialogLeft:100px;dialogTop:200px;center:yes;help:yes;resizable:yes;status:yes') 
+	window.showModalDialog('${pageContext.request.contextPath}/pse_showDateWarn.action?currPage=1&f=datawarn','药品有效期预警','dialogWidth:1200px;dialogHeight:400px;dialogLeft:100px;dialogTop:200px;center:yes;help:yes;resizable:yes;status:yes')  
+	/* window.open('${pageContext.request.contextPath}/pse_showDateWarn.action?currPage=1&f=datawarn',"_blank","toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=1200, height=500") */
 	</script>
 	<script type="text/javascript">
 	
@@ -68,6 +69,9 @@
 						},{"menuid":"40","icon":"icon-sys","menuname":"进货管理",
 							"menus":[{"menuid":"61","menuname":"进货列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/pse_showPurchase.action?currPage=1"}
 								
+							]
+						},{"menuid":"84","icon":"icon-sys","menuname":"药品采购单管理",
+							"menus":[{"menuid":"1","menuname":"药品采购单列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/buy_showBuy.action?currPage=1"}
 							]
 						},{"menuid":"51","icon":"icon-sys","menuname":"会员管理",
 							"menus":[{"menuid":"71","menuname":"会员列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/member_showMember.action?currPage=1"}

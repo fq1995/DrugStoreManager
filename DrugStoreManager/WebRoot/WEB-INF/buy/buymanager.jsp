@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix ="s" uri="/struts-tags"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -10,12 +11,44 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>药品管理</title>
+<title>药品采购单管理</title>
 <link href="<%=basePath%>css/style1.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<%-- <link rel="stylesheet" href="<%=basePath%>css/lanrenzhijia.css" media="all"> --%>
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.min.js"></script>
+<script src="<%=basePath%>js/buymanager_operation.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
-<script src="<%=basePath%>js/kucunmanager_operation.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			jQuery(document).ready(function($) {
+				 $(".theme-login").on("mouseenter", function () {
+					
+				    var $this = $(this);
+				    var realPath = $(this).attr("id");
+				    //alert(realPath);
+					$("#images").attr("src",realPath); 
+					
+					
+				    $this.find(".theme-popover-mask").show();
+				    $('.theme-popover').slideDown(200);
+				}).on("mouseleave", function () {
+				    var $this = $(this);
+				    $this.find(".theme-popover-mask").hide();
+				    $('.theme-popover').slideUp(200);
+				    
+				}); 
+				 $('.theme-poptit .close').click(function() {
+						$('.theme-popover-mask').fadeOut(100);
+						$('.theme-popover').slideUp(200);
+				});
+				 
+			})
+		</script>
+<script type="text/javascript">
+	$(function(){
+		
+	})
+</script>
+
 
 <style type="text/css">
 	th,td  
@@ -27,15 +60,16 @@
 </head>
 
 <body>
+	<input type="hidden" name="param">
 	<div class="place">
 		<span>位置：</span>
 		<ul class="placeul">
-			<li><a href="#">基本操作</a></li>
+			<li><a href="#">药品采购单管理</a></li>
 			<li><img src="<%=basePath%>images/next.gif" ></li>
-			<li><a href="#">药品管理</a></li>
+			<li><a href="#">药品采购单列表</a></li>
 		</ul>
 	</div>
-
+	
 	<div class="rightinfo">
 
 		<div class="tools">
@@ -49,20 +83,14 @@
 				<li id="btn_deleteUser" class="click"><span><img src="<%=basePath%>images/t03.png" /></span>删除</li>
 				
 				<li id="" class="click"><span><img src="<%=basePath%>images/t04.png" /></span>统计</li>
-				
-				<li id="btn_warn" class="click"><span><img src="<%=basePath%>images/warn.png" /></span>库存预警</li>
-				
-				<li id="btn_warn2" class="click"><span><img src="<%=basePath%>images/warn.png" /></span>有效期预警</li>
-				
-				<li id="btn_warn3" class="click"><span><img src="<%=basePath%>images/warn.png" /></span>过期药品</li>
-				
-				<li id="btn_doprint" class="click"><span><img src="<%=basePath%>images/dayin.png" /></span>打印报表</li>
+
+				<li id="btn_print" class="click"><span><img src="<%=basePath%>images/dayin.png" /></span>打印报表</li>
 			</ul>
 
 
 			<ul class="toolbar1">
 				<li style="border:0px"> <input class="form-control" placeholder="输入需要查询的药品名" value="${requestScope.keyword }" style="width:180px;" type="text" id="keyword" name="keyword"/></li>&nbsp;&nbsp;
-				<li style="border:0px"><button id="btn_selectUser" type="button" class="btn btn-info btn-sm">查询</button></li>
+				 <button id="btn_selectUser" type="button" class="btn btn-info btn-sm">查询</button>
 				
 				<%-- <li><span><img src="<%=basePath%>images/t05.png" /></span>设置</li> --%>
 			</ul>
@@ -75,59 +103,50 @@
 				<tr>
 					<th style="width:40px"><input id="all" name="all" type="checkbox" value=""/></th>
 					<th style="width:50px">序号</th>
+					<th style="width:70px">采购单号</th>
 					<th style="width:70px">药品编号</th>
-					<th>药品名</th>
+					<th onclick="">药品名</th>
 					<th style="width:70px">剂型</th>
 					<th style="width:50px">单位</th>
 					<th style="width:50px">类别</th>
-					<th>厂 家</th>
+					<th >厂 家</th>
 					<th>批准文号</th>
+					<th>采购数量</th>
 					<th>修改人</th>
-					<th>入库日期</th>
-					<th>库存数量</th>
-					<th>库存下限</th>
-					<th>产品说明</th>
-					<th>建单时间</th>
+					<th>添加日期</th>
+				 
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${requestScope.page.list}" var="inventor"
-					varStatus="state">
+				 <c:forEach items="${requestScope.page.list}" var="buy"
+					varStatus="state"> 
 					<tr>
 						<td style="width:40px"><input name="id_check" type="checkbox"
-							value="${inventor.stockId }" id="${inventor.stockId}"/></td>
+							value="${buy.drugbuyId }" id="${buy.drugbuyId}"/></td>
 						<td style="width:50px">${state.count }</td>
-						<td style="width:70px">${inventor.drugBean.drugCode }</td>
-						<td>${inventor.drugBean.drugName }</td>
-						<td style="width:70px">${inventor.drugBean.dosageformBean.dosageform }</td>
-						<td style="width:50px">${inventor.drugBean.drugUnitBean.unitname }</td>
-						<td>${inventor.drugBean.drugCategoryBean.category }</td>
-						<td>${inventor.drugBean.manufacturer }</td>
-						<td>${inventor.drugBean.approvalNumber }</td>
-						<td>${inventor.drugBean.modifier }</td>
-						<td>${inventor.drugBean.modifyTime }</td>
-						<c:choose>
-						<c:when test="${f eq 'warn' }">
-						<td style="background-color: #F7C709">${inventor.stocknumber }</td>
-						<td style="background-color: #E6421A">${inventor.stocklimit }</td>
-						</c:when>
-						<c:otherwise>
-						<td>${inventor.stocknumber }</td>
-						<td>${inventor.stocklimit }</td>
-						</c:otherwise>
-						</c:choose>
-						
+						<td style="width:70px">${buy.drugbuyCode }</td>
+						<td style="width:70px">${buy.drugBean.drugCode }</td>
+						<td onclick="">${buy.drugBean.drugName }</td>
+						<td style="width:70px">${buy.drugBean.dosageformBean.dosageform }</td>
+						<td style="width:50px">${buy.drugBean.drugUnitBean.unitname }</td>
+						<td>${buy.drugBean.drugCategoryBean.category }</td>
+						<td>${buy.drugBean.manufacturer }</td>
+						<td>${buy.drugBean.approvalNumber }</td>
+						<td>${buy.mount}</td>
+						<td>${buy.modifier }</td>
+						<td>${buy.modifyTime }</td>
 						 
-						
-						<td>${inventor.drugBean.memo }</td>
-						<td>${inventor.date }</td>
-					
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 		</div>
-
+		
+		 
+						
+		
+		<!-- 分页 -->
+		
 		<div class="pagin">
 			<div class="message">
 				共<i class="blue">${page.total }</i>条记录，当前显示第&nbsp;<i class="blue">${page.currPage }</i>页
@@ -135,9 +154,9 @@
 			<ul class="paginList">
 				<c:if test="${page.perIndex > 0}">
 					<li class="paginItem"><a 
-						href="${pageContext.request.contextPath }/inventor_showInventor.action?currPage=1&keyword=${keyword}">首页</a></li>
+						href="${pageContext.request.contextPath }/buy_showBuy.action?currPage=1&keyword=${keyword}">首页</a></li>
 					<li class="paginItem"><a 
-						href="${pageContext.request.contextPath }/inventor_showInventor.action?currPage=${page.perIndex}&keyword=${keyword}"><span
+						href="${pageContext.request.contextPath }/buy_showBuy.action?currPage=${page.perIndex}&keyword=${keyword}"><span
 							class="pagepre"></span></a></li>
 				</c:if>
 				<c:forEach begin="1" end="${page.totalPage }" var="p">
@@ -147,16 +166,16 @@
 						</c:when>
 						<c:otherwise>
 							<li class="paginItem"><a 
-								href="${pageContext.request.contextPath }/inventor_showInventor.action?currPage=${p}&keyword=${keyword}">${p}</a></li>
+								href="${pageContext.request.contextPath }/buy_showBuy.action?currPage=${p}&keyword=${keyword}">${p}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				<c:if test="${page.nextIndex > 0}">
 					<li class="paginItem"><a id="next"
-						href="${pageContext.request.contextPath }/inventor_showInventor.action?currPage=${page.nextIndex}&keyword=${keyword}"><span
+						href="${pageContext.request.contextPath }/buy_showBuy.action?currPage=${page.nextIndex}&keyword=${keyword}"><span
 							class="pagenxt"></span></a></li>
 					<li class="paginItem"><a id="total"
-						href="${pageContext.request.contextPath }/inventor_showInventor.action?currPage=${page.totalPage}&keyword=${keyword}">尾页</a></li>
+						href="${pageContext.request.contextPath }/buy_showBuy.action?currPage=${page.totalPage}&keyword=${keyword}">尾页</a></li>
 				</c:if>
 				&nbsp;
 				&nbsp;
@@ -205,7 +224,7 @@
 $('.tablelist tbody tr:odd').addClass('odd');
 function jump(){
 var pc = $("#select_jumpPage option:selected").text();
-window.location.href="${pageContext.request.contextPath}/inventor_showInventor.action?keyword=${keyword}&currPage="+pc;
+window.location.href="${pageContext.request.contextPath}/buy_showBuy.action?keyword=${keyword}&currPage="+pc;
 } 
 </script>
 

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,8 @@ import org.springframework.stereotype.Controller;
 
 import com.fq.po.DosageformBean;
 import com.fq.po.DrugBean;
+import com.fq.po.DrugBuy;
 import com.fq.po.DrugCategoryBean;
-import com.fq.po.DrugPurchaseBean;
 import com.fq.po.DrugUnitBean;
 import com.fq.po.InventoriesBean;
 import com.fq.service.DrugInventorService;
@@ -21,7 +22,6 @@ import com.fq.service.DrugPurchaseService;
 import com.fq.service.DrugService;
 import com.fq.util.BaseAction;
 import com.fq.util.ConstantUtils;
-import com.fq.util.DrugBuy;
 import com.fq.util.PageModel;
 import com.opensymphony.xwork2.ModelDriven;
 /**
@@ -151,7 +151,7 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 	 */
 	public String buyInventor(){
 		List<InventoriesBean> list = inventorService.showAllInventor(ids);
-		List<DrugBuy> buylist = inventorService.addPurchase(list);
+		inventorService.addPurchase(list);
 		return "showbuylist";
 	}
 	

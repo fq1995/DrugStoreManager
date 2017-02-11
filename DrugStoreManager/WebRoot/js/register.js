@@ -155,11 +155,11 @@
 			 	           $("#mes").html("请输入正确格式的邮箱！");
 			 	            return false;
 			 	    }
-					else if(data == "邮箱不可用"){
-						$("#mes").html("邮箱不可用");
+					else if(data == "邮箱名不可用"){
+						$("#mes").html("邮箱已存在");
 					}
 					
-					else if(data=="邮箱可用"){
+					else if(data=="邮箱名可用"){
 			        	$("img[name='duihao0']").css("display",""); 
 			        }
 			     }  

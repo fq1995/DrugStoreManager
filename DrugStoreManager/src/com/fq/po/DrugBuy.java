@@ -1,4 +1,4 @@
-package com.fq.util;
+package com.fq.po;
 
 
 
@@ -30,6 +30,7 @@ public class DrugBuy  implements java.io.Serializable {
     // Fields    
 
      private String drugbuyId;
+     private String drugbuyCode;
      private DrugBean drugBean;
      private String modifier;
      private Date modifyTime;
@@ -48,8 +49,9 @@ public class DrugBuy  implements java.io.Serializable {
     }
     
     /** full constructor */
-    public DrugBuy(String drugbuyId, DrugBean drugBean, String modifier, Date modifyTime, String mount) {
+    public DrugBuy(String drugbuyId, String drugbuyCode,DrugBean drugBean, String modifier, Date modifyTime, String mount) {
         this.drugbuyId = drugbuyId;
+        this.drugbuyCode = drugbuyCode;
         this.drugBean = drugBean;
         this.modifier = modifier;
         this.modifyTime = modifyTime;
@@ -69,6 +71,16 @@ public class DrugBuy  implements java.io.Serializable {
     public void setDrugbuyId(String drugbuyId) {
         this.drugbuyId = drugbuyId;
     }
+    @Column(name="DRUGBUY_CODE", length=255)
+    
+    public String getDrugbuyCode() {
+		return drugbuyCode;
+	}
+
+	public void setDrugbuyCode(String drugbuyCode) {
+		this.drugbuyCode = drugbuyCode;
+	}
+
 	@ManyToOne(fetch=FetchType.LAZY)
         @JoinColumn(name="DRUG_ID")
 
@@ -76,7 +88,7 @@ public class DrugBuy  implements java.io.Serializable {
         return this.drugBean;
     }
     
-    public void setDrugBean(DrugBean drugBean) {
+	public void setDrugBean(DrugBean drugBean) {
         this.drugBean = drugBean;
     }
     

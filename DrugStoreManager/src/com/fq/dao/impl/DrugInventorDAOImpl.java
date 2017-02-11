@@ -19,7 +19,7 @@ import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugUnitBean;
 import com.fq.po.InventoriesBean;
 import com.fq.util.BaseDAO;
-import com.fq.util.DrugBuy;
+import com.fq.po.DrugBuy;
 import com.fq.util.PageModel;
 import com.fq.util.UUIDBuild;
 @Repository("drugInventorDAO")
@@ -161,11 +161,27 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 	@Override
 	public List<DrugBuy> addPurchase(List<InventoriesBean> list) {
 		List<DrugBuy> druglist = new ArrayList<DrugBuy>();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
+		Date date = new Date();
+		StringBuilder sb = new StringBuilder();
+		sb.append("1000");
+		sb.append(sdf1.format(date));
 		DrugBuy drugbuy = new DrugBuy();
 		for(InventoriesBean bean :list){
+			sb.append(list.size());
 			drugbuy.setDrugBean(bean.getDrugBean());
+			drugbuy.setDrugbuyId(UUIDBuild.getUUID());
+			try {
+				drugbuy.setModifyTime(sdf.parse(sdf.format(date)));
+				drugbuy.setDrugbuyCode(sb.toString());
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 			druglist.add(drugbuy);
+			getHibernateTemplate().save(drugbuy);
 		}
+		
 		return druglist;
 	}
 

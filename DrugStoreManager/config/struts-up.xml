@@ -138,6 +138,21 @@
 				<param name="root">mess</param>
 			</result>
 		</action>
+		
+		<!-- 采购管理 -->
+		<action name="buy_*" class="drugBuyAction" method="{1}">
+			 
+			<result name="doadd">/WEB-INF/buy/buyadd.jsp</result>
+			<result name="showbuy">/WEB-INF/buy/buymanager.jsp</result>
+			<result name="showbuylist">/WEB-INF/buy/buymanager.jsp</result>
+			<result name="addbuy">/WEB-INF/buy/buyadd.jsp</result>
+			<result name="show" type="redirectAction">buy_showBuy.action?currPage=1
+			</result>
+			<result name="edit">/WEB-INF/buy/buyupdate.jsp</result>
+			<result name="ajax_verifyName" type="json">
+				<param name="root">mess</param>
+			</result>
+		</action>
 
 		<!-- 库存管理 -->
 
@@ -146,8 +161,8 @@
 			<result name="doadd">/WEB-INF/kucun/inventoradd.jsp</result>
 			<result name="showInventor">/WEB-INF/kucun/inventormanager.jsp</result>
 			<result name="showInventor2">/WEB-INF/kucun/inventormanager2.jsp</result>
-			<result name="showbuylist">/WEB-INF/purchase/buymanager.jsp</result>
-			<result name="addInventor">/WEB-INF/kucun/inventoradd.jsp</result>
+			<result name="showbuylist">/WEB-INF/buy/buymanager.jsp</result>
+			<result name="addInventor" type="redirectAction">buy_showBuy.action?currPage=1</result>
 			<result name="show" type="redirectAction">inventor_showInventor.action?currPage=1
 			</result>
 			<result name="edit">/WEB-INF/kucun/inventorupdate.jsp</result>
