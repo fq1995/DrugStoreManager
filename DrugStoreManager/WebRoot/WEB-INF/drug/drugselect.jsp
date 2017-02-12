@@ -41,7 +41,7 @@
 
 	
 	<div style="padding: 10px 10px 10px;">
-	    <form class="bs-example bs-example-form" role="form" action="drug_showDrugByOptions.action?currPage=1" method="post">
+	    <form class="bs-example bs-example-form" action="drug_showDrugByOptions.action?currPage=1" method="post">
 	        <div class="input-group">
 	            <span class="input-group-addon">药品名</span>
 	            <input value="${drugName }" name="drugName" id="drugName" style="width:180px" type="text" class="form-control" placeholder="请输入药品名" >
@@ -232,7 +232,7 @@
 			</div>
 
 		</div>
-	</div>
+	
 </body>
 <script type="text/javascript">
 $('.tablelist tbody tr:odd').addClass('odd');

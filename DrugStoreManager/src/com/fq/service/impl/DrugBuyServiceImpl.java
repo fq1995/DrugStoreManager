@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fq.dao.DrugBuyDAO;
-import com.fq.po.DosageformBean;
 import com.fq.po.DrugBuy;
-import com.fq.po.DrugCategoryBean;
-import com.fq.po.DrugUnitBean;
 import com.fq.service.DrugBuyService;
 import com.fq.util.PageModel;
 @Service("drugBuyService")

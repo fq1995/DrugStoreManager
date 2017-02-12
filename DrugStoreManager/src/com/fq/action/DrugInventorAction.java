@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 
 import com.fq.po.DosageformBean;
 import com.fq.po.DrugBean;
-import com.fq.po.DrugBuy;
 import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugUnitBean;
 import com.fq.po.InventoriesBean;

@@ -264,7 +264,7 @@
 					class="form-control" style="width:200px; display:inline" placeholder="请输入产品说明"/><i></i></li>
 				<li><label>药品图片</label>
 				<img alt="" src="${pageContext.request.contextPath}/upload/${drug.oldName}" style="width:80px;height:48px ">
-				<input name="photo" type="file" id="photo" style="border: none"></li></li>				
+				<input name="photo" type="file" id="photo" style="border: none"></li>				
 				<li><label>批准文号</label><input name="approvalNumber" type="text" id="approvalNumber" value="${drug.approvalNumber }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入批准文号"/><i></i></li>
 				<li><label>修改人</label><input name="modifier" type="text" id="modifier" value="${drug.modifier }"
