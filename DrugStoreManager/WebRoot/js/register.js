@@ -55,7 +55,7 @@
 	
 	$(function() {
   		//验证码
-  		$("#inputVerifyCode").blur(function(){
+  		$("#inputVerifyCode").mouseleave(function(){
   			var verifyCode = $("#inputVerifyCode").val();
   	  		$.ajax({
   				url:'user_validateVerifyCode.action',
@@ -66,6 +66,7 @@
   			       //获取Action返回的数据用  data.Action中的属性名 获取
    			          if(data==false)
   			          {
+   			        	$("img[name='duihao4']").css("display","none");
    			        	$("#tishi").html("验证码输入错误");
   			          }else{
   			            $("#tishi").html("");
@@ -201,3 +202,7 @@
 		});
 	    
 	});
+	$(document).keypress(function(e) {
+		if (e.which == 13)
+		$("form").submit();
+	}) 

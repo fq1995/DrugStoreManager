@@ -11,6 +11,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<c:choose>
+	<c:when test="${f eq 'datawarn'}">
+		<title>有效期预警</title>			 
+	</c:when>
+						
+	<c:otherwise>
+		<title>药品进货管理</title>
+	</c:otherwise>
+</c:choose>
 <title>药品进货管理</title>
 <link href="<%=basePath%>css/style1.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">

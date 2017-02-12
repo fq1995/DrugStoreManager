@@ -26,7 +26,7 @@ $(function() {
 
 $(function() {
 	//验证码
-	$("#inputVerifyCode").blur(function() {
+	$("#inputVerifyCode").mouseleave(function() {
 		var verifyCode = $("#inputVerifyCode").val();
 		$.ajax({
 			url : 'user_validateVerifyCode.action',
@@ -37,9 +37,11 @@ $(function() {
 			dataType : 'json',
 			success : function(data) {
 				if (verifyCode.trim.length == 0) {
+					$("img[name='duihao4']").css("display", "none");
 					$("#tishi").html("验证码输入错误");
 				}
 				if (data == false) {
+					$("img[name='duihao4']").css("display", "none");
 					$("#tishi").html("验证码输入错误");
 				} else {
 					$("#loginbtn").css("disabled",false);
@@ -108,5 +110,10 @@ $(function() {
 		$("#ti").html("");
 
 	});
-
+	
+	
 });
+$(document).keypress(function(e) {
+	if (e.which == 13)
+	$("form").submit();
+}) 
