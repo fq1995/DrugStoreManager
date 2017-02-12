@@ -138,7 +138,7 @@
  		});
  		
  		function check(){
- 	
+ 		 	
  			var name = $("input[name='drugBean.drugName']").val(); 
  			var pass = $("#modifier").val();
  			var number = $("#stocknumber").val();
@@ -146,7 +146,8 @@
  			var dosageform = $("#dosageform").val(); 
 	 		var unitname = $("#unitname").val(); 
 	 		var category = $("#category").val(); 
- 			if($.trim(category) == "" || category.length == 0 || $.trim(unitname) == "" || unitname.length == 0 || $.trim(dosageform) == "" || dosageform.length == 0 || $.trim(name) == "" || name.length == 0 || $.trim(pass) == "" || pass.length == 0 || $.trim(number) == "" || number.length == 0 && $.trim(limit) == "" || limit.length == 0){
+	 		var reg = /^\+?[1-9][0-9]*$/;
+ 			if(!reg.test(number) || !reg.test(number) || $.trim(category) == "" || category.length == 0 || $.trim(unitname) == "" || unitname.length == 0 || $.trim(dosageform) == "" || dosageform.length == 0 || $.trim(name) == "" || name.length == 0 || $.trim(pass) == "" || pass.length == 0 || $.trim(number) == "" || number.length == 0 && $.trim(limit) == "" || limit.length == 0){
  				$("#add").attr("disabled",false);  
  				return false;
  			}else{
@@ -166,6 +167,7 @@
  	 			var dosageform = $("#dosageform").val(); 
  	 			var unitname = $("#unitname").val(); 
  	 			var category = $("#category").val(); 
+ 	 			var reg = /^\+?[1-9][0-9]*$/;
  	 			if($.trim(name) == "" || name.length == 0){
  	 				alert("请输入药品名");
  	 				return false;
@@ -181,10 +183,10 @@
  	 			}else if($.trim(pass) == "" || pass.length == 0){
  	 				alert("请输入修改人");
  	 				return false;
- 	 			}else if($.trim(number) == "" || number.length == 0){
+ 	 			}else if($.trim(number) == "" || number.length == 0 || !reg.test(number)){
  	 				alert("请输入数量");
  	 				return false;
- 	 			}else if($.trim(limit) == "" || limit.length == 0){
+ 	 			}else if($.trim(limit) == "" || limit.length == 0 || !reg.test(limit)){
  	 				alert("请输入库存下限");
  	 				return false;
  	 			}

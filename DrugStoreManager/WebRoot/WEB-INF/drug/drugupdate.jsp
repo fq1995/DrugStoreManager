@@ -26,62 +26,198 @@
  		
  	});
  	$(function() {
+		$("#drugName").css("background-color", "");
+		$("#modifier").css("background-color", "");
+		$("#drugCode").css("background-color", "");
+		$("#dosageform").css("background-color",""); 
+ 		$("#unitname").css("background-color",""); 
+ 		$("#category").css("background-color",""); 
+ 		$("#salepeice").css("background-color",""); 
+ 		$("#mess").html("");
  		
- 		$("#drugName").css("background-color",""); 
- 		$("#modifier").css("background-color",""); 
- 		$("#drugCode").css("background-color",""); 
- 		
- 		//药品编号非空
- 		$("#drugCode").blur(function(){
- 			var name = $("input[name='drugCode']").val(); 
- 	        if($.trim(name) == "" || name.length == 0 ||name.length >10){
- 	        	$("#drugCode").css("background-color","#FFB9B9"); 
- 	        	$("#add").attr("disabled",true);   
- 	        	return false;
- 	        }else{
- 	        	$("#drugCode").css("background-color",""); 
- 	        	$("#add").attr("disabled",false);   
- 	        }
- 		});
- 		
- 		//药品名非空
- 		$("#drugName").blur(function(){
- 			var name = $("input[name='drugName']").val(); 
+ 		//销售价
+ 		$("#salepeice").blur(function(){
+ 			var name = $("#salepeice").val(); 
+ 			var reg = /^[0-9].*$/;
  	        if($.trim(name) == "" || name.length == 0 ){
- 	        	$("#drugName").css("background-color","#FFB9B9"); 
+ 	        	$("#salepeice").css("background-color","#FFB9B9"); 
  	        	$("#add").attr("disabled",true);   
- 	        	return false;
+ 	        	$("#mess").html("请输入正确格式的价格");
+ 	        }else if(!reg.test(name)){
+ 	        	$("#salepeice").css("background-color","#FFB9B9"); 
+ 	        	$("#add").attr("disabled",true);  
+ 	        	$("#mess").html("请输入正确格式的价格");
  	        }else{
- 	        	$("#drugName").css("background-color",""); 
+ 	        	$("#salepeice").css("background-color",""); 
+ 	        	$("#add").attr("disabled",false);   
+ 	        	$("#mess").html("");
+ 	        }
+ 		});
+ 		
+ 		
+ 		//剂型
+ 		$("#dosageform").blur(function(){
+ 			var name = $("#dosageform").val(); 
+ 	        if($.trim(name) == "" || name.length == 0 ){
+ 	        	$("#dosageform").css("background-color","#FFB9B9"); 
+ 	        	$("#add").attr("disabled",true);   
+ 	        }else{
+ 	        	$("#dosageform").css("background-color",""); 
  	        	$("#add").attr("disabled",false);   
  	        }
  		});
  		
- 		//修改人
- 		$("#modifier").blur(function(){
+ 		//单位
+ 		$("#unitname").blur(function(){
+ 			var name = $("#unitname").val(); 
+ 	        if($.trim(name) == "" || name.length == 0 ){
+ 	        	$("#unitname").css("background-color","#FFB9B9"); 
+ 	        	$("#add").attr("disabled",true);   
+ 	        }else{
+ 	        	$("#unitname").css("background-color",""); 
+ 	        	$("#add").attr("disabled",false);   
+ 	        }
+ 		});
+ 		
+ 		//类别
+ 		$("#category").blur(function(){
+ 			var name = $("#category").val(); 
+ 	        if($.trim(name) == "" || name.length == 0 ){
+ 	        	$("#category").css("background-color","#FFB9B9"); 
+ 	        	$("#add").attr("disabled",true);   
+ 	        }else{
+ 	        	$("#category").css("background-color",""); 
+ 	        	$("#add").attr("disabled",false);   
+ 	        }
+ 		});
+ 		
+		//药品编号非空
+		$("#drugCode").blur(function() {
+			var name = $("input[name='drugCode']").val();
+			if ($.trim(name) == "" || name.length == 0 || name.length > 10) {
+				$("#drugCode").css("background-color", "#FFB9B9");
+				$("#add").attr("disabled", true);
+			} else {
+				$("#drugCode").css("background-color", "");
+				$("#add").attr("disabled", false);
+			}
+		});
+
+		//药品名非空
+		$("#drugName").blur(function() {
+			$("#message").html("");
+			var name = $("input[name='drugName']").val();
+			$.ajax({
+				url : 'drug_validateName.action',
+				type : 'POST',
+				data : {
+					'name' : name
+				},
+				dataType : 'json',
+				success : function(data) {
+					if ($.trim(name) == "" || name.length == 0) {
+						$("#drugName").css("background-color", "#FFB9B9");
+						$("#add").attr("disabled", true);
+					} else if ("药品名可用" == data) {
+						$("#drugName").css("background-color", "");
+						$("#add").attr("disabled", false);
+						$("#message").css("color","green");
+						$("#message").html("药品名可用");
+					} else if ("药品名不可用" == data) {
+						$("#message").css("color","red");
+						$("#message").html("该药品已存在");
+						$("#add").attr("disabled", true);
+						$("#drugName").css("background-color", "#FFB9B9");
+					} else {
+						$("#message").css("color","red");
+						$("#message").html("药品名不可为空");
+					}
+				},
+				error : function(data) {
+				}
+			});
+
+		});
+
+		//修改人
+		$("#modifier").blur(function() {
+			var pass = $("#modifier").val();
+			if ($.trim(pass) == "" || pass.length == 0) {
+				$("#modifier").css("background-color", "#FFB9B9");
+				$("#add").attr("disabled", true);
+			} else {
+				$("#modifier").css("background-color", "");
+				$("#add").attr("disabled", false);
+			}
+		});
+
+		function check(){
+		 	
+ 			var name = $("input[name='drugName']").val(); 
  			var pass = $("#modifier").val();
- 			if ($.trim(pass) == "" || pass.length == 0) {
- 				$("#modifier").css("background-color","#FFB9B9"); 
- 				$("#add").attr("disabled",true);   
+ 			var dosageform = $("#dosageform").val(); 
+	 		var unitname = $("#unitname").val(); 
+	 		var category = $("#category").val(); 
+	 		var salepeice = $("#salepeice").val(); 
+	 		var reg = /^[0-9].*$/;
+ 			if(!reg.test(salepeice) || $.trim(category) == "" || category.length == 0 || $.trim(category) == "" || category.length == 0 || $.trim(unitname) == "" || unitname.length == 0 || $.trim(dosageform) == "" || dosageform.length == 0 || $.trim(name) == "" || name.length == 0 || $.trim(pass) == "" || pass.length == 0 ){
+ 				$("#add").attr("disabled",false);  
  				return false;
  			}else{
- 				$("#modifier").css("background-color",""); 
- 				$("#add").attr("disabled",false);   
- 	        }
+ 				return true;
+ 			}
+ 			
+ 		};
+ 		
+ 		//保存按钮
+ 		$("#add").click(function(){
+ 			if(!check()){
+ 				$("#add").attr("disabled",true);  
+ 				var name = $("input[name='drugName']").val(); 
+ 	 			var pass = $("#modifier").val();
+ 	 			var dosageform = $("#dosageform").val(); 
+ 	 			var unitname = $("#unitname").val(); 
+ 	 			var category = $("#category").val(); 
+ 	 			var salepeice = $("#salepeice").val(); 
+ 	 			var reg = /^[0-9].*$/;
+ 	 			if($.trim(name) == "" || name.length == 0){
+ 	 				alert("请输入药品名");
+ 	 				return false;
+ 	 			}else if($.trim(dosageform) == "" || dosageform.length == 0){
+ 	 				alert("请选择药品剂型");
+ 	 				return false;
+ 	 			}else if($.trim(unitname) == "" || unitname.length == 0){
+ 	 				alert("请选择药品单位");
+ 	 				return false;
+ 	 			}else if($.trim(category) == "" || category.length == 0){
+ 	 				alert("请选择药品类别");
+ 	 				return false;
+ 	 			}else if($.trim(salepeice) == "" || salepeice.length == 0 || !reg.test(salepeice)){
+ 	 				alert("请输入正确格式的价格");
+ 	 				return false;
+ 	 			}else if($.trim(pass) == "" || pass.length == 0){
+ 	 				alert("请输入修改人");
+ 	 				return false;
+ 	 			}
+ 			}else if(check()){
+ 				$("#add").attr("disabled",false); 
+ 				$("form").submit(); 
+ 			};
  		});
  		
  		
- 		
- 	});
+	});
 </script>
 </head>
 <body>
 	<div class="place">
 		<span>位置：</span>
 		<ul class="placeul">
-			<li><a href="#">首页</a></li>
-			<li><img src="images/next.gif" ></li>
-			<li><a href="#">表单</a></li>
+			<li><a href="#">药品管理</a></li>
+			<li><img src="<%=basePath%>images/next.gif" ></li>
+			<li><a href="#">药品列表</a></li>
+			<li><img src="images/next.gif"></li>
+			<li><a href="#">药品修改</a></li>
 		</ul>
 	</div>
 	<div class="formbody">
@@ -95,32 +231,33 @@
 
 			<ul class="forminfo">
 				<li><label>药品编号</label><input name="drugCode" type="text" id="drugCode" value="${drug.drugCode }" readonly="readonly"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入药品编号" /><i>必填</i><i style="color: red">${message2}</i></li>
+					class="form-control" style="width:200px; display:inline" placeholder="请输入药品编号" /><i></i><i style="color: red">${message2}</i></li>
 				<li><label>药品名</label><input name="drugName" type="text" id="drugName" value="${drug.drugName }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入药品名"/><i>必填</i><i style="color: red">${message}</i></li>
 				<li><label>剂型</label>
-					<select id="form" class="form-control" style="width:200px;height:34px"  name="dosageformBean.dosageformId" value="dosageformBean.dosageformId">
+					<select class="form-control" style="width:200px;height:34px;display: inline;"  name="dosageformBean.dosageformId"  id="dosageform">
 						<option value="${drug.dosageformBean.dosageformId }">${drug.dosageformBean.dosageform }</option>
 					<c:forEach items="${dosageformList }" var="dosageform">
 						<option value="${dosageform.dosageformId }">${dosageform.dosageform }</option>
 					</c:forEach>
-					</select></li>
+					</select><i>必填</i></li>
 				<li><label>单位</label>
-					<select class="form-control" style="width:200px;height:34px"  name="drugUnitBean.unitnameId">
+					<select class="form-control" style="width:200px;height:34px;display: inline;"  name="drugUnitBean.unitnameId" id="unitname">
 						<option value="${drug.drugUnitBean.unitnameId }">${drug.drugUnitBean.unitname }</option>
 					<c:forEach items="${drugUnitList }" var="drugUnit">
 						<option value="${drugUnit.unitnameId }">${drugUnit.unitname }</option>
 					</c:forEach>
-					</select></li>
+					</select><i>必填</i></li>
 				<li><label>类别</label>
-					<select class="form-control" style="width:200px;height:34px"  name="drugCategoryBean.categoryId">
+					<select class="form-control" style="width:200px;height:34px;display: inline;"  name="drugCategoryBean.categoryId" id="category">
 						<option value="${drug.drugCategoryBean.categoryId }">${drug.drugCategoryBean.category }</option>
 					<c:forEach items="${drugCategoryList }" var="drugCategory">
 						<option value="${drugCategory.categoryId }">${drugCategory.category }</option>
 					</c:forEach>
-					</select></li>
+					</select><i>必填</i></li>
 				<li><label>销售价</label><input name="salepeice" type="text" id="salepeice" value="${drug.salepeice }"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入销售价"/><i></i></li>
+					class="form-control" style="width:200px; display:inline" placeholder="请输入销售价"/><i>必填</i><i
+					id="mess" style="color: red"></i></li>
 				<li><label>厂商</label><input name="manufacturer" type="text" id="manufacturer" value="${drug.manufacturer }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入生产厂商"/><i></i></li>
 				<li><label>产品说明</label><input name="memo" type="text" id="memo" value="${drug.memo }"
