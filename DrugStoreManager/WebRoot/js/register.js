@@ -31,10 +31,16 @@
 			if(null == username || $.trim(username) == ''){
 				alert("请输入用户名");
 				$("#username").focus();
-			}else if(null == nickname || $.trim(nickname) == ''){
+			}else if(username.length > 4){
+	        	alert("用户名长度不得大于4位");
+	        	$("#username").focus();
+	        }else if(null == nickname || $.trim(nickname) == ''){
 				alert("请输入昵称");
 				$("#nickname").focus();
-			}else if(null == name || $.trim(name) == ''){
+			}else if(nickname.length > 20){
+	        	alert("昵称长度不能大于20位");
+	        	$("#nickname").focus();
+	        } else if(null == name || $.trim(name) == ''){
 				alert("请输入邮箱");
 				$("input[name='email']").focus();
 			}else if (!reg.test(name)){
@@ -43,7 +49,7 @@
 		    }else if(null == pass || $.trim(pass) == ''){
 				alert("请输入密码");
 				$("#password").focus();
-			}else if(null == pass2 || $.trim(pass2) == ''){
+			}else if(null == pass2 || $.trim(pass2) == '' || pass2 !=pass){
 				alert("请再次输入密码");
 				$("#password2").focus();
 			}else if(null == inputVerifyCode || $.trim(inputVerifyCode) == ''){
@@ -93,9 +99,16 @@
 					if($.trim(nickname) == "" || nickname.length == 0){
 			            $(".tip_").html("<a style='color:red'>昵称不能为空</a>");
 			            
-			        }  
+			        }else if(nickname.length > 20){
+			        	$(".tip_").html("<a style='color:red'>昵称长度不能大于20位</a>");
+			        } 
 					else if(data == "用户名不可用"){
-						$("#mess").html("昵称不可用");
+						$("#mess").html("昵称已存在");
+					}
+					
+					
+					else if(data == "用户名不可用"){
+						$("#mess").html("昵称已存在");
 					}
 					
 					else if(data=="用户名可用"){
@@ -122,9 +135,11 @@
 					if($.trim(username) == "" || username.length == 0){
 			            $(".tip_name").html("<a style='color:red'>用户名不能为空</a>");
 			            
-			        }  
+			        }else if(username.length > 4){
+			        	$(".tip_name").html("<a style='color:red'>用户名长度不得大于4位</a>");
+			        }
 					else if(data == "用户名不可用"){
-						$("#messs").html("用户名不可用");
+						$("#messs").html("用户名已存在");
 					}
 					
 					else if(data=="用户名可用"){
@@ -195,7 +210,7 @@
 			}else if (rpass.length<6 || rpass.length>10) {
 				$(".tip_pass2").html("<a style='color:red'>密码的长度必须在6-10个字符</a>");
 			}else if (rpass != pass) {
-				$(".tip_pass2").html("<a style='color:red'>确认密码与密码输入不一致</a>");
+				$(".tip_pass2").html("<a style='color:red'>两次密码输入不一致</a>");
 			}else{
 	        	$("img[name='duihao3']").css("display",""); 
 	        }

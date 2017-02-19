@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fq.dao.DrugDAO;
 import com.fq.po.DosageformBean;
@@ -14,12 +15,14 @@ import com.fq.po.DrugUnitBean;
 import com.fq.service.DrugService;
 
 import com.fq.util.PageModel;
+
 @Service("drugService")
 public class DrugServiceImpl implements DrugService {
-
+	
 	@Autowired
 	private DrugDAO drugDAO;
-
+	@Transactional
+	
 	@Override
 	public DrugBean selectDrugByName(String drugname) {
 		return drugDAO.selectDrugByName(drugname);

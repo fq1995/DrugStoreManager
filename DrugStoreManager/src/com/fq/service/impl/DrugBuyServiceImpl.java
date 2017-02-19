@@ -13,7 +13,7 @@ import com.fq.util.PageModel;
 public class DrugBuyServiceImpl implements DrugBuyService {
 	
 	@Autowired
-	private DrugBuyDAO drugbuydao;
+	private DrugBuyDAO drugBuyDAO;
 	@Override
 	public List<DrugBuy> show() {
 		// TODO Auto-generated method stub
@@ -40,12 +40,12 @@ public class DrugBuyServiceImpl implements DrugBuyService {
 
 	@Override
 	public void addBuy(Integer drugCode, DrugBuy buy, String time) throws Exception {
-		drugbuydao.addBuy(drugCode, buy, time);
+		drugBuyDAO.addBuy(drugCode, buy, time);
 	}
 
 	@Override
 	public PageModel<DrugBuy> splitDrug(Integer currPage, Integer pageSize, String keyword) {
-		return drugbuydao.splitDrugBuy(currPage, pageSize, keyword);
+		return drugBuyDAO.splitDrugBuy(currPage, pageSize, keyword);
 	}
 
 	
@@ -57,23 +57,23 @@ public class DrugBuyServiceImpl implements DrugBuyService {
 
 	@Override
 	public void deleteAllDrug(List<DrugBuy> drugList) {
-		drugbuydao.deleteAllDrugBuy(drugList);
+		drugBuyDAO.deleteAllDrugBuy(drugList);
 	}
 
 	@Override
 	public void updateDrug(DrugBuy buy, String time) {
-		drugbuydao.updateDrugBuy(buy, time);
+		drugBuyDAO.updateDrugBuy(buy, time);
 
 	}
 
 	@Override
 	public DrugBuy selectById(String id) {
-		return drugbuydao.selectById(id);
+		return drugBuyDAO.selectById(id);
 	}
 
 	@Override
 	public Integer select() {
-		return drugbuydao.select();
+		return drugBuyDAO.select();
 	}
 
 }

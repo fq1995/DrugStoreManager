@@ -185,6 +185,13 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 		return druglist;
 	}
 
+	@Override
+	public List<InventoriesBean> stats() {
+		String hql = "from InventoriesBean i order by i.stocknumber";
+		List<InventoriesBean> list = (List<InventoriesBean>) hibernateTemplate.find(hql);
+		return list;
+	}
+
 	
 
 }

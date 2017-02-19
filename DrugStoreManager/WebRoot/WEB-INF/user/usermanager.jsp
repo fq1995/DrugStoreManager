@@ -65,12 +65,13 @@
 		<table class="tablelist">
 			<thead>
 				<tr>
-					<th><input id="all" name="all" type="checkbox" value="" /></th>
-					<th>序号</th>
+					<th style="width: 50px"><input id="all" name="all" type="checkbox" value="" /></th>
+					<th style="width: 50px">序号</th>
 					<th>用户编号</th>
+					<th>账号</th>
 					<th>用户名</th>
+					<th>昵称</th>
 					<th>密码</th>
-					<th>权限</th>
 					<th>是否审核</th>
 					<th>添加日期</th>
 				</tr>
@@ -79,13 +80,14 @@
 				<c:forEach items="${requestScope.page.list}" var="user"
 					varStatus="state">
 					<tr>
-						<td><input name="id_check" type="checkbox"
+						<td style="width: 50px"><input name="id_check" type="checkbox"
 							value="${user.userId }" id="${user.userId}"/></td>
-						<td>${state.count }</td>
+						<td style="width: 50px">${state.count }</td>
 						<td>${user.userCode }</td>
+						<td>${user.email }</td>
 						<td>${user.username }</td>
+						<td>${user.nickname }</td>
 						<td>${user.password }</td>
-						<td>${user.roleBean.rolename }</td>
 						<c:choose>
 							<c:when test="${user.status eq 1}">
 								<td>是</td>

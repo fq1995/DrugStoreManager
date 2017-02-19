@@ -1,6 +1,26 @@
 function change() {
 	$("#verifyCode").attr("src", "validateImg?a=" + new Date().getTime());
 }
+function verify() {
+	var verifyCode = $("#inputVerifyCode").val();
+	$.ajax({
+		url : 'user_validateVerifyCode.action',
+		type : 'POST',
+		data : {
+			'yanzheng' : verifyCode
+		},
+		dataType : 'json',
+		success : function(data) {
+			if (data == false) {
+				alert("请输入正确的验证码");
+				$("#inputVerifyCode").focus();
+				return false;
+			}else {
+				return true;
+			}
+		}
+	});
+};
 $(function() {
 	$("#loginbtn").focus(function () {
 		var reg = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
@@ -20,6 +40,10 @@ $(function() {
 			alert("请输入验证码");
 			$("#inputVerifyCode").focus();
 		}
+		/*else if(verify()){
+			
+		}
+		*/
 	});
 });
 

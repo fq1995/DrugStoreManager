@@ -42,4 +42,6 @@ public interface DrugInventorDAO {
 	Integer select();
 	
 	List<DrugBuy> addPurchase(List<InventoriesBean> list);
+	//统计
+	List<InventoriesBean> stats();
 }

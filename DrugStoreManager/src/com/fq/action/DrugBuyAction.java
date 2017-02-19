@@ -45,7 +45,7 @@ public class DrugBuyAction extends BaseAction implements ModelDriven<DrugBuy>, R
 	private String drugbuyCode;
 	
 	@Autowired
-	private DrugBuyService drugbuyService;
+	private DrugBuyService drugBuyService;
 	@Autowired
 	private DrugService drugService;
 	private DrugBuy drugbuyBean = new DrugBuy();
@@ -66,7 +66,7 @@ public class DrugBuyAction extends BaseAction implements ModelDriven<DrugBuy>, R
 		if (currPage == null) {
 			currPage = 1;
 		}
-		PageModel<DrugBuy> page = drugbuyService.splitDrug(currPage, ConstantUtils.PAGESIZE, keyword);
+		PageModel<DrugBuy> page = drugBuyService.splitDrug(currPage, ConstantUtils.PAGESIZE, keyword);
 		request.put("page", page);
 		return "showbuy";
 	}
@@ -79,7 +79,7 @@ public class DrugBuyAction extends BaseAction implements ModelDriven<DrugBuy>, R
 		List<DrugCategoryBean> drugCategoryList = drugService.selectCategory();
 		List<DrugUnitBean> drugUnitList = drugService.selectUnit();
 		List<DosageformBean> dosageformList = drugService.selectForm();
-		drugCode = drugbuyService.select();
+		drugCode = drugBuyService.select();
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		StringBuilder sb = new StringBuilder();
@@ -111,9 +111,9 @@ public class DrugBuyAction extends BaseAction implements ModelDriven<DrugBuy>, R
 		request.put("dosageformList", dosageformList);
 		
 		if (null == selectDrugByName() && null == selectDrugByDrugcode()) {
-			drugCode = drugbuyService.select();
+			drugCode = drugBuyService.select();
 			try {
-				drugbuyService.addBuy(drugCode,drugbuyBean, time);
+				drugBuyService.addBuy(drugCode,drugbuyBean, time);
 			} catch (Exception e) {
 				System.out.println("时间转换错误");
 				e.printStackTrace();
@@ -130,8 +130,8 @@ public class DrugBuyAction extends BaseAction implements ModelDriven<DrugBuy>, R
 	 * 删除
 	 */
 	public String delBuy() {
-		List<DrugBuy> listDrug = drugbuyService.showAllDrug(ids);
-		drugbuyService.deleteAllDrug(listDrug);
+		List<DrugBuy> listDrug = drugBuyService.showAllDrug(ids);
+		drugBuyService.deleteAllDrug(listDrug);
 		return "show";
 	}
 
@@ -139,7 +139,7 @@ public class DrugBuyAction extends BaseAction implements ModelDriven<DrugBuy>, R
 	 * 编辑
 	 */
 	public String editBuy() {
-		DrugBuy drugBean1 = drugbuyService.selectById(id);
+		DrugBuy drugBean1 = drugBuyService.selectById(id);
 		List<DrugCategoryBean> drugCategoryList = drugService.selectCategory();
 		List<DrugUnitBean> drugUnitList = drugService.selectUnit();
 		List<DosageformBean> dosageformList = drugService.selectForm();
@@ -166,7 +166,7 @@ public class DrugBuyAction extends BaseAction implements ModelDriven<DrugBuy>, R
 		request.put("dosageformList", dosageformList);
 		if (null == selectDrugByNameAndDrugId()) {
 			
-			drugbuyService.updateDrug(drugbuyBean, time);
+			drugBuyService.updateDrug(drugbuyBean, time);
 			return "show";
 		}
 		request.put("message", "药品名已被使用！");
@@ -179,7 +179,7 @@ public class DrugBuyAction extends BaseAction implements ModelDriven<DrugBuy>, R
 	 * @return
 	 */
 	public DrugBuy selectDrugByName() {
-		DrugBuy bean = drugbuyService.selectDrugByName(drugbuyBean.getDrugBean().getDrugName());
+		DrugBuy bean = drugBuyService.selectDrugByName(drugbuyBean.getDrugBean().getDrugName());
 		return bean;
 	}
 
@@ -189,7 +189,7 @@ public class DrugBuyAction extends BaseAction implements ModelDriven<DrugBuy>, R
 	 * @return
 	 */
 	public DrugBuy selectDrugByNameAndDrugId() {
-		DrugBuy bean = drugbuyService.selectDrugByNameAndDrugId(drugbuyBean.getDrugBean().getDrugName(), drugbuyBean.getDrugBean().getDrugId());
+		DrugBuy bean = drugBuyService.selectDrugByNameAndDrugId(drugbuyBean.getDrugBean().getDrugName(), drugbuyBean.getDrugBean().getDrugId());
 		return bean;
 	}
 
@@ -199,7 +199,7 @@ public class DrugBuyAction extends BaseAction implements ModelDriven<DrugBuy>, R
 	 * @return
 	 */
 	public DrugBuy selectDrugByDrugcode() {
-		DrugBuy bean = drugbuyService.selectDrugByDrugcode(drugbuyBean.getDrugBean().getDrugCode());
+		DrugBuy bean = drugBuyService.selectDrugByDrugcode(drugbuyBean.getDrugBean().getDrugCode());
 		return bean;
 	}
 
@@ -208,7 +208,7 @@ public class DrugBuyAction extends BaseAction implements ModelDriven<DrugBuy>, R
 	 */
 	public String validateName() {
 		if(null != name){
-			DrugBuy bean = drugbuyService.selectDrugByName(name);
+			DrugBuy bean = drugBuyService.selectDrugByName(name);
 			if (null == bean) {
 				mess = "药品名可用";
 			} else if (null != bean) {
@@ -327,14 +327,17 @@ public class DrugBuyAction extends BaseAction implements ModelDriven<DrugBuy>, R
 	}
 
 
-	public DrugBuyService getDrugbuyService() {
-		return drugbuyService;
+	public DrugBuyService getDrugBuyService() {
+		return drugBuyService;
 	}
 
 
-	public void setDrugbuyService(DrugBuyService drugbuyService) {
-		this.drugbuyService = drugbuyService;
+	public void setDrugBuyService(DrugBuyService drugBuyService) {
+		this.drugBuyService = drugBuyService;
 	}
+
+
+	
 
 
 }

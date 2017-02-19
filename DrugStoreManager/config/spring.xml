@@ -64,6 +64,7 @@
 				
 			</list>
 		</property>
+	
 		<!-- 自动扫描hbm方式配置的hibernate文件和.hbm文件 
 		<property name="mappingDirectoryLocations">
 			<list>
@@ -85,7 +86,7 @@
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
-	
+
 	
 	<!-- 声明式事物 -->
 	<!-- 配置事务管理器 -->
@@ -107,6 +108,7 @@
 			<tx:method name="register*" propagation="REQUIRED"/>
 			<tx:method name="show*" propagation="REQUIRED"/>
 			<tx:method name="select*" propagation="REQUIRED"/>
+			<tx:method name="test*" propagation="REQUIRED"/>
 			<!-- 除上面所定义的方法开事物  其他的都是只读事物  只能读，不能修改 -->
 			<tx:method name="*" read-only="true"/>
 		</tx:attributes>

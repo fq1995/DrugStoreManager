@@ -192,6 +192,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 		return bean;
 	}
 	/**
+	 * 
 	 * ajax校验验证码是否正确
 	 */
 	public String validateVerifyCode() {

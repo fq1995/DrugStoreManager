@@ -157,6 +157,7 @@
 		<!-- 库存管理 -->
 
 		<action name="inventor_*" class="drugInventorAction" method="{1}">
+			<result name="stats">/WEB-INF/kucun/stats.jsp</result>
 			<result name="print">/WEB-INF/kucun/inventorprint.jsp</result>
 			<result name="doadd">/WEB-INF/kucun/inventoradd.jsp</result>
 			<result name="showInventor">/WEB-INF/kucun/inventormanager.jsp</result>
@@ -168,6 +169,9 @@
 			<result name="edit">/WEB-INF/kucun/inventorupdate.jsp</result>
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
+			</result>
+			<result name="ajax_stats" type="json">
+				<param name="root">json</param>
 			</result>
 		</action>
 

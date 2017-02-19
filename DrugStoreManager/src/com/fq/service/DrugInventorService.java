@@ -54,5 +54,8 @@ public interface DrugInventorService {
 	// 添加至采购清单
 	List<DrugBuy> addPurchase(List<InventoriesBean> list);
 	
+	//统计
+	String stats();
+	
 	 
 }

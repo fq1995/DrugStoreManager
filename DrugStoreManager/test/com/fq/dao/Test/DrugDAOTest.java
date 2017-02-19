@@ -68,7 +68,14 @@ public class DrugDAOTest extends TestCase {
 	@Test
 	public void testAddDrug() {
 		DrugBean drugBean = new DrugBean();
-		drugDAO.addDrug(((Integer)1111), drugBean, new Date().toString());
+		drugBean.setDrugCode(1111);
+		drugBean.setDrugId("b358ccc44d5c4b17bfc488b81ac8f622");
+		drugBean.setDrugName("桑菊感冒片");
+		drugBean.setModifier("张三");
+		drugBean.setModifyTime(new Date());
+		drugBean.setManufacturer("桂林中族中药股份有限公司");
+		drugBean.setApprovalNumber("国药准字Z45020280");
+		drugDAO.addDrug(((Integer)1111), drugBean, "2017-02-01");
 	}
 
 	@Test

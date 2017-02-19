@@ -45,6 +45,7 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 	private Integer stockCode;
 	private Integer drugCode;
 	private String f;
+	private String json;
 	@Autowired
 	private DrugInventorService inventorService;
 	@Autowired
@@ -53,7 +54,7 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 	private DrugPurchaseService drugPseService;
 	private InventoriesBean inventoriesBean = new InventoriesBean();
 	private DrugBean drugBean = inventoriesBean.getDrugBean();
-
+	
 	private HttpServletResponse response = ServletActionContext.getResponse();
 
 	/**
@@ -199,7 +200,19 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 		request.put("message", "药品名已被使用！");
 		return editInventor();
 	}
-
+	/**
+	 * 跳转统计页面
+	 */
+	public String dostats(){
+		return "stats";
+	}
+	/**
+	 * 统计数量
+	 */
+	public String stats(){
+		json = inventorService.stats();
+		return "ajax_stats";
+	}
 	/**
 	 * 跳转打印界面
 	 */
@@ -334,5 +347,14 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 	public void setF(String f) {
 		this.f = f;
 	}
+
+	public String getJson() {
+		return json;
+	}
+
+	public void setJson(String json) {
+		this.json = json;
+	}
+	
 	
 }
