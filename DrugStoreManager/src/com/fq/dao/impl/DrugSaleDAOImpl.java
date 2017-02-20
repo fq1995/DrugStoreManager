@@ -203,6 +203,13 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 		return saleCode;
 	}
 
+	@Override
+	public List<DrugSalesBean> stats() {
+		String hql = "from DrugSalesBean order by salesVolume desc";
+		List<DrugSalesBean> list = (List<DrugSalesBean>) hibernateTemplate.find(hql);
+		return list;
+	}
+
 	
 	
 

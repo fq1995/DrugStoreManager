@@ -1,10 +1,13 @@
 package com.fq.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fq.dao.MemberDAO;
 import com.fq.po.MemberBean;
 import com.fq.service.MemberService;
@@ -71,6 +74,30 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Integer selectCode() {
 		return memberDao.selectCode();
+	}
+
+	@Override
+	public String stats() {
+		List<MemberBean> list = memberDao.stats();
+		String json = null;
+		List<MemberBean> list2 = new ArrayList<>();
+		if(list.size()>=10){
+			for(int i = 0;i<10;i++){
+				list2.add(new MemberBean(list.get(i).getMemberName(), list.get(i).getMemberLevel(), list.get(i).getIntegration()));
+			}
+		}
+		if(list.size()<10){
+			for(int i = 0;i<list.size();i++){
+				list2.add(new MemberBean(list.get(i).getMemberName(), list.get(i).getMemberLevel(), list.get(i).getIntegration()));
+			}
+		}
+		ObjectMapper mapper = new ObjectMapper();  
+		try {
+			json = mapper.writeValueAsString(list2);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}  
+		return json;
 	}
 
 }

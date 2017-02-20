@@ -1,11 +1,14 @@
 package com.fq.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fq.dao.DrugSaleDAO;
 import com.fq.po.DosageformBean;
 import com.fq.po.DrugBean;
@@ -13,6 +16,7 @@ import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugSalesBean;
 import com.fq.po.DrugUnitBean;
 import com.fq.po.MemberBean;
+import com.fq.po.SaleStats;
 import com.fq.po.UserBean;
 import com.fq.service.DrugSaleService;
 import com.fq.util.PageModel;
@@ -115,6 +119,30 @@ public class DrugSaleServiceImpl implements DrugSaleService {
 	@Override
 	public Integer selectCode() {
 		return drugSaleDao.selectCode();
+	}
+
+	@Override
+	public String stats() {
+		List<DrugSalesBean> list = drugSaleDao.stats();
+		String json = null;
+		List<SaleStats> list2 = new ArrayList<>();
+		if(list.size()>=10){
+			for(int i = 0; i<10; i++){
+				list2.add(new SaleStats(list.get(i).getSalesVolume(),list.get(i).getDrugBean().getDrugName()));
+			}
+		}
+		if(list.size()<10){
+			for(int i = 0;i<list.size();i++){
+				list2.add(new SaleStats(list.get(i).getSalesVolume(),list.get(i).getDrugBean().getDrugName()));
+			}
+		}
+		ObjectMapper mapper = new ObjectMapper();  
+		try {
+			json = mapper.writeValueAsString(list2);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}  
+		return json;
 	}
 
 	

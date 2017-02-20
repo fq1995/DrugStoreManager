@@ -39,4 +39,7 @@ public interface MemberService {
 
 	// 查询编号
 	Integer selectCode();
+	
+	//统计
+	String stats();
 }

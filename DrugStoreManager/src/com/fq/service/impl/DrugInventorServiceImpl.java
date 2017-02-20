@@ -15,7 +15,7 @@ import com.fq.po.DrugBean;
 import com.fq.po.DrugBuy;
 import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugUnitBean;
-import com.fq.po.Invenstats;
+import com.fq.po.InvenStats;
 import com.fq.po.InventoriesBean;
 import com.fq.service.DrugInventorService;
 import com.fq.util.PageModel;
@@ -109,15 +109,15 @@ public class DrugInventorServiceImpl implements DrugInventorService {
 	public String stats() {
 		String json = null;
 		List<InventoriesBean> list = drugInventorDao.stats();
-		List<Invenstats> list2 = new ArrayList<>();
+		List<InvenStats> list2 = new ArrayList<>();
 		if(list.size() >= 10){
 			for(int i = 0; i<10;i++){
-				list2.add(new Invenstats(list.get(i).getDrugBean().getDrugName(),list.get(i).getStocknumber()));
+				list2.add(new InvenStats(list.get(i).getDrugBean().getDrugName(),list.get(i).getStocknumber()));
 			}
 		}
 		if(list.size() < 10){
 			for(int i = 0; i<list.size();i++){
-				list2.add(new Invenstats(list.get(i).getDrugBean().getDrugName(),list.get(i).getStocknumber()));
+				list2.add(new InvenStats(list.get(i).getDrugBean().getDrugName(),list.get(i).getStocknumber()));
 			}
 		}
 		ObjectMapper mapper = new ObjectMapper();  

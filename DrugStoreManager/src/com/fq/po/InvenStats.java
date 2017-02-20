@@ -1,6 +1,6 @@
 package com.fq.po;
 
-public class Invenstats {
+public class InvenStats {
 	private String drugName;
 	private Integer stocknumber;
 	public String getDrugName() {
@@ -15,12 +15,12 @@ public class Invenstats {
 	public void setStocknumber(Integer stocknumber) {
 		this.stocknumber = stocknumber;
 	}
-	public Invenstats(String drugName, Integer stocknumber) {
+	public InvenStats(String drugName, Integer stocknumber) {
 		super();
 		this.drugName = drugName;
 		this.stocknumber = stocknumber;
 	}
-	public Invenstats() {
+	public InvenStats() {
 		super();
 	}
 	

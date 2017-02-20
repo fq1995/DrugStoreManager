@@ -50,5 +50,7 @@ public interface DrugSaleDAO {
 	MemberBean selectSaleByTel(String suppliertel);
 	//查询编号
 	Integer selectCode();
+	//统计
+	List<DrugSalesBean> stats();
 
 }

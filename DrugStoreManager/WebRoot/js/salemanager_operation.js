@@ -71,6 +71,10 @@
 			window.location.href="sale_doPrint.action";
 		},false);
 		
+		//跳转统计界面
+		document.querySelector("#btn_stats").addEventListener("click",()=>{
+			window.location.href="sale_dostats.action";
+		},false);
 		
 	}
 	window.addEventListener("load",init,false);

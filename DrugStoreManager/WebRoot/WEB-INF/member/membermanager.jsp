@@ -16,7 +16,6 @@
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
 <script src="<%=basePath%>js/membermanager_operation.js" type="text/javascript" charset="utf-8"></script>
-<%-- <script src="<%=basePath%>js/usermanager_page.js" type="text/javascript" charset="utf-8"></script> --%>
 <script type="text/javascript">
 	$(function(){
 		var keyword = $("#keyword").val;
@@ -46,7 +45,7 @@
 						src="<%=basePath%>images/t02.png"  /></span>修改</li>
 				<li id="btn_deleteUser" class="click"><span><img src="<%=basePath%>images/t03.png" /></span>删除</li>
 				
-				<li id="" class="click"><span><img src="<%=basePath%>images/t04.png" /></span>统计</li>
+				<li id="btn_stats" class="click"><span><img src="<%=basePath%>images/t04.png" /></span>统计</li>
 			
 				<li id="btn_print" class="click"><span><img src="<%=basePath%>images/dayin.png" /></span>打印报表</li>
 			</ul>

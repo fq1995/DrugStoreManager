@@ -49,7 +49,14 @@ public class MemberBean  implements java.io.Serializable {
         this.memberId = memberId;
     }
     
-    /** full constructor */
+    public MemberBean(String memberName, String memberLevel, Integer integration) {
+		super();
+		this.memberName = memberName;
+		this.memberLevel = memberLevel;
+		this.integration = integration;
+	}
+
+	/** full constructor */
     public MemberBean(String memberId, String memberCode, String memberName, String sex, String age, String memberLevel, Integer integration, String suppliertel, String address, Set<DrugSalesBean> drugSalesBeans) {
         this.memberId = memberId;
         this.memberCode = memberCode;

@@ -106,5 +106,12 @@ public class MemberDAOImpl extends BaseDAO<MemberBean> implements MemberDAO {
 		return code;
 	}
 
+	@Override
+	public List<MemberBean> stats() {
+		String hql = "from MemberBean order by integration desc";
+		List<MemberBean> list = (List<MemberBean>) hibernateTemplate.find(hql);
+		return list;
+	}
+
 
 }

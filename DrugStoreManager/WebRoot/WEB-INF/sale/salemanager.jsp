@@ -48,9 +48,9 @@
 						src="<%=basePath%>images/t02.png"  /></span>修改</li>
 				<li id="btn_deleteUser" class="click"><span><img src="<%=basePath%>images/t03.png" /></span>删除</li>
 				
-				<li id="" class="click"><span><img src="<%=basePath%>images/t04.png" /></span>统计</li>
+				<li id="btn_stats" class="click"><span><img src="<%=basePath%>images/t04.png" /></span>统计</li>
 
-				<li id="btn_select" class="click"><span><img src="<%=basePath%>images/sousuo.png" /></span>多条件查询</li>
+				<%-- <li id="btn_select" class="click"><span><img src="<%=basePath%>images/sousuo.png" /></span>多条件查询</li> --%>
 			
 				<li id="btn_print" class="click"><span><img src="<%=basePath%>images/dayin.png" /></span>打印报表</li>
 			</ul>

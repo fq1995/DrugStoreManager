@@ -46,7 +46,8 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 	private Integer saleCode;
 	private Double price;
 	private String name;
-
+	private String json;
+	
 	@Autowired
 	private DrugSaleService drugSaleService;
 	private DrugSalesBean salesBean = new DrugSalesBean();
@@ -282,7 +283,20 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 		price = bean.getSalepeice();
 		return "ajax_verifyName";
 	}
-
+	
+	/**
+	 * 跳转到统计界面
+	 */
+	public String dostats(){
+		return "stats";
+	}
+	/**
+	 * 统计
+	 */
+	public String stats(){
+		json = drugSaleService.stats();
+		return "ajax_stats";
+	}
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
@@ -384,6 +398,14 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getJson() {
+		return json;
+	}
+
+	public void setJson(String json) {
+		this.json = json;
 	}
 
 }

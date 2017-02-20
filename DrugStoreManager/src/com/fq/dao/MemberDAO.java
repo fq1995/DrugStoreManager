@@ -39,4 +39,7 @@ public interface MemberDAO {
 
 	// 查询编号
 	Integer selectCode();
+	
+	//统计
+	List<MemberBean> stats();
 }

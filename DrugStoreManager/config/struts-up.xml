@@ -178,6 +178,7 @@
 		<!-- 销售管理 -->
 
 		<action name="sale_*" class="drugSaleAction" method="{1}">
+			<result name="stats">/WEB-INF/sale/stats.jsp</result>
 			<result name="print">/WEB-INF/sale/saleprint.jsp</result>
 			<result name="doadd">/WEB-INF/sale/saleadd.jsp</result>
 			<result name="showSale">/WEB-INF/sale/salemanager.jsp</result>
@@ -193,6 +194,9 @@
 			</result>
 			<result name="ajax_verifyName" type="json">
 				<param name="root">price</param>
+			</result>
+			<result name="ajax_stats" type="json">
+				<param name="root">json</param>
 			</result>
 		</action>
 
@@ -214,7 +218,7 @@
 		<!-- 会员管理 -->
 
 		<action name="member_*" class="memberAction" method="{1}">
-
+			<result name="stats">/WEB-INF/member/stats.jsp</result>
 			<result name="doadd">/WEB-INF/member/memberadd.jsp</result>
 			<result name="showMember">/WEB-INF/member/membermanager.jsp</result>
 			<result name="addMember">/WEB-INF/member/memberadd.jsp</result>
@@ -223,6 +227,9 @@
 			<result name="edit">/WEB-INF/member/memberupdate.jsp</result>
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
+			</result>
+			<result name="ajax_stats" type="json">
+				<param name="root">json</param>
 			</result>
 		</action>
 

@@ -11,7 +11,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>药品管理</title>
+<title>库存下限预警</title>
 <link href="<%=basePath%>css/style1.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.min.js"></script>
@@ -49,7 +49,7 @@
 						src="<%=basePath%>images/t02.png"  /></span>修改</li>
 				<li id="btn_deleteUser" class="click"><span><img src="<%=basePath%>images/t03.png" /></span>删除</li>
 				
-				<li id="" class="click"><span><img src="<%=basePath%>images/t04.png" /></span>统计</li>
+				<li id="btn_stats" class="click"><span><img src="<%=basePath%>images/t04.png" /></span>统计</li>
 				
 				<li id="btn_buy" class="click"><span><img src="<%=basePath%>images/buy.gif" /></span>添加进采购单</li>
 				

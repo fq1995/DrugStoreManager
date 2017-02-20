@@ -34,7 +34,8 @@ public class MemberAction extends BaseAction implements ModelDriven<MemberBean>,
 	private String mess;
 	private String keyword;
 	private Integer memCode;
-
+	private String json;
+	
 	@Autowired
 	private MemberService memberService;
 	private MemberBean memberBean = new MemberBean();
@@ -164,7 +165,19 @@ public class MemberAction extends BaseAction implements ModelDriven<MemberBean>,
 		}
 		return "ajax_verifyName";
 	}
-
+	/**
+	 * 跳转到统计界面
+	 */
+	public String dostats(){
+		return "stats";
+	}
+	/**
+	 * 统计
+	 */
+	public String stats(){
+		json = memberService.stats();
+		return "ajax_stats";
+	}
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
@@ -242,6 +255,14 @@ public class MemberAction extends BaseAction implements ModelDriven<MemberBean>,
 
 	public void setMemCode(Integer memCode) {
 		this.memCode = memCode;
+	}
+
+	public String getJson() {
+		return json;
+	}
+
+	public void setJson(String json) {
+		this.json = json;
 	}
 
 }

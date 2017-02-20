@@ -29,6 +29,11 @@
  	});
  	
  	$(function() {
+ 		//返回
+ 		$("#return").click(function(){
+ 			location.href = "${pageContext.request.contextPath}/sale_showSale.action?currPage=1";
+ 		});
+ 		
  		//药品名称
  		$("#drugname").blur(function(){
  			var drugid = $("#drugname").val();
@@ -198,7 +203,7 @@
 					</select></li> 
 					
 				<li><input id="add" type="submit" class="btn btn-info btn-sm"  value="确认保存" />&nbsp;&nbsp;&nbsp;&nbsp;
-					<input id="return" type="button" class="btn btn-info btn-sm" onclick="javascript:history.go(-1);" value="返回" /></li>
+					<input id="return" type="button" class="btn btn-info btn-sm" value="返回" /></li>
 			</ul>
 		</form>
 	</div>
