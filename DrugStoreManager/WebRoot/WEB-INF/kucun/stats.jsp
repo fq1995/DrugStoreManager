@@ -13,7 +13,6 @@
 <script type="text/javascript"
 	src="<%=basePath%>js/jquery-1.6.2.min.js"></script>
 <script type="text/javascript">
-
 $(function() {
 	var name = new Array();
 	var number = new Array();
