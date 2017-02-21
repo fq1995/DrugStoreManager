@@ -71,6 +71,11 @@
 		document.querySelector("#btn_print").addEventListener("click",()=>{
 			window.location.href="pse_doprint.action";
 		},false);
+		
+		//跳转统计界面
+		document.querySelector("#btn_stats").addEventListener("click",()=>{
+			window.location.href="pse_dostats.action";
+		},false);
 	}
 	window.addEventListener("load",init,false);
 })();

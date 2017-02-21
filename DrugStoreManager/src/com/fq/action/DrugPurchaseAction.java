@@ -43,6 +43,7 @@ public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPu
 	private Integer pseCode;
 	private Integer drugCode;
 	private String f;
+	private String json;
 	
 	@Autowired
 	private DrugPurchaseService drugPseService;
@@ -250,7 +251,19 @@ public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPu
 		}
 		return "ajax_verifyName";
 	}
-
+	/**
+	 * 跳转到统计界面
+	 */
+	public String dostats(){
+		return "stats";
+	}
+	/**
+	 * 统计
+	 */
+	public String stats(){
+		json = drugPseService.stats();
+		return "ajax_stats";
+	}
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
@@ -344,6 +357,14 @@ public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPu
 
 	public void setF(String f) {
 		this.f = f;
+	}
+
+	public String getJson() {
+		return json;
+	}
+
+	public void setJson(String json) {
+		this.json = json;
 	}
 	
 }

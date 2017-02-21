@@ -203,6 +203,7 @@
 		<!-- 进货管理 -->
 
 		<action name="pse_*" class="drugPurchaseAction" method="{1}">
+			<result name="stats">/WEB-INF/purchase/stats.jsp</result>
 			<result name="print">/WEB-INF/purchase/purchaseprint.jsp</result>
 			<result name="doadd">/WEB-INF/purchase/purchaseadd.jsp</result>
 			<result name="showPurchase">/WEB-INF/purchase/purchasemanager.jsp</result>
@@ -212,6 +213,9 @@
 			<result name="edit">/WEB-INF/purchase/purchaseupdate.jsp</result>
 			<result name="ajax_verifyName" type="json">
 				<param name="root">mess</param>
+			</result>
+			<result name="ajax_stats" type="json">
+				<param name="root">json</param>
 			</result>
 		</action>
 

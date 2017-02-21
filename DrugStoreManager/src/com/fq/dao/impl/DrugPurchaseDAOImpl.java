@@ -212,5 +212,12 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 		return super.split(hql, hql_count, currPage, pagesize,keyword);
 	}
 
+	@Override
+	public List<DrugPurchaseBean> stats() {
+		String hql ="from DrugPurchaseBean order by amount desc";
+		List<DrugPurchaseBean> list = (List<DrugPurchaseBean>) hibernateTemplate.find(hql);
+		return list;
+	}
+
 
 }

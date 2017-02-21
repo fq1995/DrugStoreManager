@@ -1,11 +1,14 @@
 package com.fq.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fq.dao.DrugPurchaseDAO;
 import com.fq.po.DosageformBean;
 import com.fq.po.DrugBean;
@@ -13,6 +16,7 @@ import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugPurchaseBean;
 import com.fq.po.DrugUnitBean;
 import com.fq.po.MemberBean;
+import com.fq.po.PurchaseStats;
 import com.fq.po.SupplierBean;
 import com.fq.po.UserBean;
 import com.fq.service.DrugPurchaseService;
@@ -127,6 +131,30 @@ public class DrugPurchaseServiceImpl implements DrugPurchaseService {
 	@Override
 	public PageModel<DrugPurchaseBean> splitOverDate(Integer currPage, Integer pagesize, String keyword) {
 		return drugPseDao.splitOverDate(currPage, pagesize, keyword);
+	}
+
+	@Override
+	public String stats() {
+		String json = null;
+		List<DrugPurchaseBean> list = drugPseDao.stats();
+		List<PurchaseStats> list2 = new ArrayList<>();
+		if(list.size()>=10){
+			for(int i = 0; i<10;i++){
+				list2.add(new PurchaseStats(list.get(i).getAmount(),list.get(i).getDrugBean().getDrugName()));
+			}
+		}
+		if(list.size()<10){
+			for(int i = 0; i<list.size();i++){
+				list2.add(new PurchaseStats(list.get(i).getAmount(),list.get(i).getDrugBean().getDrugName()));
+			}
+		}
+		ObjectMapper mapper = new ObjectMapper();  
+		try {
+			json = mapper.writeValueAsString(list2);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}  
+		return json;
 	}
 	
 	

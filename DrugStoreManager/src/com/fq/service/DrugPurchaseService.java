@@ -69,5 +69,8 @@ public interface DrugPurchaseService {
 	
 	// 过期药
 	PageModel<DrugPurchaseBean> splitOverDate(Integer currPage, Integer pagesize, String keyword);
+	
+	//统计
+	String stats();
 
 }
