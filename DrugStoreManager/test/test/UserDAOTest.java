@@ -1,39 +1,44 @@
-package com.fq.dao.Test;
+package test;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.fq.dao.UserDAO;
 import com.fq.po.UserBean;
 import com.fq.service.UserService;
-
-import junit.framework.TestCase;
-
-public class UserDAOTest extends TestCase {
+@org.junit.runner.RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:spring.xml") 
+public class UserDAOTest extends AbstractJUnit4SpringContextTests {
 	
-	private ApplicationContext applicationContext;
+	/*private ApplicationContext applicationContext;
 	
 	@Autowired
 	private UserDAO userDAO;
 	@Autowired
+	private UserService userService; */
+	
+	@Resource
+	private UserDAO userDAO;
+	@Resource
 	private UserService userService; 
 	
-	@Before
-	protected void setUp() throws Exception {
-		//获取spring的容器
+	
+	public void setUp() throws Exception {
+		/*//获取spring的容器
 		applicationContext = new ClassPathXmlApplicationContext(new String[] {
 			"spring_bean.xml",
 			"spring.xml"
 		});
 		userDAO = (UserDAO) applicationContext.getBean("userDAO");
-		userService = (UserService) applicationContext.getBean("userService");
+		userService = (UserService) applicationContext.getBean("userService");*/
 	}
 
 	@Test
@@ -84,7 +89,7 @@ public class UserDAOTest extends TestCase {
 	}
 	@Test
 	public void testUpdateUser() {
-		UserBean userBean = new UserBean();
+		UserBean userBean = new UserBean("15c54ab46f7f464cace4544fe31bcf5d",1010);
 		userDAO.updateUser(userBean, "2016-10-11");
 	}
 	@Test
