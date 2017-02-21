@@ -55,6 +55,9 @@
 			}else if(null == inputVerifyCode || $.trim(inputVerifyCode) == ''){
 				alert("请输入验证码");
 				$("#inputVerifyCode").focus();
+			}else if($("#tishi").html() == "验证码输入错误"){
+				alert("请输入正确的验证码");
+				$("#inputVerifyCode").focus();
 			}
 		});
 	});
