@@ -3,11 +3,8 @@ package com.fq.service;
 import java.util.Date;
 import java.util.List;
 
-import com.fq.po.DosageformBean;
 import com.fq.po.DrugBean;
-import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugSalesBean;
-import com.fq.po.DrugUnitBean;
 import com.fq.po.MemberBean;
 import com.fq.po.UserBean;
 import com.fq.util.PageModel;
@@ -35,15 +32,6 @@ public interface DrugSaleService {
 	// 根据ID查询
 	DrugSalesBean selectById(String id);
 
-	// 查询类别
-	List<DrugCategoryBean> selectCategory();
-
-	// 查询单位
-	List<DrugUnitBean> selectUnit();
-
-	// 查询剂型
-	List<DosageformBean> selectForm();
-
 	// 查询药品
 	List<DrugBean> selectDrug();
 
@@ -67,5 +55,8 @@ public interface DrugSaleService {
 	
 	//统计
 	String stats();
+	
+	//数据下拉表格
+	String comboGrid();
 
 }

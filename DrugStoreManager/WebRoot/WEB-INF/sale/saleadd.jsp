@@ -13,9 +13,12 @@
 <title>药品销售添加</title>
 <link href="css/style1.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>  
+<link rel="stylesheet" type="text/css" href="<%=basePath%>js/jquery-easyui-1.5/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>js/jquery-easyui-1.5/themes/icon.css">
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.min.js"></script>
-
+<script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript">
 	
  	$(function(){
@@ -35,8 +38,11 @@
  		});
  		
  		//药品名称
- 		$("#drugname").blur(function(){
- 			var drugid = $("#drugname").val();
+ 		/* $("#drugname").blur(function(){
+ 			var g = $('#drugname').combogrid('grid');	// 获取数据表格对象
+ 			var r = g.datagrid('getSelected');	// 获取选择的行
+ 			var drugid = r.drugId;
+ 			alert(drugid);
  			$.ajax({
  				url:'sale_validateid.action',
  				type:'POST',
@@ -50,8 +56,16 @@
  				 error:function(data){  
  					alert("请选择药品名称");
  		         }  
- 	  		});
- 		});
+ 	  		}); 
+ 		}); */
+ 		//单价
+ 		$("#salepeice").focus(function(){
+ 			var g = $('#drugname').combogrid('grid');	// 获取数据表格对象
+ 			var r = g.datagrid('getSelected');	// 获取选择的行
+ 			var salepeice = r.salepeice;
+ 			$("#salepeice").val(salepeice);
+		});
+ 		
  		
  		//会员电话
  		$("#suppliertel").blur(function(){
@@ -62,95 +76,156 @@
  				type:'POST',
  				data:{'tel':tel},
  				dataType:'json',
- 				success:function(data){ 
- 					if(data == "无此会员"){
+ 				success:function(data){
+ 					if($.trim(tel) == "" || tel.length == 0 ){
+ 		 	        	$("#suppliertel").css("background-color","#FFB9B9"); 
+ 		 	        	$("#add").attr("disabled",true);   
+ 		 	        }else if(data == "无此会员"){
  						$("#mess").html("无此会员");
- 					}
- 					else if(data=="会员可用"){
+ 					}else if(data=="会员可用"){
  						$("#salepeice").val((saleprice*0.9).toFixed(2));
  						$("#mess").html("会员可用");
+ 						$("#suppliertel").css("background-color",""); 
+ 		 	        	$("#add").attr("disabled",false);   
  			        }
  			     }  
  	  		});
  		});
  		
  		
- 		//销售总金额
+ 		//销售数量、总金额
  		$("#salesVolume").blur(function() {
  			var volue = $("#salesVolume").val();
  			var saleprice = $("#salepeice").val();
  			if(!isNaN(volue)){
  				if($.trim(volue) == "" || volue.length == 0){
+ 					$("#salesVolume").css("background-color","#FFB9B9"); 
+		 	        $("#add").attr("disabled",true);   
  	 				alert("数量不能为空");
  	 			}
  				else if(volue <= 0){
+ 					$("#salesVolume").css("background-color","#FFB9B9"); 
+		 	        $("#add").attr("disabled",true);   
  	 				alert("数量必须大于0");
  	 			}else{
  	 				$("#totalamount").val(volue*saleprice);
+ 	 				$("#salesVolume").css("background-color",""); 
+ 	 				$("#add").attr("disabled",false);   
  	 			}
- 				
  			}else{
- 			   alert("输入的不是数字");
+ 				$("#salesVolume").css("background-color","#FFB9B9"); 
+	 	        $("#add").attr("disabled",true);   
+ 			    alert("输入的不是数字");
  			}
  		});
  		
  	});
  	
  	$(function() {
-/* 		$("#drugBean.drugName").css("background-color",""); 
- 		$("#drugBean.modifier").css("background-color",""); 
- 		$("#drugBean.drugCode").css("background-color",""); 
+ 		$("#drugname").css("background-color","");
+ 		$("#salepeice").css("background-color","");
+ 		$("#totalamount").css("background-color","");
+ 		$("#modifier").css("background-color","");
+ 		$("#suppliertel").css("background-color",""); 
+ 		$("#salesVolume").css("background-color",""); 
  		
-  		//药品编号非空
- 		$("#drugBean.drugCode").blur(function(){
- 			var name = $("input[name='drugBean.drugCode']").val(); 
- 	        if($.trim(name) == "" || name.length == 0 ||name.length >10){
- 	        	$("#drugBean.drugCode").css("background-color","#FFB9B9"); 
+ 		//药品名非空
+ 		$("#drugName").blur(function(){
+ 			var g = $('#drugname').combogrid('grid');	// 获取数据表格对象
+ 			var r = g.datagrid('getSelected');	// 获取选择的行
+ 			var name = r.drugName;
+ 	        if($.trim(name) == "" || name.length == 0 ){
+ 	        	$("#drugName").css("background-color","#FFB9B9"); 
  	        	$("#add").attr("disabled",true);   
  	        }else{
- 	        	$("#drugBean.drugCode").css("background-color",""); 
+ 	        	$("#drugName").css("background-color",""); 
  	        	$("#add").attr("disabled",false);   
  	        }
  		});
  		
- 		//药品名非空
- 		$("#drugBean.drugName").blur(function(){
- 			var name = $("input[name='drugBean.drugName']").val(); 
+ 		//药品单价非空
+ 		$("#salepeice").blur(function(){
+ 			var name = $("input[name='drugBean.salepeice']").val(); 
  	        if($.trim(name) == "" || name.length == 0 ){
- 	        	$("#drugBean.drugName").css("background-color","#FFB9B9"); 
+ 	        	$("#salepeice").css("background-color","#FFB9B9"); 
  	        	$("#add").attr("disabled",true);   
  	        }else{
- 	        	$("#drugBean.drugName").css("background-color",""); 
+ 	        	$("#salepeice").css("background-color",""); 
+ 	        	$("#add").attr("disabled",false);   
+ 	        }
+ 		});
+ 		
+ 		//药品总价非空
+ 		$("#totalamount").blur(function(){
+ 			var name = $("input[name='totalamount']").val(); 
+ 	        if($.trim(name) == "" || name.length == 0 ){
+ 	        	$("#totalamount").css("background-color","#FFB9B9"); 
+ 	        	$("#add").attr("disabled",true);   
+ 	        }else{
+ 	        	$("#totalamount").css("background-color",""); 
  	        	$("#add").attr("disabled",false);   
  	        }
  		});
  		
  		//修改人
- 		$("#drugBean.modifier").blur(function(){
- 			var pass = $("#drugBean.modifier").val();
+ 		$("#modifier").blur(function(){
+ 			var pass = $("#modifier").val();
  			if ($.trim(pass) == "" || pass.length == 0) {
- 				$("#drugBean.modifier").css("background-color","#FFB9B9"); 
+ 				$("#modifier").css("background-color","#FFB9B9"); 
  				$("#add").attr("disabled",true);   
  			}else{
- 				$("#drugBean.modifier").css("background-color",""); 
+ 				$("#modifier").css("background-color",""); 
  				$("#add").attr("disabled",false);   
  	        }
- 		}); */
+ 		}); 
  		
- 		/* $("select[name='drugBean.drugId']").blur(function(){
- 			var drugId = $("select[name='drugBean.drugId']").val(); 
- 			$.ajax({
-  				url:'sale_selectDrugByName.action',
-  				type:'POST',
-  				data:{'drugId':drugId},
-  				dataType:'json'
-  				
-  	  		});
  		
- 		}); */
+ 		//提交
+ 		$("#form").submit(function(){
+ 			var g = $('#drugname').combogrid('grid');	// 获取数据表格对象
+ 			var r = g.datagrid('getSelected');	// 获取选择的行
+ 			var name = r.drugName;
+ 			var salepeice = $("input[name='drugBean.salepeice']").val(); 
+ 			var tel = $("#suppliertel").val();
+ 			var totalamount = $("input[name='totalamount']").val(); 
+ 			var modifier = $("#modifier").val();
+ 			var volue = $("#salesVolume").val();
+ 			
+ 			if($.trim(name) == "" || name.length == 0 ){
+ 	        	$("#drugName").css("background-color","#FFB9B9"); 
+ 	        	alert("请选择药品名称");
+ 	        	return false;
+ 	        }else if($.trim(salepeice) == "" || salepeice.length == 0 ||name.length >10){
+ 	        	$("#salepeice").css("background-color","#FFB9B9"); 
+ 	        	alert("请输入药品单价");
+ 	        	return false; 
+ 	        }else if($.trim(volue) == "" || volue.length == 0 ){
+	 	        $("#salesVolume").css("background-color","#FFB9B9"); 
+	 	       alert("请输入销售数量");
+	 	       return false;
+		 	}else if($.trim(totalamount) == "" || totalamount.length == 0 ){
+ 	        	$("#totalamount").css("background-color","#FFB9B9"); 
+ 	        	alert("请输入销售总价");
+ 	        	return false; 
+ 	        }else if($.trim(modifier) == "" || modifier.length == 0) {
+ 				$("#modifier").css("background-color","#FFB9B9"); 
+ 				alert("请输入修改人");
+ 				return false; 
+ 			}
+ 		});
  		
  	});
+ 	$(function() {
+ 		$.ajax({
+ 			 url: 'sale_comboGrid.action',
+ 			 dataType: 'json',
+ 			success: function(data) {
+ 			}
+ 		})
+	});
+ 	
 </script>
+
 </head>
 <body>
 	<div class="place">
@@ -165,7 +240,7 @@
 		<div class="formtitle">
 			<span>基本信息</span>
 		</div>
-		<form action="sale_addSale.action" method="post">
+		<form action="sale_addSale.action" method="post" id="form">
 			<input type="hidden" name="currPage" value="1">
 			<input type="hidden" name="time">
 
@@ -173,36 +248,52 @@
 				<li><label>销售单编号</label><input name="salesCode" type="text" id="salesCode" value="${requestScope.saleCode+1 }" readonly="readonly"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入销售单编号" /><i>必填</i></li>
 				<li><label>药品名称</label>
-					<select class="form-control" style="width:200px;height:34px" id="drugname" name="drugBean.drugId">
+				<%-- <select class="form-control" style="width:200px;height:34px" id="drugname" name="drugBean.drugId">
 				 		<option value="">请选择</option>
 					<c:forEach items="${drugList }" var="drug">
 						<option value="${drug.drugId }">${drug.drugName }</option>
 					</c:forEach> 
 					</select>
-					</li>
-					
-				
-				<li><label>查询会员</label>
-					<input name="memberBean.suppliertel" type="text" id="suppliertel" 
-					class="form-control" style="width:200px; display:inline" placeholder="请输入客户电话"/><i>必填</i><i id="mess" style="color: red"></i>
+				 --%>
+					<select class="easyui-combogrid" style="width:18%" id="drugname" name="drugBean.drugId" data-options="
+						panelWidth: 770,
+						idField: 'drugId',
+						textField: 'drugName',
+						url: '${pageContext.request.contextPath}/json/drug.json',
+						method: 'post',
+						columns: [[
+							{field:'drugName',title:'药品名称',width:110,align:'center'},
+							{field:'dosageform',title:'药品剂型',width:80,align:'center'},
+							{field:'unitname',title:'药品单位',width:80,align:'center'},
+							{field:'category',title:'药品类别',width:80,align:'center'},
+							{field:'approvalNumber',title:'批准文号',width:200,align:'center'},
+							{field:'manufacturer',title:'生产厂商',width:200,align:'center'}
+						]],
+						fitColumns: true
+					">
+					</select>
 				</li>
+				
 				
 				<li><label>销售单价</label><input name="drugBean.salepeice" type="text" id="salepeice" 
 					class="form-control" style="width:200px; display:inline" placeholder="请输入销售价格"/><i>必填</i></li>
+				<li><label>查询会员</label>
+					<input name="memberBean.suppliertel" type="text" id="suppliertel" 
+					class="form-control" style="width:200px; display:inline" placeholder="请输入客户电话"/><i>必填</i><i id="mess" style="color: red"></i></li>
 				<li><label>销售数量</label><input name="salesVolume" type="text" id="salesVolume"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入销售数量"/><i>必填</i></li>
 				<li><label>销售金额</label><input name="totalamount" type="text" id="totalamount" 
 					class="form-control" style="width:200px; display:inline" placeholder="请输入销售金额"/><i>必填</i></li>
 				
 			 	<li><label>操作人</label>
-					<select class="form-control" style="width:200px;height:34px"  name="userBean.userId">
+					<select class="form-control" style="width:200px;height:34px"  name="userBean.userId" id="modifier">
 						<option value="">请选择</option>
 					<c:forEach items="${userList }" var="user">
 						<option value="${user.userId }">${user.username }</option>
 					</c:forEach>
 					</select></li> 
 					
-				<li><input id="add" type="submit" class="btn btn-info btn-sm"  value="确认保存" />&nbsp;&nbsp;&nbsp;&nbsp;
+				<li><input id="add" type="submit" class="btn btn-info btn-sm" disabled="disabled"  value="确认保存" />&nbsp;&nbsp;&nbsp;&nbsp;
 					<input id="return" type="button" class="btn btn-info btn-sm" value="返回" /></li>
 			</ul>
 		</form>

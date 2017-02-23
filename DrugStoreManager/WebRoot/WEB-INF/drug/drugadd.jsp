@@ -123,7 +123,8 @@
 					if ($.trim(name) == "" || name.length == 0) {
 						$("#drugName").css("background-color", "#FFB9B9");
 						$("#add").attr("disabled", true);
-					} else if ("药品名可用" == data) {
+					}
+					/* else if ("药品名可用" == data) {
 						$("#drugName").css("background-color", "");
 						$("#add").attr("disabled", false);
 						$("#message").css("color","green");
@@ -133,7 +134,9 @@
 						$("#message").html("该药品已存在");
 						$("#add").attr("disabled", true);
 						$("#drugName").css("background-color", "#FFB9B9");
-					} else {
+					} 
+					 */
+					else {
 						$("#message").css("color","red");
 						$("#message").html("药品名不可为空");
 					}

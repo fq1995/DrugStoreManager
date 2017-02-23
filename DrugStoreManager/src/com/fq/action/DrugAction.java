@@ -74,11 +74,10 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 		request.put("page", page);
 		return "showDrug";
 	}
-
 	/**
-	 * 跳转到多条件查询
+	 * 剂型、单位、类别
 	 */
-	public String doShowDrugByOptions() {
+	public void before(){
 		List<DrugCategoryBean> drugCategoryList = drugService.selectCategory();
 		List<DrugUnitBean> drugUnitList = drugService.selectUnit();
 		List<DosageformBean> dosageformList = drugService.selectForm();
@@ -86,6 +85,12 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 		request.put("drugCategoryList", drugCategoryList);
 		request.put("drugUnitList", drugUnitList);
 		request.put("dosageformList", dosageformList);
+	}
+	/**
+	 * 跳转到多条件查询
+	 */
+	public String doShowDrugByOptions() {
+		before();
 		return "showDrugByOptions";
 	}
 
@@ -94,13 +99,7 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 	 * 
 	 */
 	public String showDrugByOptions() {
-		List<DrugCategoryBean> drugCategoryList = drugService.selectCategory();
-		List<DrugUnitBean> drugUnitList = drugService.selectUnit();
-		List<DosageformBean> dosageformList = drugService.selectForm();
-
-		request.put("drugCategoryList", drugCategoryList);
-		request.put("drugUnitList", drugUnitList);
-		request.put("dosageformList", dosageformList);
+		before();
 
 		String drugName = (String) request.get("drugName");
 		request.put("drugName", drugName);
@@ -138,16 +137,9 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 	 * 跳转新增
 	 */
 	public String doaddDrug() {
-		List<DrugCategoryBean> drugCategoryList = drugService.selectCategory();
-		List<DrugUnitBean> drugUnitList = drugService.selectUnit();
-		List<DosageformBean> dosageformList = drugService.selectForm();
+		before();
 		drugCode = drugService.select();
-
 		request.put("drugCode", drugCode);
-		request.put("drugCategoryList", drugCategoryList);
-		request.put("drugUnitList", drugUnitList);
-		request.put("dosageformList", dosageformList);
-		
 		return "doadd";
 	}
 	/**
@@ -195,14 +187,7 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 	 * @throws Exception
 	 */
 	public String addDrug() {
-		List<DrugCategoryBean> drugCategoryList = drugService.selectCategory();
-		List<DrugUnitBean> drugUnitList = drugService.selectUnit();
-		List<DosageformBean> dosageformList = drugService.selectForm();
-
-		request.put("drugCategoryList", drugCategoryList);
-		request.put("drugUnitList", drugUnitList);
-		request.put("dosageformList", dosageformList);
-		
+		before();
 		if (null == selectDrugByName() && null == selectDrugByDrugcode()) {
 			
 			if(photo != null){
@@ -268,18 +253,9 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 	 */
 	public String editDrug() {
 		DrugBean drugBean1 = drugService.selectById(id);
-		List<DrugCategoryBean> drugCategoryList = drugService.selectCategory();
-		List<DrugUnitBean> drugUnitList = drugService.selectUnit();
-		List<DosageformBean> dosageformList = drugService.selectForm();
-
-		request.put("drugCategoryList", drugCategoryList);
-		request.put("drugUnitList", drugUnitList);
-		request.put("dosageformList", dosageformList);
+		before();
 		if (null != drugBean1) {
-			
 			request.put("drug", drugBean1);
-			
-			
 		}
 		return "edit";
 	}
@@ -288,13 +264,7 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 	 * 修改药品
 	 */
 	public String updateDrug() {
-		List<DrugCategoryBean> drugCategoryList = drugService.selectCategory();
-		List<DrugUnitBean> drugUnitList = drugService.selectUnit();
-		List<DosageformBean> dosageformList = drugService.selectForm();
-
-		request.put("drugCategoryList", drugCategoryList);
-		request.put("drugUnitList", drugUnitList);
-		request.put("dosageformList", dosageformList);
+		before();
 		if (null == selectDrugByNameAndDrugId()) {
 			
 			if(photo != null){

@@ -77,7 +77,18 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 		request.put("page", page);
 		return "showInventor";
 	}
+	/**
+	 * 剂型、单位、类别
+	 */
+	public void before(){
+		List<DrugCategoryBean> drugCategoryList = drugService.selectCategory();
+		List<DrugUnitBean> drugUnitList = drugService.selectUnit();
+		List<DosageformBean> dosageformList = drugService.selectForm();
 
+		request.put("drugCategoryList", drugCategoryList);
+		request.put("drugUnitList", drugUnitList);
+		request.put("dosageformList", dosageformList);
+	}
 	/**
 	 * 药品库存预警分页
 	 * 
@@ -106,17 +117,11 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 	 * 跳转新增库存
 	 */
 	public String doaddInventor() {
-		List<DrugCategoryBean> drugCategoryList = inventorService.selectCategory();
-		List<DrugUnitBean> drugUnitList = inventorService.selectUnit();
-		List<DosageformBean> dosageformList = inventorService.selectForm();
+		before();
 		stockCode = inventorService.select();
 		drugCode = drugService.select();
-		
 		request.put("drugCode", drugCode);
 		request.put("stockCode", stockCode);
-		request.put("drugCategoryList", drugCategoryList);
-		request.put("drugUnitList", drugUnitList);
-		request.put("dosageformList", dosageformList);
 		return "doadd";
 	}
 
@@ -127,13 +132,7 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 	 * @throws Exception
 	 */
 	public String addInventor() {
-		List<DrugCategoryBean> drugCategoryList = inventorService.selectCategory();
-		List<DrugUnitBean> drugUnitList = inventorService.selectUnit();
-		List<DosageformBean> dosageformList = inventorService.selectForm();
-
-		request.put("drugCategoryList", drugCategoryList);
-		request.put("drugUnitList", drugUnitList);
-		request.put("dosageformList", dosageformList);
+		before();
 		if (null == selectInventorByName() && null == selectInventorByDrugcode()) {
 			stockCode = inventorService.select();
 			drugCode = drugService.select();
@@ -169,13 +168,7 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 	 */
 	public String editInventor() {
 		InventoriesBean bean1 = inventorService.selectById(id);
-		List<DrugCategoryBean> drugCategoryList = inventorService.selectCategory();
-		List<DrugUnitBean> drugUnitList = inventorService.selectUnit();
-		List<DosageformBean> dosageformList = inventorService.selectForm();
-
-		request.put("drugCategoryList", drugCategoryList);
-		request.put("drugUnitList", drugUnitList);
-		request.put("dosageformList", dosageformList);
+		before();
 		if (null != bean1) {
 			request.put("inventor", bean1);
 		}
@@ -186,13 +179,7 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 	 * 修改库存药品
 	 */
 	public String updateInventor() {
-		List<DrugCategoryBean> drugCategoryList = inventorService.selectCategory();
-		List<DrugUnitBean> drugUnitList = inventorService.selectUnit();
-		List<DosageformBean> dosageformList = inventorService.selectForm();
-
-		request.put("drugCategoryList", drugCategoryList);
-		request.put("drugUnitList", drugUnitList);
-		request.put("dosageformList", dosageformList);
+		before();
 		if (null != selectInventorByDrugcode()) {
 			inventorService.updateInventor(inventoriesBean);
 			return "show";

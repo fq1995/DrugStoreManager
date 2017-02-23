@@ -15,7 +15,7 @@ import com.fq.po.DrugBean;
 import com.fq.po.DrugBuy;
 import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugUnitBean;
-import com.fq.po.InvenStats;
+import com.fq.util.InvenStats;
 import com.fq.po.InventoriesBean;
 import com.fq.service.DrugInventorService;
 import com.fq.util.PageModel;

@@ -8,7 +8,7 @@ import java.sql.*;
  */
 public class DBConnection {
 
-	private String url = "jdbc:mysql://127.0.0.1:3306/struts07?useUnicode=true&characterEncoding=utf-8";
+	private String url = "jdbc:mysql://127.0.0.1:3306/yaodian?useUnicode=true&characterEncoding=utf-8";
 	private static String className = "com.mysql.jdbc.Driver";
 	private String username = "root";
 	private String password = "123456";

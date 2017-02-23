@@ -198,6 +198,10 @@
 			<result name="ajax_stats" type="json">
 				<param name="root">json</param>
 			</result>
+			<result name="ajax_combogrid" type="json">
+				<param name="root">combogrid</param>
+			</result>
+			
 		</action>
 
 		<!-- 进货管理 -->

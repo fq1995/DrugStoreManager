@@ -19,8 +19,10 @@ import com.fq.po.DrugUnitBean;
 import com.fq.po.MemberBean;
 import com.fq.po.UserBean;
 import com.fq.service.DrugSaleService;
+import com.fq.service.DrugService;
 import com.fq.util.BaseAction;
 import com.fq.util.ConstantUtils;
+import com.fq.util.DrugFile;
 import com.fq.util.PageModel;
 import com.opensymphony.xwork2.ModelDriven;
 /**
@@ -47,9 +49,12 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 	private Double price;
 	private String name;
 	private String json;
+	private String combogrid;
 	
 	@Autowired
 	private DrugSaleService drugSaleService;
+	@Autowired
+	private DrugService drugService;
 	private DrugSalesBean salesBean = new DrugSalesBean();
 	private DrugBean drugBean = salesBean.getDrugBean();
 	private UserBean userBean = salesBean.getUserBean();
@@ -75,7 +80,26 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 		request.put("page", page);
 		return "showSale";
 	}
+	/**
+	 * 剂型、单位、类别
+	 */
+	public void before(){
+		List<DrugCategoryBean> drugCategoryList = drugService.selectCategory();
+		List<DrugUnitBean> drugUnitList = drugService.selectUnit();
+		List<DosageformBean> dosageformList = drugService.selectForm();
+		
+		List<MemberBean> memberList = drugSaleService.selectMember();
+		List<UserBean> userList = drugSaleService.selectUser();
+		List<DrugBean> drugList = drugSaleService.selectDrug();
 
+		request.put("drugCategoryList", drugCategoryList);
+		request.put("drugUnitList", drugUnitList);
+		request.put("dosageformList", dosageformList);
+		
+		request.put("userList", userList);
+		request.put("memberList", memberList);
+		request.put("drugList", drugList);
+	}
 	/**
 	 * 跳转打印界面
 	 */
@@ -87,21 +111,9 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 	 * 跳转新增
 	 */
 	public String doaddSale() {
-		List<MemberBean> memberList = drugSaleService.selectMember();
-		List<UserBean> userList = drugSaleService.selectUser();
-		List<DrugBean> drugList = drugSaleService.selectDrug();
-		List<DrugCategoryBean> drugCategoryList = drugSaleService.selectCategory();
-		List<DrugUnitBean> drugUnitList = drugSaleService.selectUnit();
-		List<DosageformBean> dosageformList = drugSaleService.selectForm();
+		before();
 		saleCode = drugSaleService.selectCode();
-
 		request.put("saleCode", saleCode);
-		request.put("userList", userList);
-		request.put("memberList", memberList);
-		request.put("drugList", drugList);
-		request.put("drugCategoryList", drugCategoryList);
-		request.put("drugUnitList", drugUnitList);
-		request.put("dosageformList", dosageformList);
 		return "doadd";
 	}
 
@@ -112,19 +124,7 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 	 * @throws Exception
 	 */
 	public String addSale() {
-		List<UserBean> userList = drugSaleService.selectUser();
-		List<MemberBean> memberList = drugSaleService.selectMember();
-		List<DrugBean> drugList = drugSaleService.selectDrug();
-		List<DrugCategoryBean> drugCategoryList = drugSaleService.selectCategory();
-		List<DrugUnitBean> drugUnitList = drugSaleService.selectUnit();
-		List<DosageformBean> dosageformList = drugSaleService.selectForm();
-
-		request.put("userList", userList);
-		request.put("memberList", memberList);
-		request.put("drugList", drugList);
-		request.put("drugCategoryList", drugCategoryList);
-		request.put("drugUnitList", drugUnitList);
-		request.put("dosageformList", dosageformList);
+		before();
 		saleCode = drugSaleService.selectCode();
 		try {
 			drugSaleService.addSale(saleCode, userBean, drugBean, salesBean, time);
@@ -150,19 +150,7 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 	 */
 	public String editSale() {
 		DrugSalesBean bean1 = drugSaleService.selectById(id);
-		List<UserBean> userList = drugSaleService.selectUser();
-		List<MemberBean> memberList = drugSaleService.selectMember();
-		List<DrugBean> drugList = drugSaleService.selectDrug();
-		List<DrugCategoryBean> drugCategoryList = drugSaleService.selectCategory();
-		List<DrugUnitBean> drugUnitList = drugSaleService.selectUnit();
-		List<DosageformBean> dosageformList = drugSaleService.selectForm();
-
-		request.put("userList", userList);
-		request.put("memberList", memberList);
-		request.put("drugList", drugList);
-		request.put("drugCategoryList", drugCategoryList);
-		request.put("drugUnitList", drugUnitList);
-		request.put("dosageformList", dosageformList);
+		before();
 		if (null != bean1) {
 			request.put("sale", bean1);
 		}
@@ -173,19 +161,7 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 	 * 修改药品
 	 */
 	public String updateSale() {
-		List<UserBean> userList = drugSaleService.selectUser();
-		List<MemberBean> memberList = drugSaleService.selectMember();
-		List<DrugBean> drugList = drugSaleService.selectDrug();
-		List<DrugCategoryBean> drugCategoryList = drugSaleService.selectCategory();
-		List<DrugUnitBean> drugUnitList = drugSaleService.selectUnit();
-		List<DosageformBean> dosageformList = drugSaleService.selectForm();
-
-		request.put("userList", userList);
-		request.put("memberList", memberList);
-		request.put("drugList", drugList);
-		request.put("drugCategoryList", drugCategoryList);
-		request.put("drugUnitList", drugUnitList);
-		request.put("dosageformList", dosageformList);
+		before();
 		if (null != selectSaleByDrugcode()) {
 			drugSaleService.updateSale(salesBean, time);
 			return "show";
@@ -283,7 +259,15 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 		price = bean.getSalepeice();
 		return "ajax_verifyName";
 	}
-	
+	/**
+	 * 数据表格下拉
+	 */
+	public String comboGrid(){
+		combogrid = drugSaleService.comboGrid();
+		String path = ServletActionContext.getServletContext().getRealPath("\\/json");
+		DrugFile.print(path, combogrid);
+		return "ajax_combogrid";
+	}
 	/**
 	 * 跳转到统计界面
 	 */
@@ -406,6 +390,12 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 
 	public void setJson(String json) {
 		this.json = json;
+	}
+	public String getCombogrid() {
+		return combogrid;
+	}
+	public void setCombogrid(String combogrid) {
+		this.combogrid = combogrid;
 	}
 
 }

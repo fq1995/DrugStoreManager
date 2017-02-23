@@ -16,7 +16,7 @@ import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugPurchaseBean;
 import com.fq.po.DrugUnitBean;
 import com.fq.po.MemberBean;
-import com.fq.po.PurchaseStats;
+import com.fq.util.PurchaseStats;
 import com.fq.po.SupplierBean;
 import com.fq.po.UserBean;
 import com.fq.service.DrugPurchaseService;

@@ -3,11 +3,8 @@ package com.fq.dao;
 import java.util.Date;
 import java.util.List;
 
-import com.fq.po.DosageformBean;
 import com.fq.po.DrugBean;
-import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugSalesBean;
-import com.fq.po.DrugUnitBean;
 import com.fq.po.MemberBean;
 import com.fq.po.UserBean;
 import com.fq.util.PageModel;
@@ -32,12 +29,7 @@ public interface DrugSaleDAO {
 	
 	//根据ID查询
 	DrugSalesBean selectById(String id);
-	//查询类别
-	List<DrugCategoryBean> selectCategory();
-	//查询单位
-	List<DrugUnitBean> selectUnit();
-	//查询剂型
-	List<DosageformBean> selectForm();
+	
 	//查询药品
 	List<DrugBean> selectDrug();
 	//查询会员
@@ -52,5 +44,7 @@ public interface DrugSaleDAO {
 	Integer selectCode();
 	//统计
 	List<DrugSalesBean> stats();
+	//数据表格下拉
+	List<DrugBean> comboGrid();
 
 }

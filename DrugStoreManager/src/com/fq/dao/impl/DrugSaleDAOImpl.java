@@ -14,11 +14,8 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.fq.dao.DrugSaleDAO;
-import com.fq.po.DosageformBean;
 import com.fq.po.DrugBean;
-import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugSalesBean;
-import com.fq.po.DrugUnitBean;
 import com.fq.po.MemberBean;
 import com.fq.po.UserBean;
 import com.fq.util.BaseDAO;
@@ -130,27 +127,6 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 	}
 
 	@Override
-	public List<DrugCategoryBean> selectCategory() {
-		String hql ="from DrugCategoryBean";
-		List<DrugCategoryBean> drugCategoryList = (List<DrugCategoryBean>) hibernateTemplate.find(hql);
-		return drugCategoryList==null||drugCategoryList.size()<=0?null:drugCategoryList;
-	}
-
-	@Override
-	public List<DrugUnitBean> selectUnit() {
-		String hql = "from DrugUnitBean";
-		List<DrugUnitBean> drugUnitList = (List<DrugUnitBean>) hibernateTemplate.find(hql);
-		return drugUnitList==null||drugUnitList.size()<=0?null:drugUnitList;
-	}
-
-	@Override
-	public List<DosageformBean> selectForm() {
-		String hql = "from DosageformBean";
-		List<DosageformBean> dosageformList = (List<DosageformBean>) hibernateTemplate.find(hql);
-		return dosageformList==null||dosageformList.size()<=0?null:dosageformList;
-	}
-
-	@Override
 	public List<DrugBean> selectDrug() {
 		String hql = "from DrugBean";
 		List<DrugBean> drugList = (List<DrugBean>) hibernateTemplate.find(hql);
@@ -207,6 +183,13 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 	public List<DrugSalesBean> stats() {
 		String hql = "from DrugSalesBean order by salesVolume desc";
 		List<DrugSalesBean> list = (List<DrugSalesBean>) hibernateTemplate.find(hql);
+		return list;
+	}
+
+	@Override
+	public List<DrugBean> comboGrid() {
+		String hql = "from DrugBean order by drugName";
+		List<DrugBean> list = (List<DrugBean>) hibernateTemplate.find(hql);
 		return list;
 	}
 

@@ -16,9 +16,10 @@ import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugSalesBean;
 import com.fq.po.DrugUnitBean;
 import com.fq.po.MemberBean;
-import com.fq.po.SaleStats;
+import com.fq.util.SaleStats;
 import com.fq.po.UserBean;
 import com.fq.service.DrugSaleService;
+import com.fq.util.DrugCombogrid;
 import com.fq.util.PageModel;
 @Service("drugSaleService")
 public class DrugSaleServiceImpl implements DrugSaleService {
@@ -63,21 +64,6 @@ public class DrugSaleServiceImpl implements DrugSaleService {
 	@Override
 	public DrugSalesBean selectById(String id) {
 		return drugSaleDao.selectById(id);
-	}
-
-	@Override
-	public List<DrugCategoryBean> selectCategory() {
-		return drugSaleDao.selectCategory();
-	}
-
-	@Override
-	public List<DrugUnitBean> selectUnit() {
-		return drugSaleDao.selectUnit();
-	}
-
-	@Override
-	public List<DosageformBean> selectForm() {
-		return drugSaleDao.selectForm();
 	}
 
 	@Override
@@ -136,6 +122,32 @@ public class DrugSaleServiceImpl implements DrugSaleService {
 				list2.add(new SaleStats(list.get(i).getSalesVolume(),list.get(i).getDrugBean().getDrugName()));
 			}
 		}
+		ObjectMapper mapper = new ObjectMapper();  
+		try {
+			json = mapper.writeValueAsString(list2);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}  
+		return json;
+	}
+
+	@Override
+	public String comboGrid() {
+		String json = null;
+		List<DrugBean> list = drugSaleDao.comboGrid(); 
+		List<DrugCombogrid> list2 = new ArrayList<>();
+		for(int i = 0;i<list.size();i++){
+			list2.add(new DrugCombogrid(list.get(i).getDrugId(),
+										list.get(i).getDrugCode(), 
+										list.get(i).getDrugName(), 
+										list.get(i).getDosageformBean().getDosageform(), 
+										list.get(i).getDrugUnitBean().getUnitname(), 
+										list.get(i).getDrugCategoryBean().getCategory(), 
+										list.get(i).getSalepeice(),
+										list.get(i).getApprovalNumber(), 
+										list.get(i).getManufacturer()));
+		}
+		
 		ObjectMapper mapper = new ObjectMapper();  
 		try {
 			json = mapper.writeValueAsString(list2);
