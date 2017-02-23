@@ -17,8 +17,33 @@
 <script type="text/javascript" src="<%=basePath%>js/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
-<script src="<%=basePath%>js/drugmanager_operation.js" type="text/javascript" charset="utf-8"></script>
-
+<script type="text/javascript">
+$(function(){
+	//清空
+	$("#clear").click(function(){
+		//未实现列表清空
+		
+		/* if($("#dosageformId").find("option:selected").text() != null){
+			$("#dosageformId").append("<option value=''>"+'请选择剂型'+"</option>");
+		}
+		if($("#unitnameId").find("option:selected").text() != null){
+			$("#unitnameId").append("<option value=''>"+'请选择单位'+"</option>");
+		}
+		if($("#categoryId").find("option:selected").text() != null){
+			$("#categoryId").append("<option value=''>"+'请选择类别'+"</option>");
+		}
+		$("#dosageformId").find("option[text='']").attr("selected",true);
+		$("#unitnameId").find("option[text='']").attr("selected",true);
+		$("#categoryId").find("option[text='']").attr("selected",true); */
+		
+		
+		$("#drugName").val('');
+		$("#manufacturer").val('');
+		$("#modifyTime").val('');
+		$("#modifier").val('');
+	});
+})
+</script>
 <style type="text/css">
 	th,td  
 	{  
@@ -47,7 +72,7 @@
 	            <input value="${drugName }" name="drugName" id="drugName" style="width:180px" type="text" class="form-control" placeholder="请输入药品名" >
 	            
 	            <span class="input-group-addon">剂型</span>
-	            <select class="form-control" style="width:200px;height:34px" name="dosageformBean.dosageformId">
+	            <select class="form-control" style="width:200px;height:34px" name="dosageformBean.dosageformId" id="dosageformId">
 	            		<c:choose>
 	            			<c:when test="${dosageform.dosageformId eq null }">
 	            				<option value="">请选择剂型</option>
@@ -63,7 +88,7 @@
 				</select>
 	            
 	            <span class="input-group-addon">单位</span>
-	            <select class="form-control" style="width:200px;height:34px" name="drugUnitBean.unitnameId">
+	            <select class="form-control" style="width:200px;height:34px" name="drugUnitBean.unitnameId" id="unitnameId">
 						<c:choose>
 	            			<c:when test="${unit.unitnameId eq null }">
 	            				<option value="">请选择单位</option>
@@ -79,7 +104,7 @@
 				</select>
 	            
 	            <span class="input-group-addon">类别</span>
-	            <select class="form-control" style="width:200px;height:34px"  name="drugCategoryBean.categoryId">
+	            <select class="form-control" style="width:200px;height:34px"  name="drugCategoryBean.categoryId" id="categoryId">
 						<c:choose>
 	            			<c:when test="${category.categoryId eq null }">
 	            				<option value="">请选择类别</option>
@@ -107,8 +132,9 @@
 	            <span class="input-group-addon">修改人</span>
 	            <input id="modifier" name="modifier" value="${modifier }" style="width:180px" type="text" class="form-control" value="${modifier }" placeholder="请输入修改人">
 	            
-	            <input style="width:180px;margin-left:50px" type="submit" class="form-control btn btn-info btn-sm" placeholder="twitterhandle" id="select" value="查询">
+	            <input style="width:130px;margin-left:50px" type="submit" class="form-control btn btn-info btn-sm" placeholder="twitterhandle" id="select" value="查询">
 	            
+	            <input style="width:130px;margin-left:20px" type="button" class="form-control btn btn-info btn-sm" placeholder="twitterhandle" id="clear" value="清空">
 	        </div>
 	        
 	      
