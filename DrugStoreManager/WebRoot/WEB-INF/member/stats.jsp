@@ -32,7 +32,7 @@ $(function() {
 			  // 路径配置
 		        require.config({
 		            paths: {
-		                echarts: 'http://echarts.baidu.com/build/dist'
+		                echarts: '${pageContext.request.contextPath}/js/echarts/build/dist'
 		            }
 		        });
 		        
