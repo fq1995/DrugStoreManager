@@ -48,16 +48,30 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 	public void addSale(Integer saleCode, UserBean userBean, DrugBean drugBean, DrugSalesBean bean, String time) throws Exception {
 //		drugBean = bean.getDrugBean();
 //		userBean = bean.getUserBean();
+		Session session=sessionFactory.getCurrentSession();
+		//设置会员积分为成交价格取整
 		MemberBean mbean = bean.getMemberBean();
+		Integer salesVolume = bean.getSalesVolume();
+		if(null != mbean && null != salesVolume){
+			String suppliertel = mbean.getSuppliertel();
+			MemberBean member = selectSaleByTel(suppliertel); 
+			Double d = Math.floor(bean.getDrugBean().getSalepeice()) ;
+			member.setIntegration(Integer.parseInt(new java.text.DecimalFormat("0").format(d))*salesVolume);
+			session.update(member);
+		}
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = sdf.parse(time);
 		bean.setSalesDate(date);
 		bean.setSalesCode((++saleCode).toString());
 		bean.setSalesId(UUIDBuild.getUUID());
-		Session session=sessionFactory.getCurrentSession();
+		
+		/*session.clear();
+		session.merge(bean);*/
+		session.evict(mbean);
 		session.clear();
-		session.merge(bean);
+		session.save(bean);
+		session.flush();
 	}
 	
 
