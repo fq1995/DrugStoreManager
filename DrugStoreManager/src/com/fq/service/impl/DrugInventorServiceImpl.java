@@ -112,12 +112,12 @@ public class DrugInventorServiceImpl implements DrugInventorService {
 		List<InvenStats> list2 = new ArrayList<>();
 		if(list.size() >= 10){
 			for(int i = 0; i<10;i++){
-				list2.add(new InvenStats(list.get(i).getDrugBean().getDrugName(),list.get(i).getStocknumber()));
+				list2.add(new InvenStats(list.get(i).getDrugBean().getDrugName(),list.get(i).getStocknumber(),list.get(i).getStocklimit()));
 			}
 		}
 		if(list.size() < 10){
 			for(int i = 0; i<list.size();i++){
-				list2.add(new InvenStats(list.get(i).getDrugBean().getDrugName(),list.get(i).getStocknumber()));
+				list2.add(new InvenStats(list.get(i).getDrugBean().getDrugName(),list.get(i).getStocknumber(),list.get(i).getStocklimit()));
 			}
 		}
 		ObjectMapper mapper = new ObjectMapper();  

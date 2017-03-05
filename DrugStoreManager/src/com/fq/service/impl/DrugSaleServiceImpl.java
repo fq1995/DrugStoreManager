@@ -87,8 +87,8 @@ public class DrugSaleServiceImpl implements DrugSaleService {
 	}
 
 	@Override
-	public void addSale(Integer saleCode, UserBean userBean, DrugBean drugBean, DrugSalesBean bean, String time) throws Exception {
-		drugSaleDao.addSale(saleCode, userBean, drugBean, bean, time);
+	public void addSale(String tel, DrugSalesBean bean) throws Exception {
+		drugSaleDao.addSale(tel,bean);
 		
 	}
 
@@ -155,6 +155,12 @@ public class DrugSaleServiceImpl implements DrugSaleService {
 			e.printStackTrace();
 		}  
 		return json;
+	}
+
+	@Override
+	public void updateMember(String tel,DrugSalesBean bean) {
+		drugSaleDao.updateMember(tel,bean);
+		
 	}
 
 	

@@ -16,6 +16,7 @@
 $(function() {
 	var name = new Array();
 	var number = new Array();
+	var stocklimit = new Array();
 	$.ajax({
 		 url: 'inventor_stats.action',
 		 dataType: 'json',
@@ -24,6 +25,7 @@ $(function() {
 			 for(var i in data){
 				 name.push(data[i].drugName);
 				 number.push(data[i].stocknumber);
+				 stocklimit.push(data[i].stocklimit);
 			 } 
 
 			 
@@ -66,7 +68,7 @@ $(function() {
 		                    },
 		                    calculable : true,
 		                    legend: {
-		                        data:['库存']
+		                        data:['库存','下限']
 		                    },
 		                    xAxis : [
 		                        {
@@ -87,6 +89,23 @@ $(function() {
 		                            "name":"库存",
 		                            "type":"bar",
 		                            "data":number,
+//		                            "data":[30,100,100,100,100,120,200,200,200,200],
+		                             markPoint : {
+		                                data : [
+		                                    {type : 'max', name: '最大值'},
+		                                    {type : 'min', name: '最小值'}
+		                                ]
+		                            },
+		                            markLine : {
+		                                data : [
+		                                    {type : 'average', name: '平均值'}
+		                                ]
+		                            }
+		                        },
+		                        {
+		                            "name":"下限",
+		                            "type":"bar",
+		                            "data":stocklimit,
 //		                            "data":[30,100,100,100,100,120,200,200,200,200],
 		                             markPoint : {
 		                                data : [

@@ -6,7 +6,8 @@ package com.fq.util;
  */
 public class InvenStats {
 	private String drugName;
-	private Integer stocknumber;
+	private Integer stocknumber;//库存数量
+	private Integer stocklimit;//库存下限
 	public String getDrugName() {
 		return drugName;
 	}
@@ -19,13 +20,21 @@ public class InvenStats {
 	public void setStocknumber(Integer stocknumber) {
 		this.stocknumber = stocknumber;
 	}
-	public InvenStats(String drugName, Integer stocknumber) {
+	
+	public InvenStats(String drugName, Integer stocknumber, Integer stocklimit) {
 		super();
 		this.drugName = drugName;
 		this.stocknumber = stocknumber;
+		this.stocklimit = stocklimit;
 	}
 	public InvenStats() {
 		super();
+	}
+	public Integer getStocklimit() {
+		return stocklimit;
+	}
+	public void setStocklimit(Integer stocklimit) {
+		this.stocklimit = stocklimit;
 	}
 	
 	

@@ -31,7 +31,7 @@ public class DrugSalesBean  implements java.io.Serializable {
 
      private String salesId;
      private DrugBean drugBean;
-     private MemberBean memberBean;
+//     private MemberBean memberBean;
      private UserBean userBean;
      private String salesCode;
      private Double salepeice;
@@ -53,10 +53,10 @@ public class DrugSalesBean  implements java.io.Serializable {
     }
     
     /** full constructor */
-    public DrugSalesBean(String salesId, DrugBean drugBean, MemberBean memberBean, UserBean userBean, String salesCode, Double salepeice, Double memberprice, Integer salesVolume, Date salesDate, Float totalamount) {
+    public DrugSalesBean(String salesId, DrugBean drugBean, UserBean userBean, String salesCode, Double salepeice, Double memberprice, Integer salesVolume, Date salesDate, Float totalamount) {
         this.salesId = salesId;
         this.drugBean = drugBean;
-        this.memberBean = memberBean;
+//        this.memberBean = memberBean;
         this.userBean = userBean;
         this.salesCode = salesCode;
         this.salepeice = salepeice;
@@ -89,16 +89,7 @@ public class DrugSalesBean  implements java.io.Serializable {
     public void setDrugBean(DrugBean drugBean) {
         this.drugBean = drugBean;
     }
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-        @JoinColumn(name="MEMBER_ID")
-
-    public MemberBean getMemberBean() {
-        return this.memberBean;
-    }
-    
-    public void setMemberBean(MemberBean memberBean) {
-        this.memberBean = memberBean;
-    }
+	
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
         @JoinColumn(name="USER_ID")
 

@@ -212,6 +212,21 @@
  				alert("请输入修改人");
  				return false; 
  			}
+ 	        
+ 	       /*  else{
+ 				$.ajax({
+ 	 				url:'sale_addSale.action',
+ 	 				type:'POST',
+ 	 				data:{'tel':tel},
+ 	 				dataType:'json',
+ 	 				success:function(data){
+ 	 					 
+ 	 			     }  
+ 	 	  		});
+ 			} */
+ 			
+ 			
+ 			
  		});
  		
  	});
@@ -278,7 +293,7 @@
 				<li><label>销售单价</label><input name="drugBean.salepeice" type="text" id="salepeice" 
 					class="form-control" style="width:200px; display:inline" placeholder="请输入销售价格"/><i>必填</i></li>
 				<li><label>查询会员</label>
-					<input name="memberBean.suppliertel" type="text" id="suppliertel" 
+					<input name="suppliertel" type="text" id="suppliertel" 
 					class="form-control" style="width:200px; display:inline" placeholder="请输入客户电话"/><i>必填</i><i id="mess" style="color: red"></i></li>
 				<li><label>销售数量</label><input name="salesVolume" type="text" id="salesVolume"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入销售数量"/><i>必填</i></li>

@@ -35,7 +35,6 @@ public class MemberBean  implements java.io.Serializable {
      private Integer integration;
      private String suppliertel;
      private String address;
-     private Set<DrugSalesBean> drugSalesBeans = new HashSet<DrugSalesBean>(0);
 
 
     // Constructors
@@ -57,7 +56,7 @@ public class MemberBean  implements java.io.Serializable {
 	}
 
 	/** full constructor */
-    public MemberBean(String memberId, String memberCode, String memberName, String sex, String age, String memberLevel, Integer integration, String suppliertel, String address, Set<DrugSalesBean> drugSalesBeans) {
+    public MemberBean(String memberId, String memberCode, String memberName, String sex, String age, String memberLevel, Integer integration, String suppliertel, String address) {
         this.memberId = memberId;
         this.memberCode = memberCode;
         this.memberName = memberName;
@@ -67,7 +66,6 @@ public class MemberBean  implements java.io.Serializable {
         this.integration = integration;
         this.suppliertel = suppliertel;
         this.address = address;
-        this.drugSalesBeans = drugSalesBeans;
     }
 
    
@@ -163,15 +161,7 @@ public class MemberBean  implements java.io.Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="memberBean")
 
-    public Set<DrugSalesBean> getDrugSalesBeans() {
-        return this.drugSalesBeans;
-    }
-    
-    public void setDrugSalesBeans(Set<DrugSalesBean> drugSalesBeans) {
-        this.drugSalesBeans = drugSalesBeans;
-    }
    
 
 

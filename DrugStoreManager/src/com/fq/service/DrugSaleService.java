@@ -15,8 +15,7 @@ public interface DrugSaleService {
 
 	DrugSalesBean selectSaleByDrugcode(Integer code);
 
-	void addSale(Integer saleCode, UserBean userBean, DrugBean drugBean, DrugSalesBean bean, String time)
-			throws Exception;
+	void addSale(String tel, DrugSalesBean bean) throws Exception;
 
 	PageModel<DrugSalesBean> splitSale(Integer currPage, Integer pageSize, String keyword);
 
@@ -58,5 +57,9 @@ public interface DrugSaleService {
 	
 	//数据下拉表格
 	String comboGrid();
+	
+	//修改会员积分
+	void updateMember(String tel,DrugSalesBean bean);
+
 
 }

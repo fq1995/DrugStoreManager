@@ -5,8 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +24,7 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
-	@Resource
+	@Autowired
 	SessionFactory sessionFactory;
 	
 	@Override
@@ -45,33 +43,18 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 
 	
 	@Override
-	public void addSale(Integer saleCode, UserBean userBean, DrugBean drugBean, DrugSalesBean bean, String time) throws Exception {
-//		drugBean = bean.getDrugBean();
-//		userBean = bean.getUserBean();
+	public void addSale(String tel, DrugSalesBean bean) throws Exception {
 		Session session=sessionFactory.getCurrentSession();
-		//设置会员积分为成交价格取整
-		MemberBean mbean = bean.getMemberBean();
-		Integer salesVolume = bean.getSalesVolume();
-		if(null != mbean && null != salesVolume){
-			String suppliertel = mbean.getSuppliertel();
-			MemberBean member = selectSaleByTel(suppliertel); 
-			Double d = Math.floor(bean.getDrugBean().getSalepeice()) ;
-			member.setIntegration(Integer.parseInt(new java.text.DecimalFormat("0").format(d))*salesVolume);
-			session.update(member);
-		}
-		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = sdf.parse(time);
+		Date date = new Date();
+		String time = sdf.format(date);
+		date = sdf.parse(time);
 		bean.setSalesDate(date);
-		bean.setSalesCode((++saleCode).toString());
 		bean.setSalesId(UUIDBuild.getUUID());
-		
-		/*session.clear();
-		session.merge(bean);*/
-		session.evict(mbean);
+		bean.setUserBean(null);
+		updateMember(tel,bean); 
 		session.clear();
-		session.save(bean);
-		session.flush();
+		session.merge(bean);
 	}
 	
 
@@ -205,6 +188,19 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 		String hql = "from DrugBean order by drugName";
 		List<DrugBean> list = (List<DrugBean>) hibernateTemplate.find(hql);
 		return list;
+	}
+
+	@Override
+	public void updateMember(String tel,DrugSalesBean bean) {
+		//设置会员积分为成交价格取整
+				
+				if(null != tel && null != tel){
+					MemberBean member = selectSaleByTel(tel); 
+					Double d = Math.floor(bean.getDrugBean().getSalepeice()) ;
+					member.setIntegration(member.getIntegration()+Integer.parseInt(new java.text.DecimalFormat("0").format(d))*(bean.getSalesVolume()));
+					hibernateTemplate.update(member);
+				}
+				
 	}
 
 	

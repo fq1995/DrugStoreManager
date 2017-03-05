@@ -17,7 +17,7 @@ public interface DrugSaleDAO {
 	
 	DrugBean selectSaleByDrugId(String id);
 	
-	void addSale(Integer saleCode, UserBean userBean, DrugBean drugBean, DrugSalesBean bean,String time) throws Exception;
+	void addSale(String tel, DrugSalesBean bean) throws Exception;
 	
 	PageModel<DrugSalesBean> splitSale(Integer currPage, Integer pageSize, String keyword);
 	//批量查询
@@ -46,5 +46,7 @@ public interface DrugSaleDAO {
 	List<DrugSalesBean> stats();
 	//数据表格下拉
 	List<DrugBean> comboGrid();
+	//修改会员积分
+	void updateMember(String tel,DrugSalesBean bean);
 
 }
