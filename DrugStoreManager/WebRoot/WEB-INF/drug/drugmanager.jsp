@@ -136,7 +136,7 @@
 						<td>${drug.modifyTime }</td>
 						<td> ${drug.memo} </td>
 						<td>
-							<a name="picture" class="btn btn-primary btn-large theme-login" id="/picturepath/${drug.newName } " href="javascript:;">查看图片</a>
+							<a name="picture" class="btn2 btn2-primary btn-large theme-login" id="/picturepath/${drug.newName } " href="javascript:;">查看图片</a>
 						</td>
 					</tr>
 				</c:forEach>

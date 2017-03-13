@@ -66,7 +66,6 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 		if (null != keyword) {
 			request.put("keyword", keyword);
 		}
-
 		if (currPage == null) {
 			currPage = 1;
 		}
@@ -87,20 +86,9 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 		request.put("dosageformList", dosageformList);
 	}
 	/**
-	 * 跳转到多条件查询
+	 * 多条件查询回显数据
 	 */
-	public String doShowDrugByOptions() {
-		before();
-		return "showDrugByOptions";
-	}
-
-	/**
-	 * 多条件查询
-	 * 
-	 */
-	public String showDrugByOptions() {
-		before();
-
+	public void after(){
 		String drugName = (String) request.get("drugName");
 		request.put("drugName", drugName);
 
@@ -120,9 +108,23 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 		request.put("manufacturer", manufacturer);
 
 		Date modifyTime = (Date) request.get("modifyTime");
-
 		request.put("modifyTime", modifyTime);
+	}
+	/**
+	 * 跳转到多条件查询
+	 */
+	public String doShowDrugByOptions() {
+		before();
+		return "showDrugByOptions";
+	}
 
+	/**
+	 * 多条件查询
+	 * 
+	 */
+	public String showDrugByOptions() {
+		before();
+		after();
 		PageModel<DrugBean> page = drugService.splitDrug(currPage, ConstantUtils.PAGESIZE, drugBean.getDrugName(),
 				drugBean.getDosageformBean().getDosageformId(), drugBean.getDrugUnitBean().getUnitnameId(),
 				drugBean.getDrugCategoryBean().getCategoryId(), drugBean.getManufacturer(), drugBean.getModifyTime(),
@@ -148,9 +150,10 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 	public String addPicture(){
 		if(photo != null){
 			//利用程序建立upload文件
-			path=ServletActionContext.getServletContext().getRealPath("\\/upload");
-			System.out.println(path);
-			System.out.println(photoContentType);
+			/*String path=ServletActionContext.getServletContext().getRealPath("/upload");*/
+			String path= ConstantUtils.picturepath;
+			
+			request.put("path", path);
 			File fupload = new File(path);
 			if(!fupload.exists()){
 				fupload.mkdirs();
@@ -169,6 +172,8 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 				request.put("photoFileName", photoFileName);
 				request.put("newFileName", newFileName);
 				 
+				drugBean.setOldName(photoFileName);
+				drugBean.setNewName(newFileName);
 				mess="上传成功";
 			} catch (IOException e) {
 				mess="上传失敗"; 
@@ -189,41 +194,7 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 	public String addDrug() {
 		before();
 		if (null == selectDrugByName() && null == selectDrugByDrugcode()) {
-			
-			if(photo != null){
-				//利用程序建立upload文件
-				/*String path=ServletActionContext.getServletContext().getRealPath("/upload");*/
-				String path= ConstantUtils.picturepath;
-				
-				request.put("path", path);
-				File fupload = new File(path);
-				if(!fupload.exists()){
-					fupload.mkdirs();
-				}
-				//指定本地文件的名字
-				//重命名
-				if(photoFileName==null){
-					mess="上传文件失败";
-					return "doadd";
-				}
-				newFileName = StrUtils.getNewFileName()+photoFileName.substring(photoFileName.indexOf("."));
-				
-				File newFile = new File(fupload,newFileName);
-				try {
-					FileUtils.copyFile(photo, newFile);
-					request.put("photoFileName", photoFileName);
-					request.put("newFileName", newFileName);
-					 
-					drugBean.setOldName(photoFileName);
-					drugBean.setNewName(newFileName);
-					mess="上传成功";
-				} catch (IOException e) {
-					mess="上传失敗"; 
-					e.printStackTrace();
-				}
-			}
-			
-			
+			addPicture();
 			drugCode = drugService.select();
 			try {
 				drugService.addDrug(drugCode,drugBean, time);
@@ -266,38 +237,7 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 	public String updateDrug() {
 		before();
 		if (null == selectDrugByNameAndDrugId()) {
-			
-			if(photo != null){
-				//利用程序建立upload文件
-//				path=ServletActionContext.getServletContext().getRealPath("/upload");
-				path= ConstantUtils.picturepath;
-				request.put("path", path);
-				File fupload = new File(path);
-				if(!fupload.exists()){
-					fupload.mkdirs();
-				}
-				//指定本地文件的名字
-				//重命名
-				if(photoFileName==null){
-					mess="上传文件失败";
-					return "doadd";
-				}
-				newFileName = StrUtils.getNewFileName()+photoFileName.substring(photoFileName.indexOf("."));
-				
-				File newFile = new File(fupload,newFileName);
-				try {
-					FileUtils.copyFile(photo, newFile);
-					request.put("photoFileName", photoFileName);
-					request.put("newFileName", newFileName);
-					 
-					drugBean.setOldName(photoFileName);
-					drugBean.setNewName(newFileName);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			
-			
+			addPicture();
 			drugService.updateDrug(drugBean, time);
 			return "show";
 		}

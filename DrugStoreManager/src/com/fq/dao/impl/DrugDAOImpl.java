@@ -186,8 +186,8 @@ public class DrugDAOImpl extends BaseDAO<DrugBean> implements DrugDAO {
 			sb1.append(" and d.modifier   ='"+modifier+"'");
 			sb.append(" and d.modifier  ='"+modifier+"'");
 		}
-		System.out.println(sb1.toString());
-		System.out.println(sb.toString());
+	/*	System.out.println(sb1.toString());
+		System.out.println(sb.toString());*/
 		return super.split(sb.toString(), sb1.toString(), currPage, pageSize);
 	}
 
