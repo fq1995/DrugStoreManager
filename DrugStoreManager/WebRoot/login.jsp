@@ -14,6 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="css/styles.css" type="text/css" media="screen" rel="stylesheet" />
     <link href="css/jquery-ui-1.8.16.custom.css" rel="stylesheet">
     <script src="js/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
     <script src="js/jquery-ui-1.8.16.custom.min.js"></script>
     <script type="text/javascript" src="js/jquery.keyboard.extension-typing.js"></script>
     <link type="text/css" href="css/keyboard.css" rel="stylesheet" />
@@ -80,19 +81,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <p>
                     <label class="loginlabel" for="yanzheng">
                         验证码:</label>
-                    <span><input id="inputVerifyCode" class="logininput ui-keyboard-input ui-widget-content ui-corner-all" name="yanzheng" type="text" value="" onclick="JavaScript:this.value=''" style="width: 80px;" placeholder="请输入验证码"/></span>
+                    <span><input id="inputVerifyCode" class="logininput ui-keyboard-input ui-widget-content ui-corner-all" name="yanzheng" type="text" value="" style="width: 80px;" placeholder="请输入验证码"/></span>
                      <span><img id="verifyCode" src="validateImg" onclick="change()" style="width:100px ;height: 25px"/></span>
                      <img name="duihao4" alt="" src="images/yes.jpg" style="display:none"/>
                     <span id="tishi" style="width:40px;height:25px;color:red"></span>
                 </p>
                 <div id="an">
-                    <button  id="loginbtn" type="submit" class="positive" name="Submit"
+                    <button  id="loginbtn" type="submit" class="positive" name="Submit" onclick="saveUserInfo()" 
                     >
                         <img src="images/key.png" alt="" />登录</button>
                 <ul id="forgottenpassword">
                     <li class="boldtext">|</li>
                     <li>
-                        <input id="remember" type="checkbox" name="remember" id="rememberMe"><label for="rememberMe">记住我</label>&nbsp;<a href="register.jsp" style="text-decoration:none; cursor: hand;cursor: pointer;" id="register">还未注册</a></li>
+                        <input id="remember" type="checkbox" name="remember"><label for="rememberMe">记住我</label>&nbsp;<a href="register.jsp" style="text-decoration:none; cursor: hand;cursor: pointer;" id="register">还未注册</a></li>
                 </ul>
                 	<button style="display:inline-block" id="resetbtn" type="RESET" class="positive" name="Reset" style="width: 69px;" onclick="clean()">重置</button>
                 </div>
@@ -100,5 +101,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </form>
     </div>
 </div>
+<script type="text/javascript">
+//初始化页面时验证是否记住了密码
+$(document).ready(function() {
+    if ($.cookie("rmbUser") == "true") {
+        $("#remember").attr("checked", true);
+        $("#email").val($.cookie("email"));
+        $("#password").val($.cookie("password"));
+    }
+});
 
+function saveUserInfo() {
+	 //获取错误
+	   
+	 
+   if($('#remember').is(':checked')) {
+        var email = $("#email").val();
+        var password = $("#password").val();
+        $.cookie("rmbUser", "true", { expires: 7 }); // 存储一个带7天期限的 cookie
+        $.cookie("email", email, { expires: 7 }); // 存储一个带7天期限的 cookie
+        $.cookie("password", password, { expires: 7 }); // 存储一个带7天期限的 cookie
+    }
+    else {
+        $.cookie("rmbUser", "false", { expires: -1 });        // 删除 cookie
+        $.cookie("email", '', { expires: -1 });
+        $.cookie("password", '', { expires: -1 });
+    }
+}
+</script>
 </body>
