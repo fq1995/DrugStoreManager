@@ -306,7 +306,7 @@
 					class="form-control" style="width:200px; display:inline" placeholder="请输入销售价格"/><i>必填</i></li>
 				<li><label>查询会员</label>
 					<input name="suppliertel" type="text" id="suppliertel" 
-					class="form-control" style="width:200px; display:inline" placeholder="请输入客户电话"/><i>必填</i><i id="mess" style="color: red"></i></li>
+					class="form-control" style="width:200px; display:inline" placeholder="请输入客户电话"/><i></i><i id="mess" style="color: red"></i></li>
 				<li><label>销售数量</label><input name="salesVolume" type="text" id="salesVolume"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入销售数量"/><i>必填</i></li>
 				<li><label>销售金额</label><input name="totalamount" type="text" id="totalamount" 

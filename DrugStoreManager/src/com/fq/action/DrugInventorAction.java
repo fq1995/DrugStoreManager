@@ -140,8 +140,8 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 			inventorService.addInventor(stockCode, drugCode, drugBean, inventoriesBean, time);
 			return "show";
 		}
-		request.put("message", "药品名已被使用！");
-		request.put("message2", "药品编号已被使用！");
+		request.put("message", "药品已存在！");
+//		request.put("message2", "药品编号已被使用！");
 		return "addInventor";
 
 	}
