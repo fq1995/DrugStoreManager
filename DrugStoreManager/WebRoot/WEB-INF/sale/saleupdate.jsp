@@ -168,7 +168,6 @@
 			<input type="hidden" name="salesId" id="salesId" value="${sale.salesId }"/>
 			
 			<input type="hidden" name="drugBean.drugCode" id="drugCode" value="${sale.drugBean.drugCode }">
-			<input type="hidden" name="memberBean.memberCode" value="${sale.memberBean.memberCode }">
 			<input type="hidden" name="userBean.userCode" value="${sale.userBean.userCode }">
 			
 			
@@ -183,11 +182,11 @@
 					</c:forEach>
 					</select></li>
 				<li><label>查询会员</label>
-					<input name="memberBean.suppliertel" type="text" id="suppliertel" value="${sale.memberBean.suppliertel }"
+					<input name="tel" type="text" id="suppliertel" value="${tel}"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入客户电话"/><i>必填</i><i id="mess" style="color: red"></i>
 				</li>
 				
-				<li><label>销售单价</label><input name="salepeice" type="text" id="salepeice" value="${sale.salepeice }"
+				<li><label>销售单价</label><input name="drugBean.salepeice" type="text" id="salepeice" value="${sale.salepeice }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入销售价格"/><i>必填</i></li>
 				<li><label>销售数量</label><input name="salesVolume" type="text" id="salesVolume" value="${sale.salesVolume }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入销售数量"/><i>必填</i></li>

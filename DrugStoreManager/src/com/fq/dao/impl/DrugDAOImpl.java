@@ -96,7 +96,22 @@ public class DrugDAOImpl extends BaseDAO<DrugBean> implements DrugDAO {
 	}
 
 	@Override
-	public void updateDrug(DrugBean drugBean, String time) {
+	public void updateDrug(DrugBean drugBean2, String time) {
+		DrugBean drugBean =  (DrugBean) getHibernateTemplate().get(DrugBean.class, drugBean2.getDrugId());
+		drugBean.setApprovalNumber(drugBean2.getApprovalNumber());
+		drugBean.setDosageformBean(drugBean2.getDosageformBean());
+		drugBean.setDrugCategoryBean(drugBean2.getDrugCategoryBean());
+		drugBean.setDrugCode(drugBean2.getDrugCode());
+		drugBean.setDrugId(drugBean2.getDrugId());
+		drugBean.setDrugName(drugBean2.getDrugName());
+		drugBean.setDrugUnitBean(drugBean2.getDrugUnitBean());
+		drugBean.setManufacturer(drugBean2.getManufacturer());
+		drugBean.setMemberprice(drugBean2.getMemberprice());
+		drugBean.setMemo(drugBean2.getMemo());
+		drugBean.setModifier(drugBean2.getModifier());
+		drugBean.setSalepeice(drugBean2.getSalepeice());
+		drugBean.setOldName(drugBean2.getOldName());
+		drugBean.setNewName(drugBean2.getNewName());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date=null;
 		try {
@@ -220,6 +235,22 @@ public class DrugDAOImpl extends BaseDAO<DrugBean> implements DrugDAO {
 		List<Integer> list = (List<Integer>) hibernateTemplate.find(hql);
 		Integer drugCode = list.get(0);
 		return drugCode;
+	}
+
+	@Override
+	public DrugBean selectDrugByName(String drugname, String dosageform, 
+			String unitname, String category,
+			String approvalNumber, String manufacturer) {
+		String hql ="from DrugBean where drugName=? "
+				+ " and dosageformBean.dosageformId = ?"
+				+ " and drugUnitBean.unitnameId = ?"
+				+ " and drugCategoryBean.categoryId = ?"
+				+ " and approvalNumber = ? "
+				+ " and manufacturer = ?"
+				+ " and status=1";
+		List<DrugBean> drugList = (List<DrugBean>) hibernateTemplate.find(hql, 
+				drugname,dosageform,unitname,category,approvalNumber,manufacturer);
+		return drugList==null||drugList.size()<=0?null:drugList.get(0);
 	}
 
 }

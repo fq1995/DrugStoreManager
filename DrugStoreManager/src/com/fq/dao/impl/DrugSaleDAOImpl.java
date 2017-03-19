@@ -1,5 +1,6 @@
 package com.fq.dao.impl;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,6 +18,7 @@ import com.fq.po.DrugSalesBean;
 import com.fq.po.MemberBean;
 import com.fq.po.UserBean;
 import com.fq.util.BaseDAO;
+import com.fq.util.ConstantUtils;
 import com.fq.util.PageModel;
 import com.fq.util.UUIDBuild;
 @Repository("drugSaleDAO")
@@ -44,24 +46,32 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 	
 	@Override
 	public void addSale(String tel, DrugSalesBean bean) throws Exception {
-		Session session=sessionFactory.getCurrentSession();
+//		DrugSalesBean bean = hibernateTemplate.get(DrugSalesBean.class, bean2.getSalesId());
+		DrugBean drug = hibernateTemplate.get(DrugBean.class, bean.getDrugBean().getDrugId());
+		drug.setSalepeice(bean.getDrugBean().getSalepeice());
+		BigDecimal   b   =   new   BigDecimal(drug.getSalepeice()*ConstantUtils.discount); 
+		Double   f1   =   b.setScale(1,   BigDecimal.ROUND_HALF_UP).doubleValue();  
+		drug.setMemberprice(f1); 
+		UserBean user = hibernateTemplate.get(UserBean.class, bean.getUserBean().getUserId());
+		bean.setDrugBean(drug);
+		bean.setUserBean(user);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		String time = sdf.format(date);
 		date = sdf.parse(time);
 		bean.setSalesDate(date);
 		bean.setSalesId(UUIDBuild.getUUID());
-		bean.setUserBean(null);
+		bean.setSalepeice(bean.getDrugBean().getSalepeice());
+		bean.setMemberprice(f1);
 		updateMember(tel,bean); 
-		session.clear();
-		session.merge(bean);
+		hibernateTemplate.merge(bean);
 	}
 	
 
 	@Override
 	public PageModel<DrugSalesBean> splitSale(Integer currPage, Integer pageSize, String keyword) {
 		String hql_count = "select count(*) from DrugSalesBean where drugBean.drugName like :keyword";
-		String hql = "from DrugSalesBean where drugBean.drugName like :keyword ";
+		String hql = "from DrugSalesBean where drugBean.drugName like :keyword order by salesDate desc";
 		return super.split(hql, hql_count, currPage, pageSize,keyword);
 	}
 
@@ -89,7 +99,10 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 	}
 
 	@Override
-	public void updateSale(DrugSalesBean bean, String time) {
+	public void updateSale(DrugSalesBean bean2, String time) {
+		DrugSalesBean bean = hibernateTemplate.get(DrugSalesBean.class, bean2.getSalesId());
+		DrugBean drugbean = hibernateTemplate.get(DrugBean.class, bean2.getDrugBean().getDrugId());
+		UserBean userBean = hibernateTemplate.get(UserBean.class, bean2.getUserBean().getUserId());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date=null;
 		try {
@@ -98,21 +111,18 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 			System.out.println("时间转换错误");
 			e.printStackTrace();
 		}
+		drugbean.setSalepeice(bean2.getDrugBean().getSalepeice());
+		BigDecimal   b   =   new   BigDecimal(drugbean.getSalepeice()*ConstantUtils.discount); 
+		Double   f1   =   b.setScale(1,   BigDecimal.ROUND_HALF_UP).doubleValue();  
+		drugbean.setMemberprice(f1);
+		bean.setDrugBean(drugbean);
 		bean.setSalesDate(date);
-		
-		Session session=sessionFactory.getCurrentSession();
-		session.clear();
-		DrugSalesBean dsBean = (DrugSalesBean) session.get(DrugSalesBean.class, bean.getSalesId());
-		dsBean = bean; 
-		dsBean.setDrugBean(bean.getDrugBean());
-		getHibernateTemplate().saveOrUpdate(dsBean);
-		session.flush();
-		/*
-		dsBean.setMemberBean(bean.getMemberBean()); 
-		dsBean.setMemberprice(bean.getMemberprice());
-		dsBean.setSalepeice(bean.getSalepeice());
-		dsBean.setUserBean(bean.getUserBean());*/
-		/*getHibernateTemplate().merge(dsBean);*/
+		bean.setMemberprice(f1);
+		bean.setSalepeice(bean2.getDrugBean().getSalepeice());
+		bean.setSalesVolume(bean2.getSalesVolume());
+		bean.setTotalamount(bean2.getTotalamount());
+		bean.setUserBean(userBean);
+		getHibernateTemplate().merge(bean);
 		
 	}
 	
@@ -193,14 +203,14 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 	@Override
 	public void updateMember(String tel,DrugSalesBean bean) {
 		//设置会员积分为成交价格取整
-				
-				if(null != tel && null != tel){
+				if(null != tel && !"".equals(tel) && null != bean){
 					MemberBean member = selectSaleByTel(tel); 
 					Double d = Math.floor(bean.getDrugBean().getSalepeice()) ;
-					member.setIntegration(member.getIntegration()+Integer.parseInt(new java.text.DecimalFormat("0").format(d))*(bean.getSalesVolume()));
-					hibernateTemplate.update(member);
+					if(null!=member){
+						member.setIntegration(member.getIntegration()+Integer.parseInt(new java.text.DecimalFormat("0").format(d))*(bean.getSalesVolume()));
+						hibernateTemplate.update(member);
+					}
 				}
-				
 	}
 
 	

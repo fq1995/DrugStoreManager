@@ -134,7 +134,7 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 			System.out.println("时间转换错误");
 			e.printStackTrace();
 		}
-		return "addSale";
+		return doaddSale();
 
 	}
 
@@ -151,6 +151,8 @@ public class DrugSaleAction extends BaseAction implements ModelDriven<DrugSalesB
 	 * 编辑药品
 	 */
 	public String editSale() {
+		HttpServletRequest request2 = ServletActionContext.getRequest();
+		tel = (String) request2.getSession().getAttribute("tel");
 		DrugSalesBean bean1 = drugSaleService.selectById(id);
 		before();
 		if (null != bean1) {

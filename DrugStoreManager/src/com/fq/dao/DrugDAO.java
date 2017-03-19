@@ -49,6 +49,10 @@ DrugBean selectDrugByName(String drugname);
 	DosageformBean selectFormById(String id);
 	//查询药品编号
 	Integer select();
+
+	//查重
+	DrugBean selectDrugByName(String drugname, String dosageform, String unitname, String category,
+			String approvalNumber, String manufacturer);
 	
 	
 	

@@ -119,6 +119,12 @@ public class DrugServiceImpl implements DrugService {
 	public Integer select() {
 		return drugDAO.select();
 	}
+
+	@Override
+	public DrugBean selectDrugByName(String drugname, String dosageform, String unitname, String category,
+			String approvalNumber, String manufacturer) {
+		return drugDAO.selectDrugByName(drugname,dosageform,unitname,category,approvalNumber,manufacturer);
+	}
 	
 	
 

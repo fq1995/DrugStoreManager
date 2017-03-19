@@ -182,7 +182,7 @@
 			<result name="print">/WEB-INF/sale/saleprint.jsp</result>
 			<result name="doadd">/WEB-INF/sale/saleadd.jsp</result>
 			<result name="showSale">/WEB-INF/sale/salemanager.jsp</result>
-			<result name="addSale">/WEB-INF/sale/saleadd.jsp</result>
+			<!-- <result name="addSale">/WEB-INF/sale/saleadd.jsp</result> -->
 			<result name="show" type="redirectAction">sale_showSale.action?currPage=1
 			</result>
 			<result name="edit">/WEB-INF/sale/saleupdate.jsp</result>

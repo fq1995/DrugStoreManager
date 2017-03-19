@@ -107,7 +107,9 @@
 				$("#add").attr("disabled", false);
 			}
 		});
-
+		$("#drugName").focus(function() {
+			$("#message").html("");
+		});
 		//药品名非空
 		$("#drugName").blur(function() {
 			$("#message").html("");

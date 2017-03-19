@@ -81,6 +81,36 @@ public class DosageformBean  implements java.io.Serializable {
     public void setDrugBeans(Set<DrugBean> drugBeans) {
         this.drugBeans = drugBeans;
     }
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((dosageformId == null) ? 0 : dosageformId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof DosageformBean)) {
+			return false;
+		}
+		DosageformBean other = (DosageformBean) obj;
+		if (dosageformId == null) {
+			if (other.dosageformId != null) {
+				return false;
+			}
+		} else if (!dosageformId.equals(other.dosageformId)) {
+			return false;
+		}
+		return true;
+	}
    
 
 

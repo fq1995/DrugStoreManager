@@ -14,6 +14,8 @@ public interface DrugService {
 	List<DrugBean> show();
 
 	DrugBean selectDrugByName(String drugname);
+	
+	DrugBean selectDrugByName(String drugname, String dosageform, String unitname, String category, String approvalNumber, String manufacturer);
 
 	DrugBean selectDrugByDrugcode(Integer drugcode);
 

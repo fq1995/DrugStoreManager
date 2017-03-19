@@ -81,6 +81,36 @@ public class DrugUnitBean  implements java.io.Serializable {
     public void setDrugBeans(Set<DrugBean> drugBeans) {
         this.drugBeans = drugBeans;
     }
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((unitnameId == null) ? 0 : unitnameId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof DrugUnitBean)) {
+			return false;
+		}
+		DrugUnitBean other = (DrugUnitBean) obj;
+		if (unitnameId == null) {
+			if (other.unitnameId != null) {
+				return false;
+			}
+		} else if (!unitnameId.equals(other.unitnameId)) {
+			return false;
+		}
+		return true;
+	}
    
 
 

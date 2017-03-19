@@ -193,7 +193,7 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 	 */
 	public String addDrug() {
 		before();
-		if (null == selectDrugByName() && null == selectDrugByDrugcode()) {
+		if (null == selectDrugByName()) {
 			addPicture();
 			drugCode = drugService.select();
 			try {
@@ -204,8 +204,7 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 			}
 			return "show";
 		}
-		request.put("message", "药品名已被使用！");
-		request.put("message2", "药品编号已被使用！");
+		request.put("message", "药品已存在！");
 		return "addDrug";
 
 	}
@@ -223,10 +222,12 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 	 * 编辑药品
 	 */
 	public String editDrug() {
-		DrugBean drugBean1 = drugService.selectById(id);
-		before();
-		if (null != drugBean1) {
-			request.put("drug", drugBean1);
+		if(null!=id){
+			DrugBean drugBean1 = drugService.selectById(id);
+			before();
+			if (null != drugBean1) {
+				request.put("drug", drugBean1);
+			}
 		}
 		return "edit";
 	}
@@ -235,14 +236,16 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 	 * 修改药品
 	 */
 	public String updateDrug() {
-		before();
-		if (null == selectDrugByNameAndDrugId()) {
+//		before();
+		DrugBean bean = selectDrugByName();
+		if((null!=bean && bean.equals(drugBean)) || null==bean){
 			addPicture();
 			drugService.updateDrug(drugBean, time);
 			return "show";
+		}else{
+			request.put("message", "药品已存在！");
+			return editDrug();
 		}
-		request.put("message", "药品名已被使用！");
-		return editDrug();
 	}
 
 	/**
@@ -251,7 +254,17 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 	 * @return
 	 */
 	public DrugBean selectDrugByName() {
-		DrugBean bean = drugService.selectDrugByName(drugBean.getDrugName());
+		String dosageform = ServletActionContext.getRequest().getParameter("dosageform");
+		String unitname = ServletActionContext.getRequest().getParameter("unitname");
+		String category = ServletActionContext.getRequest().getParameter("category");
+		String approvalNumber = ServletActionContext.getRequest().getParameter("approvalNumber");
+		String manufacturer = ServletActionContext.getRequest().getParameter("dosageform");
+		DrugBean bean = drugService.selectDrugByName(drugBean.getDrugName(),
+				drugBean.getDosageformBean().getDosageformId(),
+				drugBean.getDrugUnitBean().getUnitnameId(),
+				drugBean.getDrugCategoryBean().getCategoryId(),
+				drugBean.getApprovalNumber(),
+				drugBean.getManufacturer());
 		return bean;
 	}
 
@@ -279,8 +292,14 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 	 * ajax校验药品名是否可用
 	 */
 	public String validateName() {
+		name = ServletActionContext.getRequest().getParameter("name");
+		String dosageform = ServletActionContext.getRequest().getParameter("dosageform");
+		String unitname = ServletActionContext.getRequest().getParameter("unitname");
+		String category = ServletActionContext.getRequest().getParameter("category");
+		String approvalNumber = ServletActionContext.getRequest().getParameter("approvalNumber");
+		String manufacturer = ServletActionContext.getRequest().getParameter("dosageform");
 		if(null != name){
-			DrugBean bean = drugService.selectDrugByName(name);
+			DrugBean bean = drugService.selectDrugByName(name,dosageform,unitname,category,approvalNumber,manufacturer);
 			if (null == bean) {
 				mess = "药品名可用";
 			} else if (null != bean) {

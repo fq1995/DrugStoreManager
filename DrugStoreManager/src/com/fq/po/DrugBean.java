@@ -293,6 +293,84 @@ public class DrugBean  implements java.io.Serializable {
     public void setDrugSalesBeans(Set<DrugSalesBean> drugSalesBeans) {
         this.drugSalesBeans = drugSalesBeans;
     }
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((approvalNumber == null) ? 0 : approvalNumber.hashCode());
+		result = prime * result + ((dosageformBean == null) ? 0 : dosageformBean.hashCode());
+		result = prime * result + ((drugCategoryBean == null) ? 0 : drugCategoryBean.hashCode());
+		result = prime * result + ((drugId == null) ? 0 : drugId.hashCode());
+		result = prime * result + ((drugName == null) ? 0 : drugName.hashCode());
+		result = prime * result + ((drugUnitBean == null) ? 0 : drugUnitBean.hashCode());
+		result = prime * result + ((manufacturer == null) ? 0 : manufacturer.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof DrugBean)) {
+			return false;
+		}
+		DrugBean other = (DrugBean) obj;
+		if (approvalNumber == null) {
+			if (other.approvalNumber != null) {
+				return false;
+			}
+		} else if (!approvalNumber.equals(other.approvalNumber)) {
+			return false;
+		}
+		if (dosageformBean == null) {
+			if (other.dosageformBean != null) {
+				return false;
+			}
+		} else if (!dosageformBean.equals(other.dosageformBean)) {
+			return false;
+		}
+		if (drugCategoryBean == null) {
+			if (other.drugCategoryBean != null) {
+				return false;
+			}
+		} else if (!drugCategoryBean.equals(other.drugCategoryBean)) {
+			return false;
+		}
+		if (drugId == null) {
+			if (other.drugId != null) {
+				return false;
+			}
+		} else if (!drugId.equals(other.drugId)) {
+			return false;
+		}
+		if (drugName == null) {
+			if (other.drugName != null) {
+				return false;
+			}
+		} else if (!drugName.equals(other.drugName)) {
+			return false;
+		}
+		if (drugUnitBean == null) {
+			if (other.drugUnitBean != null) {
+				return false;
+			}
+		} else if (!drugUnitBean.equals(other.drugUnitBean)) {
+			return false;
+		}
+		if (manufacturer == null) {
+			if (other.manufacturer != null) {
+				return false;
+			}
+		} else if (!manufacturer.equals(other.manufacturer)) {
+			return false;
+		}
+		return true;
+	}
    
 
 }
