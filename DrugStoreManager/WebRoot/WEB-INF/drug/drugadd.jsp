@@ -112,38 +112,18 @@
 		$("#drugName").blur(function() {
 			$("#message").html("");
 			var name = $("input[name='drugName']").val();
-			$.ajax({
-				url : 'drug_validateName.action',
-				type : 'POST',
-				data : {
-					'name' : name
-				},
-				dataType : 'json',
-				success : function(data) {
-					if ($.trim(name) == "" || name.length == 0) {
-						$("#drugName").css("background-color", "#FFB9B9");
-						$("#add").attr("disabled", true);
-					}
-					/* else if ("药品名可用" == data) {
-						$("#drugName").css("background-color", "");
-						$("#add").attr("disabled", false);
-						$("#message").css("color","green");
-						$("#message").html("药品名可用");
-					} else if ("药品名不可用" == data) {
-						$("#message").css("color","red");
-						$("#message").html("该药品已存在");
-						$("#add").attr("disabled", true);
-						$("#drugName").css("background-color", "#FFB9B9");
-					} 
-					 */
-					else {
-						$("#message").css("color","red");
-						$("#message").html("药品名不可为空");
-					}
-				},
-				error : function(data) {
-				}
-			});
+			if ($.trim(name) == "" || name.length == 0) {
+				$("#drugName").css("background-color", "#FFB9B9");
+				$("#message").css("color","red");
+				$("#message").html("药品名不可为空");
+				$("#add").attr("disabled", true);
+			}else {
+				$("#drugName").css("background-color", "");
+				$("#message").css("color","");
+				$("#message").html("");
+				$("#add").attr("disabled", false);
+			};
+	
 
 		});
 
@@ -187,6 +167,8 @@
  	 			var unitname = $("#unitname").val(); 
  	 			var category = $("#category").val(); 
  	 			var salepeice = $("#salepeice").val(); 
+ 	 			var approvalNumber = $("#approvalNumber").val();
+ 	 			var manufacturer = $("#manufacturer").val();
  	 			var reg = /^[0-9].*$/;
  	 			if($.trim(name) == "" || name.length == 0){
  	 				alert("请输入药品名");
@@ -206,6 +188,30 @@
  	 			}else if($.trim(pass) == "" || pass.length == 0){
  	 				alert("请输入修改人");
  	 				return false;
+ 	 			}else{
+ 	 				$.ajax({
+ 	 					url : 'drug_validateName.action',
+ 	 					type : 'POST',
+ 	 					data : {
+ 	 						'name' : name,
+ 	 						'dosageform' : dosageform,
+ 	 						'unitname' : unitname,
+ 	 						'category' : category,
+ 	 						'approvalNumber' : approvalNumber,
+ 	 						'manufacturer' : manufacturer
+ 	 					},
+ 	 					dataType : 'json',
+ 	 					success : function(data) {
+ 	 						if ("药品名可用" == data) {
+ 	 							return true;
+ 	 						} else if ("药品名不可用" == data) {
+ 	 							alert("该药品已存在");
+ 	 							return false;
+ 	 						}
+ 	 					},
+ 	 					error : function(data) {
+ 	 					}
+ 	 				});
  	 			}
  			}else if(check()){
  				$("#add").attr("disabled",false); 

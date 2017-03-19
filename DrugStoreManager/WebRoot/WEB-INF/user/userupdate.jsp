@@ -197,8 +197,8 @@
     <form action="user_updateUser.action" method="post">
     <input type="hidden" name="userId" value="${user.userId}">
     <input type="hidden" name="id" value="${user.userId}">
- 	<input type="hidden" name="roleBean.rolecode" value="${user.roleBean.rolecode}">
- 	<input type="hidden" name="roleBean.roleid" value="${user.roleBean.roleid}">
+ 	<%-- <input type="hidden" name="roleBean.rolecode" value="${user.roleBean.rolecode}">
+ 	<input type="hidden" name="roleBean.roleid" value="${user.roleBean.roleid}"> --%>
  	<input type="hidden" name="time">
         <ul class="forminfo">
         	<li><label>用户编号</label><input name="userCode" type="text" id="userCode" value="${user.userCode}"

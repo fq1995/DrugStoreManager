@@ -30,7 +30,7 @@
 			</result>
 		</action>
 
-		<!-- 角色管理 -->
+		<!-- 角色管理 
 
 		<action name="role_*" class="roleAction" method="{1}">
 			<result name="doadd">/WEB-INF/role/roleadd.jsp</result>
@@ -44,7 +44,7 @@
 			</result>
 		</action>
 
-		<!-- 权限管理 -->
+		权限管理 
 
 		<action name="per_*" class="permissionAction" method="{1}">
 			<result name="doaddPer">/WEB-INF/per/peradd.jsp</result>
@@ -57,7 +57,7 @@
 				<param name="root">mess</param>
 			</result>
 		</action>
-
+		-->
 		<!-- 员工管理 -->
 
 		<action name="emp_*" class="empAction" method="{1}">

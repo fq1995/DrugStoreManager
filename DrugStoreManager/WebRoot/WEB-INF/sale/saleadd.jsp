@@ -32,6 +32,18 @@
  	});
  	
  	$(function() {
+/*  		function funB(){
+ 			var g = $('#drugname').combogrid('grid');	// 获取数据表格对象
+	 		var r = g.datagrid('getSelected');	// 获取选择的行
+ 			if(null != r){
+	 			var salepeice = r.salepeice;
+	 			$("#salepeice").val(salepeice);
+ 			}
+ 			setTimeout(funB, 1000);
+ 		} */
+ 		
+ 		
+ 		
  		//返回
  		$("#return").click(function(){
  			location.href = "${pageContext.request.contextPath}/sale_showSale.action?currPage=1";
@@ -108,7 +120,7 @@
 		 	        $("#add").attr("disabled",true);   
  	 				alert("数量必须大于0");
  	 			}else{
- 	 				$("#totalamount").val(volue*saleprice);
+ 	 				$("#totalamount").val((volue*saleprice).toFixed(2));
  	 				$("#salesVolume").css("background-color",""); 
  	 				$("#add").attr("disabled",false);   
  	 			}

@@ -43,9 +43,8 @@
 	 var _menus = {"menus":[
 						{"menuid":"1","icon":"icon-sys","menuname":"基本操作",
 							"menus":[
-									{"menuid":"13","menuname":"用户管理","icon":"icon-users","url":"${pageContext.request.contextPath}/user_showUser.action?currPage=1"},
-									{"menuid":"14","menuname":"角色管理","icon":"icon-role","url":"${pageContext.request.contextPath}/role_showRole.action?currPage=1"},
-									{"menuid":"15","menuname":"权限设置","icon":"icon-set","url":"${pageContext.request.contextPath}/per_showPer.action?currPage=1"}
+									{"menuid":"13","menuname":"用户管理","icon":"icon-users","url":"${pageContext.request.contextPath}/user_showUser.action?currPage=1"}
+									
 								]
 						},{"menuid":"8","icon":"icon-sys","menuname":"员工管理",
 							"menus":[{"menuid":"21","menuname":"员工列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/emp_showEmp.action?currPage=1"}

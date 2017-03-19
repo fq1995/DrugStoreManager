@@ -31,7 +31,6 @@ public class UserBean  implements java.io.Serializable {
     // Fields    
 
      private String userId;
-     private RoleBean roleBean;
      private Integer userCode;
      private String username;
      private String password;
@@ -41,7 +40,6 @@ public class UserBean  implements java.io.Serializable {
      private String nickname;
      private Set<DrugPurchaseBean> drugPurchaseBeans = new HashSet<DrugPurchaseBean>(0);
      private Set<DrugSalesBean> drugSalesBeans = new HashSet<DrugSalesBean>(0);
-     private Set<ReturnsBean> returnsBeans = new HashSet<ReturnsBean>(0);
 
 
     // Constructors
@@ -57,9 +55,8 @@ public class UserBean  implements java.io.Serializable {
     }
     
     /** full constructor */
-    public UserBean(String userId, RoleBean roleBean, Integer userCode, String username, String password, Date addtime, Integer status,String email,  String nickname, Set<DrugPurchaseBean> drugPurchaseBeans, Set<DrugSalesBean> drugSalesBeans, Set<ReturnsBean> returnsBeans) {
+    public UserBean(String userId,  Integer userCode, String username, String password, Date addtime, Integer status,String email,  String nickname, Set<DrugPurchaseBean> drugPurchaseBeans, Set<DrugSalesBean> drugSalesBeans ) {
         this.userId = userId;
-        this.roleBean = roleBean;
         this.userCode = userCode;
         this.username = username;
         this.password = password;
@@ -69,7 +66,6 @@ public class UserBean  implements java.io.Serializable {
         this.nickname = nickname;
         this.drugPurchaseBeans = drugPurchaseBeans;
         this.drugSalesBeans = drugSalesBeans;
-        this.returnsBeans = returnsBeans;
     }
 
    
@@ -85,17 +81,7 @@ public class UserBean  implements java.io.Serializable {
     public void setUserId(String userId) {
         this.userId = userId;
     }
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-        @JoinColumn(name="ROLEID")
-
-    public RoleBean getRoleBean() {
-        return this.roleBean;
-    }
-    
-    public void setRoleBean(RoleBean roleBean) {
-        this.roleBean = roleBean;
-    }
-    
+	 
     @Column(name="USER_CODE", nullable=true)
 
     public Integer getUserCode() {
@@ -173,15 +159,7 @@ public class UserBean  implements java.io.Serializable {
     public void setDrugSalesBeans(Set<DrugSalesBean> drugSalesBeans) {
         this.drugSalesBeans = drugSalesBeans;
     }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="userBean")
-
-    public Set<ReturnsBean> getReturnsBeans() {
-        return this.returnsBeans;
-    }
-    
-    public void setReturnsBeans(Set<ReturnsBean> returnsBeans) {
-        this.returnsBeans = returnsBeans;
-    }
+ 
 
     @Column(name="email", length=100)
 
