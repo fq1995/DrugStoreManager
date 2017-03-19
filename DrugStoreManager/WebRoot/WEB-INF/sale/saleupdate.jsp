@@ -214,8 +214,8 @@
 	        	return false; 
 	        }else if($.trim(volue) == "" || volue.length == 0 ){
  	        $("#salesVolume").css("background-color","#FFB9B9"); 
- 	       alert("请输入销售数量");
- 	       return false;
+ 	        alert("请输入销售数量");
+ 	        return false;
 	 	}else if($.trim(totalamount) == "" || totalamount.length == 0 ){
 	        	$("#totalamount").css("background-color","#FFB9B9"); 
 	        	alert("请输入销售总价");
