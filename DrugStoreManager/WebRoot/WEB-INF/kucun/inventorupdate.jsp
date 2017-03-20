@@ -251,6 +251,8 @@
 					</select><i>必填</i></li>
 				<li><label>厂商</label><input name="drugBean.manufacturer" type="text" id="manufacturer" value="${inventor.drugBean.manufacturer }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入生产厂商"/><i></i></li>
+				<li><label>售价</label><input name="drugBean.salepeice" type="text" id="salepeice" value="${inventor.drugBean.salepeice }"
+					class="form-control" style="width:200px; display:inline" placeholder="请输入销售价格"/><i>必填</i></li>
 				<li><label>产品说明</label><input name="drugBean.memo" type="text" id="memo" value="${inventor.drugBean.memo }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入产品说明"/><i></i></li>
 				<li><label>批准文号</label><input name="drugBean.approvalNumber" type="text" id="approvalNumber" value="${inventor.drugBean.approvalNumber}"

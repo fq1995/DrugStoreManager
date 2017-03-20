@@ -29,6 +29,9 @@ public interface DrugInventorService {
 
 	// 修改
 	void updateInventor(InventoriesBean bean);
+	
+	// 修改
+	void updateInventor(InventoriesBean bean,String time);
 
 	// 根据ID查询
 	InventoriesBean selectById(String id);

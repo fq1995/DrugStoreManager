@@ -1,5 +1,6 @@
 package com.fq.dao.impl;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugUnitBean;
 import com.fq.po.InventoriesBean;
 import com.fq.util.BaseDAO;
+import com.fq.util.ConstantUtils;
 import com.fq.po.DrugBuy;
 import com.fq.util.PageModel;
 import com.fq.util.UUIDBuild;
@@ -55,6 +57,7 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		drugBean.setSalepeice(Bean.getDrugBean().getSalepeice());
 		drugBean.setDrugCode(++drugCode);
 		drugBean.setStatus("1");
 		drugBean.setModifyTime(date);
@@ -62,10 +65,9 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 		Bean.setDate(date);
 		Bean.setStockId(UUIDBuild.getUUID());
 		Session session=sessionFactory.getCurrentSession();
-		
 		drugBean.setDrugId(UUIDBuild.getUUID());
+		session.save(drugBean);
 		session.merge(Bean);
-//		hibernateTemplate.save(Bean);
 	}
 
 
@@ -101,6 +103,7 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 
 	@Override
 	public void updateInventor(InventoriesBean bean) {
+		getHibernateTemplate().merge(bean.getDrugBean());
 		getHibernateTemplate().merge(bean);
 
 	}
@@ -190,6 +193,28 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 		String hql = "from InventoriesBean i order by i.stocknumber";
 		List<InventoriesBean> list = (List<InventoriesBean>) hibernateTemplate.find(hql);
 		return list;
+	}
+
+	@Override
+	public void updateInventor(InventoriesBean Bean, String time) {
+		DrugBean drugBean = Bean.getDrugBean();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date =null;
+		try {
+			date = sdf.parse(time);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		drugBean.setSalepeice(Bean.getDrugBean().getSalepeice());
+		BigDecimal   b   =   new   BigDecimal(drugBean.getSalepeice()*ConstantUtils.discount); 
+		Double   f1   =   b.setScale(1,   BigDecimal.ROUND_HALF_UP).doubleValue();  
+		drugBean.setMemberprice(f1); 
+		drugBean.setStatus("1");
+		drugBean.setModifyTime(date);
+		Bean.setDate(date);
+		drugBean.setDrugId(UUIDBuild.getUUID());
+		getHibernateTemplate().merge(drugBean);
+		getHibernateTemplate().merge(Bean);
 	}
 
 	

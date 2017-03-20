@@ -26,6 +26,8 @@ public interface DrugInventorDAO {
 	void deleteAllInventor(List<InventoriesBean> list);
 	//修改
 	void updateInventor(InventoriesBean bean);
+	//修改
+	void updateInventor(InventoriesBean bean,String time);
 	//根据时间查询
 	List<InventoriesBean> selectByDate(Date date);
 	//根据ID查询

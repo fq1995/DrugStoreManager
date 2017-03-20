@@ -112,6 +112,7 @@
 					<th style="width:50px">类别</th>
 					<th >厂 家</th>
 					<th>批准文号</th>
+					<th>销售价</th>
 					<th>修改人</th>
 					<th>添加日期</th>
 					<th>产品说明</th>
@@ -132,6 +133,7 @@
 						<td>${drug.drugCategoryBean.category }</td>
 						<td>${drug.manufacturer }</td>
 						<td>${drug.approvalNumber }</td>
+						<td>${drug.salepeice }</td>
 						<td>${drug.modifier }</td>
 						<td>${drug.modifyTime }</td>
 						<td> ${drug.memo} </td>

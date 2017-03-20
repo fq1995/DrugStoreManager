@@ -133,16 +133,16 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 	 */
 	public String addInventor() {
 		before();
-		if (null == selectInventorByName() && null == selectInventorByDrugcode()) {
-			stockCode = inventorService.select();
-			drugCode = drugService.select();
-			
-			inventorService.addInventor(stockCode, drugCode, drugBean, inventoriesBean, time);
-			return "show";
+		stockCode = inventorService.select();
+		drugCode = drugService.select();
+		inventorService.addInventor(stockCode, drugCode, drugBean, inventoriesBean, time);
+		return "show";
+	/*	if (null == selectInventorByName() && null == selectInventorByDrugcode()) {
+		
 		}
 		request.put("message", "药品已存在！");
 //		request.put("message2", "药品编号已被使用！");
-		return "addInventor";
+		return "addInventor";*/
 
 	}
 	/**

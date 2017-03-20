@@ -129,6 +129,12 @@ public class DrugInventorServiceImpl implements DrugInventorService {
 		return json;
 	}
 
+	@Override
+	public void updateInventor(InventoriesBean bean, String time) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 
 }

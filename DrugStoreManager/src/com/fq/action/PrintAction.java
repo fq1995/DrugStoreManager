@@ -73,6 +73,9 @@ public class PrintAction implements RequestAware {
 	// 打印库存
 	public void printKucun() throws IOException {
 		Date date = (Date) request.get("date");
+		if(null==date){
+			date = new Date();
+		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 		String inputDate = sdf.format(date);
 		List<InventoriesBean> list = inventorService.selectByDate(date);
@@ -208,6 +211,9 @@ public class PrintAction implements RequestAware {
 	// 打印药品
 	public void printDrug() throws IOException {
 		date = new Date();
+		if(null==date){
+			date = new Date();
+		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 		String inputDate = sdf.format(date);
 		List<DrugBean> list = drugService.show();
@@ -319,6 +325,9 @@ public class PrintAction implements RequestAware {
 	// 打印员工
 	public void printEmp() throws IOException {
 		date = new Date();
+		if(null==date){
+			date = new Date();
+		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 		String inputDate = sdf.format(date);
 		List<EmployeeBean> list = empService.show();
@@ -426,6 +435,9 @@ public class PrintAction implements RequestAware {
 	// 打印用户
 	public void printUser() throws IOException {
 		date = new Date();
+		if(null==date){
+			date = new Date();
+		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 		String inputDate = sdf.format(date);
 		List<UserBean> list = userService.show();
@@ -506,6 +518,9 @@ public class PrintAction implements RequestAware {
 	// 打印供货商
 	public void printSupplier() throws IOException {
 		date = new Date();
+		if(null==date){
+			date = new Date();
+		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 		String inputDate = sdf.format(date);
 		List<SupplierBean> list = supplierService.show();
@@ -596,6 +611,9 @@ public class PrintAction implements RequestAware {
 	// 打印会员
 	public void printMember() throws IOException {
 		date = new Date();
+		if(null==date){
+			date = new Date();
+		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 		String inputDate = sdf.format(date);
 		List<MemberBean> list = memberService.show();
@@ -703,6 +721,9 @@ public class PrintAction implements RequestAware {
 	// 打印销售表
 	public void printSale() throws IOException {
 		Date date = (Date) request.get("date");
+		if(null==date){
+			date = new Date();
+		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 		String inputDate = sdf.format(date);
 		List<DrugSalesBean> list = drugSaleService.show(date);
@@ -767,7 +788,7 @@ public class PrintAction implements RequestAware {
 
 		nRow = sheet.getRow(rowNo++);
 		nCell = nRow.getCell(colNo);
-		nCell.setCellValue(inputDate.replaceFirst("-0", "-").replaceFirst("-", "年") + "月份用户表");
+		nCell.setCellValue(inputDate.replaceFirst("-0", "-").replaceFirst("-", "年") + "月份销售药品表");
 		rowNo++;
 
 		// 处理数据
@@ -837,6 +858,9 @@ public class PrintAction implements RequestAware {
 	// 打印进货表
 	public void printPurchase() throws IOException {
 		Date date = (Date) request.get("date");
+		if(null==date){
+			date = new Date();
+		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 		String inputDate = sdf.format(date);
 		List<DrugPurchaseBean> list = drugPurchaseService.show(date);
