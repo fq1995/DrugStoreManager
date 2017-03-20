@@ -30,6 +30,7 @@ $(function() {
 
 $(function() {
 	//验证码
+	
 	$("#inputVerifyCode").mouseleave(function() {
 		var verifyCode = $("#inputVerifyCode").val();
 		$.ajax({
@@ -110,11 +111,17 @@ $(function() {
 		$("#ti").html("");
 
 	});
-	$("#inputVerifyCode").focus(function() {
+	/*$("#inputVerifyCode").focus(function() {
 		$("#ti").html("");
 
+	});*/
+	$("#inputVerifyCode").focus(function() {
+		$("#ti").html("");
+		var verifyCode = $("#inputVerifyCode").val();
+		if (verifyCode.length > 0) {
+			$("#tishi").html("");
+		}
 	});
-	
 	
 });
 $(document).keypress(function(e) {

@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset=utf-8 />
-<title>药品添加</title>
+<title>库存药品添加</title>
 <link href="css/style1.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
@@ -29,11 +29,24 @@
  		$("#drugName").css("background-color",""); 
  		$("#modifier").css("background-color",""); 
  		$("#drugCode").css("background-color",""); 
+ 		$("#salepeice").css("background-color","");
  		
  		$("#dosageform").css("background-color",""); 
  		$("#unitname").css("background-color",""); 
  		$("#category").css("background-color",""); 
  		
+ 		
+ 		//售价
+ 		$("#salepeice").blur(function(){
+ 			var name = $("#salepeice").val(); 
+ 	        if($.trim(name) == "" || name.length == 0 ){
+ 	        	$("#salepeice").css("background-color","#FFB9B9"); 
+ 	        	$("#add").attr("disabled",true);   
+ 	        }else{
+ 	        	$("#salepeice").css("background-color",""); 
+ 	        	$("#add").attr("disabled",false);   
+ 	        }
+ 		});
  		//剂型
  		$("#dosageform").blur(function(){
  			var name = $("#dosageform").val(); 
@@ -146,8 +159,9 @@
  			var dosageform = $("#dosageform").val(); 
 	 		var unitname = $("#unitname").val(); 
 	 		var category = $("#category").val(); 
+	 		var salepeice = $("#salepeice").val();
 	 		var reg = /^\+?[1-9][0-9]*$/;
- 			if(!reg.test(number) || !reg.test(number) || $.trim(category) == "" || category.length == 0 || $.trim(unitname) == "" || unitname.length == 0 || $.trim(dosageform) == "" || dosageform.length == 0 || $.trim(name) == "" || name.length == 0 || $.trim(pass) == "" || pass.length == 0 || $.trim(number) == "" || number.length == 0 && $.trim(limit) == "" || limit.length == 0){
+ 			if(!reg.test(number) || !reg.test(number) || $.trim(category) == "" || category.length == 0 || $.trim(unitname) == "" || unitname.length == 0 || $.trim(dosageform) == "" || dosageform.length == 0 || $.trim(name) == "" || name.length == 0 || $.trim(pass) == "" || pass.length == 0 || $.trim(number) == "" || number.length == 0 && $.trim(limit) == "" || limit.length == 0 || $.trim(salepeice) == "" || salepeice.length == 0){
  				$("#add").attr("disabled",false);  
  				return false;
  			}else{
@@ -167,6 +181,7 @@
  	 			var dosageform = $("#dosageform").val(); 
  	 			var unitname = $("#unitname").val(); 
  	 			var category = $("#category").val(); 
+ 	 			var salepeice = $("#salepeice").val();
  	 			var reg = /^\+?[1-9][0-9]*$/;
  	 			if($.trim(name) == "" || name.length == 0){
  	 				alert("请输入药品名");
@@ -179,6 +194,9 @@
  	 				return false;
  	 			}else if($.trim(category) == "" || category.length == 0){
  	 				alert("请选择药品类别");
+ 	 				return false;
+ 	 			}else if($.trim(salepeice) == "" || salepeice.length == 0){
+ 	 				alert("请输入销售价格");
  	 				return false;
  	 			}else if($.trim(pass) == "" || pass.length == 0){
  	 				alert("请输入修改人");

@@ -10,194 +10,212 @@
 <html>
 <head>
 <meta charset=utf-8 />
-<title>药品修改</title>
+<title>库存药品修改</title>
 <link href="css/style1.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.min.js"></script>
 <script type="text/javascript">
- 	$(function(){
- 		var str = "";
- 		var mydate = new Date();
- 		str += mydate.getFullYear()+"-";
- 		str += mydate.getMonth()+1+"-";
- 		str += mydate.getDate();
- 		$("input[name='time']").val(str);
- 		
- 	});
- 	$(function() {
- 		$("#drugName").css("background-color",""); 
- 		$("#modifier").css("background-color",""); 
- 		$("#drugCode").css("background-color",""); 
- 		
- 		$("#dosageform").css("background-color",""); 
- 		$("#unitname").css("background-color",""); 
- 		$("#category").css("background-color",""); 
- 		
- 		//剂型
- 		$("#dosageform").blur(function(){
- 			var name = $("#dosageform").val(); 
- 	        if($.trim(name) == "" || name.length == 0 ){
- 	        	$("#dosageform").css("background-color","#FFB9B9"); 
- 	        	$("#add").attr("disabled",true);   
- 	        }else{
- 	        	$("#dosageform").css("background-color",""); 
- 	        	$("#add").attr("disabled",false);   
- 	        }
- 		});
- 		
- 		//单位
- 		$("#unitname").blur(function(){
- 			var name = $("#unitname").val(); 
- 	        if($.trim(name) == "" || name.length == 0 ){
- 	        	$("#unitname").css("background-color","#FFB9B9"); 
- 	        	$("#add").attr("disabled",true);   
- 	        }else{
- 	        	$("#unitname").css("background-color",""); 
- 	        	$("#add").attr("disabled",false);   
- 	        }
- 		});
- 		
- 		//类别
- 		$("#category").blur(function(){
- 			var name = $("#category").val(); 
- 	        if($.trim(name) == "" || name.length == 0 ){
- 	        	$("#category").css("background-color","#FFB9B9"); 
- 	        	$("#add").attr("disabled",true);   
- 	        }else{
- 	        	$("#category").css("background-color",""); 
- 	        	$("#add").attr("disabled",false);   
- 	        }
- 		});
- 		
-  		//药品编号非空
- 		$("#drugCode").blur(function(){
- 			var name = $("input[name='drugBean.drugCode']").val(); 
- 	        if($.trim(name) == "" || name.length == 0 ||name.length >10){
- 	        	$("#drugCode").css("background-color","#FFB9B9"); 
- 	        	$("#add").attr("disabled",true);   
- 	        }else{
- 	        	$("#drugCode").css("background-color",""); 
- 	        	$("#add").attr("disabled",false);   
- 	        }
- 		});
- 		
- 		//药品名非空
- 		$("#drugName").blur(function(){
- 			var name = $("input[name='drugBean.drugName']").val(); 
- 	        if($.trim(name) == "" || name.length == 0 ){
- 	        	$("#drugName").css("background-color","#FFB9B9"); 
- 	        	$("#add").attr("disabled",true);   
- 	        }else{
- 	        	$("#drugName").css("background-color",""); 
- 	        	$("#add").attr("disabled",false);   
- 	        }
- 		});
- 		
- 		//修改人非空
- 		$("#modifier").blur(function(){
- 			var pass = $("#modifier").val();
- 			if ($.trim(pass) == "" || pass.length == 0) {
- 				$("#modifier").css("background-color","#FFB9B9"); 
- 				$("#add").attr("disabled",true);   
- 			}else{
- 				$("#modifier").css("background-color",""); 
- 				$("#add").attr("disabled",false);   
- 	        }
- 		}); 
- 		
- 		//数量
- 		
- 		$("#stocknumber").blur(function(){
- 			var number = $("#stocknumber").val();
- 			var reg = /^\+?[1-9][0-9]*$/;
- 			if ($.trim(number) == "" || number.length == 0) {
- 				$("#stocknumber").css("background-color","#FFB9B9"); 
- 				$("#add").attr("disabled",true);   
- 			}else if(!reg.test(number)){
- 				$("#stocknumber").css("background-color","#FFB9B9"); 
- 				$("#add").attr("disabled",true);  
- 			}else{
- 				$("#stocknumber").css("background-color",""); 
- 			}
- 		});
- 		//下限
- 		$("#stocklimit").blur(function(){
- 			var number = $("#stocklimit").val();
- 			var reg = /^\+?[1-9][0-9]*$/;
- 			if ($.trim(number) == "" || number.length == 0) {
- 				$("#stocklimit").css("background-color","#FFB9B9"); 
- 				$("#add").attr("disabled",true);   
- 			}else if(!reg.test(number)){
- 				$("#stocklimit").css("background-color","#FFB9B9"); 
- 				$("#add").attr("disabled",true);  
- 			}else{
- 				$("#stocklimit").css("background-color",""); 
- 				$("#add").attr("disabled",false);  
- 			}
- 		});
- 		
- 		function check(){
- 		 	
- 			var name = $("input[name='drugBean.drugName']").val(); 
- 			var pass = $("#modifier").val();
- 			var number = $("#stocknumber").val();
- 			var limit = $("#stocklimit").val();
- 			var dosageform = $("#dosageform").val(); 
-	 		var unitname = $("#unitname").val(); 
-	 		var category = $("#category").val(); 
-	 		var reg = /^\+?[1-9][0-9]*$/;
- 			if(!reg.test(number) || !reg.test(number) || $.trim(category) == "" || category.length == 0 || $.trim(unitname) == "" || unitname.length == 0 || $.trim(dosageform) == "" || dosageform.length == 0 || $.trim(name) == "" || name.length == 0 || $.trim(pass) == "" || pass.length == 0 || $.trim(number) == "" || number.length == 0 && $.trim(limit) == "" || limit.length == 0){
- 				$("#add").attr("disabled",false);  
- 				return false;
- 			}else{
- 				return true;
- 			}
- 			
- 		};
- 		
- 		//保存按钮
- 		$("#add").click(function(){
- 			if(!check()){
- 				$("#add").attr("disabled",true);  
- 				var name = $("input[name='drugBean.drugName']").val(); 
- 	 			var pass = $("#modifier").val();
- 	 			var number = $("#stocknumber").val();
- 	 			var limit = $("#stocklimit").val();
- 	 			var dosageform = $("#dosageform").val(); 
- 	 			var unitname = $("#unitname").val(); 
- 	 			var category = $("#category").val(); 
- 	 			var reg = /^\+?[1-9][0-9]*$/;
- 	 			if($.trim(name) == "" || name.length == 0){
- 	 				alert("请输入药品名");
- 	 				return false;
- 	 			}else if($.trim(dosageform) == "" || dosageform.length == 0){
- 	 				alert("请选择药品剂型");
- 	 				return false;
- 	 			}else if($.trim(unitname) == "" || unitname.length == 0){
- 	 				alert("请选择药品单位");
- 	 				return false;
- 	 			}else if($.trim(category) == "" || category.length == 0){
- 	 				alert("请选择药品类别");
- 	 				return false;
- 	 			}else if($.trim(pass) == "" || pass.length == 0){
- 	 				alert("请输入修改人");
- 	 				return false;
- 	 			}else if($.trim(number) == "" || number.length == 0 || !reg.test(number)){
- 	 				alert("请输入数量");
- 	 				return false;
- 	 			}else if($.trim(limit) == "" || limit.length == 0 || !reg.test(limit)){
- 	 				alert("请输入库存下限");
- 	 				return false;
- 	 			}
- 			}else if(check()){
- 				$("#add").attr("disabled",false); 
- 				$("form").submit(); 
- 			};
- 		});
- 		
- 		
- 	});
+$(function(){
+		var str = "";
+		var mydate = new Date();
+		str += mydate.getFullYear()+"-";
+		str += mydate.getMonth()+1+"-";
+		str += mydate.getDate();
+		$("input[name='time']").val(str);
+		 
+	});
+	$(function() {
+		$("#drugName").css("background-color",""); 
+		$("#modifier").css("background-color",""); 
+		$("#drugCode").css("background-color",""); 
+		$("#salepeice").css("background-color","");
+		
+		$("#dosageform").css("background-color",""); 
+		$("#unitname").css("background-color",""); 
+		$("#category").css("background-color",""); 
+		
+		
+		//售价
+		$("#salepeice").blur(function(){
+			var name = $("#salepeice").val(); 
+	        if($.trim(name) == "" || name.length == 0 ){
+	        	$("#salepeice").css("background-color","#FFB9B9"); 
+	        	$("#add").attr("disabled",true);   
+	        }else{
+	        	$("#salepeice").css("background-color",""); 
+	        	$("#add").attr("disabled",false);   
+	        }
+		});
+		//剂型
+		$("#dosageform").blur(function(){
+			var name = $("#dosageform").val(); 
+	        if($.trim(name) == "" || name.length == 0 ){
+	        	$("#dosageform").css("background-color","#FFB9B9"); 
+	        	$("#add").attr("disabled",true);   
+	        }else{
+	        	$("#dosageform").css("background-color",""); 
+	        	$("#add").attr("disabled",false);   
+	        }
+		});
+		
+		//单位
+		$("#unitname").blur(function(){
+			var name = $("#unitname").val(); 
+	        if($.trim(name) == "" || name.length == 0 ){
+	        	$("#unitname").css("background-color","#FFB9B9"); 
+	        	$("#add").attr("disabled",true);   
+	        }else{
+	        	$("#unitname").css("background-color",""); 
+	        	$("#add").attr("disabled",false);   
+	        }
+		});
+		
+		//类别
+		$("#category").blur(function(){
+			var name = $("#category").val(); 
+	        if($.trim(name) == "" || name.length == 0 ){
+	        	$("#category").css("background-color","#FFB9B9"); 
+	        	$("#add").attr("disabled",true);   
+	        }else{
+	        	$("#category").css("background-color",""); 
+	        	$("#add").attr("disabled",false);   
+	        }
+		});
+		
+		//药品编号非空
+		$("#drugCode").blur(function(){
+			var name = $("input[name='drugBean.drugCode']").val(); 
+	        if($.trim(name) == "" || name.length == 0 ||name.length >10){
+	        	$("#drugCode").css("background-color","#FFB9B9"); 
+	        	$("#add").attr("disabled",true);   
+	        }else{
+	        	$("#drugCode").css("background-color",""); 
+	        	$("#add").attr("disabled",false);   
+	        }
+		});
+		
+		//药品名非空
+		$("#drugName").blur(function(){
+			var name = $("input[name='drugBean.drugName']").val(); 
+	        if($.trim(name) == "" || name.length == 0 ){
+	        	$("#drugName").css("background-color","#FFB9B9"); 
+	        	$("#add").attr("disabled",true);   
+	        }else{
+	        	$("#drugName").css("background-color",""); 
+	        	$("#add").attr("disabled",false);   
+	        }
+		});
+		
+		//修改人非空
+		$("#modifier").blur(function(){
+			var pass = $("#modifier").val();
+			if ($.trim(pass) == "" || pass.length == 0) {
+				$("#modifier").css("background-color","#FFB9B9"); 
+				$("#add").attr("disabled",true);   
+			}else{
+				$("#modifier").css("background-color",""); 
+				$("#add").attr("disabled",false);   
+	        }
+		}); 
+		
+		//数量
+		
+		$("#stocknumber").blur(function(){
+			var number = $("#stocknumber").val();
+			var reg = /^\+?[1-9][0-9]*$/;
+			if ($.trim(number) == "" || number.length == 0) {
+				$("#stocknumber").css("background-color","#FFB9B9"); 
+				$("#add").attr("disabled",true);   
+			}else if(!reg.test(number)){
+				$("#stocknumber").css("background-color","#FFB9B9"); 
+				$("#add").attr("disabled",true);  
+			}else{
+				$("#stocknumber").css("background-color",""); 
+			}
+		});
+		//下限
+		$("#stocklimit").blur(function(){
+			var number = $("#stocklimit").val();
+			var reg = /^\+?[1-9][0-9]*$/;
+			if ($.trim(number) == "" || number.length == 0) {
+				$("#stocklimit").css("background-color","#FFB9B9"); 
+				$("#add").attr("disabled",true);   
+			}else if(!reg.test(number)){
+				$("#stocklimit").css("background-color","#FFB9B9"); 
+				$("#add").attr("disabled",true);  
+			}else{
+				$("#stocklimit").css("background-color",""); 
+				$("#add").attr("disabled",false);  
+			}
+		});
+		
+		function check(){
+	
+			var name = $("input[name='drugBean.drugName']").val(); 
+			var pass = $("#modifier").val();
+			var number = $("#stocknumber").val();
+			var limit = $("#stocklimit").val();
+			var dosageform = $("#dosageform").val(); 
+ 		var unitname = $("#unitname").val(); 
+ 		var category = $("#category").val(); 
+ 		var salepeice = $("#salepeice").val();
+ 		var reg = /^\+?[1-9][0-9]*$/;
+			if(!reg.test(number) || !reg.test(number) || $.trim(category) == "" || category.length == 0 || $.trim(unitname) == "" || unitname.length == 0 || $.trim(dosageform) == "" || dosageform.length == 0 || $.trim(name) == "" || name.length == 0 || $.trim(pass) == "" || pass.length == 0 || $.trim(number) == "" || number.length == 0 && $.trim(limit) == "" || limit.length == 0 || $.trim(salepeice) == "" || salepeice.length == 0){
+				$("#add").attr("disabled",false);  
+				return false;
+			}else{
+				return true;
+			}
+			
+		};
+		
+		//保存按钮
+		$("#add").click(function(){
+			if(!check()){
+				$("#add").attr("disabled",true);  
+				var name = $("input[name='drugBean.drugName']").val(); 
+	 			var pass = $("#modifier").val();
+	 			var number = $("#stocknumber").val();
+	 			var limit = $("#stocklimit").val();
+	 			var dosageform = $("#dosageform").val(); 
+	 			var unitname = $("#unitname").val(); 
+	 			var category = $("#category").val(); 
+	 			var salepeice = $("#salepeice").val();
+	 			var reg = /^\+?[1-9][0-9]*$/;
+	 			if($.trim(name) == "" || name.length == 0){
+	 				alert("请输入药品名");
+	 				return false;
+	 			}else if($.trim(dosageform) == "" || dosageform.length == 0){
+	 				alert("请选择药品剂型");
+	 				return false;
+	 			}else if($.trim(unitname) == "" || unitname.length == 0){
+	 				alert("请选择药品单位");
+	 				return false;
+	 			}else if($.trim(category) == "" || category.length == 0){
+	 				alert("请选择药品类别");
+	 				return false;
+	 			}else if($.trim(salepeice) == "" || salepeice.length == 0){
+	 				alert("请输入销售价格");
+	 				return false;
+	 			}else if($.trim(pass) == "" || pass.length == 0){
+	 				alert("请输入修改人");
+	 				return false;
+	 			}else if($.trim(number) == "" || number.length == 0 || !reg.test(number)){
+	 				alert("请输入数量");
+	 				return false;
+	 			}else if($.trim(limit) == "" || limit.length == 0 || !reg.test(limit)){
+	 				alert("请输入库存下限");
+	 				return false;
+	 			}
+			}else if(check()){
+				$("#add").attr("disabled",false); 
+				$("form").submit(); 
+			};
+		});
+		
+		
+	});
 </script>
 </head>
 <body>

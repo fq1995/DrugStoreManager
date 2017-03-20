@@ -112,8 +112,6 @@ $(document).ready(function() {
 });
 
 function saveUserInfo() {
-	 //获取错误
-	   
 	 
    if($('#remember').is(':checked')) {
         var email = $("#email").val();
