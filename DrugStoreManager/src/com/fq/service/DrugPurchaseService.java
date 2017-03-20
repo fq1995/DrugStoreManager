@@ -22,6 +22,8 @@ public interface DrugPurchaseService {
 
 	void addPse(Integer drugCode, Integer pseCode, SupplierBean supBean, DosageformBean dfBean, DrugCategoryBean dcBean,
 			DrugUnitBean duBean, DrugBean drugBean, DrugPurchaseBean drugPseBean, String time);
+	
+	void addPse(Integer drugCode, Integer pseCode, DrugPurchaseBean drugPseBean, String time);
 
 	PageModel<DrugPurchaseBean> splitPse(Integer currPage, Integer pageSize, String keyword);
 

@@ -41,7 +41,9 @@ public class UserDAOTest extends TestCase {
 		UserBean userBean = new UserBean();
 		userBean.setUsername("测试");
 		userBean.setPassword("123456");
-		userService.register(userBean);
+		Integer userCode = 1111;
+		String time = "2017-03-14 00:00:00";
+		userService.register(userCode, userBean, time);
 //		userDAO.register(userBean);
 	}
 	@Test

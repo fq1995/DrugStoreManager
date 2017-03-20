@@ -66,7 +66,8 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	 */
 	public String registUser(){
 		if(null == selectUserByName()){
-			userService.register(userBean);
+			userCode = userService.selectCode().get(0);
+			userService.register(userCode,userBean,time);
 			return "error";
 		}else{
 			request.put("message","邮箱已被使用！");

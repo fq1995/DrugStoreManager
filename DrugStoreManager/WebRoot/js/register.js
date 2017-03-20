@@ -18,6 +18,49 @@
 		$("img[name='duihao6']").css("display","none");
 	}
 	$(function() {
+		$("#username").focus(function(){
+  			$("#messs").html("");
+  			$(".exit").html("");
+  			$(".tip_name").html("");
+  			$("img[name='duihao6']").css("display","none"); 
+  		    $("#tip_name").html("");
+		});
+		
+		$("#nickname").focus(function(){
+			$("#mess").html("");
+  			$(".exit").html("");
+  			$(".tip_").html("");
+  			$("img[name='duihao1']").css("display","none"); 
+  		    $("#tip_").html("");
+		});
+		
+		$("#email").focus(function() {
+			$("#mes").html("");
+  			$(".exit").html("");
+  			$(".tip_1").html("");
+  			$("img[name='duihao0']").css("display","none"); 
+  		    $("#tip_").html("");
+		});
+		
+		$("#password").focus(function() {
+			$(".tip_pass").html("");
+			$("img[name='duihao2']").css("display","none"); 
+		});
+		
+		$("#password2").focus(function() {
+			$(".tip_pass2").html("");
+			$("img[name='duihao3']").css("display","none"); 
+		});
+			
+		$("#inputVerifyCode").focus(function() {
+			var verifyCode = $("#inputVerifyCode").val();
+			if (verifyCode.length > 0) {
+				$("#tishi").html("");
+		        $("img[name='duihao4']").css("display","none");
+			}
+		});
+	});
+	$(function() {
 		$("#loginbtn").focus(function () {
 			var reg = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
 			var inputVerifyCode = $("#inputVerifyCode").val();

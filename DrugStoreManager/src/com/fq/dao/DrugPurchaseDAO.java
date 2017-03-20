@@ -57,4 +57,6 @@ public interface DrugPurchaseDAO {
 	PageModel<DrugPurchaseBean> splitOverDate(Integer currPage, Integer pagesize, String keyword);
 	//统计
 	List<DrugPurchaseBean> stats();
+	
+	void addPse(Integer drugCode, Integer pseCode, DrugPurchaseBean drugPseBean, String time);
 }

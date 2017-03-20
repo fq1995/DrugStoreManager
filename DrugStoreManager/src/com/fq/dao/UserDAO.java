@@ -8,7 +8,7 @@ import com.fq.util.PageModel;
 public interface UserDAO {
 
 	// 注册
-	void register(UserBean userBean);
+	void register(Integer userCode, UserBean userBean, String time);
 
 	// 登录
 	UserBean loginOrNot(String username, String password);

@@ -1,5 +1,6 @@
 package com.fq.dao.impl;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,6 +24,7 @@ import com.fq.po.MemberBean;
 import com.fq.po.SupplierBean;
 import com.fq.po.UserBean;
 import com.fq.util.BaseDAO;
+import com.fq.util.ConstantUtils;
 import com.fq.util.PageModel;
 import com.fq.util.UUIDBuild;
 @Repository("drugPurchaseDAO")
@@ -53,6 +55,37 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 		String hql = "from DrugPurchaseBean where drugBean.drugId=?";
 		List<DrugPurchaseBean> list = (List<DrugPurchaseBean>) hibernateTemplate.find(hql,id);
 		return list==null||list.size()<=0?null:list.get(0);
+	}
+	
+	@Override
+	public void addPse(Integer drugCode, Integer pseCode, DrugPurchaseBean drugPseBean, String time) {
+		DrugBean drugBean =  drugPseBean.getDrugBean();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = sdf.parse(time);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		drugBean.setModifyTime(date);
+		drugBean.setStatus("1");
+		drugBean.setDrugId(UUIDBuild.getUUID());
+		
+		BigDecimal   b   =   new   BigDecimal(drugPseBean.getPurchaseprice()*1.5); 
+		Double   f1   =   b.setScale(1,   BigDecimal.ROUND_HALF_UP).doubleValue();  
+		drugBean.setSalepeice(f1);
+		
+		BigDecimal   b2   =   new   BigDecimal(drugBean.getSalepeice()*ConstantUtils.discount); 
+		Double   f2   =   b2.setScale(1,   BigDecimal.ROUND_HALF_UP).doubleValue();  
+		drugBean.setMemberprice(f2);
+		
+		drugPseBean.setSalepeice(drugBean.getSalepeice());
+		drugPseBean.setMemberprice(drugBean.getMemberprice());
+		drugPseBean.setDrugBean(drugBean);
+		drugPseBean.setPurchasedate(date);
+		drugPseBean.setPurchaseId(UUIDBuild.getUUID());
+		hibernateTemplate.merge(drugBean);
+		hibernateTemplate.merge(drugPseBean);
 	}
 
 	@Override
@@ -218,6 +251,8 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 		List<DrugPurchaseBean> list = (List<DrugPurchaseBean>) hibernateTemplate.find(hql);
 		return list;
 	}
+
+	
 
 
 }

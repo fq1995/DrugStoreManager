@@ -50,7 +50,20 @@ public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPu
 	@Autowired
 	private DrugService drugService;
 	private DrugPurchaseBean drugPseBean = new DrugPurchaseBean();
-
+	/**
+	 * 下拉菜单
+	 */
+	public void before(){
+		List<SupplierBean> supplierList = drugPseService.selectSupplier();
+		List<DrugCategoryBean> drugCategoryList = drugPseService.selectCategory();
+		List<DrugUnitBean> drugUnitList = drugPseService.selectUnit();
+		List<DosageformBean> dosageformList = drugPseService.selectForm();
+		
+		request.put("supplierList", supplierList);
+		request.put("drugCategoryList", drugCategoryList);
+		request.put("drugUnitList", drugUnitList);
+		request.put("dosageformList", dosageformList);
+	}
 	/**
 	 * 药品进货分页
 	 * 
@@ -128,41 +141,27 @@ public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPu
 	 * 跳转新增
 	 */
 	public String doaddPurchase() {
-		List<SupplierBean> supplierList = drugPseService.selectSupplier();
-		List<DrugCategoryBean> drugCategoryList = drugPseService.selectCategory();
-		List<DrugUnitBean> drugUnitList = drugPseService.selectUnit();
-		List<DosageformBean> dosageformList = drugPseService.selectForm();
+		before();
 		pseCode = drugPseService.selectCode();
 		drugCode = drugService.select();
 		
 		request.put("drugCode", drugCode);
 		request.put("pseCode", pseCode);
-		request.put("supplierList", supplierList);
-		request.put("drugCategoryList", drugCategoryList);
-		request.put("drugUnitList", drugUnitList);
-		request.put("dosageformList", dosageformList);
+		
 		return "doadd";
 	}
 
 	public String addPurchase() {
-		List<SupplierBean> supplierList = drugPseService.selectSupplier();
-		List<DrugCategoryBean> drugCategoryList = drugPseService.selectCategory();
-		List<DrugUnitBean> drugUnitList = drugPseService.selectUnit();
-		List<DosageformBean> dosageformList = drugPseService.selectForm();
+		before();
 
-		request.put("supplierList", supplierList);
-		request.put("drugCategoryList", drugCategoryList);
-		request.put("drugUnitList", drugUnitList);
-		request.put("dosageformList", dosageformList);
-
-		DrugBean drugBean = drugPseBean.getDrugBean();
+/*		DrugBean drugBean = drugPseBean.getDrugBean();
 		DosageformBean dfBean = drugBean.getDosageformBean();
 		DrugCategoryBean dcBean = drugBean.getDrugCategoryBean();
 		DrugUnitBean duBean = drugBean.getDrugUnitBean();
-		SupplierBean supBean = drugPseBean.getSupplierBean();
+		SupplierBean supBean = drugPseBean.getSupplierBean();*/
 		pseCode = drugPseService.selectCode();
 		drugCode = drugService.select();
-		drugPseService.addPse(drugCode, pseCode, supBean, dfBean, dcBean, duBean, drugBean, drugPseBean, time);
+		drugPseService.addPse(drugCode, pseCode, drugPseBean, time);
 		request.put("message", "药品进货名已被使用！");
 		request.put("message2", "药品进货编号已被使用！");
 		return "addPurchase";
@@ -182,16 +181,8 @@ public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPu
 	 * 编辑药品进货
 	 */
 	public String editPurchase() {
+		before();
 		DrugPurchaseBean drugPseBean = drugPseService.selectById(id);
-		List<SupplierBean> supplierList = drugPseService.selectSupplier();
-		List<DrugCategoryBean> drugCategoryList = drugPseService.selectCategory();
-		List<DrugUnitBean> drugUnitList = drugPseService.selectUnit();
-		List<DosageformBean> dosageformList = drugPseService.selectForm();
-
-		request.put("supplierList", supplierList);
-		request.put("drugCategoryList", drugCategoryList);
-		request.put("drugUnitList", drugUnitList);
-		request.put("dosageformList", dosageformList);
 		if (null != drugPseBean) {
 			request.put("purchase", drugPseBean);
 		}
@@ -202,15 +193,7 @@ public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPu
 	 * 修改药品进货
 	 */
 	public String updatePurchase() {
-		List<SupplierBean> supplierList = drugPseService.selectSupplier();
-		List<DrugCategoryBean> drugCategoryList = drugPseService.selectCategory();
-		List<DrugUnitBean> drugUnitList = drugPseService.selectUnit();
-		List<DosageformBean> dosageformList = drugPseService.selectForm();
-
-		request.put("supplierList", supplierList);
-		request.put("drugCategoryList", drugCategoryList);
-		request.put("drugUnitList", drugUnitList);
-		request.put("dosageformList", dosageformList);
+		before();
 		if (null == selectPurchaseByName()) {
 			drugPseService.updatePse(drugPseBean);
 			return "show";

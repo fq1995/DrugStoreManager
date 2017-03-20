@@ -13,8 +13,21 @@
     <!-- <script type="text/javascript" src="js/jquery.keyboard.extension-typing.js"></script>  -->
     <link type="text/css" href="css/keyboard.css" rel="stylesheet" />
     <script type="text/javascript" src="js/register.js"></script>
+    <script type="text/javascript">
+    $(function(){
+ 		var str = "";
+ 		var mydate = new Date();
+ 		str += mydate.getFullYear()+"-";
+ 		str += mydate.getMonth()+1+"-";
+ 		str += mydate.getDate();
+ 		$("input[name='time']").val(str);
+ 		 
+ 	});
+    
+    </script>
 </head>
 <body id="login">
+
 <div id="wrappertop">
 </div>
 <div id="wrapper">
@@ -31,6 +44,7 @@
         <div id="darkbannerwrap">
         </div>
         <form name="form1" method="post" action="user_registUser.action">
+        	<input type="hidden" name="time">
             <fieldset class="form">
             <p>
                     <label class="loginlabel" for="username">
@@ -78,12 +92,12 @@
                 <div>
                     <button id="loginbtn" type="submit" class="positive" name="Submit">
                         <img src="images/key.png" alt="Announcement"/>注册</button>
-                <ul id="forgottenpassword">
+               <!--  <ul id="forgottenpassword">
                     <li class="boldtext">|</li>
                     <li>
                         <input id="remember" type="checkbox" name="remember" id="rememberMe"><label for="rememberMe">记住我</label></li>
-                </ul>
-                <button id="resetbtn" type="RESET" class="positive" name="Reset" style="width: 69px;" onclick="clean()">重置</button>
+                </ul> -->
+                	<button id="resetbtn" type="RESET" class="positive" name="Reset" style="width: 69px; padding-left:0px" onclick="clean()">重置</button>
                 </div>
 
 

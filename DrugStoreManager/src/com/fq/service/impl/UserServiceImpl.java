@@ -16,9 +16,9 @@ public class UserServiceImpl implements UserService {
 	private UserDAO userDAO;
 	
 	@Override
-	public void register(UserBean userBean) {
-		userBean.setAddtime(new Date());
-		userDAO.register(userBean);
+	public void register(Integer userCode, UserBean userBean, String time) {
+//		userBean.setAddtime(new Date());
+		userDAO.register(userCode,userBean,time);
 	}
 
 	@Override

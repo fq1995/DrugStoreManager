@@ -21,9 +21,18 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 	private HibernateTemplate hibernateTemplate;
 
 	@Override
-	public void register(UserBean userBean) {
-		userBean.setUserId(UUIDBuild.getUUID());
+	public void register(Integer userCode, UserBean userBean, String time) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = sdf.parse(time);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		userBean.setStatus(1);
+		userBean.setAddtime(date);
+		userBean.setUserId(UUIDBuild.getUUID());
+		userBean.setUserCode(++userCode);
 		hibernateTemplate.save(userBean);
 	}
 
@@ -106,6 +115,7 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 		userBean.setAddtime(date);
 		userBean.setUserId(UUIDBuild.getUUID());
 		userBean.setUserCode(++code);
+		userBean.setStatus(1);
 		hibernateTemplate.save(userBean);
 		
 	}

@@ -105,7 +105,6 @@ public class DrugPurchaseServiceImpl implements DrugPurchaseService {
 			DrugPurchaseBean drugPseBean, String time) {
 		drugPseDao.addPse(drugCode, pseCode,supBean, dfBean, dcBean, duBean, drugBean, drugPseBean, time);
 		
-		
 	}
 
 	@Override
@@ -155,6 +154,12 @@ public class DrugPurchaseServiceImpl implements DrugPurchaseService {
 			e.printStackTrace();
 		}  
 		return json;
+	}
+
+	@Override
+	public void addPse(Integer drugCode, Integer pseCode, DrugPurchaseBean drugPseBean, String time) {
+		drugPseDao.addPse(drugCode, pseCode, drugPseBean, time);
+		
 	}
 	
 	
