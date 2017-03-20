@@ -23,7 +23,7 @@ $(function() {
 			 data = $.parseJSON(data);
 			 for(var i in data){
 				 name.push(data[i].drugName);
-				 number.push(data[i].salesVolume);
+				 number.push(Number(data[i].salesVolume));
 			 } 
 
 			 
@@ -48,7 +48,7 @@ $(function() {
 
 		                var option = {
 		                	title : {
-		                		text: '销售数量前十名',
+		                		text: '销售数量前二十名',
 		                	},
 		                	tooltip: {
 		                		trigger: 'axis',
@@ -72,6 +72,11 @@ $(function() {
 		                        {
 		                            type : 'category',
 		                            name : '药品名称',
+		                            axisLabel : {
+		                    			interval : 0,
+		                    			rotate:45,
+		                                margin:2,
+		                    		},
 		                            data : name
 //		                            data : ["唐必呋","奉宫酒","胃必治","速效伤风胶囊","云南白药粉","炎痛喜康片","永龙去痛胶囊","灭滴灵片","阿昔洛韦软膏","地巴唑片"]
 		                        }
@@ -84,9 +89,11 @@ $(function() {
 		                    ],
 		                    series : [
 		                        {
-		                            "name":"库存",
-		                            "type":"bar",
-		                            "data":number,
+		                        	barGap:'0', 
+		                    		barMaxWidth:40,
+		                        	name : "销售",
+		                            type : "bar",
+		                            data : number,
 //		                            "data":[30,100,100,100,100,120,200,200,200,200],
 		                             markPoint : {
 		                                data : [

@@ -112,12 +112,12 @@ public class DrugSaleServiceImpl implements DrugSaleService {
 		List<DrugSalesBean> list = drugSaleDao.stats();
 		String json = null;
 		List<SaleStats> list2 = new ArrayList<>();
-		if(list.size()>=10){
-			for(int i = 0; i<10; i++){
+		if(list.size()>=20){
+			for(int i = 0; i<20; i++){
 				list2.add(new SaleStats(list.get(i).getSalesVolume(),list.get(i).getDrugBean().getDrugName()));
 			}
 		}
-		if(list.size()<10){
+		if(list.size()<20){
 			for(int i = 0;i<list.size();i++){
 				list2.add(new SaleStats(list.get(i).getSalesVolume(),list.get(i).getDrugBean().getDrugName()));
 			}

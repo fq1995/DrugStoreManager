@@ -23,7 +23,7 @@ $(function() {
 			 data = $.parseJSON(data);
 			 for(var i in data){
 				 name.push(data[i].drugName);
-				 number.push(data[i].amount);
+				 number.push(Number(data[i].amount));
 			 } 
 
 			 
@@ -72,6 +72,11 @@ $(function() {
 		                        {
 		                            type : 'category',
 		                            name : '药品名称',
+		                            axisLabel : {
+		                    			interval : 0,
+		                    			rotate:45,
+		                                margin:2,
+		                    		},
 		                            data : name
 //		                            data : ["唐必呋","奉宫酒","胃必治","速效伤风胶囊","云南白药粉","炎痛喜康片","永龙去痛胶囊","灭滴灵片","阿昔洛韦软膏","地巴唑片"]
 		                        }

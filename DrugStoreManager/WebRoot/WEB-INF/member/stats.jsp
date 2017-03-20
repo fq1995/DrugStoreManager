@@ -24,8 +24,8 @@ $(function() {
 			 data = $.parseJSON(data);
 			 for(var i in data){
 				 name.push(data[i].memberName);
-				 integration.push(data[i].integration);
-				 memberLevel.push(data[i].memberLevel);
+				 integration.push(Number(data[i].integration));
+				 memberLevel.push(Number(data[i].memberLevel));
 			 } 
 
 			 
@@ -74,6 +74,11 @@ $(function() {
 		                        {
 		                            type : 'category',
 		                            name : '会员',
+		                            axisLabel : {
+		                    			interval : 0,
+		                    			rotate:45,
+		                                margin:2,
+		                    		},
 		                            data : name
 //		                            data : ["唐必呋","奉宫酒","胃必治","速效伤风胶囊","云南白药粉","炎痛喜康片","永龙去痛胶囊","灭滴灵片","阿昔洛韦软膏","地巴唑片"]
 		                        }
@@ -86,9 +91,9 @@ $(function() {
 		                    ],
 		                    series : [
 		                        {
-		                            "name":"积分",
-		                            "type":"bar",
-		                            "data":integration,
+		                            name : "积分",
+		                            type : "bar",
+		                            data : integration,
 //		                            "data":[30,100,100,100,100,120,200,200,200,200],
 		                             markPoint : {
 		                                data : [

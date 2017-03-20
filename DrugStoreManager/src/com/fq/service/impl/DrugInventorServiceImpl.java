@@ -110,12 +110,12 @@ public class DrugInventorServiceImpl implements DrugInventorService {
 		String json = null;
 		List<InventoriesBean> list = drugInventorDao.stats();
 		List<InvenStats> list2 = new ArrayList<>();
-		if(list.size() >= 10){
-			for(int i = 0; i<10;i++){
+		if(list.size() >= 20){
+			for(int i = 0; i<20;i++){
 				list2.add(new InvenStats(list.get(i).getDrugBean().getDrugName(),list.get(i).getStocknumber(),list.get(i).getStocklimit()));
 			}
 		}
-		if(list.size() < 10){
+		if(list.size() < 20){
 			for(int i = 0; i<list.size();i++){
 				list2.add(new InvenStats(list.get(i).getDrugBean().getDrugName(),list.get(i).getStocknumber(),list.get(i).getStocklimit()));
 			}
