@@ -50,6 +50,7 @@ public class DrugBean  implements java.io.Serializable {
      private Double memberprice;
      private String oldName;
      private String newName;
+     private Integer stocknumber;
      private Set<InventoriesBean> inventoriesBeans = new HashSet<InventoriesBean>(0);
      private Set<DrugBuy> drugBuies = new HashSet<DrugBuy>(0);
      private Set<DrugPurchaseBean> drugPurchaseBeans = new HashSet<DrugPurchaseBean>(0);
@@ -69,7 +70,7 @@ public class DrugBean  implements java.io.Serializable {
     }
     
     /** full constructor */
-    public DrugBean(String drugId, DrugUnitBean drugUnitBean, DosageformBean dosageformBean, DrugCategoryBean drugCategoryBean, Integer drugCode, String drugName, String manufacturer, String approvalNumber, String modifier, Date modifyTime, String memo, String status, Double salepeice, Double memberprice,  String oldName, String newName, Set<InventoriesBean> inventoriesBeans, Set<DrugBuy> drugBuies,  Set<DrugPurchaseBean> drugPurchaseBeans, Set<DrugSalesBean> drugSalesBeans) {
+    public DrugBean(String drugId, DrugUnitBean drugUnitBean, DosageformBean dosageformBean, DrugCategoryBean drugCategoryBean, Integer drugCode, String drugName, String manufacturer, String approvalNumber, String modifier, Date modifyTime, String memo, String status, Double salepeice, Double memberprice,  String oldName, String newName, Integer stocknumber, Set<InventoriesBean> inventoriesBeans, Set<DrugBuy> drugBuies,  Set<DrugPurchaseBean> drugPurchaseBeans, Set<DrugSalesBean> drugSalesBeans) {
         this.drugId = drugId;
         this.drugUnitBean = drugUnitBean;
         this.dosageformBean = dosageformBean;
@@ -86,6 +87,7 @@ public class DrugBean  implements java.io.Serializable {
         this.memberprice = memberprice;
         this.oldName = oldName;
         this.newName = newName;
+        this.stocknumber = stocknumber;
         this.inventoriesBeans = inventoriesBeans;
         this.drugBuies = drugBuies;
         this.drugPurchaseBeans = drugPurchaseBeans;
@@ -256,6 +258,16 @@ public class DrugBean  implements java.io.Serializable {
         this.newName = newName;
     }
     
+    @Column(name="STOCKNUMBER")
+    
+    public Integer getStocknumber() {
+		return stocknumber;
+	}
+
+	public void setStocknumber(Integer stocknumber) {
+		this.stocknumber = stocknumber;
+	}
+
 @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="drugBean")
 
     public Set<InventoriesBean> getInventoriesBeans() {

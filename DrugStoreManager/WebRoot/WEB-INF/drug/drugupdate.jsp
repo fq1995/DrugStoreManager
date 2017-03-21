@@ -214,6 +214,7 @@
 			<input type="hidden" name="currPage" value="1">
 			<input type="hidden" name="time">
 			<input type="hidden" name="drugId" value="${drug.drugId }">
+			<input type="hidden" name="stocknumber" value="${drug.stocknumber }">
 
 			<ul class="forminfo">
 				<li><label>药品编号</label><input name="drugCode" type="text" id="drugCode" value="${drug.drugCode }" readonly="readonly"

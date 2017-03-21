@@ -181,7 +181,7 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 	public String updateInventor() {
 		before();
 		if (null != selectInventorByDrugcode()) {
-			inventorService.updateInventor(inventoriesBean);
+			inventorService.updateInventor(inventoriesBean,time);
 			return "show";
 		}
 		request.put("message", "药品名已被使用！");

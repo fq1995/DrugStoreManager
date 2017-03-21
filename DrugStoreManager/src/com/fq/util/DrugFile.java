@@ -1,25 +1,18 @@
 package com.fq.util;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 
 public class DrugFile {
 	
 	public static void print(String path,String json){
-//		String path="C:\\Users\\fu\\git\\DrugStoreManager\\DrugStoreManager\\WebRoot";
-		File file = new File(path, "drug.json");
+		/*File file = new File(path, "drug.json");
 		if(!file.exists()){
 			file.mkdirs();
 		}
-		/*try {
-			file.createNewFile(); // 创建文件
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
-		// 向文件写入内容(输出流)
-//		String json = drugSaleServiceImpl.stats();
 		byte bt[] = new byte[1024];
 		bt = json.getBytes();
 		try {
@@ -32,6 +25,21 @@ public class DrugFile {
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+		}*/
+		OutputStreamWriter pw = null;//定义一个流
+		try {
+			pw = new OutputStreamWriter(new FileOutputStream(path+"/drug.json"),"UTF-8");
+			pw.write(json);//将要写入文件的内容
+		} catch (UnsupportedEncodingException | FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				pw.close();//关闭流
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

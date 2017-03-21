@@ -32,7 +32,7 @@ DrugBean selectDrugByName(String drugname);
 	//修改
 	void updateDrug(DrugBean DrugBean,String time);
 	
-	void updateDrug(DrugBean DrugBean);
+	 
 	//根据ID查询
 	DrugBean selectById(String id);
 	//查询类别

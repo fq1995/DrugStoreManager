@@ -108,7 +108,8 @@ public class DrugDAOTest extends TestCase {
 		DrugBean drugBean = new DrugBean();
 		drugBean.setDrugId("111111111111111111111111111111");
 		drugBean.setDrugCode(1111);
-		drugDAO.updateDrug(drugBean);
+		String time = "2017-03-13";
+		drugDAO.updateDrug(drugBean,time);
 	}
 
 	@Test

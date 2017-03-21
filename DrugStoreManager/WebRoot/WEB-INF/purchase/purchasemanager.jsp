@@ -82,7 +82,7 @@
 				<tr>
 					<th style="width:40px"><input id="all" name="all" type="checkbox" value=""/></th>
 					<th style="width:50px">序号</th>
-					<th style="width:70px">药品进货单号</th>
+					<th style="width:70px">进货单号</th>
 					<th>药品名</th>
 					<th style="width:70px">剂型</th>
 					<th style="width:50px">单位</th>

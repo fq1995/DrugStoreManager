@@ -27,6 +27,12 @@
  		 
  	});
  	$(function() {
+ 		//返回
+ 		$("#return").click(function(){
+ 			location.href = "${pageContext.request.contextPath}/pse_showPurchase.action?currPage=1";
+ 		});
+ 		
+ 		
  		$("#drugName").css("background-color",""); 
  		$("#modifier").css("background-color",""); 
  		$("input[name='drugBean.drugCode']").css("background-color",""); 
@@ -98,9 +104,12 @@
 		<div class="formtitle">
 			<span>基本信息</span>
 		</div>
-		<form action="pse_addPurchase.action" method="post">
+		<form action="pse_updatePurchase.action" method="post">
 			<input type="hidden" name="currPage" value="1">
 			<input type="hidden" name="time">
+			<input type="hidden" name="drugBean.drugId" value="${purchase.drugBean.drugId }">
+			<input type="hidden" name="purchaseId" value="${purchase.purchaseId }">
+			<input type="hidden" name="supplierBean.supplierId" value="${purchase.supplierBean.supplierId }">
 
 			<ul class="forminfo">
 				<li><label>进货单编号</label><input name="purchaseCode" type="text" id="purchaseCode" value="${purchase.purchaseCode }" readonly="readonly"
@@ -160,7 +169,7 @@
 					class="form-control" style="width:200px; display:inline" placeholder="请输入修改人"/><i>必填</i></li>
 				
 				<li><input id="add" type="submit" class="btn btn-info btn-sm"  value="确认保存" />&nbsp;&nbsp;&nbsp;&nbsp;
-					<input id="return" type="button" class="btn btn-info btn-sm" onclick="javascript:history.go(-1);" value="返回" /></li>
+					<input id="return" type="button" class="btn btn-info btn-sm" value="返回" /></li>
 			</ul>
 		</form>
 	</div>

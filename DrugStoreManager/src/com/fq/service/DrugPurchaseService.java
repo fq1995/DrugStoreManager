@@ -20,9 +20,6 @@ public interface DrugPurchaseService {
 
 	DrugPurchaseBean selectPseByDrugId(String id);
 
-	void addPse(Integer drugCode, Integer pseCode, SupplierBean supBean, DosageformBean dfBean, DrugCategoryBean dcBean,
-			DrugUnitBean duBean, DrugBean drugBean, DrugPurchaseBean drugPseBean, String time);
-	
 	void addPse(Integer drugCode, Integer pseCode, DrugPurchaseBean drugPseBean, String time);
 
 	PageModel<DrugPurchaseBean> splitPse(Integer currPage, Integer pageSize, String keyword);
@@ -34,7 +31,7 @@ public interface DrugPurchaseService {
 	void deleteAllPse(List<DrugPurchaseBean> list);
 
 	// 修改
-	void updatePse(DrugPurchaseBean bean);
+	void updatePse(DrugPurchaseBean bean, String time);
 
 	// 根据ID查询
 	DrugPurchaseBean selectById(String id);

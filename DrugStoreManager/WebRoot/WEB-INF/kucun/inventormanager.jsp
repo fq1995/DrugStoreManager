@@ -108,11 +108,11 @@
 						<td>${inventor.drugBean.modifyTime }</td>
 						<c:choose>
 						<c:when test="${f eq 'warn' }">
-						<td style="background-color: #F7C709">${inventor.stocknumber }</td>
+						<td style="background-color: #F7C709">${inventor.drugBean.stocknumber }</td>
 						<td style="background-color: #E6421A">${inventor.stocklimit }</td>
 						</c:when>
 						<c:otherwise>
-						<td>${inventor.stocknumber }</td>
+						<td>${inventor.drugBean.stocknumber }</td>
 						<td>${inventor.stocklimit }</td>
 						</c:otherwise>
 						</c:choose>

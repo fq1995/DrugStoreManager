@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.fq.po.DosageformBean;
-import com.fq.po.DrugBean;
 import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugPurchaseBean;
 import com.fq.po.DrugUnitBean;
@@ -152,19 +151,13 @@ public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPu
 	}
 
 	public String addPurchase() {
-		before();
-
-/*		DrugBean drugBean = drugPseBean.getDrugBean();
-		DosageformBean dfBean = drugBean.getDosageformBean();
-		DrugCategoryBean dcBean = drugBean.getDrugCategoryBean();
-		DrugUnitBean duBean = drugBean.getDrugUnitBean();
-		SupplierBean supBean = drugPseBean.getSupplierBean();*/
+//		before();
 		pseCode = drugPseService.selectCode();
 		drugCode = drugService.select();
 		drugPseService.addPse(drugCode, pseCode, drugPseBean, time);
-		request.put("message", "药品进货名已被使用！");
-		request.put("message2", "药品进货编号已被使用！");
-		return "addPurchase";
+/*		request.put("message", "药品进货名已被使用！");
+		request.put("message2", "药品进货编号已被使用！");*/
+		return doaddPurchase();
 
 	}
 
@@ -194,12 +187,9 @@ public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPu
 	 */
 	public String updatePurchase() {
 		before();
-		if (null == selectPurchaseByName()) {
-			drugPseService.updatePse(drugPseBean);
-			return "show";
-		}
-		request.put("message", "药品名已被使用！");
-		return editPurchase();
+		drugPseService.updatePse(drugPseBean,time);
+		return "show";
+	 
 	}
 
 	/**

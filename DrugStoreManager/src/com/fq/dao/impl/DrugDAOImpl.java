@@ -98,6 +98,7 @@ public class DrugDAOImpl extends BaseDAO<DrugBean> implements DrugDAO {
 	@Override
 	public void updateDrug(DrugBean drugBean2, String time) {
 		DrugBean drugBean =  (DrugBean) getHibernateTemplate().get(DrugBean.class, drugBean2.getDrugId());
+		drugBean.setStocknumber(drugBean2.getStocknumber());
 		drugBean.setApprovalNumber(drugBean2.getApprovalNumber());
 		drugBean.setDosageformBean(drugBean2.getDosageformBean());
 		drugBean.setDrugCategoryBean(drugBean2.getDrugCategoryBean());
@@ -135,11 +136,7 @@ public class DrugDAOImpl extends BaseDAO<DrugBean> implements DrugDAO {
 		return null==drugBean?null:drugBean;
 	}
 
-	@Override
-	public void updateDrug(DrugBean drugBean) {
-		getHibernateTemplate().update(drugBean);
-		
-	}
+	 
 
 	@Override
 	public List<DrugCategoryBean> selectCategory() {

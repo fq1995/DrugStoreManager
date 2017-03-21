@@ -78,6 +78,7 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 		BigDecimal   b2   =   new   BigDecimal(drugBean.getSalepeice()*ConstantUtils.discount); 
 		Double   f2   =   b2.setScale(1,   BigDecimal.ROUND_HALF_UP).doubleValue();  
 		drugBean.setMemberprice(f2);
+		drugBean.setStocknumber(drugPseBean.getAmount());
 		
 		drugPseBean.setSalepeice(drugBean.getSalepeice());
 		drugPseBean.setMemberprice(drugBean.getMemberprice());
@@ -88,33 +89,7 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 		hibernateTemplate.merge(drugPseBean);
 	}
 
-	@Override
-	public void addPse(Integer drugCode, Integer pseCode, SupplierBean supBean,DosageformBean dfBean, DrugCategoryBean dcBean, DrugUnitBean duBean, DrugBean drugBean,
-			DrugPurchaseBean drugPseBean, String time) {
-		drugBean = drugPseBean.getDrugBean();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = null;
-		try {
-			date = sdf.parse(time);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		drugPseBean.setPurchaseCode((++pseCode).toString());
-		drugPseBean.setPurchasedate(date);
-		Session session=sessionFactory.getCurrentSession();
-		session.clear();
-		session.load(dfBean, dfBean.getDosageformId());
-		session.load(dcBean, dcBean.getCategoryId());
-		session.load(duBean, duBean.getUnitnameId());
-		session.load(supBean, supBean.getSupplierId());
-		drugBean.setDrugId(UUIDBuild.getUUID());
-		drugBean.setModifyTime(date);
-		drugBean.setStatus("1");
-		drugBean.setDrugCode(++drugCode);
-		drugPseBean.setPurchaseId(UUIDBuild.getUUID());
-		hibernateTemplate.merge(drugPseBean);
-	}
-
+	 
 	@Override
 	public PageModel<DrugPurchaseBean> splitPse(Integer currPage, Integer pageSize, String keyword) {
 		String hql_count = "select count(*) from DrugPurchaseBean where drugBean.drugName like :keyword  order by purchaseCode desc";
@@ -146,7 +121,52 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 	}
 
 	@Override
-	public void updatePse(DrugPurchaseBean bean) {
+	public void updatePse(DrugPurchaseBean bean2, String time) {
+		DrugPurchaseBean bean = hibernateTemplate.get(DrugPurchaseBean.class, bean2.getPurchaseId());
+		DrugBean drugBean = hibernateTemplate.get(DrugBean.class, bean2.getDrugBean().getDrugId());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = sdf.parse(time);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		drugBean.setStocknumber(drugBean.getStocknumber()+bean2.getAmount());
+		drugBean.setModifyTime(date);
+		drugBean.setApprovalNumber(bean2.getDrugBean().getApprovalNumber());
+		drugBean.setDosageformBean(bean2.getDrugBean().getDosageformBean());
+		drugBean.setDrugCategoryBean(bean2.getDrugBean().getDrugCategoryBean());
+		drugBean.setDrugName(bean2.getDrugBean().getDrugName());
+		drugBean.setDrugUnitBean(bean2.getDrugBean().getDrugUnitBean());
+		drugBean.setManufacturer(bean2.getDrugBean().getManufacturer());
+		drugBean.setMemo(bean2.getDrugBean().getMemo());
+		drugBean.setModifier(bean2.getDrugBean().getModifier());
+		drugBean.setStatus(bean2.getDrugBean().getStatus());
+		drugBean.setOldName(bean2.getDrugBean().getOldName());
+		drugBean.setNewName(bean2.getDrugBean().getNewName());
+		
+		BigDecimal   b   =   new   BigDecimal(bean2.getPurchaseprice()*1.5); 
+		Double   f1   =   b.setScale(1,   BigDecimal.ROUND_HALF_UP).doubleValue();  
+		drugBean.setSalepeice(f1);
+		
+		BigDecimal   b2   =   new   BigDecimal(drugBean.getSalepeice()*ConstantUtils.discount); 
+		Double   f2   =   b2.setScale(1,   BigDecimal.ROUND_HALF_UP).doubleValue();  
+		drugBean.setMemberprice(f2);
+		
+		String[] supId = bean2.getSupplierBean().getSupplierId().split(",");
+		String sid = supId[supId.length-1].substring(1);
+		SupplierBean supplierBean = hibernateTemplate.get(SupplierBean.class,  sid);
+		bean.setSupplierBean(supplierBean);
+		
+		bean.setAmount(bean2.getAmount());
+		bean.setMemberprice(f2);
+		bean.setProductionDate(bean2.getProductionDate());
+		bean.setPurchasedate(bean2.getProductionDate());
+		bean.setPurchaseprice(bean2.getPurchaseprice());
+		bean.setSalepeice(f1);
+		bean.setDrugBean(drugBean);
+		bean.setValidityDate(bean2.getValidityDate());
+		getHibernateTemplate().merge(drugBean);
 		getHibernateTemplate().merge(bean);
 
 	}

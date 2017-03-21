@@ -3,8 +3,7 @@ package com.fq.po;
 // default package
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -42,7 +40,6 @@ public class DrugPurchaseBean  implements java.io.Serializable {
      private Date validityDate;
      private Double purchaseprice;
      private Double salepeice;
-     private Float totalamount;
      private Date purchasedate;
      private Double memberprice;
 
@@ -60,7 +57,7 @@ public class DrugPurchaseBean  implements java.io.Serializable {
     }
     
     /** full constructor */
-    public DrugPurchaseBean(String purchaseId, DrugBean drugBean, UserBean userBean, SupplierBean supplierBean, String purchaseCode, String drugname, Integer amount, Date productionDate, Date validityDate, Double purchaseprice, Double salepeice, Float totalamount, Date purchasedate, Double memberprice ) {
+    public DrugPurchaseBean(String purchaseId, DrugBean drugBean, UserBean userBean, SupplierBean supplierBean, String purchaseCode, String drugname, Integer amount, Date productionDate, Date validityDate, Double purchaseprice, Double salepeice,  Date purchasedate, Double memberprice ) {
         this.purchaseId = purchaseId;
         this.drugBean = drugBean;
         this.userBean = userBean;
@@ -72,7 +69,6 @@ public class DrugPurchaseBean  implements java.io.Serializable {
         this.validityDate = validityDate;
         this.purchaseprice = purchaseprice;
         this.salepeice = salepeice;
-        this.totalamount = totalamount;
         this.purchasedate = purchasedate;
         this.memberprice = memberprice;
     }
@@ -191,15 +187,6 @@ public class DrugPurchaseBean  implements java.io.Serializable {
         this.salepeice = salepeice;
     }
     
-    @Column(name="TOTALAMOUNT", precision=12, scale=0)
-
-    public Float getTotalamount() {
-        return this.totalamount;
-    }
-    
-    public void setTotalamount(Float totalamount) {
-        this.totalamount = totalamount;
-    }
     @Temporal(TemporalType.DATE)
     @Column(name="PURCHASEDATE", length=10)
 

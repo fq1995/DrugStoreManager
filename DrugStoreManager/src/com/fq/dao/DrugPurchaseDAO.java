@@ -21,16 +21,13 @@ public interface DrugPurchaseDAO {
 	
 	DrugPurchaseBean selectPseByDrugId(String id);
 	
-	void addPse(Integer drugCode, Integer pseCode, SupplierBean supBean, DosageformBean dfBean, DrugCategoryBean dcBean, DrugUnitBean duBean, DrugBean drugBean,
-			DrugPurchaseBean drugPseBean, String time);
-	
 	PageModel<DrugPurchaseBean> splitPse(Integer currPage, Integer pageSize, String keyword);
 	//批量查询
 	List<DrugPurchaseBean> showAllPse(String ids);
 	//批量删除对象
 	void deleteAllPse(List<DrugPurchaseBean> list);
 	//修改
-	void updatePse(DrugPurchaseBean bean);
+	void updatePse(DrugPurchaseBean bean, String time);
 	//根据ID查询
 	DrugPurchaseBean selectById(String id);
 	//查询类别

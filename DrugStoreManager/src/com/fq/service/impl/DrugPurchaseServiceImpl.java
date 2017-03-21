@@ -60,8 +60,8 @@ public class DrugPurchaseServiceImpl implements DrugPurchaseService {
 
 
 	@Override
-	public void updatePse(DrugPurchaseBean bean) {
-		drugPseDao.updatePse(bean);
+	public void updatePse(DrugPurchaseBean bean, String time) {
+		drugPseDao.updatePse(bean,time);
 		
 	}
 
@@ -100,13 +100,7 @@ public class DrugPurchaseServiceImpl implements DrugPurchaseService {
 		return drugPseDao.selectUser();
 	}
 
-	@Override
-	public void addPse(Integer drugCode, Integer pseCode,SupplierBean supBean,DosageformBean dfBean, DrugCategoryBean dcBean, DrugUnitBean duBean, DrugBean drugBean,
-			DrugPurchaseBean drugPseBean, String time) {
-		drugPseDao.addPse(drugCode, pseCode,supBean, dfBean, dcBean, duBean, drugBean, drugPseBean, time);
-		
-	}
-
+	 
 	@Override
 	public List<SupplierBean> selectSupplier() {
 		return drugPseDao.selectSupplier();

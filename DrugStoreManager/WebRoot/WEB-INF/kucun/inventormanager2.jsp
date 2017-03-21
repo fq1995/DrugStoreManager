@@ -110,11 +110,11 @@
 						<td>${inventor.drugBean.modifyTime }</td>
 						<c:choose>
 						<c:when test="${f eq 'warn' }">
-						<td style="background-color: #F7C709">${inventor.stocknumber }</td>
+						<td style="background-color: #F7C709">${inventor.drugBean.stocknumber }</td>
 						<td style="background-color: #E6421A">${inventor.stocklimit }</td>
 						</c:when>
 						<c:otherwise>
-						<td>${inventor.stocknumber }</td>
+						<td>${inventor.drugBean.stocknumber }</td>
 						<td>${inventor.stocklimit }</td>
 						</c:otherwise>
 						</c:choose>
@@ -137,9 +137,9 @@
 			<ul class="paginList">
 				<c:if test="${page.perIndex > 0}">
 					<li class="paginItem"><a 
-						href="${pageContext.request.contextPath }/inventor_showInventor.action?currPage=1&keyword=${keyword}">首页</a></li>
+						href="${pageContext.request.contextPath }/inventor_showWarn.action?currPage=1&keyword=${keyword}">首页</a></li>
 					<li class="paginItem"><a 
-						href="${pageContext.request.contextPath }/inventor_showInventor.action?currPage=${page.perIndex}&keyword=${keyword}"><span
+						href="${pageContext.request.contextPath }/inventor_showWarn.action?currPage=${page.perIndex}&keyword=${keyword}"><span
 							class="pagepre"></span></a></li>
 				</c:if>
 				<c:forEach begin="1" end="${page.totalPage }" var="p">
@@ -149,16 +149,16 @@
 						</c:when>
 						<c:otherwise>
 							<li class="paginItem"><a 
-								href="${pageContext.request.contextPath }/inventor_showInventor.action?currPage=${p}&keyword=${keyword}">${p}</a></li>
+								href="${pageContext.request.contextPath }/inventor_showWarn.action?currPage=${p}&keyword=${keyword}">${p}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				<c:if test="${page.nextIndex > 0}">
 					<li class="paginItem"><a id="next"
-						href="${pageContext.request.contextPath }/inventor_showInventor.action?currPage=${page.nextIndex}&keyword=${keyword}"><span
+						href="${pageContext.request.contextPath }/inventor_showWarn.action?currPage=${page.nextIndex}&keyword=${keyword}"><span
 							class="pagenxt"></span></a></li>
 					<li class="paginItem"><a id="total"
-						href="${pageContext.request.contextPath }/inventor_showInventor.action?currPage=${page.totalPage}&keyword=${keyword}">尾页</a></li>
+						href="${pageContext.request.contextPath }/inventor_showWarn.action?currPage=${page.totalPage}&keyword=${keyword}">尾页</a></li>
 				</c:if>
 				&nbsp;
 				&nbsp;
@@ -207,7 +207,7 @@
 $('.tablelist tbody tr:odd').addClass('odd');
 function jump(){
 var pc = $("#select_jumpPage option:selected").text();
-window.location.href="${pageContext.request.contextPath}/inventor_showInventor.action?keyword=${keyword}&currPage="+pc;
+window.location.href="${pageContext.request.contextPath}/inventor_showWarn.action?keyword=${keyword}&currPage="+pc;
 } 
 </script>
 

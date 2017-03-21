@@ -57,6 +57,7 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		drugBean.setStocknumber(Bean.getStocklimit());
 		drugBean.setSalepeice(Bean.getDrugBean().getSalepeice());
 		drugBean.setDrugCode(++drugCode);
 		drugBean.setStatus("1");
@@ -101,12 +102,7 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 
 	}
 
-	@Override
-	public void updateInventor(InventoriesBean bean) {
-		getHibernateTemplate().merge(bean.getDrugBean());
-		getHibernateTemplate().merge(bean);
-
-	}
+	 
 
 	@Override
 	public InventoriesBean selectById(String id) {
@@ -137,8 +133,8 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 
 	@Override
 	public PageModel<InventoriesBean> splitWarn(Integer currPage, Integer pagesize, String keyword) {
-		String hql_count = "select count(*) from InventoriesBean where drugBean.drugName like :keyword and stocknumber <= stocklimit ";
-		String hql = "from InventoriesBean where drugBean.drugName like :keyword and stocknumber <= stocklimit ";
+		String hql_count = "select count(*) from InventoriesBean where drugBean.drugName like :keyword and drugBean.stocknumber <= stocklimit ";
+		String hql = "from InventoriesBean where drugBean.drugName like :keyword and drugBean.stocknumber <= stocklimit ";
 		return super.split(hql, hql_count, currPage, pagesize,keyword);
 	}
 
@@ -197,7 +193,8 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 
 	@Override
 	public void updateInventor(InventoriesBean Bean, String time) {
-		DrugBean drugBean = Bean.getDrugBean();
+		InventoriesBean bean = hibernateTemplate.get(InventoriesBean.class, Bean.getStockId());
+		DrugBean drugBean = hibernateTemplate.get(DrugBean.class, Bean.getDrugBean().getDrugId());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date =null;
 		try {
@@ -211,10 +208,22 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 		drugBean.setMemberprice(f1); 
 		drugBean.setStatus("1");
 		drugBean.setModifyTime(date);
-		Bean.setDate(date);
-		drugBean.setDrugId(UUIDBuild.getUUID());
+		drugBean.setStocknumber(Bean.getDrugBean().getStocknumber());
+		drugBean.setApprovalNumber(Bean.getDrugBean().getApprovalNumber());
+		drugBean.setDosageformBean(Bean.getDrugBean().getDosageformBean());
+		drugBean.setDrugCategoryBean(Bean.getDrugBean().getDrugCategoryBean());
+		drugBean.setDrugName(Bean.getDrugBean().getDrugName());
+		drugBean.setDrugUnitBean(Bean.getDrugBean().getDrugUnitBean());
+		drugBean.setManufacturer(Bean.getDrugBean().getManufacturer());
+		drugBean.setModifier(Bean.getDrugBean().getModifier());
+		
+		bean.setDate(date);
+		bean.setStocklimit(Bean.getStocklimit());
+		bean.setStocknumber(drugBean.getStocknumber());
+		bean.setDrugBean(drugBean); 
+		
 		getHibernateTemplate().merge(drugBean);
-		getHibernateTemplate().merge(Bean);
+		getHibernateTemplate().merge(bean);
 	}
 
 	

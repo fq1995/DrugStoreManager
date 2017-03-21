@@ -59,11 +59,7 @@ public class DrugInventorServiceImpl implements DrugInventorService {
 	}
 
 
-	@Override
-	public void updateInventor(InventoriesBean bean) {
-		drugInventorDao.updateInventor(bean);
-	}
-
+	 
 	@Override
 	public InventoriesBean selectById(String id) {
 		return drugInventorDao.selectById(id);
@@ -131,7 +127,7 @@ public class DrugInventorServiceImpl implements DrugInventorService {
 
 	@Override
 	public void updateInventor(InventoriesBean bean, String time) {
-		// TODO Auto-generated method stub
+		drugInventorDao.updateInventor(bean,time);
 		
 	}
 

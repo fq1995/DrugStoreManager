@@ -273,7 +273,7 @@
 					class="form-control" style="width:200px; display:inline" placeholder="请输入批准文号"/><i></i></li>
 				<li><label>修改人</label><input name="drugBean.modifier" type="text" id="modifier"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入修改人"/><i>必填</i></li>
-				<li><label>库存数量</label><input name="stocknumber" type="text" id="stocknumber"
+				<li><label>库存数量</label><input name="drugBean.stocknumber" type="text" id="stocknumber"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入库存数量"/><i>必填</i></li>
 				<li><label>库存下限</label><input name="stocklimit" type="text" id="stocklimit"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入库存下限"/><i>必填</i></li>

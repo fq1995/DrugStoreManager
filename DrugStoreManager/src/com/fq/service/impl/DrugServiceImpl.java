@@ -68,11 +68,7 @@ public class DrugServiceImpl implements DrugService {
 		return drugDAO.selectById(id);
 	}
 
-	@Override
-	public void updateDrug(DrugBean DrugBean) {
-		drugDAO.updateDrug(DrugBean);
-		
-	}
+	 
 
 	@Override
 	public List<DrugCategoryBean> selectCategory() {

@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset=utf-8 />
-<title>药品添加</title>
+<title>药品进货添加</title>
 <link href="css/style1.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
@@ -27,6 +27,12 @@
  		 
  	});
  	$(function() {
+ 		//返回
+ 		$("#return").click(function(){
+ 			location.href = "${pageContext.request.contextPath}/pse_showPurchase.action?currPage=1";
+ 		});
+ 		
+ 		
  		$("#drugName").css("background-color",""); 
  		$("#modifier").css("background-color",""); 
  		$("input[name='drugBean.drugCode']").css("background-color",""); 
@@ -160,7 +166,7 @@
 					class="form-control" style="width:200px; display:inline" placeholder="请输入修改人"/><i>必填</i></li>
 				
 				<li><input id="add" type="submit" class="btn btn-info btn-sm" disabled value="确认保存" />&nbsp;&nbsp;&nbsp;&nbsp;
-					<input id="return" type="button" class="btn btn-info btn-sm" onclick="javascript:history.go(-1);" value="返回" /></li>
+					<input id="return" type="button" class="btn btn-info btn-sm" value="返回" /></li>
 			</ul>
 		</form>
 	</div>
