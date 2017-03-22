@@ -60,6 +60,7 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 	@Override
 	public void addPse(Integer drugCode, Integer pseCode, DrugPurchaseBean drugPseBean, String time) {
 		DrugBean drugBean =  drugPseBean.getDrugBean();
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = null;
 		try {
@@ -67,10 +68,15 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		drugBean.setModifyTime(date);
 		drugBean.setStatus("1");
 		drugBean.setDrugId(UUIDBuild.getUUID());
-		
+		drugBean.setStocknumber(drugPseBean.getAmount());
+		DrugBean drugBean2  = exit(drugBean);
+		if(null!=drugBean2){
+			drugBean = hibernateTemplate.get(DrugBean.class, drugBean2.getDrugId());
+		}
+		drugBean.setModifyTime(date);
+		drugBean.setStocknumber(drugBean.getStocknumber()+drugPseBean.getAmount());
 		BigDecimal   b   =   new   BigDecimal(drugPseBean.getPurchaseprice()*1.5); 
 		Double   f1   =   b.setScale(1,   BigDecimal.ROUND_HALF_UP).doubleValue();  
 		drugBean.setSalepeice(f1);
@@ -78,7 +84,6 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 		BigDecimal   b2   =   new   BigDecimal(drugBean.getSalepeice()*ConstantUtils.discount); 
 		Double   f2   =   b2.setScale(1,   BigDecimal.ROUND_HALF_UP).doubleValue();  
 		drugBean.setMemberprice(f2);
-		drugBean.setStocknumber(drugPseBean.getAmount());
 		
 		drugPseBean.setSalepeice(drugBean.getSalepeice());
 		drugPseBean.setMemberprice(drugBean.getMemberprice());
@@ -231,8 +236,8 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		String str = sdf.format(date);
-		
-		String hql_count = "select count(*) from DrugPurchaseBean where drugBean.drugName like :keyword and validityDate < '"+str+"'";
+		String hql_count = "select count(*) from DrugPurchaseBean where drugBean.drugName like :keyword and  datediff(validityDate,str_to_date('"+str+"','%Y-%m-%d')) between 0 and 90 ";
+//		String hql_count = "select count(*) from DrugPurchaseBean where drugBean.drugName like :keyword and validityDate < '"+str+"'";
 		String hql = "from DrugPurchaseBean where drugBean.drugName like :keyword and datediff(validityDate,str_to_date('"+str+"','%Y-%m-%d')) between 0 and 90 ";
 		return super.split(hql, hql_count, currPage, pagesize,keyword);
 	}
@@ -272,7 +277,14 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 		return list;
 	}
 
-	
+	public DrugBean exit(DrugBean drugBean){
+		String hql ="from DrugBean as d where d.drugName =? and d.manufacturer =? and d.approvalNumber =? "
+				+ "and d.drugUnitBean =? and d.dosageformBean =? and  d.drugCategoryBean =? ";
+		List<DrugBean> drugBeanList = (List<DrugBean>) hibernateTemplate.find(hql,drugBean.getDrugName(),drugBean.getManufacturer(),
+				drugBean.getApprovalNumber(),drugBean.getDrugUnitBean(),drugBean.getDosageformBean(),
+				drugBean.getDrugCategoryBean());
+		return drugBeanList==null||drugBeanList.size()<=0?null:drugBeanList.get(0);
+	}
 
 
 }

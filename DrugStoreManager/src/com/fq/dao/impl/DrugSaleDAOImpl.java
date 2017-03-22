@@ -45,12 +45,12 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 	
 	@Override
 	public void addSale(String tel, DrugSalesBean bean) throws Exception {
-//		DrugSalesBean bean = hibernateTemplate.get(DrugSalesBean.class, bean2.getSalesId());
 		DrugBean drug = hibernateTemplate.get(DrugBean.class, bean.getDrugBean().getDrugId());
 		drug.setSalepeice(bean.getDrugBean().getSalepeice());
 		BigDecimal   b   =   new   BigDecimal(drug.getSalepeice()*ConstantUtils.discount); 
 		Double   f1   =   b.setScale(1,   BigDecimal.ROUND_HALF_UP).doubleValue();  
 		drug.setMemberprice(f1); 
+		drug.setStocknumber(drug.getStocknumber()-bean.getSalesVolume());
 		UserBean user = hibernateTemplate.get(UserBean.class, bean.getUserBean().getUserId());
 		bean.setDrugBean(drug);
 		bean.setUserBean(user);
@@ -114,6 +114,7 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 		BigDecimal   b   =   new   BigDecimal(drugbean.getSalepeice()*ConstantUtils.discount); 
 		Double   f1   =   b.setScale(1,   BigDecimal.ROUND_HALF_UP).doubleValue();  
 		drugbean.setMemberprice(f1);
+		drugbean.setStocknumber(drugbean.getStocknumber()-bean.getSalesVolume());
 		bean.setDrugBean(drugbean);
 		bean.setSalesDate(date);
 		bean.setMemberprice(f1);
@@ -194,7 +195,7 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 
 	@Override
 	public List<DrugBean> comboGrid() {
-		String hql = "from DrugBean order by drugName";
+		String hql = "from DrugBean group by drugName order by drugName";
 		List<DrugBean> list = (List<DrugBean>) hibernateTemplate.find(hql);
 		return list;
 	}

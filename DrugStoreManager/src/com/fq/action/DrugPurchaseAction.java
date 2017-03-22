@@ -103,7 +103,7 @@ public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPu
 		}
 		PageModel<DrugPurchaseBean> page = drugPseService.splitOverDate(currPage, ConstantUtils.PAGESIZE, keyword);
 		request.put("page", page);
-		return "showPurchase";
+		return "showOverDate";
 	}
 
 	/**

@@ -147,11 +147,33 @@
 			</div>
 			<ul class="paginList">
 				<c:if test="${page.perIndex > 0}">
-					<li class="paginItem"><a 
-						href="${pageContext.request.contextPath }/pse_showPurchase.action?currPage=1&keyword=${keyword}">首页</a></li>
-					<li class="paginItem"><a 
-						href="${pageContext.request.contextPath }/pse_showPurchase.action?currPage=${page.perIndex}&keyword=${keyword}"><span
-							class="pagepre"></span></a></li>
+					<li class="paginItem">
+						<c:choose>
+						<c:when test="${f eq 'datawarn'}">
+						  <a href="${pageContext.request.contextPath }/pse_showDateWarn.action?currPage=1&keyword=${keyword}">首页</a>
+						</c:when>
+						<c:when test="${f eq 'overdata'}">
+						  <a href="${pageContext.request.contextPath }/pse_showOverDate.action?currPage=1&keyword=${keyword}">首页</a>
+						</c:when>
+						<c:otherwise>
+						  <a href="${pageContext.request.contextPath }/pse_showPurchase.action?currPage=1&keyword=${keyword}">首页</a>
+						</c:otherwise>
+						</c:choose>
+						
+					</li>
+					<li class="paginItem">
+						<c:choose>
+						<c:when test="${f eq 'datawarn'}">
+						  <a href="${pageContext.request.contextPath }/pse_showDateWarn.action?currPage=${page.perIndex}&keyword=${keyword}"> <span class="pagepre"></span></a>
+						</c:when>
+						<c:when test="${f eq 'overdata'}">
+						  <a href="${pageContext.request.contextPath }/pse_showOverDate.action?currPage=${page.perIndex}&keyword=${keyword}"> <span class="pagepre"></span></a>
+						</c:when>
+						<c:otherwise>
+						  <a href="${pageContext.request.contextPath }/pse_showPurchase.action?currPage=${page.perIndex}&keyword=${keyword}"> <span class="pagepre"></span></a>
+						</c:otherwise>
+						</c:choose>
+					</li>
 				</c:if>
 				<c:forEach begin="1" end="${page.totalPage }" var="p">
 					<c:choose>
@@ -159,17 +181,49 @@
 							<li class="paginItem"><a  href="#" style="background-color:#337AB7;color:#FFFFFF">${p}</a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="paginItem"><a 
-								href="${pageContext.request.contextPath }/pse_showPurchase.action?currPage=${p}&keyword=${keyword}">${p}</a></li>
+							<li class="paginItem">
+								<c:choose>
+								<c:when test="${f eq 'datawarn'}">
+								  <a href="${pageContext.request.contextPath }/pse_showDateWarn.action?currPage=${p}&keyword=${keyword}">${p}</a>
+								</c:when>
+								<c:when test="${f eq 'overdata'}">
+								 <a href="${pageContext.request.contextPath }/pse_showOverDate.action?currPage=${p}&keyword=${keyword}">${p}</a>
+								</c:when>
+								<c:otherwise>
+								  <a href="${pageContext.request.contextPath }/pse_showPurchase.action?currPage=${p}&keyword=${keyword}">${p}</a>
+								</c:otherwise>
+								</c:choose>
+							</li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				<c:if test="${page.nextIndex > 0}">
-					<li class="paginItem"><a id="next"
-						href="${pageContext.request.contextPath }/pse_showPurchase.action?currPage=${page.nextIndex}&keyword=${keyword}"><span
-							class="pagenxt"></span></a></li>
-					<li class="paginItem"><a id="total"
-						href="${pageContext.request.contextPath }/pse_showPurchase.action?currPage=${page.totalPage}&keyword=${keyword}">尾页</a></li>
+					<li class="paginItem">
+						<c:choose>
+									<c:when test="${f eq 'datawarn'}">
+									  <a id="next" href="${pageContext.request.contextPath }/pse_showDateWarn.action?currPage=${page.nextIndex}&keyword=${keyword}"><span class="pagenxt"></span></a>
+									</c:when>
+									<c:when test="${f eq 'overdata'}">
+									 <a id="next" href="${pageContext.request.contextPath }/pse_showOverDate.action?currPage=${page.nextIndex}&keyword=${keyword}"><span class="pagenxt"></span></a>
+									</c:when>
+									<c:otherwise>
+									  <a id="next" href="${pageContext.request.contextPath }/pse_showPurchase.action?currPage=${page.nextIndex}&keyword=${keyword}"><span class="pagenxt"></span></a>
+									</c:otherwise>
+						</c:choose>
+					</li>
+					<li class="paginItem">
+						<c:choose>
+										<c:when test="${f eq 'datawarn'}">
+										  <a id="total" href="${pageContext.request.contextPath }/pse_showDateWarn.action?currPage=${page.totalPage}&keyword=${keyword}">尾页</a>
+										</c:when>
+										<c:when test="${f eq 'overdata'}">
+										 <a id="total" href="${pageContext.request.contextPath }/pse_showOverDate.action?currPage=${page.totalPage}&keyword=${keyword}">尾页</a>
+										</c:when>
+										<c:otherwise>
+										  <a id="total" href="${pageContext.request.contextPath }/pse_showPurchase.action?currPage=${page.totalPage}&keyword=${keyword}">尾页</a>
+										</c:otherwise>
+						</c:choose>
+					</li>
 				</c:if>
 				&nbsp;
 				&nbsp;
@@ -213,12 +267,19 @@
 
 		</div>
 	</div>
+	<input type="hidden" name="f" id="f" value="${f}" />
 </body>
 <script type="text/javascript">
 $('.tablelist tbody tr:odd').addClass('odd');
 function jump(){
 var pc = $("#select_jumpPage option:selected").text();
-window.location.href="${pageContext.request.contextPath}/pse_showPurchase.action?keyword=${keyword}&currPage="+pc;
+var f = $("#f").val();
+if(f == 'datawarn'){
+	window.location.href="${pageContext.request.contextPath}/pse_showDateWarn.action?keyword=${keyword}&currPage="+pc;
+}else if(f == 'overdata'){
+	window.location.href="${pageContext.request.contextPath}/pse_showOverDate.action?keyword=${keyword}&currPage="+pc;
+}else
+	window.location.href="${pageContext.request.contextPath}/pse_showPurchase.action?keyword=${keyword}&currPage="+pc;
 } 
 </script>
 
