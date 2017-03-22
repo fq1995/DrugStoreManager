@@ -13,38 +13,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>药品采购单管理</title>
 <link href="<%=basePath%>css/style1.css" rel="stylesheet" type="text/css" />
-<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<%-- <link rel="stylesheet" href="<%=basePath%>css/lanrenzhijia.css" media="all"> --%>
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.min.js"></script>
 <script src="<%=basePath%>js/buymanager_operation.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
-		<script>
-			jQuery(document).ready(function($) {
-				 $(".theme-login").on("mouseenter", function () {
-					
-				    var $this = $(this);
-				    var realPath = $(this).attr("id");
-				    //alert(realPath);
-					$("#images").attr("src",realPath); 
-					
-					
-				    $this.find(".theme-popover-mask").show();
-				    $('.theme-popover').slideDown(200);
-				}).on("mouseleave", function () {
-				    var $this = $(this);
-				    $this.find(".theme-popover-mask").hide();
-				    $('.theme-popover').slideUp(200);
-				    
-				}); 
-				 $('.theme-poptit .close').click(function() {
-						$('.theme-popover-mask').fadeOut(100);
-						$('.theme-popover').slideUp(200);
-				});
-				 
-			})
-		</script>
- 
-
+<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
 <style type="text/css">
 	th,td  

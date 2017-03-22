@@ -12,8 +12,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>药品剂型管理</title>
 <link href="<%=basePath%>css/style1.css" rel="stylesheet" type="text/css" />
-<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.min.js"></script>
+<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
 <script src="<%=basePath%>js/formmanager_operation.js" type="text/javascript" charset="utf-8"></script>
 <style type="text/css">
