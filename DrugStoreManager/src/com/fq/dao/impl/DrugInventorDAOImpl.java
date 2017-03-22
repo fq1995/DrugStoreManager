@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
@@ -16,12 +15,12 @@ import org.springframework.stereotype.Repository;
 import com.fq.dao.DrugInventorDAO;
 import com.fq.po.DosageformBean;
 import com.fq.po.DrugBean;
+import com.fq.po.DrugBuy;
 import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugUnitBean;
 import com.fq.po.InventoriesBean;
 import com.fq.util.BaseDAO;
 import com.fq.util.ConstantUtils;
-import com.fq.po.DrugBuy;
 import com.fq.util.PageModel;
 import com.fq.util.UUIDBuild;
 @Repository("drugInventorDAO")
@@ -29,9 +28,7 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
-	@Autowired
-	private SessionFactory sessionFactory;
-	
+	 
 	@Override
 	public InventoriesBean selectInventorByName(String name) {
 		String hql ="from InventoriesBean where drugBean.drugName=? and drugBean.status=1";
@@ -57,25 +54,29 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		drugBean.setStocknumber(Bean.getStocklimit());
-		drugBean.setSalepeice(Bean.getDrugBean().getSalepeice());
+		drugBean.setDrugId(UUIDBuild.getUUID());
 		drugBean.setDrugCode(++drugCode);
 		drugBean.setStatus("1");
+		DrugBean drugBean2 = exit(drugBean);
+		if(null!=drugBean2){
+			drugBean = getHibernateTemplate().get(DrugBean.class, drugBean2.getDrugId());
+		}
+		drugBean.setStocknumber(Bean.getStocklimit());
+		drugBean.setSalepeice(Bean.getDrugBean().getSalepeice());
 		drugBean.setModifyTime(date);
 		Bean.setStockCode((++code).toString());
 		Bean.setDate(date);
 		Bean.setStockId(UUIDBuild.getUUID());
-		Session session=sessionFactory.getCurrentSession();
-		drugBean.setDrugId(UUIDBuild.getUUID());
-		session.save(drugBean);
-		session.merge(Bean);
+		Bean.setDrugBean(drugBean);
+		hibernateTemplate.merge(drugBean);
+		hibernateTemplate.merge(Bean);
 	}
 
 
 	@Override
 	public PageModel<InventoriesBean> splitInventor(Integer currPage, Integer pageSize, String keyword) {
 		String hql_count = "select count(*) from InventoriesBean where drugBean.drugName like :keyword " ;
-		String hql = "from InventoriesBean where drugBean.drugName like :keyword order by drugBean.drugCode desc";
+		String hql = "from InventoriesBean where drugBean.drugName like :keyword order by date desc";
 		return super.split(hql, hql_count, currPage, pageSize,keyword);
 	}
 
@@ -101,8 +102,6 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 		getHibernateTemplate().deleteAll(list);
 
 	}
-
-	 
 
 	@Override
 	public InventoriesBean selectById(String id) {
@@ -225,7 +224,31 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 		getHibernateTemplate().merge(drugBean);
 		getHibernateTemplate().merge(bean);
 	}
+	
+	public DrugBean exit(DrugBean drugBean){
+		String hql ="from DrugBean as d where d.drugName =? and d.manufacturer =? and d.approvalNumber =? "
+				+ "and d.drugUnitBean =? and d.dosageformBean =? and  d.drugCategoryBean =? ";
+		List<DrugBean> drugBeanList = (List<DrugBean>) hibernateTemplate.find(hql,drugBean.getDrugName(),drugBean.getManufacturer(),
+				drugBean.getApprovalNumber(),drugBean.getDrugUnitBean(),drugBean.getDosageformBean(),
+				drugBean.getDrugCategoryBean());
+		return drugBeanList==null||drugBeanList.size()<=0?null:drugBeanList.get(0);
+	}
 
+	@Override
+	public Double getSaleByName(String drugName) {
+		DrugBean drug = new DrugBean();
+		List<DrugBean> drugList = null;
+		String hql ="from DrugBean where drugName=? and status=1";
+		if(null!=drugName && !"".equals(drugName)){
+			drugList = (List<DrugBean>) hibernateTemplate.find(hql, drugName);
+		}
+		if(drugList==null||drugList.size()<=0){
+			return  null;
+		}else{
+			drug = drugList.get(0);
+		}
+		return drug.getSalepeice();
+	}
 	
 
 }

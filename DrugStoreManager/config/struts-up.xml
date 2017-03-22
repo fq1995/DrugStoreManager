@@ -173,6 +173,9 @@
 			<result name="ajax_stats" type="json">
 				<param name="root">json</param>
 			</result>
+			<result name="ajax_getSale" type="json">
+				<param name="root">salepeice</param>
+			</result>
 		</action>
 
 		<!-- 销售管理 -->

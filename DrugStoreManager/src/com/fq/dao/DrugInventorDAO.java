@@ -41,8 +41,10 @@ public interface DrugInventorDAO {
 	PageModel<InventoriesBean> splitWarn(Integer currPage, Integer pagesize, String keyword);
 	//查询编号
 	Integer select();
-	
+	//添加进采购单
 	List<DrugBuy> addPurchase(List<InventoriesBean> list);
 	//统计
 	List<InventoriesBean> stats();
+	//根据药品名称获取价格
+	Double getSaleByName(String drugName);
 }

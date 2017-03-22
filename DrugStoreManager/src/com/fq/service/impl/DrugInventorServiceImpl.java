@@ -131,6 +131,11 @@ public class DrugInventorServiceImpl implements DrugInventorService {
 		
 	}
 
+	@Override
+	public Double getSaleByName(String drugName) {
+		return drugInventorDao.getSaleByName(drugName);
+	}
+
 	
 
 }

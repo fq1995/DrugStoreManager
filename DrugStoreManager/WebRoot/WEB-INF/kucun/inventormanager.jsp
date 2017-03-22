@@ -117,8 +117,6 @@
 						</c:otherwise>
 						</c:choose>
 						
-						 
-						
 						<td>${inventor.drugBean.memo }</td>
 						<td>${inventor.date }</td>
 					

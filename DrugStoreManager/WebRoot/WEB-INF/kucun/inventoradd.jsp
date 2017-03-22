@@ -13,8 +13,8 @@
 <title>库存药品添加</title>
 <link href="css/style1.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
 <script type="text/javascript">
  	$(function(){
  		var str = "";
@@ -37,6 +37,20 @@
  		
  		
  		//售价
+ 		/* $("#salepeice").focus(function(){
+ 			var drugName = $("#drugName").val(); 
+ 			$.ajax({
+ 				url:'inventor_getSaleByName.action',
+ 				type:'POST',
+ 				data:{'drugName':drugName},
+ 				dataType:'json',
+ 				success:function(data){
+ 					$("#salepeice").val(data);
+ 			    }  
+ 	  		});
+ 		}); */
+ 		
+ 		
  		$("#salepeice").blur(function(){
  			var name = $("#salepeice").val(); 
  	        if($.trim(name) == "" || name.length == 0 ){
@@ -104,6 +118,15 @@
  	        }else{
  	        	$("#drugName").css("background-color",""); 
  	        	$("#add").attr("disabled",false);   
+ 	        	$.ajax({
+ 	 				url:'inventor_getSaleByName.action',
+ 	 				type:'POST',
+ 	 				data:{'drugName':name},
+ 	 				dataType:'json',
+ 	 				success:function(data){
+ 	 					$("#salepeice").val(data);
+ 	 			    }  
+ 	 	  		});
  	        }
  		});
  		

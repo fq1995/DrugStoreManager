@@ -16,7 +16,6 @@
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
 <script src="<%=basePath%>js/formmanager_operation.js" type="text/javascript" charset="utf-8"></script>
-<%-- <script src="<%=basePath%>js/usermanager_page.js" type="text/javascript" charset="utf-8"></script> --%>
 <style type="text/css">
 	th,td  
 	{  

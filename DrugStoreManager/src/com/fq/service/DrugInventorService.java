@@ -59,5 +59,8 @@ public interface DrugInventorService {
 	//统计
 	String stats();
 	
+	//根据药品名称获取价格
+	Double getSaleByName(String drugName);
+	
 	 
 }

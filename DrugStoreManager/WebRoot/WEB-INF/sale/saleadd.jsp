@@ -13,12 +13,12 @@
 <title>药品销售添加</title>
 <link href="css/style1.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>  
 <link rel="stylesheet" type="text/css" href="<%=basePath%>js/jquery-easyui-1.5/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="<%=basePath%>js/jquery-easyui-1.5/themes/icon.css">
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>  
 <script type="text/javascript">
 	
  	$(function(){

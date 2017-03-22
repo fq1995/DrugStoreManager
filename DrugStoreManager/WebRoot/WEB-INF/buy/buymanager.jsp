@@ -43,11 +43,7 @@
 				 
 			})
 		</script>
-<script type="text/javascript">
-	$(function(){
-		
-	})
-</script>
+ 
 
 
 <style type="text/css">

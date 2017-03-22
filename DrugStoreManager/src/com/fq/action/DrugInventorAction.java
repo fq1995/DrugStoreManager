@@ -46,6 +46,8 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 	private Integer drugCode;
 	private String f;
 	private String json;
+	private String drugName;
+	private Double salepeice ;
 	@Autowired
 	private DrugInventorService inventorService;
 	@Autowired
@@ -226,7 +228,14 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 		InventoriesBean bean = inventorService.selectInventorByDrugcode(inventoriesBean.getDrugBean().getDrugCode());
 		return bean;
 	}
-
+	/**
+	 * 根据药品名称获取价格
+	 */
+	public String getSaleByName(){
+		drugName = ServletActionContext.getRequest().getParameter("drugName");
+		salepeice = inventorService.getSaleByName(drugName);
+		return "ajax_getSale";
+	}
 	/**
 	 * ajax校验药品名是否可用
 	 */
@@ -341,6 +350,12 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 
 	public void setJson(String json) {
 		this.json = json;
+	}
+	public Double getSalepeice() {
+		return salepeice;
+	}
+	public void setSalepeice(Double salepeice) {
+		this.salepeice = salepeice;
 	}
 	
 	
