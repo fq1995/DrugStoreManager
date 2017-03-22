@@ -58,6 +58,9 @@ public class DrugDAOImpl extends BaseDAO<DrugBean> implements DrugDAO {
 		drugBean.setModifyTime(date);
 		drugBean.setDrugId(UUIDBuild.getUUID());
 		drugBean.setStatus("1");
+		if(null == drugBean.getNewName() || "".equals(drugBean.getNewName())){
+			drugBean.setNewName("zanwu.png");
+		}
 		if(null != drugBean.getSalepeice()){
 			drugBean.setMemberprice(drugBean.getSalepeice()*ConstantUtils.discount);
 		}

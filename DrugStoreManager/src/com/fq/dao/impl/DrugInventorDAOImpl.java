@@ -61,12 +61,13 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 		if(null!=drugBean2){
 			drugBean = getHibernateTemplate().get(DrugBean.class, drugBean2.getDrugId());
 		}
-		drugBean.setStocknumber(Bean.getStocklimit());
+		drugBean.setStocknumber(Bean.getDrugBean().getStocknumber());
 		drugBean.setSalepeice(Bean.getDrugBean().getSalepeice());
 		drugBean.setModifyTime(date);
 		Bean.setStockCode((++code).toString());
 		Bean.setDate(date);
 		Bean.setStockId(UUIDBuild.getUUID());
+		Bean.setStocknumber(Bean.getDrugBean().getStocknumber());
 		Bean.setDrugBean(drugBean);
 		hibernateTemplate.merge(drugBean);
 		hibernateTemplate.merge(Bean);

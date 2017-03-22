@@ -148,6 +148,7 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 	 * 上传图片
 	 */
 	public String addPicture(){
+		
 		if(photo != null){
 			//利用程序建立upload文件
 			/*String path=ServletActionContext.getServletContext().getRealPath("/upload");*/
@@ -179,6 +180,10 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 				mess="上传失敗"; 
 				e.printStackTrace();
 			}
+		}else{
+			String path = ServletActionContext.getServletContext().getRealPath("\\/images\\/zanwu.png");
+			photo = new File(path);
+			addPicture();
 		}
 		return "";
 		
