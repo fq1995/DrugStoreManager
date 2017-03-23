@@ -21,22 +21,7 @@
 $(function(){
 	//清空
 	$("#clear").click(function(){
-		//未实现列表清空
-		
-		/* if($("#dosageformId").find("option:selected").text() != null){
-			$("#dosageformId").append("<option value=''>"+'请选择剂型'+"</option>");
-		}
-		if($("#unitnameId").find("option:selected").text() != null){
-			$("#unitnameId").append("<option value=''>"+'请选择单位'+"</option>");
-		}
-		if($("#categoryId").find("option:selected").text() != null){
-			$("#categoryId").append("<option value=''>"+'请选择类别'+"</option>");
-		}
-		$("#dosageformId").find("option[text='']").attr("selected",true);
-		$("#unitnameId").find("option[text='']").attr("selected",true);
-		$("#categoryId").find("option[text='']").attr("selected",true); */
-		
-		
+		window.location.href="${pageContext.request.contextPath}/drug_clear.action";
 		$("#drugName").val('');
 		$("#manufacturer").val('');
 		$("#modifyTime").val('');

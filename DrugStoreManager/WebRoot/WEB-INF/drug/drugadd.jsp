@@ -41,7 +41,8 @@
  		//销售价
  		$("#salepeice").blur(function(){
  			var name = $("#salepeice").val(); 
- 			var reg = /^[0-9].*$/;
+// 			var reg = /[1-9]\d{0,9}(\.\d{1,2})?|0\.[1-9]\d?|0\.0[1-9]/;
+ 			var reg = /(^[1-9]\d*(\.\d{1,2})?$)|(^[0]{1}(\.\d{1,2})?$)/;			
  	        if($.trim(name) == "" || name.length == 0 ){
  	        	$("#salepeice").css("background-color","#FFB9B9"); 
  	        	$("#add").attr("disabled",true);   
@@ -147,7 +148,7 @@
 	 		var unitname = $("#unitname").val(); 
 	 		var category = $("#category").val(); 
 	 		var salepeice = $("#salepeice").val(); 
-	 		var reg = /^[0-9].*$/;
+	 		var reg = /(^[1-9]\d*(\.\d{1,2})?$)|(^[0]{1}(\.\d{1,2})?$)/;	
  			if(!reg.test(salepeice) || $.trim(category) == "" || category.length == 0 || $.trim(category) == "" || category.length == 0 || $.trim(unitname) == "" || unitname.length == 0 || $.trim(dosageform) == "" || dosageform.length == 0 || $.trim(name) == "" || name.length == 0 || $.trim(pass) == "" || pass.length == 0 ){
  				$("#add").attr("disabled",false);  
  				return false;
@@ -169,7 +170,7 @@
  	 			var salepeice = $("#salepeice").val(); 
  	 			var approvalNumber = $("#approvalNumber").val();
  	 			var manufacturer = $("#manufacturer").val();
- 	 			var reg = /^[0-9].*$/;
+ 	 			var reg = /(^[1-9]\d*(\.\d{1,2})?$)|(^[0]{1}(\.\d{1,2})?$)/;	
  	 			if($.trim(name) == "" || name.length == 0){
  	 				alert("请输入药品名");
  	 				return false;
@@ -289,7 +290,7 @@
 				<li><label>批准文号</label><input name="approvalNumber" type="text"
 					id="approvalNumber" class="form-control"
 					style="width: 200px; display: inline" placeholder="请输入批准文号" /><i></i></li>
-				<li><label>修改人</label><input name="modifier" type="text" value="${sessionScope.username }" readonly="readonly"
+				<li><label>修改人</label><input name="modifier" type="text" value="${sessionScope.username }"  
 					id="modifier" class="form-control"
 					style="width: 200px; display: inline" placeholder="请输入修改人" /><i></i></li>
 				<li><label>上传图片</label> 

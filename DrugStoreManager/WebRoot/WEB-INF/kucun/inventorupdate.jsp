@@ -37,9 +37,25 @@ $(function(){
 		
 		
 		//售价
+		/* $("#salepeice").focus(function(){
+			var drugName = $("#drugName").val(); 
+			$.ajax({
+				url:'inventor_getSaleByName.action',
+				type:'POST',
+				data:{'drugName':drugName},
+				dataType:'json',
+				success:function(data){
+					$("#salepeice").val(data);
+			    }  
+	  		});
+		}); */
 		$("#salepeice").blur(function(){
 			var name = $("#salepeice").val(); 
+			var reg = /(^[1-9]\d*(\.\d{1,2})?$)|(^[0]{1}(\.\d{1,2})?$)/;	
 	        if($.trim(name) == "" || name.length == 0 ){
+	        	$("#salepeice").css("background-color","#FFB9B9"); 
+	        	$("#add").attr("disabled",true);   
+	        }else if(!reg.test(name)){
 	        	$("#salepeice").css("background-color","#FFB9B9"); 
 	        	$("#add").attr("disabled",true);   
 	        }else{
@@ -104,6 +120,15 @@ $(function(){
 	        }else{
 	        	$("#drugName").css("background-color",""); 
 	        	$("#add").attr("disabled",false);   
+	        	$.ajax({
+	 				url:'inventor_getSaleByName.action',
+	 				type:'POST',
+	 				data:{'drugName':name},
+	 				dataType:'json',
+	 				success:function(data){
+	 					$("#salepeice").val(data);
+	 			    }  
+	 	  		});
 	        }
 		});
 		
@@ -161,7 +186,8 @@ $(function(){
  		var category = $("#category").val(); 
  		var salepeice = $("#salepeice").val();
  		var reg = /^\+?[1-9][0-9]*$/;
-			if(!reg.test(number) || !reg.test(number) || $.trim(category) == "" || category.length == 0 || $.trim(unitname) == "" || unitname.length == 0 || $.trim(dosageform) == "" || dosageform.length == 0 || $.trim(name) == "" || name.length == 0 || $.trim(pass) == "" || pass.length == 0 || $.trim(number) == "" || number.length == 0 && $.trim(limit) == "" || limit.length == 0 || $.trim(salepeice) == "" || salepeice.length == 0){
+ 		var reg2 = /(^[1-9]\d*(\.\d{1,2})?$)|(^[0]{1}(\.\d{1,2})?$)/;
+			if(!reg2.test(salepeice) || !reg.test(limit) || !reg.test(number) || $.trim(category) == "" || category.length == 0 || $.trim(unitname) == "" || unitname.length == 0 || $.trim(dosageform) == "" || dosageform.length == 0 || $.trim(name) == "" || name.length == 0 || $.trim(pass) == "" || pass.length == 0 || $.trim(number) == "" || number.length == 0 || $.trim(limit) == "" || limit.length == 0 || $.trim(salepeice) == "" || salepeice.length == 0){
 				$("#add").attr("disabled",false);  
 				return false;
 			}else{
@@ -183,6 +209,7 @@ $(function(){
 	 			var category = $("#category").val(); 
 	 			var salepeice = $("#salepeice").val();
 	 			var reg = /^\+?[1-9][0-9]*$/;
+	 			var reg2 = /(^[1-9]\d*(\.\d{1,2})?$)|(^[0]{1}(\.\d{1,2})?$)/;
 	 			if($.trim(name) == "" || name.length == 0){
 	 				alert("请输入药品名");
 	 				return false;
@@ -195,8 +222,8 @@ $(function(){
 	 			}else if($.trim(category) == "" || category.length == 0){
 	 				alert("请选择药品类别");
 	 				return false;
-	 			}else if($.trim(salepeice) == "" || salepeice.length == 0){
-	 				alert("请输入销售价格");
+	 			}else if($.trim(salepeice) == "" || salepeice.length == 0 || !reg2.test(salepeice)){
+	 				alert("请输入正确的销售价格");
 	 				return false;
 	 			}else if($.trim(pass) == "" || pass.length == 0){
 	 				alert("请输入修改人");

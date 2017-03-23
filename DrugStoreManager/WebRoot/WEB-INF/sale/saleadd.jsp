@@ -12,13 +12,13 @@
 <meta charset=utf-8 />
 <title>药品销售添加</title>
 <link href="css/style1.css" rel="stylesheet" type="text/css" />
+<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="<%=basePath%>js/jquery-easyui-1.5/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="<%=basePath%>js/jquery-easyui-1.5/themes/icon.css">
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-easyui-1.5/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>  
-<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 	
  	$(function(){
@@ -158,7 +158,11 @@
  		//药品单价非空
  		$("#salepeice").blur(function(){
  			var name = $("input[name='drugBean.salepeice']").val(); 
+ 			var reg = /(^[1-9]\d*(\.\d{1,2})?$)|(^[0]{1}(\.\d{1,2})?$)/;	
  	        if($.trim(name) == "" || name.length == 0 ){
+ 	        	$("#salepeice").css("background-color","#FFB9B9"); 
+ 	        	$("#add").attr("disabled",true);   
+ 	        }else if(!reg.test(name)){
  	        	$("#salepeice").css("background-color","#FFB9B9"); 
  	        	$("#add").attr("disabled",true);   
  	        }else{
@@ -170,8 +174,12 @@
  		//药品总价非空
  		$("#totalamount").blur(function(){
  			var name = $("input[name='totalamount']").val(); 
+ 			var reg = /(^[1-9]\d*(\.\d{1,2})?$)|(^[0]{1}(\.\d{1,2})?$)/;	
  	        if($.trim(name) == "" || name.length == 0 ){
  	        	$("#totalamount").css("background-color","#FFB9B9"); 
+ 	        	$("#add").attr("disabled",true);   
+ 	        }else if(!reg.test(name)){
+ 	        	$("#salepeice").css("background-color","#FFB9B9"); 
  	        	$("#add").attr("disabled",true);   
  	        }else{
  	        	$("#totalamount").css("background-color",""); 
@@ -202,20 +210,21 @@
  			var totalamount = $("input[name='totalamount']").val(); 
  			var modifier = $("#modifier").val();
  			var volue = $("#salesVolume").val();
- 			
+ 			var reg = /(^[1-9]\d*(\.\d{1,2})?$)|(^[0]{1}(\.\d{1,2})?$)/;	
+ 			var reg2 = /^[1-9]\d*$/;
  			if($.trim(name) == "" || name.length == 0 ){
  	        	$("#drugName").css("background-color","#FFB9B9"); 
  	        	alert("请选择药品名称");
  	        	return false;
- 	        }else if($.trim(salepeice) == "" || salepeice.length == 0 ||name.length >10){
+ 	        }else if($.trim(salepeice) == "" || salepeice.length == 0  || !reg.test(salepeice)){
  	        	$("#salepeice").css("background-color","#FFB9B9"); 
  	        	alert("请输入药品单价");
  	        	return false; 
- 	        }else if($.trim(volue) == "" || volue.length == 0 ){
+ 	        }else if($.trim(volue) == "" || volue.length == 0 ||  !reg2.test(volue)){
 	 	        $("#salesVolume").css("background-color","#FFB9B9"); 
 	 	       alert("请输入销售数量");
 	 	       return false;
-		 	}else if($.trim(totalamount) == "" || totalamount.length == 0 ){
+		 	}else if($.trim(totalamount) == "" || totalamount.length == 0 || !reg.test(totalamount)){
  	        	$("#totalamount").css("background-color","#FFB9B9"); 
  	        	alert("请输入销售总价");
  	        	return false; 

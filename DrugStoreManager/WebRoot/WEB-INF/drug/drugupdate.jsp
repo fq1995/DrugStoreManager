@@ -38,7 +38,7 @@
  		//销售价
  		$("#salepeice").blur(function(){
  			var name = $("#salepeice").val(); 
- 			var reg = /^[0-9].*$/;
+ 			var reg = /(^[1-9]\d*(\.\d{1,2})?$)|(^[0]{1}(\.\d{1,2})?$)/;	
  	        if($.trim(name) == "" || name.length == 0 ){
  	        	$("#salepeice").css("background-color","#FFB9B9"); 
  	        	$("#add").attr("disabled",true);   
@@ -145,7 +145,7 @@
 	 		var unitname = $("#unitname").val(); 
 	 		var category = $("#category").val(); 
 	 		var salepeice = $("#salepeice").val(); 
-	 		var reg = /^[0-9].*$/;
+	 		var reg = /(^[1-9]\d*(\.\d{1,2})?$)|(^[0]{1}(\.\d{1,2})?$)/;	
  			if(!reg.test(salepeice) || $.trim(category) == "" || category.length == 0 || $.trim(category) == "" || category.length == 0 || $.trim(unitname) == "" || unitname.length == 0 || $.trim(dosageform) == "" || dosageform.length == 0 || $.trim(name) == "" || name.length == 0 || $.trim(pass) == "" || pass.length == 0 ){
  				$("#add").attr("disabled",false);  
  				return false;
@@ -165,7 +165,7 @@
  	 			var unitname = $("#unitname").val(); 
  	 			var category = $("#category").val(); 
  	 			var salepeice = $("#salepeice").val(); 
- 	 			var reg = /^[0-9].*$/;
+ 	 			var reg = /(^[1-9]\d*(\.\d{1,2})?$)|(^[0]{1}(\.\d{1,2})?$)/;	
  	 			if($.trim(name) == "" || name.length == 0){
  	 				alert("请输入药品名");
  	 				return false;
@@ -215,6 +215,8 @@
 			<input type="hidden" name="time">
 			<input type="hidden" name="drugId" value="${drug.drugId }">
 			<input type="hidden" name="stocknumber" value="${drug.stocknumber }">
+			<input type="hidden" name="oldName" value="${drug.oldName}" >
+			<input type="hidden" name="newName" value="${drug.newName}" >
 
 			<ul class="forminfo">
 				<li><label>药品编号</label><input name="drugCode" type="text" id="drugCode" value="${drug.drugCode }" readonly="readonly"
@@ -250,7 +252,7 @@
 				<li><label>产品说明</label><input name="memo" type="text" id="memo" value="${drug.memo }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入产品说明"/><i></i></li>
 				<li><label>药品图片</label>
-				<img alt="" src="${pageContext.request.contextPath}/upload/${drug.oldName}" style="width:80px;height:48px ">
+				<img alt="" src="/picturepath/${drug.newName}" style="width:80px;height:48px ">
 				<input name="photo" type="file" id="photo" style="border: none"></li>				
 				<li><label>批准文号</label><input name="approvalNumber" type="text" id="approvalNumber" value="${drug.approvalNumber }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入批准文号"/><i></i></li>

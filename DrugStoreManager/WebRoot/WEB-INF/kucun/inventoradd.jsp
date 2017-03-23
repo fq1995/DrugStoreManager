@@ -49,11 +49,13 @@
  			    }  
  	  		});
  		}); */
- 		
- 		
  		$("#salepeice").blur(function(){
  			var name = $("#salepeice").val(); 
+ 			var reg = /(^[1-9]\d*(\.\d{1,2})?$)|(^[0]{1}(\.\d{1,2})?$)/;	
  	        if($.trim(name) == "" || name.length == 0 ){
+ 	        	$("#salepeice").css("background-color","#FFB9B9"); 
+ 	        	$("#add").attr("disabled",true);   
+ 	        }else if(!reg.test(name)){
  	        	$("#salepeice").css("background-color","#FFB9B9"); 
  	        	$("#add").attr("disabled",true);   
  	        }else{
@@ -184,7 +186,8 @@
 	 		var category = $("#category").val(); 
 	 		var salepeice = $("#salepeice").val();
 	 		var reg = /^\+?[1-9][0-9]*$/;
- 			if(!reg.test(number) || !reg.test(number) || $.trim(category) == "" || category.length == 0 || $.trim(unitname) == "" || unitname.length == 0 || $.trim(dosageform) == "" || dosageform.length == 0 || $.trim(name) == "" || name.length == 0 || $.trim(pass) == "" || pass.length == 0 || $.trim(number) == "" || number.length == 0 && $.trim(limit) == "" || limit.length == 0 || $.trim(salepeice) == "" || salepeice.length == 0){
+	 		var reg2 = /(^[1-9]\d*(\.\d{1,2})?$)|(^[0]{1}(\.\d{1,2})?$)/;
+ 			if(!reg2.test(salepeice) || !reg.test(limit) || !reg.test(number) || $.trim(category) == "" || category.length == 0 || $.trim(unitname) == "" || unitname.length == 0 || $.trim(dosageform) == "" || dosageform.length == 0 || $.trim(name) == "" || name.length == 0 || $.trim(pass) == "" || pass.length == 0 || $.trim(number) == "" || number.length == 0 || $.trim(limit) == "" || limit.length == 0 || $.trim(salepeice) == "" || salepeice.length == 0){
  				$("#add").attr("disabled",false);  
  				return false;
  			}else{
@@ -206,6 +209,7 @@
  	 			var category = $("#category").val(); 
  	 			var salepeice = $("#salepeice").val();
  	 			var reg = /^\+?[1-9][0-9]*$/;
+ 	 			var reg2 = /(^[1-9]\d*(\.\d{1,2})?$)|(^[0]{1}(\.\d{1,2})?$)/;
  	 			if($.trim(name) == "" || name.length == 0){
  	 				alert("请输入药品名");
  	 				return false;
@@ -218,8 +222,8 @@
  	 			}else if($.trim(category) == "" || category.length == 0){
  	 				alert("请选择药品类别");
  	 				return false;
- 	 			}else if($.trim(salepeice) == "" || salepeice.length == 0){
- 	 				alert("请输入销售价格");
+ 	 			}else if($.trim(salepeice) == "" || salepeice.length == 0 || !reg2.test(salepeice)){
+ 	 				alert("请输入正确的销售价格");
  	 				return false;
  	 			}else if($.trim(pass) == "" || pass.length == 0){
  	 				alert("请输入修改人");
@@ -294,7 +298,7 @@
 					class="form-control" style="width:200px; display:inline" placeholder="请输入产品说明"/><i></i></li>
 				<li><label>批准文号</label><input name="drugBean.approvalNumber" type="text" id="approvalNumber"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入批准文号"/><i></i></li>
-				<li><label>修改人</label><input name="drugBean.modifier" type="text" id="modifier" value="${sessionScope.username }" readonly="readonly"
+				<li><label>修改人</label><input name="drugBean.modifier" type="text" id="modifier" value="${sessionScope.username }"  
 					class="form-control" style="width:200px; display:inline" placeholder="请输入修改人"/><i></i></li>
 				<li><label>库存数量</label><input name="drugBean.stocknumber" type="text" id="stocknumber"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入库存数量"/><i>必填</i></li>

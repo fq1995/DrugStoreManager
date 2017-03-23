@@ -112,6 +112,20 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 		request.put("modifyTime", modifyTime);
 	}
 	/**
+	 * 清空数据
+	 */
+	public String clear(){
+		before();
+		request.put("drugName", null);
+		request.put("modifier", null);
+		request.put("unit", null);
+		request.put("dosageform", null);
+		request.put("category", null);
+		request.put("manufacturer", null);
+		request.put("modifyTime", null);
+		return "showDrugByOptions";
+	}
+	/**
 	 * 跳转到多条件查询
 	 */
 	public String doShowDrugByOptions() {
@@ -181,7 +195,7 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 				mess="上传失敗"; 
 				e.printStackTrace();
 			}
-		}else{
+		}else if(null == drugBean.getOldName() || null == drugBean.getNewName()){
 			String path = ServletActionContext.getServletContext().getRealPath("\\/images\\/zanwu.png");
 			photo = new File(path);
 			addPicture();

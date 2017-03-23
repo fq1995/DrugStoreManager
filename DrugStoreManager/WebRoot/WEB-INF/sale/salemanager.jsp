@@ -84,7 +84,7 @@
 					<th>销售日期</th>
 					<th>总金额</th>
 					<th>操作人</th>
-					<th>入库日期</th>
+					
 					<th>产品说明</th>
 					
 				</tr>
@@ -110,7 +110,7 @@
 						<td>${sale.salesDate }</td>
 						<td>${sale.totalamount }</td>
 						<td>${sale.userBean.username }</td>
-						<td>${sale.drugBean.modifyTime }</td>
+						
 						<td>${sale.drugBean.memo }</td>
 						
 					</tr>
