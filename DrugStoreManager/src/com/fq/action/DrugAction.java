@@ -50,6 +50,7 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 	private String newFileName;
 	private String photoContentType;
 	private String path; 
+	private String userName;
 	@Autowired
 	private DrugService drugService;
 	private DrugBean drugBean = new DrugBean();
@@ -448,6 +449,12 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 
 	public void setPath(String path) {
 		this.path = path;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	
 }

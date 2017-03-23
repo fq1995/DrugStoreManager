@@ -116,6 +116,9 @@ public class DrugDAOImpl extends BaseDAO<DrugBean> implements DrugDAO {
 		drugBean.setSalepeice(drugBean2.getSalepeice());
 		drugBean.setOldName(drugBean2.getOldName());
 		drugBean.setNewName(drugBean2.getNewName());
+		if(null == drugBean.getNewName() || "".equals(drugBean.getNewName())){
+			drugBean.setNewName("zanwu.png");
+		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date=null;
 		try {

@@ -85,6 +85,10 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 		Double   f2   =   b2.setScale(1,   BigDecimal.ROUND_HALF_UP).doubleValue();  
 		drugBean.setMemberprice(f2);
 		
+		if(null == drugBean.getNewName() || "".equals(drugBean.getNewName())){
+			drugBean.setNewName("zanwu.png");
+		}
+		
 		drugPseBean.setSalepeice(drugBean.getSalepeice());
 		drugPseBean.setMemberprice(drugBean.getMemberprice());
 		drugPseBean.setDrugBean(drugBean);
@@ -157,6 +161,10 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 		BigDecimal   b2   =   new   BigDecimal(drugBean.getSalepeice()*ConstantUtils.discount); 
 		Double   f2   =   b2.setScale(1,   BigDecimal.ROUND_HALF_UP).doubleValue();  
 		drugBean.setMemberprice(f2);
+		
+		if(null == drugBean.getNewName() || "".equals(drugBean.getNewName())){
+			drugBean.setNewName("zanwu.png");
+		}
 		
 		String[] supId = bean2.getSupplierBean().getSupplierId().split(",");
 		String sid = supId[supId.length-1].substring(1);

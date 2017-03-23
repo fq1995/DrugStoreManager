@@ -289,9 +289,9 @@
 				<li><label>批准文号</label><input name="approvalNumber" type="text"
 					id="approvalNumber" class="form-control"
 					style="width: 200px; display: inline" placeholder="请输入批准文号" /><i></i></li>
-				<li><label>修改人</label><input name="modifier" type="text"
+				<li><label>修改人</label><input name="modifier" type="text" value="${sessionScope.username }" readonly="readonly"
 					id="modifier" class="form-control"
-					style="width: 200px; display: inline" placeholder="请输入修改人" /><i>必填</i></li>
+					style="width: 200px; display: inline" placeholder="请输入修改人" /><i></i></li>
 				<li><label>上传图片</label> 
 					<input name="photo" type="file" id="photo" style="border: none"></li>
 				<li><input id="add" type="submit" class="btn btn-info btn-sm"

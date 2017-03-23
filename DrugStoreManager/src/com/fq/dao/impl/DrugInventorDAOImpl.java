@@ -64,6 +64,9 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 		drugBean.setStocknumber(Bean.getDrugBean().getStocknumber());
 		drugBean.setSalepeice(Bean.getDrugBean().getSalepeice());
 		drugBean.setModifyTime(date);
+		if(null == drugBean.getNewName() || "".equals(drugBean.getNewName())){
+			drugBean.setNewName("zanwu.png");
+		}
 		Bean.setStockCode((++code).toString());
 		Bean.setDate(date);
 		Bean.setStockId(UUIDBuild.getUUID());
@@ -216,7 +219,9 @@ public class DrugInventorDAOImpl extends BaseDAO<InventoriesBean> implements Dru
 		drugBean.setDrugUnitBean(Bean.getDrugBean().getDrugUnitBean());
 		drugBean.setManufacturer(Bean.getDrugBean().getManufacturer());
 		drugBean.setModifier(Bean.getDrugBean().getModifier());
-		
+		if(null == drugBean.getNewName() || "".equals(drugBean.getNewName())){
+			drugBean.setNewName("zanwu.png");
+		}
 		bean.setDate(date);
 		bean.setStocklimit(Bean.getStocklimit());
 		bean.setStocknumber(drugBean.getStocknumber());

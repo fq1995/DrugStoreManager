@@ -165,8 +165,8 @@
 					class="form-control" style="width:200px; display:inline" placeholder="请输入产品说明"/><i></i></li>
 				<li><label>批准文号</label><input name="drugBean.approvalNumber" type="text" id="drugBean.approvalNumber" value="${purchase.drugBean.approvalNumber}"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入批准文号"/><i></i></li>
-				<li><label>修改人</label><input name="drugBean.modifier" type="text" id="drugBean.modifier" value="${purchase.drugBean.modifier}"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入修改人"/><i>必填</i></li>
+				<li><label>修改人</label><input name="drugBean.modifier" type="text" id="drugBean.modifier" value="${purchase.drugBean.modifier}" readonly="readonly"
+					class="form-control" style="width:200px; display:inline" placeholder="请输入修改人"/><i></i></li>
 				
 				<li><input id="add" type="submit" class="btn btn-info btn-sm"  value="确认保存" />&nbsp;&nbsp;&nbsp;&nbsp;
 					<input id="return" type="button" class="btn btn-info btn-sm" value="返回" /></li>

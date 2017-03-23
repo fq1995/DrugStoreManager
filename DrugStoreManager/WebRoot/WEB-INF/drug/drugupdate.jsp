@@ -254,8 +254,8 @@
 				<input name="photo" type="file" id="photo" style="border: none"></li>				
 				<li><label>批准文号</label><input name="approvalNumber" type="text" id="approvalNumber" value="${drug.approvalNumber }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入批准文号"/><i></i></li>
-				<li><label>修改人</label><input name="modifier" type="text" id="modifier" value="${drug.modifier }"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入修改人"/><i>必填</i></li>
+				<li><label>修改人</label><input name="modifier" type="text" id="modifier" value="${drug.modifier }" readonly="readonly"
+					class="form-control" style="width:200px; display:inline" placeholder="请输入修改人"/><i></i></li>
 				
 				<li><input id="add" type="submit" class="btn btn-info btn-sm" value="确认保存" />&nbsp;&nbsp;&nbsp;&nbsp;
 					<input id="return" type="button" class="btn btn-info btn-sm" onclick="javascript:history.go(-1);" value="返回" /></li>

@@ -275,8 +275,8 @@ $(function(){
 					class="form-control" style="width:200px; display:inline" placeholder="请输入产品说明"/><i></i></li>
 				<li><label>批准文号</label><input name="drugBean.approvalNumber" type="text" id="approvalNumber" value="${inventor.drugBean.approvalNumber}"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入批准文号"/><i></i></li>
-				<li><label>修改人</label><input name="drugBean.modifier" type="text" id="modifier" value="${inventor.drugBean.modifier }"
-					class="form-control" style="width:200px; display:inline" placeholder="请输入修改人"/><i>必填</i></li>
+				<li><label>修改人</label><input name="drugBean.modifier" type="text" id="modifier" value="${inventor.drugBean.modifier }" readonly="readonly"
+					class="form-control" style="width:200px; display:inline" placeholder="请输入修改人"/><i></i></li>
 				<li><label>库存数量</label><input name="drugBean.stocknumber" type="text" id="stocknumber" value="${inventor.drugBean.stocknumber }"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入库存数量"/><i>必填</i></li>
 				<li><label>库存下限</label><input name="stocklimit" type="text" id="stocklimit" value="${inventor.stocklimit }"

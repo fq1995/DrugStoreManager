@@ -51,6 +51,9 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 		Double   f1   =   b.setScale(1,   BigDecimal.ROUND_HALF_UP).doubleValue();  
 		drug.setMemberprice(f1); 
 		drug.setStocknumber(drug.getStocknumber()-bean.getSalesVolume());
+		if(null == drug.getNewName() || "".equals(drug.getNewName())){
+			drug.setNewName("zanwu.png");
+		}
 		UserBean user = hibernateTemplate.get(UserBean.class, bean.getUserBean().getUserId());
 		bean.setDrugBean(drug);
 		bean.setUserBean(user);
@@ -115,6 +118,9 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 		Double   f1   =   b.setScale(1,   BigDecimal.ROUND_HALF_UP).doubleValue();  
 		drugbean.setMemberprice(f1);
 		drugbean.setStocknumber(drugbean.getStocknumber()-bean.getSalesVolume());
+		if(null == drugbean.getNewName() || "".equals(drugbean.getNewName())){
+			drugbean.setNewName("zanwu.png");
+		}
 		bean.setDrugBean(drugbean);
 		bean.setSalesDate(date);
 		bean.setMemberprice(f1);
