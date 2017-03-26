@@ -143,7 +143,10 @@ public class PrintAction implements RequestAware {
 		nCell = nRow.getCell(colNo);
 		nCell.setCellValue(inputDate.replaceFirst("-0", "-").replaceFirst("-", "年") + "月份库存表");
 		rowNo++;
-
+		
+		if(null!=list && list.size()>0 ){
+			
+		
 		// 处理数据
 		for (int j = 0; j < list.size(); j++) {
 			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -201,13 +204,14 @@ public class PrintAction implements RequestAware {
 
 		}
 
+		}
 		// 下载
 		DownloadUtil du = new DownloadUtil();
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		wb.write(os);
 		du.download(os, response, inputDate.replaceFirst("-0", "-").replaceFirst("-", "年") + "月份库存表.xls");
+	
 	}
-
 	// 打印药品
 	public void printDrug() throws IOException {
 		date = new Date();
@@ -269,7 +273,10 @@ public class PrintAction implements RequestAware {
 		nCell = nRow.getCell(colNo);
 		nCell.setCellValue("药品表");
 		rowNo++;
-
+		
+		if(null!=list && list.size()>0){
+			
+		
 		// 处理数据
 		for (int j = 0; j < list.size(); j++) {
 			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -314,12 +321,12 @@ public class PrintAction implements RequestAware {
 
 		}
 
+		}
 		// 下载
 		DownloadUtil du = new DownloadUtil();
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		wb.write(os);
 		du.download(os, response, "药品表.xls");
-
 	}
 
 	// 打印员工
@@ -379,7 +386,7 @@ public class PrintAction implements RequestAware {
 		nCell = nRow.getCell(colNo);
 		nCell.setCellValue("员工表");
 		rowNo++;
-
+		if(null!=list && list.size()>0){
 		// 处理数据
 		for (int j = 0; j < list.size(); j++) {
 			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -423,13 +430,13 @@ public class PrintAction implements RequestAware {
 			nCell.setCellStyle(dateStyle);
 
 		}
+		}
 
 		// 下载
 		DownloadUtil du = new DownloadUtil();
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		wb.write(os);
 		du.download(os, response, inputDate.replaceFirst("-0", "-").replaceFirst("-", "年") + "月份员工表.xls");
-
 	}
 
 	// 打印用户
@@ -476,7 +483,7 @@ public class PrintAction implements RequestAware {
 		nCell = nRow.getCell(colNo);
 		nCell.setCellValue("用户表");
 		rowNo++;
-
+		if(null!=list && list.size()>0){
 		// 处理数据
 		for (int j = 0; j < list.size(); j++) {
 			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -507,12 +514,12 @@ public class PrintAction implements RequestAware {
 			}
 			nCell.setCellStyle(shenheStyle);
 		}
+		}
 		// 下载
 		DownloadUtil du = new DownloadUtil();
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		wb.write(os);
 		du.download(os, response, "用户表.xls");
-
 	}
 
 	// 打印供货商
@@ -565,7 +572,7 @@ public class PrintAction implements RequestAware {
 		nCell = nRow.getCell(colNo);
 		nCell.setCellValue(inputDate.replaceFirst("-0", "-").replaceFirst("-", "年") + "月份供货商表");
 		rowNo++;
-
+		if(null!=list && list.size()>0){
 		// 处理数据
 		for (int j = 0; j < list.size(); j++) {
 			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -600,12 +607,12 @@ public class PrintAction implements RequestAware {
 			nCell.setCellStyle(stutasStyle);
 
 		}
+		}
 		// 下载
 		DownloadUtil du = new DownloadUtil();
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		wb.write(os);
 		du.download(os, response, "供货商表.xls");
-
 	}
 
 	// 打印会员
@@ -668,7 +675,7 @@ public class PrintAction implements RequestAware {
 		nCell = nRow.getCell(colNo);
 		nCell.setCellValue(inputDate.replaceFirst("-0", "-").replaceFirst("-", "年") + "月份会员表");
 		rowNo++;
-
+		if(null!=list && list.size()>0){
 		// 处理数据
 		for (int j = 0; j < list.size(); j++) {
 			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -710,12 +717,12 @@ public class PrintAction implements RequestAware {
 			nCell.setCellValue(bean.getIntegration());
 			nCell.setCellStyle(intStyle);
 		}
+		}
 		// 下载
 		DownloadUtil du = new DownloadUtil();
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		wb.write(os);
 		du.download(os, response, "会员表.xls");
-
 	}
 
 	// 打印销售表
@@ -790,7 +797,7 @@ public class PrintAction implements RequestAware {
 		nCell = nRow.getCell(colNo);
 		nCell.setCellValue(inputDate.replaceFirst("-0", "-").replaceFirst("-", "年") + "月份销售药品表");
 		rowNo++;
-
+		if(null!=list && list.size()>0){
 		// 处理数据
 		for (int j = 0; j < list.size(); j++) {
 			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -847,12 +854,12 @@ public class PrintAction implements RequestAware {
 
 		}
 
+		}
 		// 下载
 		DownloadUtil du = new DownloadUtil();
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		wb.write(os);
 		du.download(os, response, inputDate.replaceFirst("-0", "-").replaceFirst("-", "年") + "月份药品销售表.xls");
-
 	}
 
 	// 打印进货表
@@ -935,7 +942,7 @@ public class PrintAction implements RequestAware {
 		nCell = nRow.getCell(colNo);
 		nCell.setCellValue(inputDate.replaceFirst("-0", "-").replaceFirst("-", "年") + "月份进货表");
 		rowNo++;
-
+		if(null!=list && list.size()>0){
 		// 处理数据
 		for (int j = 0; j < list.size(); j++) {
 			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -999,12 +1006,12 @@ public class PrintAction implements RequestAware {
 
 		}
 
+		}
 		// 下载
 		DownloadUtil du = new DownloadUtil();
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		wb.write(os);
 		du.download(os, response, inputDate.replaceFirst("-0", "-").replaceFirst("-", "年") + "月份药品进货表.xls");
-
 	}
 
 	@Override
