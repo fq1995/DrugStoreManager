@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -49,7 +49,7 @@
                     <label class="loginlabel" for="username">
                       用户名:</label>
                     <input class="logininput ui-keyboard-input ui-widget-content ui-corner-all" name="username"
-                           id="username" type="text" value="" placeholder="请输入用户名"/>&nbsp;&nbsp;<img name="duihao6" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_name" name="tip_name"></span><i class="exit" style="color: red"></i><i id="messs" style="color: red"></i>
+                           id="username" type="text" value="" placeholder="请输入用户名" autofocus="autofocus"/>&nbsp;&nbsp;<img name="duihao6" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_name" name="tip_name"></span><i class="exit" style="color: red"></i><i id="messs" style="color: red"></i>
                 </p>
                 <p>
                     <label class="loginlabel" for="nickname">

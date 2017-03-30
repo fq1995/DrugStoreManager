@@ -6,7 +6,7 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
 <meta charset=utf-8 />
@@ -75,7 +75,7 @@
 		<form action="unit_addUnit.action" method="post">
 			<input type="hidden" name="currPage" value="1">
 			<ul class="forminfo">
-				<li><label>药品单位名</label><input name="unitname" type="text" id="unitname"
+				<li><label>药品单位名</label><input name="unitname" type="text" id="unitname" autofocus="autofocus"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入药品单位名"/><i>必填</i><i id="message" style="color: red">${message}</i></li>
 				<li><input id="add" type="submit" class="btn btn-info btn-sm" disabled value="确认保存" />&nbsp;&nbsp;&nbsp;&nbsp;
 					<input id="return" type="button" class="btn btn-info btn-sm" onclick="javascript:history.go(-1);" value="返回" /></li>

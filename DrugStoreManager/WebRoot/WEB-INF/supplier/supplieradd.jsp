@@ -6,7 +6,7 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
 <meta charset=utf-8 />
@@ -107,7 +107,7 @@
 			<ul class="forminfo">
 				<li><label>供货商编号</label><input name="supplierCode" type="text" id="supplierCode" value="${requestScope.code+1 }" readonly="readonly" 
 					class="form-control" style="width:200px; display:inline" placeholder="请输入供货商编号"/><i>必填</i><i style="color: red">${message2}</i></li>
-				<li ><label>供货商名</label><input name="supplier" type="text" id="supplier"
+				<li ><label>供货商名</label><input name="supplier" type="text" id="supplier" autofocus="autofocus"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入供货商名"/><i>必填</i><i style="color: red">${message}</i></li>
 				<li><label>联系人</label><input name="name" type="text" id="name"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入联系人"/><i>必填</i></li>

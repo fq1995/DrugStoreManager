@@ -4,7 +4,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -63,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <p>
          <label class="loginlabel" for="email">
                         用户账号:</label>
-                    <input class="logininput ui-keyboard-input ui-widget-content ui-corner-all " name="email"
+                    <input autofocus="autofocus" class="logininput ui-keyboard-input ui-widget-content ui-corner-all " name="email"
                            id="email" type="text" value="" placeholder="请输入邮箱账号"/>&nbsp;&nbsp;<img name="duihao1" alt="" src="images/yes.jpg" style="display:none"/><span class="tip_" name="tip_"></span>
                 </p>
                     <!-- <label class="loginlabel" for="username">

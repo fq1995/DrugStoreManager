@@ -6,7 +6,7 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset=utf-8 />
@@ -240,7 +240,7 @@
 					class="form-control" style="width:200px; display:inline" placeholder="请输入进货单编号"/><i></i></li>
 				<li><label>药品编号</label><input name="drugBean.drugCode" type="text" id="drugBean.drugCode" value="${requestScope.drugCode+1 }" readonly="readonly"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入药品编号"/><i></i></li>
-				<li><label>药品名</label><input name="drugBean.drugName" type="text" id="drugName"
+				<li><label>药品名</label><input name="drugBean.drugName" type="text" id="drugName" autofocus="autofocus"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入药品名"/><i>必填</i></li>
 				<li><label>剂型</label>
 					<select class="form-control" style="width:200px;height:34px"  name="drugBean.dosageformBean.dosageformId" id="dosageform">

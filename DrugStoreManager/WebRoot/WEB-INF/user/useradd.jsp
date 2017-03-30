@@ -6,7 +6,7 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
 <meta charset=utf-8 />
@@ -194,7 +194,7 @@
 			<ul class="forminfo">
 				<li><label>用户编号</label><input readonly="readonly" name="userCode" type="text" id="userCode" value="${requestScope.userCode+1 }"
 					class="form-control" style="width:200px; display:inline"/></li>
-				<li ><label>用户名</label><input name="username" type="text" id="username"
+				<li ><label>用户名</label><input name="username" type="text" id="username" autofocus="autofocus"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入用户名"/><i>用户名不能超过4个字符</i><i id="nametips" style="color: red">${message}</i></li>
 				<li ><label>昵称</label><input name="nickname" type="text" id="nickname"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入昵称"/><i>昵称不能超过20个字符</i>&nbsp;&nbsp;<span style="display: inline-block;" class="tip_" name="tip_"></span><i id="mess" style="color: red"></i></li>

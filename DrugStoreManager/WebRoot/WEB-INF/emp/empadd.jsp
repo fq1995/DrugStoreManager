@@ -6,7 +6,7 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset=utf-8 />
@@ -87,7 +87,7 @@
 			<ul class="forminfo">
 				<li><label>员工编号</label><input name="empCode" type="text" id="empCode" value="${requestScope.empCode+1}" readonly="readonly"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入员工编号"/><i style="color: red">${message2}</i></li>
-				<li ><label>员工性名</label><input name="empName" type="text" id="empName"
+				<li ><label>员工性名</label><input name="empName" type="text" id="empName" autofocus="autofocus"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入员工名"/><i>员工性名不能超过4个字符</i><i style="color: red">${message}</i></li>
 				<li><label>性别</label><cite>
 					<input name="sex" type="radio" value="1" checked="checked"<c:if test="sex==1"> checked="checked"</c:if> />男&nbsp;&nbsp;&nbsp;&nbsp;
