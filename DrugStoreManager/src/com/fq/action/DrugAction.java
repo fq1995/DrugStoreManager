@@ -140,9 +140,14 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 	public String showDrugByOptions() {
 		before();
 		after();
-		PageModel<DrugBean> page = drugService.splitDrug(currPage, ConstantUtils.PAGESIZE, drugBean.getDrugName(),
-				drugBean.getDosageformBean().getDosageformId(), drugBean.getDrugUnitBean().getUnitnameId(),
-				drugBean.getDrugCategoryBean().getCategoryId(), drugBean.getManufacturer(), drugBean.getModifyTime(),
+		PageModel<DrugBean> page = drugService.splitDrug(currPage, 
+				ConstantUtils.PAGESIZE, 
+				drugBean.getDrugName(),
+				drugBean.getDosageformBean().getDosageformId(), 
+				drugBean.getDrugUnitBean().getUnitnameId(),
+				drugBean.getDrugCategoryBean().getCategoryId(), 
+				drugBean.getManufacturer(), 
+				drugBean.getModifyTime(),
 				drugBean.getModifier());
 		request.put("page", page);
 		List<DrugBean> list = page.getList();
@@ -256,7 +261,6 @@ public class DrugAction extends BaseAction implements ModelDriven<DrugBean>, Req
 	 * 修改药品
 	 */
 	public String updateDrug() {
-//		before();
 		DrugBean bean = selectDrugByName();
 		if((null!=bean && bean.equals(drugBean)) || null==bean){
 			addPicture();

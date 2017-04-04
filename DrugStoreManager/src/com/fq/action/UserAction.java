@@ -49,7 +49,9 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	 * @return
 	 */
 	public String login(){
-		UserBean user = userService.loginOrNot(userBean.getEmail(), userBean.getPassword());
+		UserBean user = userService.loginOrNot(
+				userBean.getEmail(), 
+				userBean.getPassword());
 		if(user!=null){
 			session.put("user", user);
 			session.put("username",user.getUsername());
@@ -97,7 +99,9 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 		if(currPage == null) {
 			currPage = 1;
 		}
-		PageModel<UserBean>  page = userService.splitUser(currPage,ConstantUtils.PAGESIZE,keyword);
+		PageModel<UserBean>  page = userService.
+			splitUser(currPage, 
+				ConstantUtils.PAGESIZE,keyword);
 		request.put("page", page);
 
 		return "showUser";
@@ -116,7 +120,8 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	 * @throws Exception 
 	 */
 	public String addUser(){
-		if(null == selectUserByName() && null == selectUserByUsercode()){
+		if(null == selectUserByName() && 
+				null == selectUserByUsercode()){
 			userCode = userService.selectCode().get(0);
 			try {
 				userService.addUser(userCode,userBean,time);
@@ -127,7 +132,6 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 			return "show";
 		}
 		request.put("message","用户名已被使用！");
-		request.put("message2","用户编号已被使用！");
 		return "addUser";
 		
 	}
