@@ -10,7 +10,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.fq.dao.DrugDAO;
+import com.fq.po.DosageformBean;
 import com.fq.po.DrugBean;
+import com.fq.po.DrugCategoryBean;
+import com.fq.po.DrugUnitBean;
+import com.fq.service.DrugService;
 import com.fq.util.PageModel;
 
 import junit.framework.TestCase;
@@ -21,6 +25,8 @@ public class DrugDAOTest extends TestCase {
 	
 	@Autowired
 	private DrugDAO drugDAO;
+	@Autowired
+	private DrugService drugService;
 	
 	protected void setUp() throws Exception {
 		//获取spring的容器
@@ -29,8 +35,40 @@ public class DrugDAOTest extends TestCase {
 			"spring.xml"
 		});
 		drugDAO = (DrugDAO) applicationContext.getBean("drugDAO");
+		drugService = (DrugService) applicationContext.getBean("drugService");
 	}
 
+	@Test
+	public void testAddDrug() {
+		DrugBean drugBean = new DrugBean();
+		drugBean.setDrugCode(1063);
+		drugBean.setDrugId("80e68628b28a440e9f90da0afdf41161");
+		drugBean.setDrugName("盖克");
+		drugBean.setDosageformBean(new DosageformBean("6910bddbefff4426aee4b1c7fa0461ae"));
+		drugBean.setDrugCategoryBean(new DrugCategoryBean("24a4c5c3662a40d0b964f9490e277223"));
+		drugBean.setDrugUnitBean(new DrugUnitBean("30fc216763bb41a88ecf2cc8ffe47b8d"));
+		drugBean.setModifier("张三");
+		drugBean.setManufacturer("四川蜀中制药有限公司");
+		drugBean.setApprovalNumber("国药准字H51023460");
+		drugBean.setSalepeice(21d);
+		
+		try {
+			drugService.addDrug(((Integer)1063), drugBean, "2017-02-01");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+/*	@Test
+	public void testDeleteAllDrug() {
+		List<DrugBean> drugList = new ArrayList<DrugBean>();
+		DrugBean drugBean = new DrugBean();
+		drugBean.setDrugId("111111111111111111111111111111");
+		drugBean.setDrugCode(1111);
+		drugList.add(drugBean);
+		drugDAO.deleteAllDrug(drugList);
+	}
+	
 	@Test
 	public void testSelectDrugByDrugcode(){
 		DrugBean drugList  =  drugDAO.selectDrugByDrugcode(1001);
@@ -65,18 +103,7 @@ public class DrugDAOTest extends TestCase {
 		drugDAO.selectDrugByNameAndDrugId("保济丸", "346cbdd663fc40649f0a464d8b9d57e0");
 	}
 
-	@Test
-	public void testAddDrug() {
-		DrugBean drugBean = new DrugBean();
-		drugBean.setDrugCode(1111);
-		drugBean.setDrugId("b358ccc44d5c4b17bfc488b81ac8f622");
-		drugBean.setDrugName("桑菊感冒片");
-		drugBean.setModifier("张三");
-		drugBean.setModifyTime(new Date());
-		drugBean.setManufacturer("桂林中族中药股份有限公司");
-		drugBean.setApprovalNumber("国药准字Z45020280");
-		drugDAO.addDrug(((Integer)1111), drugBean, "2017-02-01");
-	}
+	
 
 	@Test
 	public void testSplit() {
@@ -93,15 +120,7 @@ public class DrugDAOTest extends TestCase {
 		drugDAO.showAllDrug("da116b026d5c4b8aa8d039f051bedda6");
 	}
 
-	@Test
-	public void testDeleteAllDrug() {
-		List<DrugBean> drugList = new ArrayList<DrugBean>();
-		DrugBean drugBean = new DrugBean();
-		drugBean.setDrugId("111111111111111111111111111111");
-		drugBean.setDrugCode(1111);
-		drugList.add(drugBean);
-		drugDAO.deleteAllDrug(drugList);
-	}
+	
 
 	@Test
 	public void testUpdateDrug() {
@@ -159,5 +178,5 @@ public class DrugDAOTest extends TestCase {
 	public void testSelect() {
 		drugDAO.select();
 	}
-
+*/
 }

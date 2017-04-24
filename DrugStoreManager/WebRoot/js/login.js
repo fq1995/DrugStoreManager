@@ -19,6 +19,7 @@ $(function() {
 		}else if(null == inputVerifyCode || $.trim(inputVerifyCode) == ''){
 			alert("请输入验证码");
 			$("#inputVerifyCode").focus();
+			return;
 		}
 		else if($("#tishi").html() == "验证码输入错误"){
 			alert("请输入正确的验证码");
@@ -120,11 +121,38 @@ $(function() {
 		var verifyCode = $("#inputVerifyCode").val();
 		if (verifyCode.length > 0) {
 			$("#tishi").html("");
+		}else{
+			$("#tishi").html("验证码输入错误");
+			return;
 		}
 	});
 	
 });
 $(document).keypress(function(e) {
-	if (e.which == 13)
-	$("form").submit();
+	if (e.which == 13){
+		var reg = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
+		var inputVerifyCode = $("#inputVerifyCode").val();
+		var name = $("input[name='email']").val();
+		var pass = $("#password").val();
+		if(null == name || $.trim(name) == ''){
+			alert("请输入邮箱账号");
+			$("input[name='email']").focus();
+		}else if (!reg.test(name)){
+	        alert("请输入正确格式的邮箱！");
+	        $("input[name='email']").focus();
+	    }else if(null == pass || $.trim(pass) == ''){
+			alert("请输入密码");
+			$("#password").focus();
+		}else if(null == inputVerifyCode || $.trim(inputVerifyCode) == ''){
+			alert("请输入验证码");
+			$("#inputVerifyCode").focus();
+		}
+		else if($("#tishi").html() == "验证码输入错误"){
+			alert("请输入正确的验证码");
+			$("#inputVerifyCode").focus();
+		}else{
+			$("form").submit();
+		}
+	}
+	
 }) 

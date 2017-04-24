@@ -74,9 +74,9 @@ public class DrugPurchaseDAOImpl extends BaseDAO<DrugPurchaseBean> implements Dr
 		DrugBean drugBean2  = exit(drugBean);
 		if(null!=drugBean2){
 			drugBean = hibernateTemplate.get(DrugBean.class, drugBean2.getDrugId());
+			drugBean.setStocknumber(drugBean.getStocknumber()+drugPseBean.getAmount());
 		}
 		drugBean.setModifyTime(date);
-		drugBean.setStocknumber(drugBean.getStocknumber()+drugPseBean.getAmount());
 		BigDecimal   b   =   new   BigDecimal(drugPseBean.getPurchaseprice()*1.5); 
 		Double   f1   =   b.setScale(1,   BigDecimal.ROUND_HALF_UP).doubleValue();  
 		drugBean.setSalepeice(f1);

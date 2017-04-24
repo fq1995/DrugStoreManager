@@ -10,15 +10,19 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.fq.po.DosageformBean;
+import com.fq.po.DrugBean;
 import com.fq.po.DrugCategoryBean;
 import com.fq.po.DrugPurchaseBean;
 import com.fq.po.DrugUnitBean;
+import com.fq.po.InventoriesBean;
 import com.fq.po.SupplierBean;
+import com.fq.service.DrugInventorService;
 import com.fq.service.DrugPurchaseService;
 import com.fq.service.DrugService;
 import com.fq.util.BaseAction;
 import com.fq.util.ConstantUtils;
 import com.fq.util.PageModel;
+import com.fq.util.UUIDBuild;
 import com.opensymphony.xwork2.ModelDriven;
 /**
  * 
@@ -48,6 +52,8 @@ public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPu
 	private DrugPurchaseService drugPseService;
 	@Autowired
 	private DrugService drugService;
+	@Autowired
+	private DrugInventorService inventorService;
 	private DrugPurchaseBean drugPseBean = new DrugPurchaseBean();
 	/**
 	 * 下拉菜单
@@ -151,10 +157,18 @@ public class DrugPurchaseAction extends BaseAction implements ModelDriven<DrugPu
 	}
 
 	public String addPurchase() {
-//		before();
 		pseCode = drugPseService.selectCode();
 		drugCode = drugService.select();
+		Integer stockCode = inventorService.select();
+		DrugBean drugBean = drugPseBean.getDrugBean();
 		drugPseService.addPse(drugCode, pseCode, drugPseBean, time);
+		InventoriesBean inventoriesBean = new InventoriesBean();
+		inventoriesBean.setDrugBean(drugBean);
+		inventoriesBean.setStockCode(stockCode.toString());
+		inventoriesBean.setStockId(UUIDBuild.getUUID());
+		inventoriesBean.setStocklimit(100);
+		inventoriesBean.setStocknumber(drugBean.getStocknumber());
+		inventorService.addInventor(stockCode, drugCode, drugBean, inventoriesBean, time);
 /*		request.put("message", "药品进货名已被使用！");
 		request.put("message2", "药品进货编号已被使用！");*/
 		return doaddPurchase();

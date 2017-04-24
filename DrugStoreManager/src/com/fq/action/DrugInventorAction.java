@@ -52,8 +52,7 @@ public class DrugInventorAction extends BaseAction implements ModelDriven<Invent
 	private DrugInventorService inventorService;
 	@Autowired
 	private DrugService drugService;
-	@Autowired
-	private DrugPurchaseService drugPseService;
+	 
 	private InventoriesBean inventoriesBean = new InventoriesBean();
 	private DrugBean drugBean = inventoriesBean.getDrugBean();
 	
