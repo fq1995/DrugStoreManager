@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -211,6 +213,29 @@
 					class="form-control" style="width:200px; display:inline" placeholder="请输入邮箱"/><span style="display: inline-block;" class="tip_1" name="tip_"></span><i id="mes" style="color: red"></i></li>
 			<li><label>密码</label><input name="password" type="password" id="password" value="${user.password}"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入密码"/><i>密码长度在6~10位之间</i></li>
+            <li><label>角色</label>
+					<select class="form-control" style="width:200px;height:34px"  name="type" id="type">
+						<c:choose>
+						<c:when test="${type eq '0'}">
+							<option value="0">销售员</option>
+						</c:when>
+						<c:when test="${type eq '1'}">
+							<option value="1">仓库管理员</option>
+						</c:when>
+						<c:when test="${type eq '2'}">
+							<option value="2">进货员</option>
+						</c:when>
+						<c:when test="${type eq '3'}">
+							<option value="3">店长</option>
+						</c:when>
+						</c:choose>
+						
+						<option value="0">销售员</option>
+						<option value="1">仓库管理员</option>
+						<option value="2">进货员</option>
+						<option value="3">店长</option>
+					</select>
+				</li>
             <li><label>是否审核</label><cite><input name="status" type="radio" value="1" checked="checked" />是&nbsp;&nbsp;&nbsp;&nbsp;<input name="status" type="radio" value="0" />否</cite></li>
             <li><input id="update" type="submit" class="btn btn-info btn-sm" value="确认保存"/>&nbsp;&nbsp;&nbsp;&nbsp;
 					<input id="return" type="button" class="btn btn-info btn-sm" onclick="javascript:history.go(-1);" value="返回" /></li>

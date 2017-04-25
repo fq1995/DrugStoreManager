@@ -71,6 +71,7 @@
 					<th>用户名</th>
 					<th>昵称</th>
 					<th>密码</th>
+					<th>职位</th>
 					<th>是否审核</th>
 					<th>添加日期</th>
 				</tr>
@@ -87,6 +88,20 @@
 						<td>${user.username }</td>
 						<td>${user.nickname }</td>
 						<td>${user.password }</td>
+						<c:choose>
+						<c:when test="${user.type eq '0'}">
+							<td>销售员</td>
+						</c:when>
+						<c:when test="${user.type eq '1'}">
+							<td>仓库管理员</td>
+						</c:when>
+						<c:when test="${user.type eq '2'}">
+							<td>进货员</td>
+						</c:when>
+						<c:when test="${user.type eq '3'}">
+							<td>店长</td>
+						</c:when>
+						</c:choose>
 						<c:choose>
 							<c:when test="${user.status eq 1}">
 								<td>是</td>

@@ -33,6 +33,7 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 		userBean.setAddtime(date);
 		userBean.setUserId(UUIDBuild.getUUID());
 		userBean.setUserCode(++userCode);
+		userBean.setType("0");
 		hibernateTemplate.save(userBean);
 	}
 
@@ -57,8 +58,8 @@ public class UserDAOImpl extends BaseDAO<UserBean> implements UserDAO {
 
 	@Override
 	public PageModel<UserBean> splitUser(Integer currPage, Integer pageSize,String keyword) {
-		String hql_count = "select count(*) from UserBean where type in ('0','1','2') and username like :keyword";
-		String hql = "from UserBean where type in ('0','1','2') and username like :keyword order by userCode desc";
+		String hql_count = "select count(*) from UserBean where type in ('0','1','2','3') and username like :keyword";
+		String hql = "from UserBean where type in ('0','1','2','3') and username like :keyword order by userCode desc";
 		return super.split(hql, hql_count, currPage, pageSize,keyword);
 	}
 

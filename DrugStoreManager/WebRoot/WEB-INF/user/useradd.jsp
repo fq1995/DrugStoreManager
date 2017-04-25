@@ -202,6 +202,14 @@
 					class="form-control" style="width:200px; display:inline" placeholder="请输入邮箱"/><span style="display: inline-block;" class="tip_1" name="tip_"></span><i id="mes" style="color: red"></i></li>
 				<li><label>密码</label><input name="password" type="password" id="password"
 					class="form-control" style="width:200px; display:inline" placeholder="请输入密码"/><i>密码长度在6~10位之间</i></li>
+				<li><label>角色</label>
+					<select class="form-control" style="width:200px;height:34px"  name="type" id="type">
+						<option value="0">销售员</option>
+						<option value="1">仓库管理员</option>
+						<option value="2">进货员</option>
+						<option value="3">店长</option>
+					</select>
+				</li>
 				<li><label>是否审核</label><cite>
 					<input name="status" type="radio" value="1" checked="checked"<c:if test="status==1"> checked="checked"</c:if> />是&nbsp;&nbsp;&nbsp;&nbsp;
 					<input name="status" type="radio" value="0" <c:if test="status==0"> checked="checked"</c:if> />否</cite></li>

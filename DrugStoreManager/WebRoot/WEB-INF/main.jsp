@@ -182,12 +182,7 @@
 					if (data == 3) {
 						//店长（全部功能）(3)
 					    _menus = {"menus":[
-											{"menuid":"1","icon":"icon-sys","menuname":"基本操作",
-												"menus":[
-														{"menuid":"13","menuname":"用户管理","icon":"icon-users","url":"${pageContext.request.contextPath}/user_showUser.action?currPage=1"}
-														
-													]
-											},{"menuid":"8","icon":"icon-sys","menuname":"员工管理",
+											{"menuid":"8","icon":"icon-sys","menuname":"员工管理",
 												"menus":[{"menuid":"21","menuname":"员工列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/emp_showEmp.action?currPage=1"}
 													]
 											},{"menuid":"56","icon":"icon-sys","menuname":"药品管理",
