@@ -37,6 +37,7 @@ public class UserBean  implements java.io.Serializable {
      private Integer status;
      private String email;
      private String nickname;
+     private String type;
      private Set<DrugPurchaseBean> drugPurchaseBeans = new HashSet<DrugPurchaseBean>(0);
      private Set<DrugSalesBean> drugSalesBeans = new HashSet<DrugSalesBean>(0);
 
@@ -54,7 +55,7 @@ public class UserBean  implements java.io.Serializable {
     }
     
     /** full constructor */
-    public UserBean(String userId,  Integer userCode, String username, String password, Date addtime, Integer status,String email,  String nickname, Set<DrugPurchaseBean> drugPurchaseBeans, Set<DrugSalesBean> drugSalesBeans ) {
+    public UserBean(String userId,  Integer userCode, String username, String password, Date addtime, Integer status,String email,  String nickname, String type, Set<DrugPurchaseBean> drugPurchaseBeans, Set<DrugSalesBean> drugSalesBeans ) {
         this.userId = userId;
         this.userCode = userCode;
         this.username = username;
@@ -63,6 +64,7 @@ public class UserBean  implements java.io.Serializable {
         this.status = status;
         this.email = email;
         this.nickname = nickname;
+        this.type = type;
         this.drugPurchaseBeans = drugPurchaseBeans;
         this.drugSalesBeans = drugSalesBeans;
     }
@@ -170,6 +172,15 @@ public class UserBean  implements java.io.Serializable {
         this.email = email;
     }
    
+    @Column(name="type", length=1)
+
+    public String getType() {
+        return this.type;
+    }
+    
+    public void setType(String type) {
+        this.type = type;
+    }
 
 
 

@@ -41,6 +41,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	private String newpass;
 	private String nickname;
 	private String username;
+	private String type; 
 	@Autowired
 	private UserService userService;
 	private UserBean userBean = new UserBean();
@@ -56,11 +57,17 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 			session.put("user", user);
 			session.put("username",user.getUsername());
 			session.put("nickname", user.getNickname());
+			session.put("type", user.getType());
 			return "ok";
 		}else{
 			request.put("tishi","用户名或密码错误");
 			return "error";
 		}
+	}
+	//校验用户类型
+	public String validateType(){
+		type = (String) session.get("type");
+		return "ajax_verifyType";
 	}
 	/**
 	 * 用户注册
@@ -334,6 +341,12 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 	}
 	public void setNewpass(String newpass) {
 		this.newpass = newpass;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	

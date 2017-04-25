@@ -28,6 +28,9 @@
 			<result name="ajax_verifyEmail" type="json">
 				<param name="root">mes</param>
 			</result>
+			<result name="ajax_verifyType" type="json">
+				<param name="root">type</param>
+			</result>
 		</action>
 
 		<!-- 角色管理 
