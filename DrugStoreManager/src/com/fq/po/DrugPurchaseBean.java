@@ -34,7 +34,6 @@ public class DrugPurchaseBean  implements java.io.Serializable {
      private UserBean userBean;
      private SupplierBean supplierBean;
      private String purchaseCode;
-     private String drugname;
      private Integer amount;
      private Date productionDate;
      private Date validityDate;
@@ -57,13 +56,12 @@ public class DrugPurchaseBean  implements java.io.Serializable {
     }
     
     /** full constructor */
-    public DrugPurchaseBean(String purchaseId, DrugBean drugBean, UserBean userBean, SupplierBean supplierBean, String purchaseCode, String drugname, Integer amount, Date productionDate, Date validityDate, Double purchaseprice, Double salepeice,  Date purchasedate, Double memberprice ) {
+    public DrugPurchaseBean(String purchaseId, DrugBean drugBean, UserBean userBean, SupplierBean supplierBean, String purchaseCode, Integer amount, Date productionDate, Date validityDate, Double purchaseprice, Double salepeice,  Date purchasedate, Double memberprice ) {
         this.purchaseId = purchaseId;
         this.drugBean = drugBean;
         this.userBean = userBean;
         this.supplierBean = supplierBean;
         this.purchaseCode = purchaseCode;
-        this.drugname = drugname;
         this.amount = amount;
         this.productionDate = productionDate;
         this.validityDate = validityDate;
@@ -127,15 +125,6 @@ public class DrugPurchaseBean  implements java.io.Serializable {
         this.purchaseCode = purchaseCode;
     }
     
-    @Column(name="DRUGNAME", length=20)
-
-    public String getDrugname() {
-        return this.drugname;
-    }
-    
-    public void setDrugname(String drugname) {
-        this.drugname = drugname;
-    }
     
     @Column(name="AMOUNT")
 

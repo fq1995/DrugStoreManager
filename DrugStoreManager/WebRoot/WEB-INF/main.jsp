@@ -283,7 +283,10 @@
 		//初始化左侧
 		function InitLeftMenu() {
 			$("#nav").accordion({animate:false});
-//			alert("欢迎进入药店管理系统");
+			var type = $("#type").val();
+			if(type == '4'){
+				alert("欢迎管理员进入药店管理系统");
+			}else
 			window.showModalDialog('${pageContext.request.contextPath}/pse_showDateWarn.action?currPage=1&f=datawarn','药品有效期预警','dialogWidth:1200px;dialogHeight:400px;dialogLeft:100px;dialogTop:200px;center:yes;help:yes;resizable:yes;status:yes');
 		    $.each(_menus.menus, function(i, n) {
 				var menulist ='';

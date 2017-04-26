@@ -163,7 +163,7 @@ public class DrugSaleDAOImpl extends BaseDAO<DrugSalesBean> implements DrugSaleD
 
 	@Override
 	public List<UserBean> selectUser() {
-		String hql = "from UserBean";
+		String hql = "from UserBean where type in ('0','3')";
 		List<UserBean> list = (List<UserBean>) hibernateTemplate.find(hql);
 		return list==null||list.size()<=0?null:list;
 	}

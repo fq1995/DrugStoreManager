@@ -149,13 +149,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserBean>,Requ
 		List<UserBean> listUser = userService.showAllUser(ids);
 		userService.deleteAllUser(listUser);
 		return "show";
-	/*	for(UserBean user : listUser){
-			if(user.getUsername().equals(session.get("username"))){
-				request.put("warn","没有权限删除!");
-			}else{
-				userService.deleteAllUser(listUser);
-			}
-		}*/
+
 	}
 	/**
 	 * 编辑用户

@@ -216,16 +216,16 @@
             <li><label>角色</label>
 					<select class="form-control" style="width:200px;height:34px"  name="type" id="type">
 						<c:choose>
-						<c:when test="${type eq '0'}">
+						<c:when test="${user.type eq '0'}">
 							<option value="0">销售员</option>
 						</c:when>
-						<c:when test="${type eq '1'}">
+						<c:when test="${user.type eq '1'}">
 							<option value="1">仓库管理员</option>
 						</c:when>
-						<c:when test="${type eq '2'}">
+						<c:when test="${user.type eq '2'}">
 							<option value="2">进货员</option>
 						</c:when>
-						<c:when test="${type eq '3'}">
+						<c:when test="${user.type eq '3'}">
 							<option value="3">店长</option>
 						</c:when>
 						</c:choose>
