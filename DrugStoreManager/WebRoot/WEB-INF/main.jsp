@@ -22,6 +22,7 @@
 	/* window.open('${pageContext.request.contextPath}/pse_showDateWarn.action?currPage=1&f=datawarn',"_blank","toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=1200, height=500") */
 	</script>
 	<script type="text/javascript">
+	//超级管理员
 	var _menus = {"menus":[
 							{"menuid":"1","icon":"icon-sys","menuname":"基本操作",
 								"menus":[
@@ -228,7 +229,7 @@
 									]};
 					}
 					if (data == 4) {
-						//超级管理员(4)	
+						//管理员(4)	
 						 _menus = {"menus":[
 											{"menuid":"1","icon":"icon-sys","menuname":"基本操作",
 												"menus":[
@@ -241,6 +242,59 @@
 											}
 									]};
 					} 
+					if (data == 5){
+						//超级管理员
+						_menus = {"menus":[
+												{"menuid":"1","icon":"icon-sys","menuname":"基本操作",
+													"menus":[
+															{"menuid":"13","menuname":"用户管理","icon":"icon-users","url":"${pageContext.request.contextPath}/user_showUser.action?currPage=1"}
+															
+														]
+												},{"menuid":"8","icon":"icon-sys","menuname":"员工管理",
+													"menus":[{"menuid":"21","menuname":"员工列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/emp_showEmp.action?currPage=1"}
+														]
+												},{"menuid":"56","icon":"icon-sys","menuname":"药品管理",
+													"menus":[{"menuid":"31","menuname":"药品列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/drug_showDrug.action?currPage=1"},
+															{"menuid":"32","menuname":"药品剂型","icon":"icon-nav","url":"${pageContext.request.contextPath}/form_showForm.action?currPage=1"},
+															{"menuid":"33","menuname":"药品单位","icon":"icon-nav","url":"${pageContext.request.contextPath}/unit_showUnit.action?currPage=1"},
+															{"menuid":"34","menuname":"药品类别","icon":"icon-nav","url":"${pageContext.request.contextPath}/category_showCategory.action?currPage=1"}
+														]
+												},{"menuid":"28","icon":"icon-sys","menuname":"库存管理",
+													"menus":[{"menuid":"41","menuname":"库存列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/inventor_showInventor.action?currPage=1"},
+															{"menuid":"43","menuname":"库存下限预警","icon":"icon-nav","url":"${pageContext.request.contextPath}/inventor_showWarn.action?currPage=1&f=warn"},
+															{"menuid":"44","menuname":"有效期预警","icon":"icon-nav","url":"${pageContext.request.contextPath}/pse_showDateWarn.action?currPage=1&f=datawarn"},
+															{"menuid":"62","menuname":"过期药品","icon":"icon-nav","url":"${pageContext.request.contextPath}/pse_showOverDate.action?currPage=1&f=overdata"},
+															{"menuid":"42","menuname":"报表统计","icon":"icon-nav","url":"${pageContext.request.contextPath}/inventor_doPrint.action"}
+														]
+												},{"menuid":"39","icon":"icon-sys","menuname":"销售管理",
+													"menus":[{"menuid":"51","menuname":"销售列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/sale_showSale.action?currPage=1"}
+														]
+												},{"menuid":"40","icon":"icon-sys","menuname":"进货管理",
+													"menus":[{"menuid":"61","menuname":"进货列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/pse_showPurchase.action?currPage=1"}
+														
+													]
+												},{"menuid":"84","icon":"icon-sys","menuname":"药品采购单管理",
+													"menus":[{"menuid":"1","menuname":"药品采购单列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/buy_showBuy.action?currPage=1"}
+													]
+												},{"menuid":"51","icon":"icon-sys","menuname":"会员管理",
+													"menus":[{"menuid":"71","menuname":"会员列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/member_showMember.action?currPage=1"}
+													]
+												},{"menuid":"62","icon":"icon-sys","menuname":"供货商管理",
+													"menus":[{"menuid":"81","menuname":"供货商列表","icon":"icon-nav","url":"${pageContext.request.contextPath}/sup_showSupplier.action?currPage=1"}
+													]
+												},{"menuid":"73","icon":"icon-sys","menuname":"打印报表",
+													"menus":[{"menuid":"91","menuname":"用户表","icon":"icon-nav","url":"${pageContext.request.contextPath}/print_printUser.action"},
+														{"menuid":"92","menuname":"员工表","icon":"icon-nav","url":"${pageContext.request.contextPath}/print_printEmp.action"},
+														{"menuid":"93","menuname":"药品表","icon":"icon-nav","url":"${pageContext.request.contextPath}/print_printDrug.action"},
+														{"menuid":"94","menuname":"药品库存表","icon":"icon-nav","url":"${pageContext.request.contextPath}/inventor_doPrint.action"},
+														{"menuid":"95","menuname":"药品销售表","icon":"icon-nav","url":"${pageContext.request.contextPath}/sale_doPrint.action"},
+														{"menuid":"96","menuname":"药品进货表","icon":"icon-nav","url":"${pageContext.request.contextPath}/pse_doprint.action"},
+														{"menuid":"97","menuname":"会员表","icon":"icon-nav","url":"${pageContext.request.contextPath}/print_printMember.action"},
+														{"menuid":"98","menuname":"供货商表","icon":"icon-nav","url":"${pageContext.request.contextPath}/print_printSupplier.action"}
+													]
+												}
+										]};
+					}
 				}
 			});
 			
@@ -284,7 +338,7 @@
 		function InitLeftMenu() {
 			$("#nav").accordion({animate:false});
 			var type = $("#type").val();
-			if(type == '4'){
+			if(type == '4' || type == '5'){
 				alert("欢迎管理员进入药店管理系统");
 			}else
 			window.showModalDialog('${pageContext.request.contextPath}/pse_showDateWarn.action?currPage=1&f=datawarn','药品有效期预警','dialogWidth:1200px;dialogHeight:400px;dialogLeft:100px;dialogTop:200px;center:yes;help:yes;resizable:yes;status:yes');
