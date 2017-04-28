@@ -35,7 +35,7 @@ public class UserDAOTest extends TestCase {
 		userDAO = (UserDAO) applicationContext.getBean("userDAO");
 		userService = (UserService) applicationContext.getBean("userService");
 	}
-/*
+
 	@Test
 	public void testRegister() {
 		UserBean userBean = new UserBean();
@@ -65,7 +65,7 @@ public class UserDAOTest extends TestCase {
 	@Test
 	public void testSplitUser() {
 		userDAO.splitUser(1, 5, "");
-	}*/
+	}
 	@Test
 	public void testAddUser() {
 		UserBean userBean = new UserBean();
@@ -80,7 +80,7 @@ public class UserDAOTest extends TestCase {
 			e.printStackTrace();
 		}
 	}
-/*	@Test
+	@Test
 	public void testShowAllUser() {
 		userDAO.showAllUser("15c54ab46f7f464cace4544fe31bcf5d");
 	}
@@ -105,5 +105,5 @@ public class UserDAOTest extends TestCase {
 	@Test
 	public void testSelectCode() {
 		userDAO.selectCode();
-	}*/
+	}
 }
