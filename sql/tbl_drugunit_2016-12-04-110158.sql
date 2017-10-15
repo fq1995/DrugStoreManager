@@ -1,0 +1,8 @@
+INSERT INTO `tbl_drugunit` (`UNITNAME_ID`, `UNITNAME`) VALUES ('192f6bdf72054caeb8e51b3d32efc2f0', '支');
+INSERT INTO `tbl_drugunit` (`UNITNAME_ID`, `UNITNAME`) VALUES ('2bd550b99fd74988844db5195e713a4c', '瓶');
+INSERT INTO `tbl_drugunit` (`UNITNAME_ID`, `UNITNAME`) VALUES ('30fc216763bb41a88ecf2cc8ffe47b8d', '盒');
+INSERT INTO `tbl_drugunit` (`UNITNAME_ID`, `UNITNAME`) VALUES ('33ebdc54e6134b7e9757902a2a49653e', '袋');
+INSERT INTO `tbl_drugunit` (`UNITNAME_ID`, `UNITNAME`) VALUES ('5b5c40aef6c44c0e90cd02e6a48d2d42', '千克');
+INSERT INTO `tbl_drugunit` (`UNITNAME_ID`, `UNITNAME`) VALUES ('b924e5ecc1534ac8a3700dcc3effa242', '包');
+INSERT INTO `tbl_drugunit` (`UNITNAME_ID`, `UNITNAME`) VALUES ('f3d4b617b8454b2e912884ce57565c05', '克');
+INSERT INTO `tbl_drugunit` (`UNITNAME_ID`, `UNITNAME`) VALUES ('fbe3a8e489e54231b16b0f56243c71f3', '胶囊');

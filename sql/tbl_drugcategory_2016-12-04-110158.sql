@@ -1,0 +1,14 @@
+INSERT INTO `tbl_drugcategory` (`CATEGORY_ID`, `CATEGORY`) VALUES ('14de0c5273be49cc9523c430976c0b2f', '皮肤');
+INSERT INTO `tbl_drugcategory` (`CATEGORY_ID`, `CATEGORY`) VALUES ('24a4c5c3662a40d0b964f9490e277223', '呼吸系统药');
+INSERT INTO `tbl_drugcategory` (`CATEGORY_ID`, `CATEGORY`) VALUES ('434cb2839830435e8313bb4cf788143d', NULL);
+INSERT INTO `tbl_drugcategory` (`CATEGORY_ID`, `CATEGORY`) VALUES ('54b8bd9ac2104eecb1c3190d7d112114', '胃肠');
+INSERT INTO `tbl_drugcategory` (`CATEGORY_ID`, `CATEGORY`) VALUES ('77a9a7b577c746a2997fcc4c07c8a859', '妇产科药');
+INSERT INTO `tbl_drugcategory` (`CATEGORY_ID`, `CATEGORY`) VALUES ('90fdbe8961a34d22a7d2042365f47630', '感冒');
+INSERT INTO `tbl_drugcategory` (`CATEGORY_ID`, `CATEGORY`) VALUES ('c467ef5465434ea09eb6527497d5046d', '内分泌系统药');
+INSERT INTO `tbl_drugcategory` (`CATEGORY_ID`, `CATEGORY`) VALUES ('d3de060cc6d94820aeb665518cc2942c', '保健食品');
+INSERT INTO `tbl_drugcategory` (`CATEGORY_ID`, `CATEGORY`) VALUES ('de58db8cf803491c87a8e06cbb981f3f', '药械');
+INSERT INTO `tbl_drugcategory` (`CATEGORY_ID`, `CATEGORY`) VALUES ('e197050359464db695013ced876c00de', '心脑血管');
+INSERT INTO `tbl_drugcategory` (`CATEGORY_ID`, `CATEGORY`) VALUES ('ea5c21153ec3443c8cd978dab6ee5b0e', '维生素类');
+INSERT INTO `tbl_drugcategory` (`CATEGORY_ID`, `CATEGORY`) VALUES ('ebf3daf3180345409cf88e27d7d1d175', '抗菌素');
+INSERT INTO `tbl_drugcategory` (`CATEGORY_ID`, `CATEGORY`) VALUES ('f12d4b871d574a3aa78ee98a670ad942', '中成药');
+INSERT INTO `tbl_drugcategory` (`CATEGORY_ID`, `CATEGORY`) VALUES ('f2c885a1a6364c2da265e94c6608ce0c', '外用药');

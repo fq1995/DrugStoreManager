@@ -1,0 +1,6 @@
+INSERT INTO `tbl_supplier` (`SUPPLIER_ID`, `SUPPLIER_CODE`, `SUPPLIER`, `NAME`, `TEL`, `STATUS`) VALUES ('070685898f5249aab322186f86ff6fa2', '1004', '北京国药控股医药有限公司', '小李', '15576767543', '1');
+INSERT INTO `tbl_supplier` (`SUPPLIER_ID`, `SUPPLIER_CODE`, `SUPPLIER`, `NAME`, `TEL`, `STATUS`) VALUES ('a27b311cf25442fb8328946c79a25ea4', '1005', '长沙双鹤医药有限公司', '小赵', '17854545444', '1');
+INSERT INTO `tbl_supplier` (`SUPPLIER_ID`, `SUPPLIER_CODE`, `SUPPLIER`, `NAME`, `TEL`, `STATUS`) VALUES ('b61a65e75062468996463f6b64a59f49', '1006', '武汉市马应龙医药有限公司', '小孙', '18757658892', '1');
+INSERT INTO `tbl_supplier` (`SUPPLIER_ID`, `SUPPLIER_CODE`, `SUPPLIER`, `NAME`, `TEL`, `STATUS`) VALUES ('bea77385a38a4b62b481b34cbe607409', '1001', '安徽华源医药股份有限公司', '张飞', '13154654654', '1');
+INSERT INTO `tbl_supplier` (`SUPPLIER_ID`, `SUPPLIER_CODE`, `SUPPLIER`, `NAME`, `TEL`, `STATUS`) VALUES ('cdf0d9c2f35a4d7a86365372d3ed9cd6', '1003', '杭州华东医药股份有限公司', '小刘', '13245455654', '1');
+INSERT INTO `tbl_supplier` (`SUPPLIER_ID`, `SUPPLIER_CODE`, `SUPPLIER`, `NAME`, `TEL`, `STATUS`) VALUES ('dfc36074c9a34dae9e8b8621587b1cad', '1002', '上海九洲通医药有限公司', '小王', '13143434344', '1');

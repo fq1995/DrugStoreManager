@@ -1,0 +1,6 @@
+INSERT INTO `tbl_employee` (`EMP_ID`, `EMP_CODE`, `EMP_NAME`, `SEX`, `AGE`, `TEL`, `TITLE`, `STARTDATE`) VALUES ('19ba1ca1c68741efabda407f30f94b17', '1002', '李四', '1', 23, '13254543345', '店长', '2011-10-25');
+INSERT INTO `tbl_employee` (`EMP_ID`, `EMP_CODE`, `EMP_NAME`, `SEX`, `AGE`, `TEL`, `TITLE`, `STARTDATE`) VALUES ('320235316835476e8a0ca2219b6a300d', '1005', '陈晓军', '1', 23, '18865507365', '店员', '2016-10-27');
+INSERT INTO `tbl_employee` (`EMP_ID`, `EMP_CODE`, `EMP_NAME`, `SEX`, `AGE`, `TEL`, `TITLE`, `STARTDATE`) VALUES ('6d8f164f71ff4c6ba40808071d7fd53c', '1004', '赵六', '1', 23, '13245454545', '店员', '2016-10-1');
+INSERT INTO `tbl_employee` (`EMP_ID`, `EMP_CODE`, `EMP_NAME`, `SEX`, `AGE`, `TEL`, `TITLE`, `STARTDATE`) VALUES ('b3dfbcca95004eca8eb7ebb5edb85e03', '1003', '王五', '1', 34, '13165645145', '仓库管理员', '2016-2-28');
+INSERT INTO `tbl_employee` (`EMP_ID`, `EMP_CODE`, `EMP_NAME`, `SEX`, `AGE`, `TEL`, `TITLE`, `STARTDATE`) VALUES ('c8662a36d59940d1ad9317bb0632a1bd', '1001', '张三', '1', 23, '18832432433', '店员', '2013-10-18');
+INSERT INTO `tbl_employee` (`EMP_ID`, `EMP_CODE`, `EMP_NAME`, `SEX`, `AGE`, `TEL`, `TITLE`, `STARTDATE`) VALUES ('e0e80213b1e54526bdddd6aec0192b2e', '1006', '关羽', '1', 34, '13143243233', '销售员', '2016-2-24');
